@@ -1,7 +1,7 @@
 *** Variables ***
 ${apiRoot}        
 ${apiName}        wai
-${apiVersion}     v1
+${apiVersion}     v2
 
 ${MEC-APP_SCHEMA}                   http
 ${MEC-APP_HOST}                     127.0.0.1

@@ -8,11 +8,7 @@ ${MEC-APP_HOST}                     127.0.0.1
 ${MEC-APP_PORT}                     8082
 
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
- 
-${SUB_TYPE}          AssocStaSubscription
 
-${SUB_FILTER}          assoc_sta
-${INVALID_SUB_FILTER}          assocStaSub
-
-${HREF}          /wai/v2/subscriptions/1
-${CALLBACK_URI}          http://callback.uri/1
+${STA_ID}    		123
+${MEAS_ID}    		456
+${INVALID_MEASUREMENT_CONFIG_ID}   999
