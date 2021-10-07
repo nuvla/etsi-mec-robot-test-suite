@@ -1,4 +1,5 @@
 {
+	"terminalDistance": {
         "description": "A type containing information about the distance from a terminal to a location or between two terminals, in addition the accuracy and a timestamp of the information are provided.",
         "properties": {
           "accuracy": {
@@ -43,3 +44,4 @@
         ],
         "type": "object"
       }
+}

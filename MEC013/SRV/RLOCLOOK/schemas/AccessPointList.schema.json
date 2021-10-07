@@ -1,4 +1,4 @@
-{
+{ "accessPointList": {
         "description": "A type containing list of access points.",
         "properties": {
           "accessPoint": {
@@ -266,3 +266,4 @@
         ],
         "type": "object"
       }
+}

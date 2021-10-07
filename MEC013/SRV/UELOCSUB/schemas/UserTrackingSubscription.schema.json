@@ -1,4 +1,5 @@
 {
+	"userTrackingSubscription": {
         "description": "A type containing user tracking subscription.",
         "properties": {
           "address": {
@@ -67,3 +68,4 @@
         ],
         "type": "object"
       }
+ }

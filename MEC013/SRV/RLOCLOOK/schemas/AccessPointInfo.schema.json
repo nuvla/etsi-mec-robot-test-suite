@@ -1,4 +1,4 @@
-{
+{ "accessPointInfo": {
         "description": "A type containing access point information.",
         "properties": {
           "accessPointId": {
@@ -238,3 +238,4 @@
         ],
         "type": "object"
       }
+}

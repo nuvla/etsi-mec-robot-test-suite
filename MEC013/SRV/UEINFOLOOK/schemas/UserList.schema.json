@@ -1,4 +1,5 @@
-{
+{ "userList": 
+	{
         "description": "A type containing list of users.",
         "properties": {
           "resourceURL": {
@@ -267,3 +268,4 @@
         ],
         "type": "object"
       }
+}

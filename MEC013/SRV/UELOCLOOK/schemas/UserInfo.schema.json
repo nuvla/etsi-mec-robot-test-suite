@@ -1,4 +1,5 @@
  {
+ 	"userInfo": {
         "properties": {
           "accessPointId": {
             "description": "The identity of the access point the user is currently on, see note 1.",
@@ -246,3 +247,4 @@
         "x-etsi-notes": "NOTE 1:\tAs specified in [5], clause 5.2.2.7.\nNOTE 2: \tAs specified in [5], clause 5.2.2.5.",
         "x-etsi-ref": "6.2.2"
       }
+}

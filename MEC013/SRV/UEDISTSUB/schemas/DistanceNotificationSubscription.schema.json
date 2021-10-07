@@ -1,4 +1,5 @@
 {
+	"distanceNotificationSubscription": {
         "description": "A type containing data for distance subscription, with reference to other devices.",
         "properties": {
           "callbackReference": {
@@ -148,3 +149,4 @@
         ],
         "type": "object"
       }
+}

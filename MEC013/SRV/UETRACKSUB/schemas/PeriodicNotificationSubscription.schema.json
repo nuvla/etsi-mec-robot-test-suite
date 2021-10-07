@@ -1,4 +1,5 @@
 {
+	"periodicNotificationSubscription": {
         "description": "A type containing data for periodic subscription.",
         "properties": {
           "address": {
@@ -107,3 +108,4 @@
         ],
         "type": "object"
       }
+}

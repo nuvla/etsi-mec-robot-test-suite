@@ -1,4 +1,5 @@
 {
+	"zoneInfo": {
         "description": "A type containing zone information.",
         "properties": {
           "numberOfAccessPoints": {
@@ -41,3 +42,4 @@
         ],
         "type": "object"
       }
+}

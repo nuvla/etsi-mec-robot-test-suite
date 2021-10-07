@@ -1,4 +1,5 @@
 {
+    "zonalTrafficSubscription": {
         "description": "A type containing zonal traffic subscription",
         "properties": {
           "callbackReference": {
@@ -82,3 +83,4 @@
         ],
         "type": "object"
       }
+}
