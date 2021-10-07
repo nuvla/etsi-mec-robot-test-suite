@@ -24,11 +24,15 @@ Check HTTP Response Body Json Schema Is
 Should Be Present In Json List
     [Arguments]     ${expr}   ${json_field}   ${json_value}
     Log    Check if ${json_field} is present in ${expr} with the value ${json_value}
-    :FOR  ${item}  IN  @{expr}
-    \  ${are_equal}=    Should Be Equal As Strings    ${item["${json_field}"]}    ${json_value}
-    \  Exit For Loop If    ${are_equal}
-    Log    Item found ${item}
-    [return]    ${item}
+    ${result}=    Run Keyword And Return    Should Be Equal As Strings    ${json_value}    ${expr['${json_field}']}   
+    [return]   ${result}
+
+    #:FOR  ${item}  IN  @{expr}
+    #\  Log	${item}
+    #${are_equal}=    Should Be Equal As Strings    ${expr['${item}']}    ${json_value}
+    #\  Exit For Loop If    ${are_equal}
+    #Log    Item found ${item}
+    #[return]    ${item}
     
 Should Be Present In Json
     [Arguments]     ${expr}   ${json_field}   ${json_value}

@@ -3,9 +3,11 @@
     "clientCorrelator": "0123",
     "callback": {
       "callbackData": "1234",
-      "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+      "notifyURL": "http://my.callback.com/location-area-circle/some-id"
     },
-    "address": "acr:10.0.0.1",
+    "address": [
+	"10.0.0.1"
+    ],
     "checkImmediate": true,
     "enteringLeavingCriteria": "Entering",
     "frequency": 10,
