@@ -1,7 +1,11 @@
 {
-	"apId": {
-		"macId": "macId01"
-	},
-	"callbackReference": "http://callback.uri/1",
-	"subscriptionType": "AssocStaSubscription"
+  "subscriptionType": "AssocStaSubscription",
+  "callbackReference": "http://meAppClient.example.com/wai/v2/notifications/1",
+  "apId": {
+    "bssid": "005C0A0A0A0A"
+  },
+  "notificationEvent": {
+    "threshold": 1,
+    "trigger": 1
+  }
 }

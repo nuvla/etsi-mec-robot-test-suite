@@ -14,23 +14,19 @@ TP_MEC_MEC028_SRV_WAI_005_OK
     [Documentation] 
     ...  Check that the IUT responds with the requested list of subscription
     ...  Reference "ETSI GS MEC 028 2.2.1, clause 7.5.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription #Outdated
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.2.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription
         
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve the subscription information    ${SUB_FILTER}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   SubscriptionLinkList
-    FOR    ${assocStaSub}    IN    @{response['body']['assocStaSubscription']}
-        ${passed}    Run Keyword And Return Status    Should Be Equal As Strings  ${assocStaSub['_links']['self']['href']}    ${HREF}    
-        Exit For Loop If    ${passed}
-    END
 
 TP_MEC_MEC028_SRV_WAI_006_OK
     [Documentation] 
     ...  Check that the IUT responds with the requested list of subscription
     ...  Reference "ETSI GS MEC 028 2.2.1, clause 7.5.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription #Outdated
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.2.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription
         
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
@@ -43,8 +39,7 @@ TP_MEC_MEC028_SRV_WAI_006_BR
     [Documentation] 
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  Reference "ETSI GS MEC 028 2.2.1, clause 7.5.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription #Outdated
-        
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.2.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve the subscription information    ${INVALID_SUB_FILTER}
@@ -54,7 +49,9 @@ TP_MEC_MEC028_SRV_WAI_006_NF
     [Documentation] 
     ...  Check that the IUT responds with an error when	a request with not existing parameters is sent
     ...  Reference "ETSI GS MEC 028 2.2.1, clause 7.5.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription #Outdated
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.2.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription
+    Should Be True    ${PIC_MEC_SYSTEM} == 1
+    Should Be True    ${PIC_SERVICES} == 1
     Retrieve the subscription information using wrong endpoint
     Check HTTP Response Status Code Is    404   
     
@@ -62,21 +59,19 @@ TP_MEC_MEC028_SRV_WAI_007_OK
     [Documentation] 
     ...  Check that the IUT responds with a Notification Subscription
     ...  Reference "ETSI GS MEC 028 2.2.1, clause 7.5.3.4
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription #Outdated
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.2.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Send a request for creating a subscription  AssocStaSubscription.json
     Check HTTP Response Status Code Is    201
     Check HTTP Response Body Json Schema Is   AssocStaSubscription
     Should Be Equal As Strings  ${response['body']['subscriptionType']}    ${SUB_TYPE}
-    Should Be Equal As Strings  ${response['body']['_links']['self']['href']}    ${HREF}
-    Should Be Equal As Strings  ${response['headers']['Location']}    ${HREF}
     
 TP_MEC_MEC028_SRV_WAI_007_BR
     [Documentation] 
     ...  Check that the IUT responds with an error when an invalid Subscription request is sent
     ...  ETSI GS MEC 028 2.2.1, clause 7.5.3.4
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription #Outdated
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.2.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Send a request for creating a subscription  AssocStaSubscription_BR.json
