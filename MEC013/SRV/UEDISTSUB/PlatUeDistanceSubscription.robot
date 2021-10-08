@@ -26,10 +26,10 @@ TC_MEC_MEC013_SRV_UEDISTSUB_001_OK
     Create new subscription    DistanceNotificationSubscription
     Check HTTP Response Status Code Is    201
     Check HTTP Response Body Json Schema Is    DistanceNotificationSubscription
-    Check Result Contains    ${response['body']['distanceNotificationSubscription']}    clientCorrelator    ${UEDISTSUB_CLIENT_ID}
-    Check Result Contains    ${response['body']['distanceNotificationSubscription']}    callbackReference    ${APP_SRVSUB_NOTIF_CALLBACK_URI}
-    Check Result Contains    ${response['body']['distanceNotificationSubscription']}    monitoredAddress    ${UEDISTSUB_MONITORED_IP_ADDRESS}
-    Check Result Contains    ${response['body']['distanceNotificationSubscription']}    referenceAddress    ${UEDISTSUB_IP_ADDRESS}
+    Check Result Contains in Json    ${response['body']['distanceNotificationSubscription']}    clientCorrelator    ${UEDISTSUB_CLIENT_ID}
+    Check Result Contains in Json    ${response['body']['distanceNotificationSubscription']}    callbackReference    ${APP_SRVSUB_NOTIF_CALLBACK_URI}
+    Check Result Contains in Json    ${response['body']['distanceNotificationSubscription']}    monitoredAddress    ${UEDISTSUB_MONITORED_IP_ADDRESS}
+    Check Result Contains in Json    ${response['body']['distanceNotificationSubscription']}    referenceAddress    ${UEDISTSUB_IP_ADDRESS}
 
 
 TC_MEC_MEC013_SRV_UEDISTSUB_001_BR
