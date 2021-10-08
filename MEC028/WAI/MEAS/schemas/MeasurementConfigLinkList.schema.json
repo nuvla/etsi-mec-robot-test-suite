@@ -1,46 +1,60 @@
 {
-	"required": [
-		"_links"
-	],
-	"properties": {
-		"_links": {
-			"required": [
-				"self"
-			],
-			"properties": {
-				"self": {
-					"properties": {
-						"href": {
-							"description": "URI referring to a resource",
-							"type": "string",
-							"x-etsi-mec-cardinality": "1",
-							"x-etsi-mec-origin-type": "String"
-						}
-					},
-					"required": [
-						"href"
-					],
-					"type": "object",
-					"x-etsi-ref": "6.5.23"
-				}
-			}
-		},
-		"measurementConfig": {
-			"type": "array",
-			"items": {
-				"required": [
-					"href",
-					"measurementId"
-				],
 				"properties": {
-					"href": {
-						"type": "string"
+					"_links": {
+						"description": "Hyperlink related to the resource.",
+						"properties": {
+							"self": {
+								"properties": {
+									"href": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"href"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.23"
+							}
+						},
+						"required": [
+							"self"
+						],
+						"type": "object",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "Structure (inlined)"
 					},
-					"measurementId": {
-						"type": "string"
+					"measurementConfig": {
+						"description": "",
+						"items": {
+							"properties": {
+								"href": {
+									"description": "The URI referring to a measurement configuration.",
+									"format": "uri",
+									"type": "string",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "URI"
+								},
+								"measurementId": {
+									"description": "Unique identifier allocated by the service consumer to identify measurement reports associated with this measurement configuration.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "String"
+								}
+							},
+							"required": [
+								"href",
+								"measurementId"
+							],
+							"type": "object"
+						},
+						"type": "array",
+						"x-etsi-mec-cardinality": "0..N",
+						"x-etsi-mec-origin-type": "Structure (inlined)"
 					}
-				}
+				},
+				"required": [
+					"_links"
+				],
+				"type": "object",
+				"x-etsi-ref": "6.2.5"
 			}
-		}
-	}
-}

@@ -170,7 +170,7 @@ Update a specified measurement configuration
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
     Set Headers    {"Authorization":"${TOKEN}"}
-    GET     ${apiRoot}/${apiName}/${apiVersion}/queries/measurement/${MEAS_CONF_ID}    ${body}
+    PUT     ${apiRoot}/${apiName}/${apiVersion}/queries/measurement/${MEAS_CONF_ID}    ${content}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
@@ -183,7 +183,7 @@ Delete a specified measurement configuration
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
     Set Headers    {"Authorization":"${TOKEN}"}
-    GET     ${apiRoot}/${apiName}/${apiVersion}/queries/measurement/${MEAS_CONF_ID} 
+    DELETE     ${apiRoot}/${apiName}/${apiVersion}/queries/measurement/${MEAS_CONF_ID}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     

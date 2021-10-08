@@ -1,789 +1,1128 @@
 {
 "items":{
-  "properties": {
-    "apAssociated": {
-      "properties": {
-        "assocId": {
-          "description": "Unique number which identifies a particular association between the station and Access Point.",
-          "type": "string",
-          "x-etsi-mec-cardinality": "0..1",
-          "x-etsi-mec-origin-type": "string"
-        },
-        "ipAddress": {
-          "description": "IPv4 or IPv6 address allocated for the Access Point.",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 0,
-          "type": "array",
-          "x-etsi-mec-cardinality": "0..N",
-          "x-etsi-mec-origin-type": "string"
-        },
-        "macId": {
-          "description": "Unique identifier assigned to the Access Point (as network interface controller) for communications at the data link layer of a network segment.",
-          "type": "string",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "string"
-        },
-        "ssid": {
-          "description": "Service Set Identifier to identify logical networks.",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 0,
-          "type": "array",
-          "x-etsi-mec-cardinality": "0..N",
-          "x-etsi-mec-origin-type": "String"
-        }
-      },
-      "required": [
-        "macId"
-      ],
-      "type": "object",
-      "x-etsi-ref": "6.5.12"
-    },
-    "beaconReport": {
-      "properties": {
-        "bssId": {
-          "description": "The BSSID field indicates the BSSID of the BSS(s) for which a beacon report has been received.",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array",
-          "x-etsi-mec-cardinality": "1..N",
-          "x-etsi-mec-origin-type": "String"
-        },
-        "channelId": {
-          "description": "Channel number where the beacon was received.",
-          "type": "integer",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "Integer"
-        },
-        "measurementId": {
-          "description": "Measurement ID of the Measurement configuration applied to this Beacon Report.",
-          "type": "string",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "String"
-        },
-        "reportingCondition": {
-          "description": "As in table T9-89 of IEEE 802.11-2012 [8].",
-          "type": "integer",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "Integer"
-        },
-        "ssId": {
-          "description": "(Optional) The SSID subelement indicates the ESS(s) or IBSS(s) for which a beacon report is received.",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array",
-          "x-etsi-mec-cardinality": "1..N",
-          "x-etsi-mec-origin-type": "String"
-        },
-        "staId": {
-          "properties": {
-            "aid": {
-              "description": "Number which identifies a particular association between a station and an Access Point ",
-              "type": "string",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "String"
-            },
-            "ipAddress": {
-              "description": "IPv4 or IPv6 address allocated for the station.",
-              "items": {
-                "type": "string"
-              },
-              "minItems": 0,
-              "type": "array",
-              "x-etsi-mec-cardinality": "0..N",
-              "x-etsi-mec-origin-type": "String"
-            },
-            "macId": {
-              "description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
-              "type": "string",
-              "x-etsi-mec-cardinality": "1",
-              "x-etsi-mec-origin-type": "String"
-            },
-            "ssid": {
-              "description": "Service Set Identifier to identify logical networks.",
-              "items": {
-                "type": "string"
-              },
-              "minItems": 0,
-              "type": "array",
-              "x-etsi-mec-cardinality": "0..N",
-              "x-etsi-mec-origin-type": "String"
-            }
-          },
-          "required": [
-            "macId"
-          ],
-          "type": "object",
-          "x-etsi-ref": "6.5.11"
-        }
-      },
-      "required": [
-        "staId",
-        "measurementId",
-        "channelId",
-        "bssId",
-        "ssId",
-        "reportingCondition"
-      ],
-      "type": "object",
-      "x-etsi-ref": "6.5.27"
-    },
-    "channel": {
-      "description": "Channel currently used by the station.",
-      "format": "uint32",
-      "type": "integer",
-      "x-etsi-mec-cardinality": "0..1",
-      "x-etsi-mec-origin-type": "Uint32"
-    },
-    "rssi": {
-      "properties": {
-        "rssi": {
-          "description": "The Received Signal Strength Indicator from a station",
-          "format": "uint8",
-          "type": "integer",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "Uint8"
-        }
-      },
-      "required": [
-        "rssi"
-      ],
-      "type": "object",
-      "x-etsi-ref": "6.5.21"
-    },
-    "staDataRate": {
-      "properties": {
-        "staId": {
-          "properties": {
-            "aid": {
-              "description": "Number which identifies a particular association between a station and an Access Point ",
-              "type": "string",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "String"
-            },
-            "ipAddress": {
-              "description": "IPv4 or IPv6 address allocated for the station.",
-              "items": {
-                "type": "string"
-              },
-              "minItems": 0,
-              "type": "array",
-              "x-etsi-mec-cardinality": "0..N",
-              "x-etsi-mec-origin-type": "String"
-            },
-            "macId": {
-              "description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
-              "type": "string",
-              "x-etsi-mec-cardinality": "1",
-              "x-etsi-mec-origin-type": "String"
-            },
-            "ssid": {
-              "description": "Service Set Identifier to identify logical networks.",
-              "items": {
-                "type": "string"
-              },
-              "minItems": 0,
-              "type": "array",
-              "x-etsi-mec-cardinality": "0..N",
-              "x-etsi-mec-origin-type": "String"
-            }
-          },
-          "required": [
-            "macId"
-          ],
-          "type": "object",
-          "x-etsi-ref": "6.5.11"
-        },
-        "staLastDataDownlinkRate": {
-          "description": "The data transmit rate in kbps that was most recently used for transmission of data PPDUs from the access point to the station.",
-          "format": "uint32",
-          "type": "integer",
-          "x-etsi-mec-cardinality": "0..1",
-          "x-etsi-mec-origin-type": "Uint32"
-        },
-        "staLastDataUplinkRate": {
-          "description": "The data transmit rate in Kbps that was most recently used for transmission of data PPDUs from the associated station to the access point.",
-          "format": "uint32",
-          "type": "integer",
-          "x-etsi-mec-cardinality": "0..1",
-          "x-etsi-mec-origin-type": "Uint32"
-        }
-      },
-      "type": "object",
-      "x-etsi-ref": "6.5.22"
-    },
-    "staId": {
-      "properties": {
-        "aid": {
-          "description": "Number which identifies a particular association between a station and an Access Point ",
-          "type": "string",
-          "x-etsi-mec-cardinality": "0..1",
-          "x-etsi-mec-origin-type": "String"
-        },
-        "ipAddress": {
-          "description": "IPv4 or IPv6 address allocated for the station.",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 0,
-          "type": "array",
-          "x-etsi-mec-cardinality": "0..N",
-          "x-etsi-mec-origin-type": "String"
-        },
-        "macId": {
-          "description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
-          "type": "string",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "String"
-        },
-        "ssid": {
-          "description": "Service Set Identifier to identify logical networks.",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 0,
-          "type": "array",
-          "x-etsi-mec-cardinality": "0..N",
-          "x-etsi-mec-origin-type": "String"
-        }
-      },
-      "required": [
-        "macId"
-      ],
-      "type": "object",
-      "x-etsi-ref": "6.5.11"
-    },
-    "staStatistics": {
-      "properties": {
-        "groupIdentity": {
-          "description": "Indicates the requested statistics group describing the Statistics Group Data according to table 9-114 of IEEE 802.11-2016 [8].",
-          "format": "uint8",
-          "type": "integer",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "UInt8"
-        },
-        "md": {
-          "description": "Measurement Duration.",
-          "format": "uint16",
-          "type": "integer",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "UInt16"
-        },
-        "statisticsGroupData": {
-          "description": "Statistics Group Data as defined in Annex C of IEEE 802.112016�[8].",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "not specified",
-          "properties": {
-            "dot11AMPDUDelimiterCRCErrorCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11AMPDUReceivedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11AMSDUAckFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11AckFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11BeamformingFrameCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11ChannelWidthSwitchCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11DualCTSFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11DualCTSSuccessCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11ExplicitBARFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11FCSErrorCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11FailedAMSDUCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11FailedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11FortyMHzFrameReceivedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11FortyMHzFrameTransmittedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11FrameDuplicateCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11GrantedRDGUnusedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11GrantedRDGUsedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11GroupReceivedFrameCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11GroupTransmittedFrameCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11ImplicitBARFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11MPDUInReceivedAMPDUCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11MultipleRetryAMSDUCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11MultipleRetryCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11PSMPUTTGrantDuration": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11PSMPUTTUsedDuration": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosAckFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosDiscardedFrameCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosFailedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosFrameDuplicateCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosMPDUsReceivedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosMultipleRetryCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosRTSFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosRTSSuccessCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosReceivedFragmentCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosRetriesReceivedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosRetryCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosTransmittedFragmentCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11QosTransmittedFrameCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RSNAStatsBIPMICErrors": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RSNAStatsCCMPDecryptErrors": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RSNAStatsCCMPReplays": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RSNAStatsCMACReplays": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RSNAStatsRobustMgmtCCMPReplays": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RSNAStatsTKIPICVErrors": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RSNAStatsTKIPReplays": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RTSFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RTSLSIGFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RTSLSIGSuccessCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RTSSuccessCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11ReceivedAMSDUCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11ReceivedFragmentCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11ReceivedOctetsInAMPDUCount": {
-              "format": "int64",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint64"
-            },
-            "dot11ReceivedOctetsInAMSDUCount": {
-              "format": "int64",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint64"
-            },
-            "dot11RetryAMSDUCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11RetryCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11STAStatisticsAPAverageAccessDelay": {
-              "format": "uint8",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint8"
-            },
-            "dot11STAStatisticsAverageAccessDelayBackGround": {
-              "format": "uint8",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint8"
-            },
-            "dot11STAStatisticsAverageAccessDelayBestEffort": {
-              "format": "uint8",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint8"
-            },
-            "dot11STAStatisticsAverageAccessDelayVideo": {
-              "format": "uint8",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint8"
-            },
-            "dot11STAStatisticsAverageAccessDelayVoice": {
-              "format": "uint8",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint8"
-            },
-            "dot11STAStatisticsChannelUtilization": {
-              "format": "uint8",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint8"
-            },
-            "dot11STAStatisticsStationCount": {
-              "format": "uint8",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint8"
-            },
-            "dot11STBCCTSFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11STBCCTSSuccessCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11TransmittedAMPDUCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11TransmittedAMSDUCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11TransmittedFragmentCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11TransmittedFrameCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11TransmittedFramesInGrantedRDGCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11TransmittedMPDUsInAMPDUCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11TransmittedOctetsInAMPDUCount": {
-              "format": "int64",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint64"
-            },
-            "dot11TransmittedOctetsInAMSDUCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11TransmittedOctetsInGrantedRDGCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11TwentyMHzFrameReceivedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11TwentyMHzFrameTransmittedCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11nonSTBCCTSFailureCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            },
-            "dot11nonSTBCCTSSuccessCount": {
-              "format": "uint32",
-              "type": "integer",
-              "x-etsi-mec-cardinality": "0..1",
-              "x-etsi-mec-origin-type": "Uint32"
-            }
-          },
-          "type": "object"
-        }
-      },
-      "required": [
-        "md",
-        "groupIdentity",
-        "statisticsGroupData"
-      ],
-      "type": "object",
-      "x-etsi-ref": "6.5.13"
-    },
-    "timeStamp": {
-      "properties": {
-        "nanoSeconds": {
-          "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
-          "format": "uint32",
-          "type": "integer",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "Uint32"
-        },
-        "seconds": {
-          "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
-          "format": "uint32",
-          "type": "integer",
-          "x-etsi-mec-cardinality": "1",
-          "x-etsi-mec-origin-type": "Uint32"
-        }
-      },
-      "required": [
-        "seconds",
-        "nanoSeconds"
-      ],
-      "type": "object",
-      "x-etsi-ref": "6.5.2"
-    }
-  },
-  "required": [
-    "staId"
-  ],
-  "type": "object",
-  "x-etsi-ref": "6.2.3"
-	}
+				"properties": {
+					"apAssociated": {
+						"properties": {
+							"assocId": {
+								"description": "Unique number which identifies a particular association between the station and Access Point.",
+								"type": "string",
+								"x-etsi-mec-cardinality": "0..1",
+								"x-etsi-mec-origin-type": "String"
+							},
+							"bssid": {
+								"description": "Basic Service Set Identifier (BSSID) is a unique identifier assigned to the Access Point (as network interface controller) for communications at the data link layer of a network segment. BSSID is typically set to an access point's MAC address.",
+								"type": "string",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "String"
+							},
+							"ipAddress": {
+								"description": "IPv4 or IPv6 address allocated for the Access Point.",
+								"items": {
+									"type": "string"
+								},
+								"minItems": 0,
+								"type": "array",
+								"x-etsi-mec-cardinality": "0..N",
+								"x-etsi-mec-origin-type": "String"
+							},
+							"ssid": {
+								"description": "Service Set Identifier to identify logical networks.",
+								"items": {
+									"type": "string"
+								},
+								"minItems": 0,
+								"type": "array",
+								"x-etsi-mec-cardinality": "0..N",
+								"x-etsi-mec-origin-type": "String"
+							}
+						},
+						"required": [
+							"bssid"
+						],
+						"type": "object",
+						"x-etsi-ref": "6.5.12"
+					},
+					"beaconReport": {
+						"description": "Beacon Report as defined in IEEE 802.11-2016 [8]. ",
+						"items": {
+							"properties": {
+								"antennaId": {
+									"description": "The Antenna ID field contains the identifying number for the antenna(s) used for this measurement. Antenna ID is defined in section 9.4.2.40 of IEEE 802.11-2016 [8].",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"bssid": {
+									"description": "Indicates the BSSID of the BSS for which a beacon report has been received.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"channel": {
+									"description": "Channel number where the beacon was received.",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"measurementId": {
+									"description": "Measurement ID of the Measurement configuration applied to this Beacon Report.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"operatingClass": {
+									"description": "Operating Class field indicates an operating class value as defined in Annex E within IEEE 802.11-2016 [8].",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"parentTsf": {
+									"description": "The Parent TSF field contains the lower 4 octets of the measuring STA's TSF timer value at the start of reception of the first octet of the timestamp field of the reported Beacon, Measurement Pilot, or Probe Response frame at the time the Beacon, Measurement Pilot, or Probe Response frame being reported was received.",
+									"format": "uint32",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "Uint32"
+								},
+								"rcpi": {
+									"description": "RCPI indicates the received channel power of the Beacon, Measurement Pilot, or Probe Response frame, which is a logarithmic function of the received signal power, as defined in section 9.4.2.38 of IEEE 802.11-2016 [8].",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"reportedFrameInfo": {
+									"properties": {
+										"frameType": {
+											"description": "A value of 0 indicates a Beacon or Probe Response.\nA value of 1 indicates a Measurement Pilot frame.",
+											"format": "uint8",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint8"
+										},
+										"phyType": {
+											"description": "Value between 0 and 127 coded according to dot11PHYType.",
+											"format": "uint8",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint8"
+										}
+									},
+									"required": [
+										"phyType",
+										"frameType"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.5.29"
+								},
+								"rsni": {
+									"description": "RSNI indicates the received signal-to-noise indication for the Beacon, Measurement Pilot, or Probe Response frame, as described in section 9.4.2.41 of IEEE 802.11-2016 [8].",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"ssid": {
+									"description": "The SSID subelement indicates the ESS or IBSS for which a beacon report is received.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"staId": {
+									"properties": {
+										"aid": {
+											"description": "Number which identifies a particular association between a station and an Access Point",
+											"type": "string",
+											"x-etsi-mec-cardinality": "0..1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"ipAddress": {
+											"description": "IPv4 or IPv6 address(es) allocated for the station.",
+											"items": {
+												"type": "string"
+											},
+											"minItems": 0,
+											"type": "array",
+											"x-etsi-mec-cardinality": "0..N",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"macId": {
+											"description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
+											"type": "string",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"ssid": {
+											"description": "Service Set Identifier(s) to identify logical networks.",
+											"items": {
+												"type": "string"
+											},
+											"minItems": 0,
+											"type": "array",
+											"x-etsi-mec-cardinality": "0..N",
+											"x-etsi-mec-origin-type": "String"
+										}
+									},
+									"required": [
+										"macId"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.5.11"
+								}
+							},
+							"required": [
+								"measurementId",
+								"operatingClass",
+								"channel",
+								"reportedFrameInfo",
+								"bssid"
+							],
+							"type": "object",
+							"x-etsi-ref": "6.5.27"
+						},
+						"minItems": 0,
+						"type": "array",
+						"x-etsi-mec-cardinality": "0..N",
+						"x-etsi-mec-origin-type": "BeaconReport"
+					},
+					"channel": {
+						"description": "Channel currently used by the station to connect with its associated Access Point.",
+						"format": "uint32",
+						"type": "integer",
+						"x-etsi-mec-cardinality": "0..1",
+						"x-etsi-mec-origin-type": "Uint32"
+					},
+					"channelLoad": {
+						"description": "Channel Load reports as seen by the station as defined IEEE 802.11-2016 [8]. Channel Load reports may be configured for any channel, including the station's current channel for association.",
+						"items": {
+							"properties": {
+								"channel": {
+									"description": "Channel number indicates the channel number for which the measurement report applies.",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"channelLoad": {
+									"description": "Proportion of measurement duration for which the measuring STA determined the channel to be busy, as a percentage of time, linearly scaled with 255 representing 100 %.",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"measurementDuration": {
+									"description": "Duration over which the Channel Load report was measured, in units of TUs of 1 024 µs.",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"measurementId": {
+									"description": "Measurement ID of the Measurement configuration applied to this Channel Load Report.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"operatingClass": {
+									"description": "Operating Class field indicates an operating class value as defined in Annex E within IEEE 802.11-2016 [8].",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"staId": {
+									"properties": {
+										"aid": {
+											"description": "Number which identifies a particular association between a station and an Access Point",
+											"type": "string",
+											"x-etsi-mec-cardinality": "0..1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"ipAddress": {
+											"description": "IPv4 or IPv6 address(es) allocated for the station.",
+											"items": {
+												"type": "string"
+											},
+											"minItems": 0,
+											"type": "array",
+											"x-etsi-mec-cardinality": "0..N",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"macId": {
+											"description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
+											"type": "string",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"ssid": {
+											"description": "Service Set Identifier(s) to identify logical networks.",
+											"items": {
+												"type": "string"
+											},
+											"minItems": 0,
+											"type": "array",
+											"x-etsi-mec-cardinality": "0..N",
+											"x-etsi-mec-origin-type": "String"
+										}
+									},
+									"required": [
+										"macId"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.5.11"
+								}
+							},
+							"required": [
+								"measurementId",
+								"operatingClass",
+								"channel",
+								"measurementDuration",
+								"channelLoad"
+							],
+							"type": "object",
+							"x-etsi-ref": "6.5.39"
+						},
+						"minItems": 0,
+						"type": "array",
+						"x-etsi-mec-cardinality": "0..N",
+						"x-etsi-mec-origin-type": "ChannelLoad"
+					},
+					"neighborReport": {
+						"description": "Information about neighbor Access Points seen by the station as defined IEEE 802.11-2016 [8].",
+						"items": {
+							"properties": {
+								"bssTransitionCandidatePreference": {
+									"description": "Relative value indicating the preferred ordering for this BSS as a transition candidate for roaming. 255 indicating the most preferred candidate and 1 indicating the least preferred candidate, as defined in Table 9-152 within IEEE 802.112016 [8].",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"bssid": {
+									"description": "BSSID (MAC address) of the Access Point that is being reported.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"bssidInfo": {
+									"properties": {
+										"apReachability": {
+											"description": "The apReachability field indicates whether the AP identified by this BSSID is reachable by the STA that requested the neighbor report. Valid values:\n0 = reserved\n1 = not reachable\n2 = unknown\n3 = reachable.",
+											"format": "uint8",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint8"
+										},
+										"capabilities": {
+											"properties": {
+												"apsd": {
+													"description": "APSD Option implemented",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"delayedBACK": {
+													"description": "Delayed Block Ack Option implemented",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"immediateBACK": {
+													"description": "Immediate Block Ack Option implemented",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"qos": {
+													"description": "QoS Option implemented",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"radioMeasurements": {
+													"description": "Radio Measurement Activated",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"spectrumManagement": {
+													"description": "Spectrum Management required",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												}
+											},
+											"required": [
+												"spectrumManagement",
+												"qos",
+												"apsd",
+												"radioMeasurements",
+												"delayedBACK",
+												"immediateBACK"
+											],
+											"type": "object",
+											"x-etsi-ref": "6.5.31"
+										},
+										"ftm": {
+											"description": "True indicates the AP represented by this BSSID is an AP that has set the Fine Timing Measurement Responder field of the Extended Capabilities element to 1.\n\nFalse indicates either that the reporting AP has dot11FineTimingMsmtRespActivated equal to false, or the reported AP has not set the Fine Timing Measurement Responder field of the Extended Capabilities element to 1 or that the Fine Timing Measurement Responder field of the reported AP is not available to the reporting AP at this time.",
+											"type": "boolean",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Boolean"
+										},
+										"highThroughput": {
+											"description": "True indicates that the AP represented by this BSSID is an HT AP including the HT Capabilities element in its Beacons, and that the contents of that HT Capabilities element are identical to the HT Capabilities element advertised by the AP sending the report.",
+											"type": "boolean",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Boolean"
+										},
+										"mobilityDomain": {
+											"description": "True indicates the AP represented by this BSSID is including an MDE in its Beacon frames and that the contents of that MDE are identical to the MDE advertised by the AP sending the report.",
+											"type": "boolean",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Boolean"
+										},
+										"security": {
+											"description": "True indicates the AP identified by this BSSID supports the same security provisioning as used by the STA in its current association.\n\nFalse indicates either that the AP does not support the same security provisioning or that the security information is not available at this time.",
+											"type": "boolean",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Boolean"
+										},
+										"veryHighThroughput": {
+											"description": "True indicates that the AP represented by this BSSID is a VHT AP and that the VHT Capabilities element, if included as a subelement in the report, is identical in content to the VHT Capabilities element included in the AP's Beacon.",
+											"type": "boolean",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Boolean"
+										}
+									},
+									"required": [
+										"apReachability",
+										"security",
+										"capabilities",
+										"mobilityDomain",
+										"highThroughput",
+										"veryHighThroughput",
+										"ftm"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.5.30"
+								},
+								"channel": {
+									"description": "Channel field indicates a channel number, which is interpreted in the context of the indicated operating class. Channel numbers are defined in Annex E within IEEE 802.11-2016 [8].",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"measurementId": {
+									"description": "Measurement ID of the Measurement configuration applied to this Neighbor Report.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"operatingClass": {
+									"description": "Operating Class field indicates an operating class value as defined in Annex E within IEEE 802.11-2016 [8].",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"phyType": {
+									"description": "PHY type of the AP indicated by this BSSID. It is an integer value coded according to the value of the dot11PHYType, Annex C within IEEE 802.11-2016 [8].\n2 = dsss\n4 = ofdm\n5 = hrdsss\n6 = erp\n7 = ht\n8 = dmg\n9 = vht\n10 = tvht",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "Uint8"
+								},
+								"staId": {
+									"properties": {
+										"aid": {
+											"description": "Number which identifies a particular association between a station and an Access Point",
+											"type": "string",
+											"x-etsi-mec-cardinality": "0..1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"ipAddress": {
+											"description": "IPv4 or IPv6 address(es) allocated for the station.",
+											"items": {
+												"type": "string"
+											},
+											"minItems": 0,
+											"type": "array",
+											"x-etsi-mec-cardinality": "0..N",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"macId": {
+											"description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
+											"type": "string",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"ssid": {
+											"description": "Service Set Identifier(s) to identify logical networks.",
+											"items": {
+												"type": "string"
+											},
+											"minItems": 0,
+											"type": "array",
+											"x-etsi-mec-cardinality": "0..N",
+											"x-etsi-mec-origin-type": "String"
+										}
+									},
+									"required": [
+										"macId"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.5.11"
+								}
+							},
+							"required": [
+								"measurementId",
+								"bssid",
+								"bssidInfo",
+								"operatingClass",
+								"channel",
+								"phyType"
+							],
+							"type": "object",
+							"x-etsi-ref": "6.5.10"
+						},
+						"minItems": 0,
+						"type": "array",
+						"x-etsi-mec-cardinality": "0..N",
+						"x-etsi-mec-origin-type": "NeighborReport"
+					},
+					"rssi": {
+						"properties": {
+							"rssi": {
+								"description": "The Received Signal Strength Indicator from a station",
+								"format": "uint8",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "Uint8"
+							}
+						},
+						"required": [
+							"rssi"
+						],
+						"type": "object",
+						"x-etsi-ref": "6.5.21"
+					},
+					"staDataRate": {
+						"properties": {
+							"staId": {
+								"properties": {
+									"aid": {
+										"description": "Number which identifies a particular association between a station and an Access Point",
+										"type": "string",
+										"x-etsi-mec-cardinality": "0..1",
+										"x-etsi-mec-origin-type": "String"
+									},
+									"ipAddress": {
+										"description": "IPv4 or IPv6 address(es) allocated for the station.",
+										"items": {
+											"type": "string"
+										},
+										"minItems": 0,
+										"type": "array",
+										"x-etsi-mec-cardinality": "0..N",
+										"x-etsi-mec-origin-type": "String"
+									},
+									"macId": {
+										"description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
+										"type": "string",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "String"
+									},
+									"ssid": {
+										"description": "Service Set Identifier(s) to identify logical networks.",
+										"items": {
+											"type": "string"
+										},
+										"minItems": 0,
+										"type": "array",
+										"x-etsi-mec-cardinality": "0..N",
+										"x-etsi-mec-origin-type": "String"
+									}
+								},
+								"required": [
+									"macId"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.11"
+							},
+							"staLastDataDownlinkRate": {
+								"description": "The data transmit rate in kbps that was most recently used for transmission of data PPDUs from the access point to the station.",
+								"format": "uint32",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "0..1",
+								"x-etsi-mec-origin-type": "Uint32"
+							},
+							"staLastDataUplinkRate": {
+								"description": "The data transmit rate in Kbps that was most recently used for transmission of data PPDUs from the associated station to the access point.",
+								"format": "uint32",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "0..1",
+								"x-etsi-mec-origin-type": "Uint32"
+							}
+						},
+						"type": "object",
+						"x-etsi-notes": "NOTE:\tStaDataRate shall include at least one instance of either downlink rate or uplink rate and may include both.\n If this report is contained within a data type that provides the station's identifier, staId field may be omitted",
+						"x-etsi-ref": "6.5.22"
+					},
+					"staId": {
+						"properties": {
+							"aid": {
+								"description": "Number which identifies a particular association between a station and an Access Point",
+								"type": "string",
+								"x-etsi-mec-cardinality": "0..1",
+								"x-etsi-mec-origin-type": "String"
+							},
+							"ipAddress": {
+								"description": "IPv4 or IPv6 address(es) allocated for the station.",
+								"items": {
+									"type": "string"
+								},
+								"minItems": 0,
+								"type": "array",
+								"x-etsi-mec-cardinality": "0..N",
+								"x-etsi-mec-origin-type": "String"
+							},
+							"macId": {
+								"description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
+								"type": "string",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "String"
+							},
+							"ssid": {
+								"description": "Service Set Identifier(s) to identify logical networks.",
+								"items": {
+									"type": "string"
+								},
+								"minItems": 0,
+								"type": "array",
+								"x-etsi-mec-cardinality": "0..N",
+								"x-etsi-mec-origin-type": "String"
+							}
+						},
+						"required": [
+							"macId"
+						],
+						"type": "object",
+						"x-etsi-ref": "6.5.11"
+					},
+					"staStatistics": {
+						"description": "Statistics as defined in IEEE 802.11-2016 [8] for the client station collected over measurement duration.",
+						"items": {
+							"properties": {
+								"group2to9Data": {
+									"properties": {
+										"qosAckFailureCount": {
+											"description": "dot11QosAckFailureCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosDiscardedFrameCount": {
+											"description": "dot11QosDiscardedFrameCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosFailedCount": {
+											"description": "dot11QosFailedCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosFrameDuplicateCount": {
+											"description": "dot11QosFrameDuplicateCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosMPDUsReceivedCount": {
+											"description": "dot11QosMPDUsReceivedCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosMultipleRetryCount": {
+											"description": "dot11QosMultipleRetryCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosRTSFailureCount": {
+											"description": "dot11QosRTSFailureCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosRTSSuccessCount": {
+											"description": "dot11QosRTSSuccessCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosReceivedFragmentCount": {
+											"description": "dot11QosReceivedFragmentCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosRetriesReceivedCount": {
+											"description": "dot11QosRetriesReceivedCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosRetryCount": {
+											"description": "dot11QosRetryCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosTransmittedFragmentCount": {
+											"description": "dot11QosTransmittedFragmentCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"qosTransmittedFrameCount": {
+											"description": "dot11QosTransmittedFrameCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"reportingReasonQoSCounters": {
+											"properties": {
+												"qosAckFailure": {
+													"description": "dot11QoSAckFailure",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"qosDiscarded": {
+													"description": "dot11QoSDiscarded",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"qosFailed": {
+													"description": "dot11QoSFailed ",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"qosFrameDuplicate": {
+													"description": "dot11QoSFrameDuplicate",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"qosMultipleRetry": {
+													"description": "dot11QoSMultipleRetry",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"qosRetry": {
+													"description": "dot11QoSRetry",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"qosRtsFailure": {
+													"description": "dot11QoSRTSFailure",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												}
+											},
+											"required": [
+												"qosFailed",
+												"qosRetry",
+												"qosMultipleRetry",
+												"qosFrameDuplicate",
+												"qosRtsFailure",
+												"qosAckFailure",
+												"qosDiscarded"
+											],
+											"type": "object",
+											"x-etsi-ref": "6.5.38"
+										}
+									},
+									"required": [
+										"qosTransmittedFragmentCount",
+										"qosFailedCount",
+										"qosRetryCount",
+										"qosMultipleRetryCount",
+										"qosFrameDuplicateCount",
+										"qosRTSSuccessCount",
+										"qosRTSFailureCount",
+										"qosAckFailureCount",
+										"qosReceivedFragmentCount",
+										"qosTransmittedFrameCount",
+										"qosDiscardedFrameCount",
+										"qosMPDUsReceivedCount",
+										"qosRetriesReceivedCount"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.5.36"
+								},
+								"groupIdentity": {
+									"description": "Indicates the requested statistics group describing the Statistics Group Data according to Table 9-114 of IEEE 802.11-2016 [8].\nDepending on group identity, one and only one of the STA Statistics Group Data will be present.",
+									"format": "uint8",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "UInt8"
+								},
+								"groupOneData": {
+									"properties": {
+										"ackFailureCount": {
+											"description": "dot11AckFailureCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"frameDuplicateCount": {
+											"description": "dot11FrameDuplicateCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"multipleRetryCount": {
+											"description": "dot11MultipleRetryCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"reportingReasonStaCounters": {
+											"properties": {
+												"ackFailure": {
+													"description": "dot11AckFailure",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"failed": {
+													"description": "dot11Failed",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"fcsError": {
+													"description": "dot11FCSError ",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"frameDuplicate": {
+													"description": "dot11FrameDuplicate ",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"multipleRetry": {
+													"description": "dot11MultipleRetry",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"retry": {
+													"description": "dot11Retry",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"rtsFailure": {
+													"description": "dot11RTSFailure",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												}
+											},
+											"required": [
+												"failed",
+												"fcsError",
+												"multipleRetry",
+												"frameDuplicate",
+												"rtsFailure",
+												"ackFailure",
+												"retry"
+											],
+											"type": "object",
+											"x-etsi-ref": "6.5.37"
+										},
+										"retryCount": {
+											"description": "dot11RetryCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"rtsFailureCount": {
+											"description": "dot11RTSFailureCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"rtsSuccessCount": {
+											"description": "dot11RTSSuccessCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										}
+									},
+									"required": [
+										"retryCount",
+										"multipleRetryCount",
+										"frameDuplicateCount",
+										"rtsSuccessCount",
+										"rtsFailureCount",
+										"ackFailureCount"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.5.35"
+								},
+								"groupZeroData": {
+									"properties": {
+										"failedCount": {
+											"description": "dot11FailedCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"fcsErrorCount": {
+											"description": "dot11FCSErrorCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"groupReceivedFrameCount": {
+											"description": "dot11GroupReceivedFrameCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"groupTransmittedFrameCount": {
+											"description": "dot11GroupTransmittedFrameCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"receivedFragmentCount": {
+											"description": "dot11ReceivedFragmentCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"reportingReasonStaCounters": {
+											"properties": {
+												"ackFailure": {
+													"description": "dot11AckFailure",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"failed": {
+													"description": "dot11Failed",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"fcsError": {
+													"description": "dot11FCSError ",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"frameDuplicate": {
+													"description": "dot11FrameDuplicate ",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"multipleRetry": {
+													"description": "dot11MultipleRetry",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"retry": {
+													"description": "dot11Retry",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												},
+												"rtsFailure": {
+													"description": "dot11RTSFailure",
+													"type": "boolean",
+													"x-etsi-mec-cardinality": "1",
+													"x-etsi-mec-origin-type": "Boolean"
+												}
+											},
+											"required": [
+												"failed",
+												"fcsError",
+												"multipleRetry",
+												"frameDuplicate",
+												"rtsFailure",
+												"ackFailure",
+												"retry"
+											],
+											"type": "object",
+											"x-etsi-ref": "6.5.37"
+										},
+										"transmittedFragmentCount": {
+											"description": "dot11TransmittedFragmentCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										},
+										"transmittedFrameCount": {
+											"description": "dot11TransmittedFrameCount counter",
+											"format": "uint32",
+											"type": "integer",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "Uint32"
+										}
+									},
+									"required": [
+										"transmittedFragmentCount",
+										"groupTransmittedFrameCount",
+										"failedCount",
+										"receivedFragmentCount",
+										"groupReceivedFrameCount",
+										"fcsErrorCount",
+										"transmittedFrameCount"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.5.34"
+								},
+								"measurementDuration": {
+									"description": "Duration over which the Statistics Group Data was measured in time units of 1 024 µs. Duration equal to zero indicates a report of current values.",
+									"format": "uint16",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "UInt16"
+								},
+								"measurementId": {
+									"description": "Measurement ID of the Measurement configuration applied to this STA Statistics Report.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"staId": {
+									"properties": {
+										"aid": {
+											"description": "Number which identifies a particular association between a station and an Access Point",
+											"type": "string",
+											"x-etsi-mec-cardinality": "0..1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"ipAddress": {
+											"description": "IPv4 or IPv6 address(es) allocated for the station.",
+											"items": {
+												"type": "string"
+											},
+											"minItems": 0,
+											"type": "array",
+											"x-etsi-mec-cardinality": "0..N",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"macId": {
+											"description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
+											"type": "string",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"ssid": {
+											"description": "Service Set Identifier(s) to identify logical networks.",
+											"items": {
+												"type": "string"
+											},
+											"minItems": 0,
+											"type": "array",
+											"x-etsi-mec-cardinality": "0..N",
+											"x-etsi-mec-origin-type": "String"
+										}
+									},
+									"required": [
+										"macId"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.5.11"
+								}
+							},
+							"required": [
+								"measurementId",
+								"measurementDuration",
+								"groupIdentity"
+							],
+							"type": "object",
+							"x-etsi-ref": "6.5.13"
+						},
+						"minItems": 0,
+						"type": "array",
+						"x-etsi-mec-cardinality": "0..N",
+						"x-etsi-mec-origin-type": "StaStatistics"
+					},
+					"timeStamp": {
+						"properties": {
+							"nanoSeconds": {
+								"description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+								"format": "uint32",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "Uint32"
+							},
+							"seconds": {
+								"description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+								"format": "uint32",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "Uint32"
+							}
+						},
+						"required": [
+							"seconds",
+							"nanoSeconds"
+						],
+						"type": "object",
+						"x-etsi-ref": "6.5.2"
+					}
+				},
+				"required": [
+					"staId"
+				],
+				"type": "object",
+				"x-etsi-ref": "6.2.3"
+			}
 }

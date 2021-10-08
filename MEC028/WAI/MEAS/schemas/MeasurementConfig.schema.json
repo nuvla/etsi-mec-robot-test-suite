@@ -1,14 +1,12 @@
 {
 				"properties": {
 					"_links": {
+						"description": "Hyperlink related to the resource.",
 						"properties": {
 							"self": {
 								"properties": {
 									"href": {
-										"description": "URI referring to a resource",
-										"type": "string",
-										"x-etsi-mec-cardinality": "1",
-										"x-etsi-mec-origin-type": "String"
+										"type": "string"
 									}
 								},
 								"required": [
@@ -22,21 +20,265 @@
 							"self"
 						],
 						"type": "object",
-						"x-etsi-mec-cardinality": "0..1"
+						"x-etsi-mec-cardinality": "0..1",
+						"x-etsi-mec-origin-type": "Structure (inlined)"
+					},
+					"measurementId": {
+						"description": "Unique identifier allocated by the service consumer to identify measurement reports (within sta_information query), associated with this measurement configuration.",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					},
+					"measurementInfo": {
+						"properties": {
+							"beaconRequestConf": {
+								"properties": {
+									"beaconReportingConf": {
+										"properties": {
+											"reportingCondition": {
+												"description": "Reporting condition for the Beacon Report as per Table 9-89 of IEEE 802.11-2016 [8]:\n0 = Report to be issued after each measurement.\n1 = measured RCPI level is greater than the threshold.\n2 = measured RCPI level is less than the threshold.\n3 = measured RSNI level is greater than the threshold.\n4 = measured RSNI level is less than the threshold.\n5 = measured RCPI level is greater than a threshold defined by an offset from the serving AP's reference RCPI.\n6 = measured RCPI level is less than a threshold defined by an offset from the serving AP's reference RCPI.\n7 = measured RSNI level is greater than a threshold defined by an offset from the serving AP's reference RSNI.\n8 = measured RSNI level is less than a threshold defined by an offset from the serving AP's reference RSNI.\n9 = measured RCPI level is in a range bound by the serving AP's reference RCPI and an offset from the serving AP's reference RCPI.\n10 = measured RSNI level is in a range bound by the serving AP's reference RSNI and an offset from the serving AP's reference RSNI.",
+												"format": "uint8",
+												"type": "integer",
+												"x-etsi-mec-cardinality": "1",
+												"x-etsi-mec-origin-type": "Uint8"
+											},
+											"threshold": {
+												"description": "The threshold subfield contains either the threshold value or the offset value to be used for conditional reporting.\n\nFor reportingCondition subfield with values 1 and 2, the threshold value is a logarithmic function of the received signal power, as defined in section 9.4.2.38 of IEEE 802.11-2016 [8].\n\nFor reportingCondition subfield values 3 and 4, the threshold value is a logarithmic function of the signal-to-noise ratio, as described in section 9.4.2.41 of IEEE 802.11-2016 [8].\n\nFor reportingCondition subfield values 5 to 10, the offset value is an 8-bit 2s complement integer in units of 0,5 dBm. The indicated reporting condition applies individually to each measured Beacon, Measurement Pilot, or Probe Response frame.",
+												"format": "uint8",
+												"type": "integer",
+												"x-etsi-mec-cardinality": "1",
+												"x-etsi-mec-origin-type": "Uint8"
+											}
+										},
+										"required": [
+											"reportingCondition",
+											"threshold"
+										],
+										"type": "object",
+										"x-etsi-ref": "6.5.28"
+									},
+									"bssid": {
+										"description": "The BSSID field indicates the BSS for which a beacon report is requested. If absent, the requested beacon reports should include all BSSs on the channel.",
+										"type": "string",
+										"x-etsi-mec-cardinality": "0..1",
+										"x-etsi-mec-origin-type": "String"
+									},
+									"channelId": {
+										"description": "Channel number to scan. A Channel Number of 0 indicates a request to make iterative measurements for all supported channels in the Operating Class where the measurement is permitted on the channel and the channel is valid for the current regulatory domain. A Channel Number of 255 indicates a request to make iterative measurements for all supported channels in the current Operating Class listed in the latest AP Channel Report received from the serving AP.",
+										"format": "uint8",
+										"type": "integer",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "Uint8"
+									},
+									"measurementMode": {
+										"description": "0 for passive.\n1 for active.\n2 for beacon table.",
+										"format": "uint8",
+										"type": "integer",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "Uint8"
+									},
+									"operatingClass": {
+										"description": "Operating Class field indicates an operating class value as defined in Annex E within IEEE 802.112016 [8].",
+										"format": "uint8",
+										"type": "integer",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "Uint8"
+									},
+									"ssid": {
+										"description": "The SSID subelement indicates the ESS or IBSS for which a beacon report is requested.",
+										"type": "string",
+										"x-etsi-mec-cardinality": "0..1",
+										"x-etsi-mec-origin-type": "String"
+									}
+								},
+								"required": [
+									"operatingClass",
+									"channelId",
+									"measurementMode",
+									"beaconReportingConf"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.25"
+							},
+							"channelLoadConf": {
+								"properties": {
+									"channel": {
+										"description": "Channel for which the channel load report is requested.",
+										"type": "integer",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "Integer"
+									},
+									"operatingClass": {
+										"description": "Operating Class field indicates an operating class value as defined in Annex E within IEEE 802.11-2016 [8].",
+										"format": "uint8",
+										"type": "integer",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "Uint8"
+									},
+									"reportingCondition": {
+										"description": "Reporting condition for the Beacon Report as per Table 9-153 of IEEE 802.11-2016 [8]:\n0 = Report to be issued after each measurement.\n1 = Report to be issued when Channel Load is greater than or equal to the threshold.\n2 = Report to be issued when Channel Load is less than or equal to the threshold.\n\nIf this optional field is not provided, channel load report should be issued after each measurement (reportingCondition = 0).",
+										"format": "uint8",
+										"type": "integer",
+										"x-etsi-mec-cardinality": "0..1",
+										"x-etsi-mec-origin-type": "Uint8"
+									},
+									"threshold": {
+										"description": "Channel Load reference value for threshold reporting. This field shall be provided for reportingCondition values 1 and 2.",
+										"format": "uint8",
+										"type": "integer",
+										"x-etsi-mec-cardinality": "0..1",
+										"x-etsi-mec-origin-type": "Uint8"
+									}
+								},
+								"required": [
+									"operatingClass",
+									"channel"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.24"
+							},
+							"measurementDuration": {
+								"description": "Duration of the measurement in Time Units (TUs) of 1 024 µs, as defined in section 11.11.4 of IEEE 802.11-2016 [8]. If not provided, the underlying system may utilize a default configuration that will be indicated in resulting measurement reports.",
+								"format": "uint16",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "0..1",
+								"x-etsi-mec-origin-type": "Uint16"
+							},
+							"neighborReportConf": {
+								"properties": {
+									"bssid": {
+										"description": "BSSID of the neighbor AP which information is intended to obtain. If no specific BSSID is given, the information will be provided for all APs matching the ssid criteria.",
+										"type": "string",
+										"x-etsi-mec-cardinality": "0..1",
+										"x-etsi-mec-origin-type": "String"
+									},
+									"ssid": {
+										"description": "The SSID field is optionally present. If present, it contains an SSID element. The presence of an SSID element in a Neighbor Report indicates a request for a neighbor list for the specified SSID in the SSID Element. The absence of an SSID element indicates neighbor report for the current ESS.",
+										"type": "string",
+										"x-etsi-mec-cardinality": "0..1",
+										"x-etsi-mec-origin-type": "String"
+									}
+								},
+								"type": "object",
+								"x-etsi-notes": "NOTE:\tBoth SSID and BSSID are optional configuration parameters. BSSID is valid when a SSID setting is provided, otherwise ignored. If SSID is not included, the neighbor report will be generated for the SSID (i.e. current ESS) that the station is associated.",
+								"x-etsi-ref": "6.5.32"
+							},
+							"randomInterval": {
+								"description": "Random interval to be used for starting the measurement in TUs of 1 024 µs, as specified in section 11.11.3 of IEEE 802.11-2016 [8]. If not provided, the underlying system may utilize a default configuration that will be indicated in resulting measurement reports.",
+								"format": "uint16",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "0..1",
+								"x-etsi-mec-origin-type": "Uint16"
+							},
+							"staStatisticsConf": {
+								"properties": {
+									"groupIdentity": {
+										"description": "As per Table 9-92 of IEEE 802.11-2016 [8].",
+										"format": "uint8",
+										"type": "integer",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "Uint8"
+									},
+									"measurementCount": {
+										"description": "Valid if triggeredReport = true.\nSpecifies the number of MAC service data units or protocol data units to determine if the trigger conditions are met.",
+										"format": "uint32",
+										"type": "integer",
+										"x-etsi-mec-cardinality": "0..1",
+										"x-etsi-mec-origin-type": "Uint32"
+									},
+									"triggerCondition": {
+										"properties": {
+											"ackFailureCountThreshold": {
+												"description": "Configure and set threshold for dot11AckFailureCount trigger",
+												"format": "uint32",
+												"type": "integer",
+												"x-etsi-mec-cardinality": "0..1",
+												"x-etsi-mec-origin-type": "Uint32"
+											},
+											"failedCountThreshold": {
+												"description": "Configure and set threshold for dot11FailedCount trigger",
+												"format": "uint32",
+												"type": "integer",
+												"x-etsi-mec-cardinality": "0..1",
+												"x-etsi-mec-origin-type": "Uint32"
+											},
+											"fcsErrorCountThreshold": {
+												"description": "Configure and set threshold for dot11FCSErrorCount trigger",
+												"format": "uint32",
+												"type": "integer",
+												"x-etsi-mec-cardinality": "0..1",
+												"x-etsi-mec-origin-type": "Uint32"
+											},
+											"frameDuplicateCountThreshold": {
+												"description": "Configure and set threshold for dot11FrameDuplicateCount trigger",
+												"format": "uint32",
+												"type": "integer",
+												"x-etsi-mec-cardinality": "0..1",
+												"x-etsi-mec-origin-type": "Uint32"
+											},
+											"multipleRetryCountThreshold": {
+												"description": "Configure and set threshold for dot11MultipleRetryCount trigger",
+												"format": "uint32",
+												"type": "integer",
+												"x-etsi-mec-cardinality": "0..1",
+												"x-etsi-mec-origin-type": "Uint32"
+											},
+											"retryCountThreshold": {
+												"description": "Configure and set threshold for dot11RetryCount trigger",
+												"format": "uint32",
+												"type": "integer",
+												"x-etsi-mec-cardinality": "0..1",
+												"x-etsi-mec-origin-type": "Uint32"
+											},
+											"rtsFailureCountThreshold": {
+												"description": "Configure and set threshold for dot11RTSFailureCount trigger",
+												"format": "uint32",
+												"type": "integer",
+												"x-etsi-mec-cardinality": "0..1",
+												"x-etsi-mec-origin-type": "Uint32"
+											}
+										},
+										"type": "object",
+										"x-etsi-ref": "6.5.33"
+									},
+									"triggerTimeout": {
+										"description": "Valid if triggeredReport = true.\nThe Trigger Timeout field contains a value in units of 100 time-units of 1 024 µs during which a measuring STA does not generate further triggered STA Statistics Reports after a trigger condition has been met.",
+										"format": "uint16",
+										"type": "integer",
+										"x-etsi-mec-cardinality": "0..1",
+										"x-etsi-mec-origin-type": "Uint16"
+									},
+									"triggeredReport": {
+										"description": "True = triggered reporting, otherwise duration.",
+										"type": "boolean",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "Boolean"
+									}
+								},
+								"required": [
+									"groupIdentity",
+									"triggeredReport"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.26"
+							}
+						},
+						"type": "object",
+						"x-etsi-notes": "NOTE 1:\tOnly one of channelLoadConf, beaconRequestConf, staStatisticsConf or neighborReportConf is allowed in a MeasurementInfo instance.\nNOTE 2:\tAs per IEEE 802.11-2016 [8], measurementDuration and randomInterval apply to channelLoad, beaconRequest, staStatistics, and neighborReport configurations.",
+						"x-etsi-ref": "6.5.41"
 					},
 					"staId": {
-						"minItems": 1,
-						"type": "array",
+						"description": "Identifier(s) to uniquely specify the target client station(s) for the measurement configuration.",
 						"items": {
 							"properties": {
 								"aid": {
-									"description": "Number which identifies a particular association between a station and an Access Point ",
+									"description": "Number which identifies a particular association between a station and an Access Point",
 									"type": "string",
 									"x-etsi-mec-cardinality": "0..1",
 									"x-etsi-mec-origin-type": "String"
 								},
 								"ipAddress": {
-									"description": "IPv4 or IPv6 address allocated for the station.",
+									"description": "IPv4 or IPv6 address(es) allocated for the station.",
 									"items": {
 										"type": "string"
 									},
@@ -52,7 +294,7 @@
 									"x-etsi-mec-origin-type": "String"
 								},
 								"ssid": {
-									"description": "Service Set Identifier to identify logical networks.",
+									"description": "Service Set Identifier(s) to identify logical networks.",
 									"items": {
 										"type": "string"
 									},
@@ -67,257 +309,11 @@
 							],
 							"type": "object",
 							"x-etsi-ref": "6.5.11"
-						}
-					},
-					"measurementId": {
-						"type": "string"
-					},
-					"measurementInfo": {
-						"properties": {
-							"measurementDuration": {
-								"type": "integer",
-								"format": "unit16"
-							},
-							"randomInterval": {
-								"type": "integer",
-								"format": "unit16"
-							},
-							"channelLoadConf": {
-								"properties": {
-									"apId": {
-										"properties": {
-											"ipAddress": {
-												"description": "IPv4 or IPv6 address allocated for the Access Point.",
-												"items": {
-													"type": "string"
-												},
-												"minItems": 0,
-												"type": "array",
-												"x-etsi-mec-cardinality": "0..N",
-												"x-etsi-mec-origin-type": "String"
-											},
-											"macId": {
-												"description": "Unique Identifier assigned to an Access Point (as network interface controller) for communications at the data link layer of a network segment.",
-												"type": "string",
-												"x-etsi-mec-cardinality": "1",
-												"x-etsi-mec-origin-type": "String"
-											},
-											"ssid": {
-												"description": "Service Set Identifier to identify logical networks including Basic Service Set and Extended Service Set.",
-												"items": {
-													"type": "string"
-												},
-												"minItems": 0,
-												"type": "array",
-												"x-etsi-mec-cardinality": "0..N",
-												"x-etsi-mec-origin-type": "String"
-											}
-										},
-										"required": [
-											"macId"
-										],
-										"type": "object",
-										"x-etsi-ref": "6.5.3"
-									},
-									"cChannelId": {
-										"description": "Channel number which load is reported",
-										"type": "integer",
-										"x-etsi-mec-cardinality": "1",
-										"x-etsi-mec-origin-type": "Integer"
-									},
-									"channelLoad": {
-										"description": "Channel load as per IEEE 802.11-2012 [8], section 11.11.9.3",
-										"type": "integer",
-										"x-etsi-mec-cardinality": "1",
-										"x-etsi-mec-origin-type": "Integer"
-									}
-								},
-								"required": [
-									"apId",
-									"cChannelId",
-									"channelLoad"
-								],
-								"type": "object",
-								"x-etsi-ref": "6.5.24"
-							},
-							"beaconRequestConf": {
-								"properties": {
-									"bssId": {
-										"description": "The BSSID field indicates the BSSID of the BSS(s) for which a beacon report is requested. When requesting beacon reports for all BSSs on the channel, the BSSID field contains the wildcard BSSID.",
-										"items": {
-											"type": "string"
-										},
-										"minItems": 1,
-										"type": "array",
-										"x-etsi-mec-cardinality": "1..N",
-										"x-etsi-mec-origin-type": "String"
-									},
-									"channelId": {
-										"description": "Channel number to scan. A Channel Number of 0 indicates a request to make iterative measurements for all supported channels in the Operating Class where the measurement is permitted on the channel and the channel is valid for the current regulatory domain. A Channel Number of 255 indicates a request to make iterative measurements for all supported channels in the current Operating Class listed in the latest AP Channel Report received from the serving AP.",
-										"type": "integer",
-										"x-etsi-mec-cardinality": "1",
-										"x-etsi-mec-origin-type": "Integer"
-									},
-									"measurementMode": {
-										"description": "0 for passive.\n1 for active.\n2 for beacon table.",
-										"type": "integer",
-										"x-etsi-mec-cardinality": "1",
-										"x-etsi-mec-origin-type": "Integer"
-									},
-									"reportingCondition": {
-										"description": "As in table T9-89 of IEEE 802.11-2012 [8].",
-										"type": "integer",
-										"x-etsi-mec-cardinality": "1",
-										"x-etsi-mec-origin-type": "Integer"
-									},
-									"ssId": {
-										"description": "(Optional) The SSID subelement indicates the ESS(s) or IBSS(s) for which a beacon report is requested.",
-										"items": {
-											"type": "string"
-										},
-										"minItems": 1,
-										"type": "array",
-										"x-etsi-mec-cardinality": "1..N",
-										"x-etsi-mec-origin-type": "String"
-									},
-									"staId": {
-										"properties": {
-											"aid": {
-												"description": "Number which identifies a particular association between a station and an Access Point ",
-												"type": "string",
-												"x-etsi-mec-cardinality": "0..1",
-												"x-etsi-mec-origin-type": "String"
-											},
-											"ipAddress": {
-												"description": "IPv4 or IPv6 address allocated for the station.",
-												"items": {
-													"type": "string"
-												},
-												"minItems": 0,
-												"type": "array",
-												"x-etsi-mec-cardinality": "0..N",
-												"x-etsi-mec-origin-type": "String"
-											},
-											"macId": {
-												"description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
-												"type": "string",
-												"x-etsi-mec-cardinality": "1",
-												"x-etsi-mec-origin-type": "String"
-											},
-											"ssid": {
-												"description": "Service Set Identifier to identify logical networks.",
-												"items": {
-													"type": "string"
-												},
-												"minItems": 0,
-												"type": "array",
-												"x-etsi-mec-cardinality": "0..N",
-												"x-etsi-mec-origin-type": "String"
-											}
-										},
-										"required": [
-											"macId"
-										],
-										"type": "object",
-										"x-etsi-ref": "6.5.11"
-									}
-								},
-								"required": [
-									"staId",
-									"channelId",
-									"measurementMode",
-									"bssId",
-									"ssId",
-									"reportingCondition"
-								],
-								"type": "object",
-								"x-etsi-ref": "6.5.25"
-							},
-							"staStatisticsConf": {
-								"properties": {
-									"groupIdentity": {
-										"description": "As per table T 9-114 of IEEE 802.11-2012 [8].",
-										"type": "integer",
-										"x-etsi-mec-cardinality": "1",
-										"x-etsi-mec-origin-type": "Integer"
-									},
-									"staId": {
-										"properties": {
-											"aid": {
-												"description": "Number which identifies a particular association between a station and an Access Point ",
-												"type": "string",
-												"x-etsi-mec-cardinality": "0..1",
-												"x-etsi-mec-origin-type": "String"
-											},
-											"ipAddress": {
-												"description": "IPv4 or IPv6 address allocated for the station.",
-												"items": {
-													"type": "string"
-												},
-												"minItems": 0,
-												"type": "array",
-												"x-etsi-mec-cardinality": "0..N",
-												"x-etsi-mec-origin-type": "String"
-											},
-											"macId": {
-												"description": "Unique identifier assigned to station (as network interface controller) for communications at the data link layer of a network segment.",
-												"type": "string",
-												"x-etsi-mec-cardinality": "1",
-												"x-etsi-mec-origin-type": "String"
-											},
-											"ssid": {
-												"description": "Service Set Identifier to identify logical networks.",
-												"items": {
-													"type": "string"
-												},
-												"minItems": 0,
-												"type": "array",
-												"x-etsi-mec-cardinality": "0..N",
-												"x-etsi-mec-origin-type": "String"
-											}
-										},
-										"required": [
-											"macId"
-										],
-										"type": "object",
-										"x-etsi-ref": "6.5.11"
-									},
-									"triggerCondition": {
-										"type": "integer"
-									},
-									"triggerTimeout": {
-										"description": "The Trigger Timeout field contains a value in units of 100 TUs during which a measuring STA does not generate further triggered STA Statistics Reports after a trigger condition has been met.",
-										"type": "integer",
-										"x-etsi-mec-cardinality": "1",
-										"x-etsi-mec-origin-type": "Integer"
-									},
-									"triggeredReport": {
-										"type": "boolean"
-									}
-								},
-								"required": [
-									"staId",
-									"groupIdentity",
-									"triggeredReport",
-									"triggerTimeout",
-									"triggerCondition"
-								],
-								"type": "object",
-								"x-etsi-ref": "6.5.26"
-							},
-							"neighborReportConf": {
-								"properties": {
-									"ssid": {
-										"type": "string"
-									},
-									"bssid": {
-										"type": "string"
-									}
-								}
-							}
 						},
-						"type": "object",
-						"x-etsi-ref": "6.2.3"
+						"minItems": 1,
+						"type": "array",
+						"x-etsi-mec-cardinality": "1..N",
+						"x-etsi-mec-origin-type": "StaIdentity"
 					}
 				},
 				"required": [
@@ -325,5 +321,6 @@
 					"measurementId",
 					"measurementInfo"
 				],
-				"type": "object"
+				"type": "object",
+				"x-etsi-ref": "6.2.4"
 			}

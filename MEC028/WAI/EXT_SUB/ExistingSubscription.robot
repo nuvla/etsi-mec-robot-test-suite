@@ -35,7 +35,6 @@ TP_MEC_MEC028_SRV_WAI_008_NF
     Check HTTP Response Status Code Is    404
  
 
-*** Test Cases ***
 TP_MEC_MEC028_SRV_WAI_009_OK
     [Documentation] 
     ...  Check that the IUT responds with a Notification Subscription when it is modified"
