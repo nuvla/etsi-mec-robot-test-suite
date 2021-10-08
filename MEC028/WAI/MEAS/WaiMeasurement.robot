@@ -57,8 +57,8 @@ TP_MEC_MEC028_SRV_WAI_014_OK
     ...  "https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.2.1/WlanInformationApi.yaml#/schemas/MeasurementConfigLinkList"
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
-    Check HTTP Response Body Json Schema Is   MeasurementConfig
     Retrieve a specified measurement configuration   ${MEAS_ID}
+    Check HTTP Response Body Json Schema Is   MeasurementConfig
     Check HTTP Response Status Code Is    200
     Should Be Equal As Strings  ${response['body']['measurementId']}    ${MEAS_ID}
     
@@ -122,7 +122,7 @@ TP_MEC_MEC028_SRV_WAI_016_NF
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Delete a specified measurement configuration   ${INVALID_MEASUREMENT_CONFIG_ID} 
-    Check HTTP Response Status Code Is    204
+    Check HTTP Response Status Code Is    404
     
   
 *** Keywords ***
