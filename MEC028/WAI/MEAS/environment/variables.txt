@@ -9,6 +9,6 @@ ${MEC-APP_PORT}                     8082
 
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 
-${STA_ID}    		123
+${MAC_ID}    		123
 ${MEAS_ID}    		456
 ${INVALID_MEASUREMENT_CONFIG_ID}   999

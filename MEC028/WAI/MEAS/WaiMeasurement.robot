@@ -32,13 +32,11 @@ TP_MEC_MEC028_SRV_WAI_013_OK
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     MeasurementConfig.json
     ${body}    Get File    ${path}
-    ${json_object}=	Evaluate  json.loads('''${body}''')  json
     Create a new measurement configuration  ${body}
-    Check HTTP Response Status Code Is    200
-    Check HTTP Response Body Json Schema Is   MeasurementConfigLinkList
-    Should Be Equal As Strings  ${response['body']['staIdentity']['staId']}     ${STA_ID}
-    Should Be Equal As Strings  ${response['body']['measurementId']    ${MEAS_ID}
-    Should Be Equal As Strings  ${json_object['measurementInfo']}    ${response['body']['measurementInfo']}
+    Check HTTP Response Status Code Is    201
+    Check HTTP Response Body Json Schema Is   MeasurementConfig
+    Should Be Equal As Strings  ${response['body']['staId']['macId']}     ${MAC_ID}
+    Should Be Equal As Strings  ${response['body']['measurementId']}    ${MEAS_ID}
 
 TP_MEC_MEC028_SRV_WAI_013_BR
     [Documentation] 
@@ -49,7 +47,6 @@ TP_MEC_MEC028_SRV_WAI_013_BR
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     MeasurementConfigError.json
     ${body}    Get File    ${path}
-    ${json_object}=	Evaluate  json.loads('''${body}''')  json
     Create a new measurement configuration  ${body}
     Check HTTP Response Status Code Is    400   
 
@@ -63,7 +60,7 @@ TP_MEC_MEC028_SRV_WAI_014_OK
     Check HTTP Response Body Json Schema Is   MeasurementConfig
     Retrieve a specified measurement configuration   ${MEAS_ID}
     Check HTTP Response Status Code Is    200
-    Should Be Equal As Strings  ${response['body']['measurementId']    ${MEAS_ID}
+    Should Be Equal As Strings  ${response['body']['measurementId']}    ${MEAS_ID}
     
     
 
@@ -87,13 +84,10 @@ TP_MEC_MEC028_SRV_WAI_015_OK
     Should Be True    ${PIC_SERVICES} == 1  
     ${path}    Catenate    SEPARATOR=      jsons/     MeasurementConfigUpdate.json
     ${body}    Get File    ${path}
-    ${json_object}=	Evaluate  json.loads('''${body}''')  json 
     Update a specified measurement configuration   ${MEAS_ID}   ${body}
     Check HTTP Response Status Code Is    200
-    Should Be Equal As Strings  ${response['body']['staIdentity']['staId']}    ${json_object['staIdentity']['staId']}
-    Should Be Equal As Strings  ${response['body']['measurementId']    ${MEAS_ID}
-    Should Be Equal As Strings  ${response['body']['measurementInfo']}    ${json_object['measurementInfo']}
-
+    Check HTTP Response Body Json Schema Is   MeasurementConfig
+    Should Be Equal As Strings  ${response['body']['measurementId']}    ${MEAS_ID}
 
 
 TP_MEC_MEC028_SRV_WAI_015_NF
@@ -103,7 +97,9 @@ TP_MEC_MEC028_SRV_WAI_015_NF
     ...  "https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.2.1/WlanInformationApi.yaml#/schemas/MeasurementConfigLinkList"
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
-    Update a specified measurement configuration   ${INVALID_MEASUREMENT_CONFIG_ID}   MeasurementConfigUpdate.json
+    ${path}    Catenate    SEPARATOR=      jsons/     MeasurementConfigUpdate.json
+    ${body}    Get File    ${path}
+    Update a specified measurement configuration   ${INVALID_MEASUREMENT_CONFIG_ID}   ${body}
     Check HTTP Response Status Code Is    404
     
 
