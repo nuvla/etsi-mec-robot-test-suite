@@ -14,4 +14,4 @@ ${SUB_ID}          1
 ${NOT_EXISTING_SUB_ID}          99
 ${CALLBACK_URI}          http://callback.uri/1
 ${NEW_CALLBACK_URI}          http://new.callback.uri/1
-${MAC_ID}          macId01
+${BSS_ID}          bssid01

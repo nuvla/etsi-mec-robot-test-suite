@@ -1,11 +1,16 @@
 {
-  "_links":{
-  	"href":""
-  	},
-      
-	"apId": {
-		"macId": "macId01"
-	},
-	"callbackReference": "http://new.callback.uri/1",
-	"subscriptionType": "AssocStaSubscription"
+  "subscriptionType": "AssocStaSubscription",
+  "callbackReference": "http://meAppClient.example.com/wai/v2/notifications/3",
+  "_links": {
+    "self": {
+      "href": "http://meAppServer.example.com/wai/v2/subscriptions/sub123"
+    }
+  },
+  "apId": {
+    "bssid": "005C0A0A0A0A"
+  },
+  "notificationEvent": {
+    "threshold": 1,
+    "trigger": 1
+  }
 }

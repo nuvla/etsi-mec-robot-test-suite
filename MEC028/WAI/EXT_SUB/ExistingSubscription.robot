@@ -14,7 +14,7 @@ TP_MEC_MEC028_SRV_WAI_008_OK
     [Documentation] 
     ...  Check that the IUT responds with the list of Subscription"
     ...	 Reference "ETSI GS MEC 028 2.2.1, clause 7.6.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription ##Outdated
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.2.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve existing subscription information  ${SUB_ID}
@@ -22,7 +22,7 @@ TP_MEC_MEC028_SRV_WAI_008_OK
     Check HTTP Response Body Json Schema Is   AssocStaSubscription
     Should Be Equal As Strings  ${response['body']['subscriptionType']}    ${SUB_TYPE}
     Should Be Equal As Strings  ${response['body']['callbackReference']}    ${CALLBACK_URI}
-    Should Be Equal As Strings  ${response['body']['apId']['macId']}    ${MAC_ID}
+    Should Be Equal As Strings  ${response['body']['apId']['bssid']}    ${BSS_ID}
    
 TP_MEC_MEC028_SRV_WAI_008_NF
     [Documentation] 
@@ -47,7 +47,7 @@ TP_MEC_MEC028_SRV_WAI_009_OK
     Check HTTP Response Body Json Schema Is   AssocStaSubscription
     Should Be Equal As Strings  ${response['body']['subscriptionType']}    ${SUB_TYPE}
     Should Be Equal As Strings  ${response['body']['callbackReference']}    ${NEW_CALLBACK_URI}
-    Should Be Equal As Strings  ${response['body']['apId']['macId']}    ${MAC_ID}
+    Should Be Equal As Strings  ${response['body']['apId']['bssid']}    ${BSS_ID}
    
 TP_MEC_MEC028_SRV_WAI_009_BR
     [Documentation] 
