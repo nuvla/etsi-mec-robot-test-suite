@@ -56,7 +56,7 @@ TC_MEC_MEC013_SRV_UEINFOSUB_002_OK
     Check HTTP Response Status Code Is    204
 
 
-TC_MEC_SRV_UEINFOSUB_002_NF
+TC_MEC_MEC013_SRV_UEINFOSUB_002_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application

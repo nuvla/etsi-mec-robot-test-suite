@@ -41,6 +41,10 @@ Should Be Present In Json
 
 Check Response Contains
     [Arguments]    ${source}    ${parameter}    ${value}
+    Should Be Present In Json List    ${source}    ${parameter}    ${value}
+    
+Check Response Contains in Json
+    [Arguments]    ${source}    ${parameter}    ${value}
     Should Be Present In Json    ${source}    ${parameter}    ${value}
 
 Check Result Contains

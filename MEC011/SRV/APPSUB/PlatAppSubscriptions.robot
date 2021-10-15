@@ -52,23 +52,8 @@ TP_MEC_MEC011_SRV_APPSUB_002_OK
     Check HTTP Response Status Code Is    201
     Check HTTP Response Body Json Schema Is    AppTerminationNotificationSubscription
     Check HTTP Response Header Contains    Location
-    Check Response Contains    ${response['body']}    subscriptionType    AppTerminationNotificationSubscription
-    Check Response Contains    ${response['body']}    callbackReference    ${APP_TERM_NOTIF_CALLBACK_URI}
-
-
-TP_MEC_MEC011_SRV_APPSUB_002_BR
-    [Documentation]
-    ...    Check that the IUT responds with the information on a specific subscription
-    ...    when queried by a MEC Application
-    ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.3.3.4
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/AppTerminationNotificationSubscription
-
-    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Get individual subscription    ${APP_INSTANCE_ID}    ${SUBSCRIPTION_ID}
-    Check HTTP Response Status Code Is    200
-    Check HTTP Response Body Json Schema Is    AppTerminationNotificationSubscription
-    Check Response Contains    ${response['body']}    subscriptionType    AppTerminationNotificationSubscription
+    Check Response Contains in Json    ${response['body']}    subscriptionType    AppTerminationNotificationSubscription
+    Check Response Contains in Json    ${response['body']}    callbackReference    ${APP_TERM_NOTIF_CALLBACK_URI}
 
 
          
