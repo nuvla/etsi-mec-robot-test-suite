@@ -1,0 +1,138 @@
+{
+				"description": "'This data type represents an application lifecycle management operation occurrence'",
+				"type": "object",
+				"required": [
+					"id",
+					"operationState",
+					"stateEnteredTime",
+					"startTime",
+					"lcmOperation",
+					"_links"
+				],
+				"properties": {
+					"id": {
+						"description": "'Identifier of the subscription to application LCM operation occurrence notification'",
+						"type": "string"
+					},
+					"operationState": {
+						"description": "Operation state",
+						"type": "string",
+						"format": "enum",
+						"enum": [
+							"STARTING",
+							"PROCESSING",
+							"COMPLETED",
+							"FAILED"
+						]
+					},
+					"stateEnteredTime": {
+						"properties": {
+							"nanoSeconds": {
+								"description": "The nanoseconds part of the Time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+								"format": "Uint32",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "Uint32"
+							},
+							"seconds": {
+								"description": "The seconds part of the Time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+								"format": "Uint32",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "Uint32"
+							}
+						},
+						"required": [
+							"seconds",
+							"nanoSeconds"
+						],
+						"type": "object",
+						"x-etsi-ref": "6.2.5.4"
+					},
+					"startTime": {
+						"properties": {
+							"nanoSeconds": {
+								"description": "The nanoseconds part of the Time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+								"format": "Uint32",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "Uint32"
+							},
+							"seconds": {
+								"description": "The seconds part of the Time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+								"format": "Uint32",
+								"type": "integer",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "Uint32"
+							}
+						},
+						"required": [
+							"seconds",
+							"nanoSeconds"
+						],
+						"type": "object",
+						"x-etsi-ref": "6.2.5.4"
+					},
+					"lcmOperation": {
+						"description": "Type of the actual LCM operation represented by this application instance LCM operation occurrence",
+						"type": "string",
+						"format": "enum",
+						"enum": [
+							"INSTATIATE",
+							"OPERATE",
+							"TERMINATE"
+						]
+					},
+					"operationParams": {
+						"description": "'Input parameters of the LCM operation. This attribute shall be formatted according to the request data type of the related LCM operation.'",
+						"type": "string",
+						"enum": [
+							"INSTANTIATE",
+							"OPERATE",
+							"TERMINATE"
+						]
+					},
+					"_links": {
+						"description": "Links to resources related to this resource.",
+						"type": "object",
+						"required": [
+							"self",
+							"appInstance"
+						],
+						"properties": {
+							"self": {
+								"properties": {
+									"href": {
+										"description": "URI referring to a resource",
+										"format": "uri",
+										"type": "string",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "URI"
+									}
+								},
+								"required": [
+									"href"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.2"
+							},
+							"appInstance": {
+								"properties": {
+									"href": {
+										"description": "URI referring to a resource",
+										"format": "uri",
+										"type": "string",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "URI"
+									}
+								},
+								"required": [
+									"href"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.2"
+							}
+						}
+					}
+				}
+			}

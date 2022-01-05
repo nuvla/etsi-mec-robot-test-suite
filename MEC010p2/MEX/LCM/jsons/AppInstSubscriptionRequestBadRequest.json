@@ -1,0 +1,4 @@
+{
+  "callbackERRORUri": "AppInstanceStateChangeSubscription",
+  "callbackUri": "https://callback.uri/path"
+}

@@ -1,0 +1,4 @@
+{
+  "subscriptionType": "AppInstanceStateChangeSubscription",
+  "callbackUri": "https://callback.uri/path"
+}
