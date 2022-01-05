@@ -43,7 +43,6 @@ TP_MEC_MEC010p2_MEPM_LCM_001_NF
     Check HTTP Response Status Code Is    404
 
 
-
 *** Keywords ***
 Request to configure Platform
     [Argument]  ${appInstanceId}   ${content}
