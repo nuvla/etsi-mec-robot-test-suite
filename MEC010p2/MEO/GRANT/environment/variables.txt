@@ -1,7 +1,8 @@
 *** Variables ***
 # Generic variables
 ${MEO_SCHEMA}                   http
-${MEO_HOST}                     10.192.2.172
+#${MEO_HOST}                     10.192.2.172
+${MEO_HOST}                     127.0.0.1
 ${MEO_PORT}                     8081
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
@@ -10,8 +11,8 @@ ${apiName}        granting
 ${apiVersion}     v1
 
 # Specific variables
-${grantId}                        e0deee2b-6e50-4f33-ab09-8bf0585025d3
-${non_existant_grant_id}          non_existant_grant_id
+${GRANT_ID}                        e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${NOT_EXISTING_GRANT_ID}           non_existant_grant_id
 
 
 # Notifications variables
