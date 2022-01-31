@@ -12,7 +12,9 @@ ${apiVersion}     v1
 
 # Specific variables
 ${GRANT_ID}                        e0deee2b-6e50-4f33-ab09-8bf0585025d3
-${NOT_EXISTING_GRANT_ID}           non_existant_grant_id
+${GRANT_ID_ACCEPTED}               abcdee2b-6e50-4f33-ab09-8bf05850abcd
+${NOT_EXISTING_GRANT_ID}           NOT_EXISTING_GRANT_ID
+${APP_INSTANCE_ID}                 456
 
 
 # Notifications variables
