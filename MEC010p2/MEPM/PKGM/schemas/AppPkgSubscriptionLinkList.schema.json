@@ -1,0 +1,61 @@
+{
+				"description": "'The data type represents a subscription link list of notification on application package management'",
+				"type": "object",
+				"required": [
+					"_links"
+				],
+				"properties": {
+					"_links": {
+						"description": "Links to resources related to this resource.",
+						"type": "object",
+						"required": [
+							"self"
+						],
+						"properties": {
+							"self": {
+								"properties": {
+									"href": {
+										"description": "URI referring to a resource",
+										"format": "uri",
+										"type": "string",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "URI"
+									}
+								},
+								"required": [
+									"href"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.2"
+							},
+							"subscriptions": {
+								"type": "array",
+								"items": {
+									"description": "'The data type represents the input parameters of \"subscription operation\" to notification of application package management for the onboarding, or operational state change of application package.'",
+									"type": "object",
+									"required": [
+										"href",
+										"subsctiptionType"
+									],
+									"properties": {
+										"href": {
+											"description": "The URI referring to the subscription.",
+											"type": "string",
+											"format": "uri"
+										},
+										"subsctiptionType": {
+											"description": "'Subscribed notification type'",
+											"type": "string",
+											"enum": [
+												"AppPackageOnBoardingSubscription",
+												"AppPacakgeOperationChangeSubscription",
+												"AppPackageDeletionSubscription"
+											]
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
