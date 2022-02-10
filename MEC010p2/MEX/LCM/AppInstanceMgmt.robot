@@ -10,7 +10,7 @@ Library     OperatingSystem
 
 
 *** Test Cases ***
-TP_MEC_MEC010p2_MEX_LCM_001_OK
+TC_MEC_MEC010p2_MEX_LCM_001_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_001_OK
     ...    Check that MEC API provider creates a new App Package when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.1.3.1
@@ -24,7 +24,7 @@ TP_MEC_MEC010p2_MEX_LCM_001_OK
     Should Be Equal As Strings  ${response['body']['instantiationState']}       NOT_INSTANTIATED
    
 
-TP_MEC_MEC010p2_MEX_LCM_001_BR
+TC_MEC_MEC010p2_MEX_LCM_001_BR
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_001_BR
     ...    Check that MEC API provider sends an error when it receives a malformed request for the creation of a new App Instance
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.1.3.1
@@ -36,7 +36,7 @@ TP_MEC_MEC010p2_MEX_LCM_001_BR
 
 
     
-TP_MEC_MEC010p2_MEX_LCM_002_OK
+TC_MEC_MEC010p2_MEX_LCM_002_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_002_OK
     ...    Check that MEC API provider retrieves the list of App instances when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.1.3.2
@@ -54,7 +54,7 @@ TP_MEC_MEC010p2_MEX_LCM_002_OK
     
 
 
-TP_MEC_MEC010p2_MEX_LCM_003_OK
+TC_MEC_MEC010p2_MEX_LCM_003_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_003_OK
     ...    Check that MEC API provider retrieves an App Package when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.2.3.2
@@ -66,21 +66,21 @@ TP_MEC_MEC010p2_MEX_LCM_003_OK
     Should Be Equal As Strings   ${response['body']['id']}    ${APP_INSTANCE_ID}
 
 
-TP_MEC_MEC010p2_MEX_LCM_003_NF
+TC_MEC_MEC010p2_MEX_LCM_003_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_003_NF
     ...    Check that MEC API provider fails on deletion of an App Instance when requested using wrong appInstanceId
     ...    ETSI GS MEC 010-2 2.2.1, Table 6.2.2.4.2-1  #AppInstanceInfo
     GET APP Instance   ${NOT_EXISTING_APP_INSTANCE_ID}  
     Check HTTP Response Status Code Is  404
     
-TP_MEC_MEC010p2_MEX_LCM_004_OK
+TC_MEC_MEC010p2_MEX_LCM_004_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_003_OK
     ...    Check that MEC API provider service deletes an App Instance when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.2.3.4
     Delete APP Instance   ${APP_INSTANCE_ID}  
     Check HTTP Response Status Code Is  204
     
-TP_MEC_MEC010p2_MEX_LCM_004_NF
+TC_MEC_MEC010p2_MEX_LCM_004_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_004_NF
     ...    Check that MEC API provider fails on deletion of an App Instance when requested using wrong appInstanceId
     ...   ETSI GS MEC 010-2 2.2.1, clause 7.4.2.3.4
@@ -88,9 +88,7 @@ TP_MEC_MEC010p2_MEX_LCM_004_NF
     Check HTTP Response Status Code Is  404
     
 
-
-
-TP_MEC_MEC010p2_MEX_LCM_005_OK
+TC_MEC_MEC010p2_MEX_LCM_005_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_005_OK
     ...    Check that MEC API provider service instantiates an App Instance when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.6.3.1
@@ -99,7 +97,7 @@ TP_MEC_MEC010p2_MEX_LCM_005_OK
     Check HTTP Response Status Code Is    202
     Check HTTP Response Header Contains    Location
 
-TP_MEC_MEC010p2_MEX_LCM_005_BR
+TC_MEC_MEC010p2_MEX_LCM_005_BR
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_005_BR
     ...    Check that MEC API provider service fails to instantiate an App Instance when it receives a malformed request
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.6.3.1
@@ -109,7 +107,7 @@ TP_MEC_MEC010p2_MEX_LCM_005_BR
     
 
 
-TP_MEC_MEC010p2_MEX_LCM_005_NF
+TC_MEC_MEC010p2_MEX_LCM_005_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_005_NF
     ...    Check that MEC API provider service fails to instantiate an App Instance when it receives a request related to a not existing App Instance
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.6.3.1
@@ -119,7 +117,7 @@ TP_MEC_MEC010p2_MEX_LCM_005_NF
     
 
 
-TP_MEC_MEC010p2_MEX_LCM_006_OK
+TC_MEC_MEC010p2_MEX_LCM_006_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_006_OK
     ...    Check that MEC API provider service terminates an App Instance when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.7.3.1
@@ -128,7 +126,7 @@ TP_MEC_MEC010p2_MEX_LCM_006_OK
     Check HTTP Response Status Code Is    202
     Check HTTP Response Header Contains    Location
 
-TP_MEC_MEC010p2_MEX_LCM_006_BR
+TC_MEC_MEC010p2_MEX_LCM_006_BR
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_006_OK
     ...    Check that MEC API provider service fails to terminate an App Instance when it receives a malformed request
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.7.3.1
@@ -137,7 +135,7 @@ TP_MEC_MEC010p2_MEX_LCM_006_BR
     Check HTTP Response Status Code Is    400
  
 
-TP_MEC_MEC010p2_MEX_LCM_006_NF
+TC_MEC_MEC010p2_MEX_LCM_006_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_006_NF
     ...    Check that MEC API provider service fails to terminate an App Instance when it receives a request related to a not existing App Instance
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.7.3.1
@@ -146,7 +144,7 @@ TP_MEC_MEC010p2_MEX_LCM_006_NF
     Check HTTP Response Status Code Is    404  
 
 
-TP_MEC_MEC010p2_MEX_LCM_007_OK
+TPC_MEC_MEC010p2_MEX_LCM_007_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_007_OK
     ...    Check that MEC API provider service changes the status of an App Instance from its INITIAL_STATE to a given FINAL_STATE, when requested.
     ...     The following combinations INITIAL_STATE - FINAL_STATE are supported: 
@@ -159,7 +157,7 @@ TP_MEC_MEC010p2_MEX_LCM_007_OK
     Check HTTP Response Header Contains    Location
 
 
-TP_MEC_MEC010p2_MEX_LCM_007_BR
+TC_MEC_MEC010p2_MEX_LCM_007_BR
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_007_BR
     ...    Check that MEC API provider service fails to operate on an App Instance when it receives a malformed request
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.8.3.1
@@ -167,7 +165,7 @@ TP_MEC_MEC010p2_MEX_LCM_007_BR
     Operate App Request  ${APP_INSTANCE_ID}  OperateAppRequestBadRequest
     Check HTTP Response Status Code Is    400
     
-TP_MEC_MEC010p2_MEX_LCM_007_NF
+TC_MEC_MEC010p2_MEX_LCM_007_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_007_NF
     ...    Check that MEC API provider service fails to change the status of an App Instance when it receives a request related to a not existing App Instance
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.8.3.1
@@ -177,7 +175,7 @@ TP_MEC_MEC010p2_MEX_LCM_007_NF
     
 
 
-TP_MEC_MEC010p2_MEX_LCM_008_OK
+TC_MEC_MEC010p2_MEX_LCM_008_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_008_OK
     ...    Check that MEC API provider service retrieves info about LCM Operation Occurrence on App Instances when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.9.3.2
@@ -196,7 +194,7 @@ TP_MEC_MEC010p2_MEX_LCM_008_OK
 
 
 
-TP_MEC_MEC010p2_MEX_LCM_009_OK
+TC_MEC_MEC010p2_MEX_LCM_009_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_009_OK
     ...    Check that MEC API provider service retrieves info about LCM Operation Occurrence on an App Instance when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.10.3.2
@@ -207,7 +205,7 @@ TP_MEC_MEC010p2_MEX_LCM_009_OK
     Should Be Equal As Strings  ${response}[body][id]    ${APP_LCM_OP_OCC_ID}
     
 
-TP_MEC_MEC010p2_MEX_LCM_009_NF
+TC_MEC_MEC010p2_MEX_LCM_009_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_009_NF
     ...    Check that MEC API provider service sends an error when it receives a query for a not existing LCM Operation Occurence
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.10.3.2
@@ -218,7 +216,7 @@ TP_MEC_MEC010p2_MEX_LCM_009_NF
 
 
 
-TP_MEC_MEC010p2_MEX_LCM_010_OK
+TC_MEC_MEC010p2_MEX_LCM_010_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_010_OK
     ...    Check that MEC API provider service creates a LCM Subscription when requested, where the subscription request can 
     ...    have SUBSCRIPTION_TYPE AppInstanceStateChangeSubscription or AppLcmOpOccStateChangeSubscription
@@ -241,7 +239,7 @@ TP_MEC_MEC010p2_MEX_LCM_010_OK
 
 
 
-TP_MEC_MEC010p2_MEX_LCM_010_BR
+TC_MEC_MEC010p2_MEX_LCM_010_BR
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_010_BR
     ...    Check that MEC API provider service sends an error when it receives a malformed request to create a LCM Subscription
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.3.3.1,
@@ -258,7 +256,7 @@ TP_MEC_MEC010p2_MEX_LCM_010_BR
     Check HTTP Response Status Code Is  400
     
 
-TP_MEC_MEC010p2_MEX_LCM_011_OK
+TC_MEC_MEC010p2_MEX_LCM_011_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_011_OK
     ...    Check that MEC API provider service sends the list of LCM Subscriptions when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.3.3.2,
@@ -273,14 +271,9 @@ TP_MEC_MEC010p2_MEX_LCM_011_OK
 
     Send a request for retrieving all subscriptions
     Check HTTP Response Status Code Is  200
-    ##In the MEC010p2 v2.1.1 Specification, the response data model is SubscriptionLinkList.
-    ##In the MEC010p2 v2.2.1 Specification, the response data model is AppInstanceSubscriptionLinkList.
-    ##These data models differ only for the subscriptionType attribute.
-    ##Since the OAS v2.2.1 is not available yet, the response data model is not checked yet.
-    
-    #Validate Json     AppInstanceSubscriptionLinkList.schema.json    ${response}[body]
+    Validate Json     AppInstanceSubscriptionLinkList.schema.json    ${response}[body]
 
-TP_MEC_MEC010p2_MEX_LCM_012_OK
+TC_MEC_MEC010p2_MEX_LCM_012_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_012_OK
     ...    Check that MEC API provider service sends the information about an existing LCM subscription when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.4.3.2
@@ -294,7 +287,7 @@ TP_MEC_MEC010p2_MEX_LCM_012_OK
     Should Be Equal As Strings  ${response['body']['id']}             ${SUBSCRIPTION_ID}
 
 
-TP_MEC_MEC010p2_MEX_LCM_012_NF
+TC_MEC_MEC010p2_MEX_LCM_012_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_012_NF
     ...    Check that MEC API provider service sends an error when it receives a query for a not existing LCM Subscription
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.4.3.2
@@ -307,14 +300,15 @@ TP_MEC_MEC010p2_MEX_LCM_012_NF
     Check HTTP Response Status Code Is  404
     
 
-TP_MEC_MEC010p2_MEX_LCM_013_OK
+TC_MEC_MEC010p2_MEX_LCM_013_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_013_OK
     ...    Check that MEC API provider service delete an existing LCM Subscription when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.3.3.4
     Send a request for deleting a subscription  ${SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is  204
 
-TP_MEC_MEC010p2_MEX_LCM_013_NF
+
+TC_MEC_MEC010p2_MEX_LCM_013_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_013_NF
     ...    Check that MEC API provider service sends an error when it receives a deletion request for a not existing LCM Subscription
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.3.3.4
@@ -322,7 +316,7 @@ TP_MEC_MEC010p2_MEX_LCM_013_NF
     Check HTTP Response Status Code Is  404
     
 
-TP_MEC_MEC010p2_MEX_LCM_014_OK
+TC_MEC_MEC010p2_MEX_LCM_014_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_014_OK
     ...    Check that MEC API provider service cancels an on going LCM Operation
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.11.3.1",
@@ -331,7 +325,7 @@ TP_MEC_MEC010p2_MEX_LCM_014_OK
     Check HTTP Response Status Code Is    202
     
 
-TP_MEC_MEC010p2_MEX_LCM_014_BR
+TC_MEC_MEC010p2_MEX_LCM_014_BR
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_014_BR
     ...    Check that MEC API provider service fails to cancel an on going LCM Operation when it receives a malformed request
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.11.3.1",
@@ -339,7 +333,7 @@ TP_MEC_MEC010p2_MEX_LCM_014_BR
     Cancel on going LCM Operation  ${APP_LCM_OP_OCC_ID}   CancelModeBadRequest
     Check HTTP Response Status Code Is    400
     
-TP_MEC_MEC010p2_MEX_LCM_014_NF
+TC_MEC_MEC010p2_MEX_LCM_014_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_014_NF
     ...    Check that MEC API provider service fails to cancel an on going LCM Operation when it receives a request related to a not existing application LCM Operation
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.11.3.1",
@@ -349,7 +343,7 @@ TP_MEC_MEC010p2_MEX_LCM_014_NF
 
 
 
-TP_MEC_MEC010p2_MEX_LCM_015_OK
+TC_MEC_MEC010p2_MEX_LCM_015_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_015_OK
     ...    Check that MEC API provider service makes failed an on going LCM Operation
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.12.3.1
@@ -358,7 +352,7 @@ TP_MEC_MEC010p2_MEX_LCM_015_OK
     Check HTTP Response Body Json Schema Is   AppLcmOpOcc
 
 
-TP_MEC_MEC010p2_MEX_LCM_015_NF
+TC_MEC_MEC010p2_MEX_LCM_015_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_015_NF
     ...    Check that MEC API provider service makes failed an on going LCM Operation
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.12.3.1
@@ -366,7 +360,7 @@ TP_MEC_MEC010p2_MEX_LCM_015_NF
     Check HTTP Response Status Code Is    404
 
 
-TP_MEC_MEC010p2_MEX_LCM_016_OK
+TC_MEC_MEC010p2_MEX_LCM_016_OK
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_016_OK
     ...    Check that MEC API provider service retries an on going LCM Operation
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.13.3.1
@@ -374,7 +368,7 @@ TP_MEC_MEC010p2_MEX_LCM_016_OK
     Check HTTP Response Status Code Is    200
 
 
-TP_MEC_MEC010p2_MEX_LCM_016_NF
+TC_MEC_MEC010p2_MEX_LCM_016_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_016_NF
     ...    Check that MEC API provider service fails to retry an LCM Operation when it receives a request related to a not existing application LCM Operation
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.13.3.1
