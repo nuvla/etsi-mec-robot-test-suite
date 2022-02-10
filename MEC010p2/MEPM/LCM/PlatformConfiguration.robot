@@ -10,7 +10,7 @@ Library     OperatingSystem
 
 
 *** Test Cases ***
-TP_MEC_MEC010p2_MEPM_LCM_001_OK
+TC_MEC_MEC010p2_MEPM_LCM_001_OK
     [Documentation]    TP_MEC_MEC010p2_MEPM_LCM_001_OK
     ...    Check that MEC API provider has created the configuration information in AppD to the MEPM-V
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.7.6.3.1
@@ -21,7 +21,7 @@ TP_MEC_MEC010p2_MEPM_LCM_001_OK
     Check Response Header contains    Location
 
 
-TP_MEC_MEC010p2_MEPM_LCM_001_BR
+TC_MEC_MEC010p2_MEPM_LCM_001_BR
     [Documentation]    TP_MEC_MEC010p2_MEPM_LCM_001_BR
     ...    Check that MEC API provider sends an error when it receives a malformed request for the configuration information in AppD to the MEPM-V
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.7.6.3.1
@@ -32,7 +32,7 @@ TP_MEC_MEC010p2_MEPM_LCM_001_BR
     
 
 
-TP_MEC_MEC010p2_MEPM_LCM_001_NF
+TC_MEC_MEC010p2_MEPM_LCM_001_NF
     [Documentation]    TP_MEC_MEC010p2_MEPM_LCM_001_BR
     ...    "Check that MEC API provider sends an error when it receives a request 
 	...    for the configuration information in AppD to the MEPM-V with not valid app instance ID
