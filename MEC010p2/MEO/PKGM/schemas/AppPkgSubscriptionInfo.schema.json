@@ -1,0 +1,55 @@
+{
+  "description": "'The data type represents a subscription to notification of application package management for the onboarding, or operational state change of application package'",
+  "type": "object",
+  "required": [
+    "id",
+    "subscriptionType",
+    "callbackUri",
+    "_links"
+  ],
+  "properties": {
+    "id": {
+      "description": "''",
+      "type": "string"
+    },
+    "subscriptionType": {
+      "description": "Subscribed notification type.",
+      "type": "string",
+      "enum": [
+        "AppPackageOnBoardingSubscription",
+        "AppPacakgeOperationChange",
+        "AppPackageDeletion"
+      ]
+    },
+    "callbackUri": {
+      "description": "The URI of the endpoint for the notification to be sent to.",
+      "type": "string",
+      "format": "uri"
+    },
+    "_links": {
+      "description": "Links to resources related to this resource.",
+      "type": "object",
+      "required": [
+        "self"
+      ],
+      "properties": {
+        "self": {
+          "properties": {
+            "href": {
+              "description": "URI referring to a resource",
+              "format": "uri",
+              "type": "string",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "URI"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.5.2"
+        }
+      }
+    }
+  }
+}

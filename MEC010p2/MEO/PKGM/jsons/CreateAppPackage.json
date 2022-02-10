@@ -1,1 +1,28 @@
-{}
+{
+	"id": "AppPkgInfoId",
+	"appDid": "appdId",
+	"appName": "APP_NAME",
+	"appSoftwareVersion": "APP_SOFTWARE_VERSION",
+	"appDVersion": "APP_D_VERSION",
+	"checksum": {
+		"algorithm": "SHA-256",
+		"hash": "0x1234567890abcdef"
+	},
+	"softwareImages": ["info about sofware image"],
+	"onBoardingState": "CREATED",
+	"operationalState": "ENABLED",
+	"usageState": "NOT_IN_USE",
+	"mecInfo": ["mecInfo"],
+	"links": {
+		"self": {
+			"href": "/app_lcm/v1/app_packages/123"
+		},
+		"appD": {
+			"href": "/app_lcm/v1/on_boarded_app_packages/456/appd"
+		},
+		"appPkgContent": {
+			"href": "/app_lcm/v1/on_boarded_app_packages/456/package_content"
+		}
+	}
+
+}

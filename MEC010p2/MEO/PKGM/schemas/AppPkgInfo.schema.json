@@ -1,0 +1,159 @@
+{
+        "description": "'The data type AppPkgInfo represents the parameters for an application package resource'",
+        "type": "object",
+        "required": [
+          "id",
+          "appDId",
+          "appName",
+          "appSoftwareVersion",
+          "appDVersion",
+          "checksum",
+          "softwareImages",
+          "onboardingState",
+          "operationalState",
+          "usageState",
+          "_links"
+        ],
+        "properties": {
+          "id": {
+            "description": "Identifier of the onboarded application package.",
+            "type": "string"
+          },
+          "appDId": {
+            "description": "Identifier of this MEC application descriptor. This attribute shall be globally unique.",
+            "type": "string"
+          },
+          "appProvider": {
+            "description": "Provider of the application and of the AppD.",
+            "type": "string"
+          },
+          "appName": {
+            "description": "Name to identify the MEC application.",
+            "type": "string"
+          },
+          "appSoftwareVersion": {
+            "description": "Software version of the application. This is updated when there is any change to the software in the onboarded application package.",
+            "type": "string"
+          },
+          "appDVersion": {
+            "description": "Identifies the version of the application descriptor.",
+            "type": "string"
+          },
+          "checksum": {
+            "description": "",
+            "properties": {
+              "algorithm": {
+                "description": " Name of the algorithm used to generate the checksum,  as defined in ETSI GS NFV-SOL 004. For example, SHA-256, SHA-512.",
+                "type": "string"
+              },
+              "hash": {
+                "description": "'String 1 The hexadecimal value of the checksum'",
+                "type": "string"
+              }
+            },
+            "required": [
+              "algorithm",
+              "hash"
+            ],
+            "type": "object"
+          },
+          "softwareImages": {
+            "description": "Information of application software image in application package. Type is TBD"
+          },
+          "additionalArtifacts": {
+            "description": "Additional information of application package artifacts that are not application software images. Type is TBD"
+          },
+          "onboardingState": {
+            "description": "Onboarding state of application package",
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "CREATED",
+              "UPLOADING",
+              "PROCESSING",
+              "ONBOARDED"
+            ]
+          },
+          "operationalState": {
+            "description": "Operational state of the onboarded application package: â€¢ENABLED: the application package can be used for instantiation of new application instances. â€¢DISABLED: the application package cannot be used for further application instantiation requests.",
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ]
+          },
+          "usageState": {
+            "description": "Usage state of the onboarded instance of the application package",
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "IN_USE",
+              "NOT_IN_USE"
+            ]
+          },
+          "userDefinedData": {
+            "description": "'This data type represents a list of key-value pairs. The order of the pairs in the list is not significant. In JSON, a set of key-value pairs is represented as an object. It shall comply with the provisions defined in clause 4 of IETF RFC 8259'",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "_links": {
+            "description": "Links to resources related to this resource.",
+            "type": "object",
+            "required": [
+              "self",
+              "appD",
+              "appPkgContent"
+            ],
+            "properties": {
+              "self": {
+                "properties": {
+                  "href": {
+                    "description": "URI referring to a resource",
+                    "format": "uri",
+                    "type": "string",
+                    "x-etsi-mec-cardinality": "1",
+                    "x-etsi-mec-origin-type": "URI"
+                  }
+                },
+                "required": [
+                  "href"
+                ],
+                "type": "object",
+                "x-etsi-ref": "6.5.2"
+              },
+              "appD": {
+                "properties": {
+                  "href": {
+                    "description": "URI referring to a resource",
+                    "format": "uri",
+                    "type": "string",
+                    "x-etsi-mec-cardinality": "1",
+                    "x-etsi-mec-origin-type": "URI"
+                  }
+                },
+                "required": [
+                  "href"
+                ],
+                "type": "object",
+                "x-etsi-ref": "6.5.2"
+              },
+              "appPkgContent": {
+                "properties": {
+                  "href": {
+                    "description": "URI referring to a resource",
+                    "format": "uri",
+                    "type": "string",
+                    "x-etsi-mec-cardinality": "1",
+                    "x-etsi-mec-origin-type": "URI"
+                  }
+                },
+                "required": [
+                  "href"
+                ],
+                "type": "object",
+                "x-etsi-ref": "6.5.2"
+              }
+            }
+          }
+        }
+      }

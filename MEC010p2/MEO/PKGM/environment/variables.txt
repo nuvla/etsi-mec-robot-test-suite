@@ -1,36 +1,43 @@
 *** Variables ***
 # Generic variables
 ${MEO_SCHEMA}                   http
-${MEO_HOST}                     10.192.2.172
+${MEO_HOST}                     127.0.0.1
+#${MEO_HOST}                     10.192.2.172
 ${MEO_PORT}                     8081
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
-${apiName}        apmi
+${apiName}        app_pkgm
 ${apiVersion}     v1
 
 # Specific variables
-${APP_PKG_NAME}                     APP_PKG_NAME        // Should be the same as in AppPkg.json
-${APP_PKG_VERSION}                  APP_PKG_VERSION     // Should be the same as in AppPkg.json
-${CHECKSUM}                         CHECKSUM            // Should be the same as in AppPkg.json
-${OPERATIONAL_STATE}                OPERATIONAL_STATE   // Should be the same as in AppPkg.json
-${USAGE_STATE}                      USAGE_STATE         // Should be the same as in AppPkg.json
+${APP_PKG_NAME}                     appName
+${APP_PKG_VERSION}                  APP_PKG_VERSION
+${APP_NAME}                         appName
+${CHECKSUM}                         SHA-256
+${OPERATIONAL_STATE}                ENABLED
+${ONBOARDING_STATE}                 CREATED
+${USAGE_STATE}                      NOT_IN_USE
+${APP_PKG_ID}                       01234782-2c70-4e47-9a4e-0ee3a1a00123
 ${ON_BOARDED_APP_PKG_ID}            5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 ${APPD_ID}                          e0deee2b-6e50-4f33-ab09-8bf0585025d3
-${MALFORMED_FILTER_NAME}            operationalStatus    // Should be operationalState
+${MALFORMED_FILTER_NAME}            operationalStatus
 ${FILTER_VALUE}                     NOT_IN_USE
 ${NON_EXISTENT_APP_PKG_ID}          NON_EXISTENT_APP_PKG_ID
 ${OPERATION_VALUE}                  DISABLE
+${WRONG_OPERATION_VALUE}            DISABL
 
-${ACCEPTED_CONTENT_TYPE}            text/plain           // Should refer to the type of AppD 
+${ACCEPTED_CONTENT_TYPE}            text/plain; charset=utf-8
+${ACCEPTED_CONTENT_TYPE_ZIP}        application/zip
+${WRONG_CONTENT_TYPE}               application/json
 ${SUBSCRIPTION_ID}                  e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${NOT_EXISTING_APP_PKG_ID}          NOT_EXISTING_APP_PKG_ID
 
 
 
-
-${SUBSCRIPTION_TYPE}                MobilityProcedureSubscription
+${SUBSCRIPTION_TYPE}                AppPackageOnBoardingSubscription
 ${NON_EXISTENT_SUBSCRIPTION_ID}     NON_EXISTENT_SUBSCRIPTION_ID
-
+${CALLBACK_URI}                     http://some.url/somepath
 
 
 # Notifications variables

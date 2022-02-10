@@ -1,6 +1,6 @@
 {
   "id": "1234",
-  "subscriptionType": "AppPackageOnBoardingSubscription",
+  "subscriptionType": "ON-BOARDING",
   "callbackUri": "http://172.22.1.7:9091",
   "_links": {
     "self": {

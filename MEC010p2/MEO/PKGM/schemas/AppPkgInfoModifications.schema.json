@@ -1,0 +1,16 @@
+{
+	"description": "'The data type represents the operational state for an application package resource'",
+	"type": "object",
+	"required": [
+		"operationalState"
+	],
+	"properties": {
+		"operationalState": {
+			"type": "string",
+			"enum": [
+				"DISABLED",
+				"ENABLED"
+			]
+		}
+	}
+}

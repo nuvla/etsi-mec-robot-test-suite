@@ -1,0 +1,98 @@
+{
+  "description": "'This data type represents an application package management notification for informing the subscribers about onboarding application package resources. The notification is triggered when a new application package is onboarded'",
+  "type": "object",
+  "required": [
+    "id",
+    "notificationType",
+    "subscriptionId",
+    "timeStamp",
+    "appPkgId",
+    "appDId",
+    "operationalState",
+    "_links"
+  ],
+  "properties": {
+    "id": {
+      "description": "''",
+      "type": "string"
+    },
+    "notificationType": {
+      "description": "Discriminator for the different notification types",
+      "type": "string",
+      "enum": [
+        "AppPackageOnBoarded",
+        "AppPacakgeEnabled",
+        "AppPacakgeDisabled",
+        "AppPackageDeleted"
+      ]
+    },
+    "subscriptionId": {
+      "description": "Identifier of the subscription related to this notification.",
+      "type": "string"
+    },
+    "timeStamp": {
+      "properties": {
+        "nanoSeconds": {
+          "description": "The nanoseconds part of the Time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+          "format": "Uint32",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Uint32"
+        },
+        "seconds": {
+          "description": "The seconds part of the Time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+          "format": "Uint32",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Uint32"
+        }
+      },
+      "required": [
+        "seconds",
+        "nanoSeconds"
+      ],
+      "type": "object",
+      "x-etsi-ref": "6.2.5.4"
+    },
+    "appPkgId": {
+      "description": "Identifier of the onboarded application package.",
+      "type": "string"
+    },
+    "appDId": {
+      "description": "Identifier of this MEC application descriptor. This attribute shall be globally unique.",
+      "type": "string"
+    },
+    "operationalState": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
+    "_links": {
+      "description": "Links to resources related to this resource.",
+      "type": "object",
+      "required": [
+        "subscription"
+      ],
+      "properties": {
+        "subscription": {
+          "properties": {
+            "href": {
+              "description": "URI referring to a resource",
+              "format": "uri",
+              "type": "string",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "URI"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.5.2"
+        }
+      }
+    }
+  }
+}
