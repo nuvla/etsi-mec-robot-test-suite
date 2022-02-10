@@ -306,7 +306,7 @@ TC_MEC_MEC010p2_MEO_PKGM_013_OK
 
 TC_MEC_MEC010p2_MEO_PKGM_013_NF
     [Documentation]    TP_MEC_MEC010p2_MEO_PKGM_013_NF
-    ...    Check that MEO returns an errore when an application package with wrong id is submitted
+    ...    Check that MEO returns an error when an application package with wrong id is submitted
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.7.3.3
     ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.1.2
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
