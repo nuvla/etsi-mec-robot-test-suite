@@ -24,6 +24,7 @@ ${APPD_ID}                          e0deee2b-6e50-4f33-ab09-8bf0585025d3
 ${MALFORMED_FILTER_NAME}            operationalStatus
 ${FILTER_VALUE}                     NOT_IN_USE
 ${NON_EXISTENT_APP_PKG_ID}          NON_EXISTENT_APP_PKG_ID
+${NON_EXISTING_APPD_ID}             NON_EXISTENT_APPD_ID
 ${OPERATION_VALUE}                  DISABLE
 ${WRONG_OPERATION_VALUE}            DISABL
 

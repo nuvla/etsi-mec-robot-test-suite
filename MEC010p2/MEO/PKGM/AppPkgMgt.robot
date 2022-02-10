@@ -265,7 +265,7 @@ TC_MEC_MEC010p2_MEO_PKGM_011_NF
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.2",
     ...    ETSI GS MEC 010-2 2.2.1, Table 6.2.3.3.2-1
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Get an AppD from App Package identified by    ${NON_EXISTENT_APP_PKG_ID}
+    Get an AppD from App Package identified by    ${NON_EXISTING_APPD_ID}
     Check HTTP Response Status Code Is    404
 
 

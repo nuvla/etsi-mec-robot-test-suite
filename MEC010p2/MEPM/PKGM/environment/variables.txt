@@ -12,12 +12,12 @@ ${ACCEPTED_CONTENT_TYPE}           text/plain
 
 
 # Specific variables
-${APP_PKG_ID}                       appPkgId
+${APP_PKG_ID}                       5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 ${APP_INSTANCE_ID}                  5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 ${APPD_ID}                          appdId
 ${NOT_EXISTING_APP_INSTANCE_ID}     NOT_EXISTING_APP_INSTANCE_ID
 ${CALLBACK_URI}                     http://some.url/somepath
-${SUBSCRIPTION_ID}                  1234782-2c70-4e47-9a4e-0ee3a1a0fabcd
+${SUBSCRIPTION_ID}                  e0deee2b-6e50-4f33-ab09-8bf0585025d3
 ${MALFORMED_FILTER_NAME}            operationalStatus
 ${FILTER_VALUE}                     ENABLED
 ${NON_EXISTENT_APP_PKG_ID}          NON_EXISTENT_APP_PKG_ID

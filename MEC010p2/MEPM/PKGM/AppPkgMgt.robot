@@ -1,4 +1,4 @@
-''[Documentation]   robot --outputdir ./outputs ./PackageManagement.robot
+''[Documentation]   robot --outputdir ./outputs ./AppPkgMgt.robot
 ...    Test Suite to validate Package Management (PKGM) operations.
 
 *** Settings ***
@@ -39,6 +39,15 @@ TC_MEC_MEC010p2_MEPM_PKGM_001_02_OK
         Validate Json    AppPkgInfo.schema.json   ${appPkg} 
    END
    
+TC_MEC_MEC010p2_MEPM_PKGM_001_BR
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_001_BR
+    ...    Check that MEPM responds with an error when it receives 
+    ...    a malformed request for requesting the list of existing App Packages
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.1.3.2
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
+    GET all APP Packages with filters    ${MALFORMED_FILTER_NAME}    ${FILTER_VALUE}
+    Check HTTP Response Status Code Is    400
+    
 
 TC_MEC_MEC010p2_MEPM_PKGM_002_01_OK
     [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_002_01_OK
@@ -53,48 +62,34 @@ TC_MEC_MEC010p2_MEPM_PKGM_002_01_OK
     Should Be Equal As Strings  ${response['body']['id']}      ${APP_PKG_ID} 
     
 
-TC_MEC_MEC010p2_MEPM_PKGM_003_01_OK
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_003_01_OK
-    ...    Check that MEPM returns the Application Descriptor contained on a on-boarded Application Package when requested
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.2
-    ...     ETSI GS MEC 010-2 2.2.1, clause 6.2.1.2
+
+TC_MEC_MEC010p2_MEPM_PKGM_002_02_OK
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_002_02_OK
+    ...    Check that MEPM returns the an App Package when requested - Note 3
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.2.3.2
+    ...    ETSI GS MEC 010-2 2.2.1, Table 6.2.3.3.2-1
+    ...    ETSI GS MEC 010-2 2.2.1, Table 6.2.3.3.2-1 Note 3
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Get AppD by   ${APPD_ID}
+    GET an onboarded APP Package identified by    ${APP_PKG_ID}
     Check HTTP Response Status Code Is    200
-
-
-TC_MEC_MEC010p2_MEPM_PKGM_003_02_OK
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_003_02_OK
-    ...    Check that MEPM returns the Application Descriptor contained on a on-boarded Application Package when requested
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.2
-    ...     ETSI GS MEC 010-2 2.2.1, clause 6.2.1.2
-    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Get AppD from onboarded app packages by   ${APPD_ID}
-    Check HTTP Response Status Code Is    200
-
-
-TC_MEC_MEC010p2_MEPM_PKGM_004_01_OK
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_004_01_OK
-    ...    Check that MEPM fetches the on-boarded application package content identified by appPkgId when requested
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.7.3.2
-    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Get onboarded application package   ${APP_PKG_ID}
-    Check HTTP Response Status Code Is    200
-    Should Be Equal As Strings  ${response}[headers][Content-Type]   application/zip
+    Check HTTP Response Body Json Schema Is   AppPkgInfo
+    Should Be Equal As Strings  ${response['body']['id']}      ${APP_PKG_ID} 
     
 
-TC_MEC_MEC010p2_MEPM_PKGM_004_02_OK
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_004_02_OK
-    ...    Check that MEPM fetches the on-boarded application package content identified by appDId when requested
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.7.3.2
+TC_MEC_MEC010p2_MEPM_PKGM_002_NF
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_002_NF
+    ...    Check that MEPM responds with an error when it receives 
+    ...    a request for returning a App Package referred with a wrong ID
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.2.3.2
+    ...    ETSI GS MEC 010-2 2.2.1, Table 6.2.3.3.2-1
+    ...    ETSI GS MEC 010-2 2.2.1, Table 6.2.3.3.2-1 Note 3
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Get onboarded application package by AppdId   ${APPD_ID}
-    Check HTTP Response Status Code Is    200
-    Should Be Equal As Strings  ${response}[headers][Content-Type]   application/zip
-    
+    GET an APP Package identified by    ${NON_EXISTENT_APP_PKG_ID}
+    Check HTTP Response Status Code Is    404
 
-TC_MEC_MEC010p2_MEPM_PKGM_005_OK
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_005_OK
+
+TC_MEC_MEC010p2_MEPM_PKGM_003_OK
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_003_OK
     ...    Check that MEPM service returns an application package subscription when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.3.3.1",
     ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.3.4
@@ -105,116 +100,42 @@ TC_MEC_MEC010p2_MEPM_PKGM_005_OK
     Check HTTP Response Body Json Schema Is    AppPkgSubscriptionInfo
     Should Be Equal As Strings  ${response}[body][subscriptionType]      AppPackageOnBoardingSubscription
     Should Be Equal As Strings  ${response}[body][callbackUri]           ${CALLBACK_URI}
+    
+    
+
+TC_MEC_MEC010p2_MEPM_PKGM_003_BR
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_003_BR
+    ...    Check that MEPM service sends an error when it receives a 
+    ...    malformed request for creating a new subscription on AppPackages
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.3.3.1
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
+    Send a request for a subscription    AppPkgSubscriptionBadRequest
+    Check HTTP Response Status Code Is    400
 
 
-
-TC_MEC_MEC010p2_MEPM_PKGM_006_OK
+TC_MEC_MEC010p2_MEPM_PKGM_004_OK
    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_006_OK
     ...    Check that MEPM service returns the list of Application Package Subscriptions when requested
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.5.3.2
-    ...    ETSI GS MEC 010-2 2.2.1, Table 6.2.3.4.2-1 (AppPkgSubscriptionLinkList)
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.3.3.2
+    ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.3.4
+    ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.3.7
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     Get all APP Package subscriptions
     Check HTTP Response Status Code Is    200
-    Check HTTP Response Body Json Schema Is    AppPkgSubscriptionLinkList
+    Check HTTP Response Body Json Schema Is    AppPkgSubscriptionLinkList 
     
 
-
-TC_MEC_MEC010p2_MEPM_PKGM_007_OK
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_007_OK
+TC_MEC_MEC010p2_MEPM_PKGM_005_OK
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_005_OK
     ...    Check that MEPM service returns an Application Package Subscription when requested
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.4.3.4
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.4.3.2
+    ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.3.4
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     Get an individual APP Package subscriptions    ${SUBSCRIPTION_ID}
     Check HTTP Response Body Json Schema Is    AppPkgSubscriptionInfo
     Check HTTP Response Status Code Is    200
     Should Be Equal As Strings  ${response}[body][id]           ${SUBSCRIPTION_ID}
     Should Contain  ${response}[body][_links][self][href]  /app_pkgm/v1/subscriptions/${SUBSCRIPTION_ID}
-
-TC_MEC_MEC010p2_MEPM_PKGM_008_OK
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_008_OK
-    ...    Check that MEPM service deletes an Application Package Subscription when requested
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.4.3.4
-    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Delete an App Package Subscription identified by    ${SUBSCRIPTION_ID}
-    Check HTTP Response Status Code Is    204
-    Check HTTP Response Body is Empty
-
-
-#TC_MEC_MEC010p2_MEPM_PKGM_009_OK
-#    [Documentation]   TP_MEC_MEC010p2_MEPM_PKGM_009_OK
-#    ...  Check that the MEPM service sends a application package notification 
-#    ...  if the MEO service has an associated subscription and the event is generated
-#    ...  ETSI GS MEC 010-2 2.2.1, clause 7.3.5.3.1
-#    ...  ETSI GS MEC 010-2 2.2.1, clause 6.2.3.6
-#    ${json}=	Get File	schemas/AppPkgNotification.schema.json
-#    Log  Creating mock request and response to handle  Application Package Notification
-#    &{req}=  Create Mock Request Matcher	POST  ${callback_endpoint}  body_type="JSON_SCHEMA"    body=${json}
-#    &{rsp}=  Create Mock Response	headers="Content-Type: application/json"  status_code=204
-#    Create Mock Expectation  ${req}  ${rsp}
-#    Wait Until Keyword Succeeds    ${total_polling_time}   ${polling_interval}   Verify Mock Expectation    ${req}
-#    Log  Verifying results
-#    Verify Mock Expectation  ${req}
-#    Log  Cleaning the endpoint
-#    Clear Requests  ${callback_endpoint}   
-
-
-TC_MEC_MEC010p2_MEPM_PKGM_001_BR
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_001_BR
-    ...    Check that MEPM responds with an error when it receives 
-    ...    a malformed request for requesting the list of existing App Packages
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.1.3.2
-    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    GET all APP Packages with filters    ${MALFORMED_FILTER_NAME}    ${FILTER_VALUE}
-    Check HTTP Response Status Code Is    400
-
-
-TC_MEC_MEC010p2_MEPM_PKGM_002_NF
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_001_BR
-    ...    Check that MEPM responds with an error when it receives
-    ...    a request for returning a App Package referred with a wrong ID
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.4.2.3.2
-    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Get AppD by    ${NON_EXISTENT_APP_PKG_ID}
-    Check HTTP Response Status Code Is    404   
-
-
-TC_MEC_MEC010p2_MEPM_PKGM_003_01_NF
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_003_01_NF
-    ...    Check that MEPM responds with an error when it receives 
-    ...    a request for returning a App Descriptor referred with a wrong App Package ID
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.2
-    ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.1.2
-    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Get AppD from onboarded app packages by    ${NON_EXISTENT_APP_PKG_ID}
-    Check HTTP Response Status Code Is    404               
-    
-
-
-
-TC_MEC_MEC010p2_MEPM_PKGM_003_02_NF
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_003_02_NF
-    ...    Check that MEPM responds with an error when it receives 
-    ...    a request for returning a App Descriptor referred with a wrong appDId
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.2
-    ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.1.2
-    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Get AppD from onboarded app packages by    ${NON_EXISTENT_APP_PKG_ID}
-    Check HTTP Response Status Code Is    404      
-
-
-
-TC_MEC_MEC010p2_MEPM_PKGM_004_BR
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_004_BR
-    ...    Check that MEPM service sends an error when it receives a 
-    ...    malformed request for creating a new subscription on AppPackages
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.4.3.1
-    ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.3.4
-    ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.3.7
-    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Send a request for a subscription     AppPkgSubscriptionBadRequest
-    Check HTTP Response Status Code Is    400    
-    
 
 
 TC_MEC_MEC010p2_MEPM_PKGM_005_NF
@@ -227,34 +148,20 @@ TC_MEC_MEC010p2_MEPM_PKGM_005_NF
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     Get an individual APP Package subscriptions    ${NON_EXISTENT_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404
+    
 
-
-
-TC_MEC_MEC010p2_MEPM_PKGM_007_01_NF
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_007_01_NF
-    ...    Check that MEPM responds with an error when it receives 
-    ...    a POST request referring an application descriptor AppD
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.1
+TC_MEC_MEC010p2_MEPM_PKGM_006_OK
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_006_OK
+    ...    Check that MEPM service deletes an Application Package Subscription when requested
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.4.3.4
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Post AppD by   ${APPD_ID}
-    Check HTTP Response Status Code Is    405    
-
-
-
-TC_MEC_MEC010p2_MEPM_PKGM_007_02_NF
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_007_02_NF
-    ...    Check that MEPM responds with an error when it receives 
-    ...    a POST request referring an application descriptor AppD
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.1
-    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-   Post AppD from onboarded app packages by    ${APPD_ID}
-   Check HTTP Response Status Code Is    405     
-
-
-   
-TC_MEC_MEC010p2_MEO_PKGM_009_NF
-    [Documentation]    TP_MEC_MEC010p2_MEO_PKGM_009_NF
-    ...    Check that MEPM service sends an error when it receives a deletion request for a subscription on AppPackages with a wrong identifier
+    Delete an App Package Subscription identified by    ${SUBSCRIPTION_ID}
+    Check HTTP Response Status Code Is    204
+    
+TC_MEC_MEC010p2_MEPM_PKGM_006_NF
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_006_NF
+    ...    Check that MEPM service sends an error when it receives a deletion request for a subscription on AppPackages 
+    ...    with a wrong identifier
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.4.3.4
     ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.3.4
     ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.3.7
@@ -262,34 +169,90 @@ TC_MEC_MEC010p2_MEO_PKGM_009_NF
     Delete an App Package Subscription identified by    ${NON_EXISTENT_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404
 
-
-TC_MEC_MEC010p2_MEPM_PKGM_010_BR
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_010_BR
-    ...    Check that MEPM service sends an error when it receives a 
-    ...    malformed request for creating a new subscription on AppPackages
-    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.3.3.1
+TC_MEC_MEC010p2_MEPM_PKGM_008_NA
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_008_NA
+    ...    Check that MEPM responds with an error when it receives 
+    ...    a POST request referring an application descriptor AppD
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.4
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Send a request for a subscription    AppPkgSubscriptionBadRequest
-    Check HTTP Response Status Code Is    400
-    
+    Post AppD by   ${APPD_ID}
+    Check HTTP Response Status Code Is    405    
+
+TC_MEC_MEC010p2_MEPM_PKGM_009_OK
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_009_OK
+    ...    Check that MEPM returns the Application Descriptor contained on a on-boarded Application Package when requested
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.2
+    ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.1.2
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
+    Get AppD by   ${APPD_ID}
+    Check HTTP Response Status Code Is    200
+
+TC_MEC_MEC010p2_MEPM_PKGM_009_NF
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_009_NF
+    ...    Check that MEPM responds with an error when it receives
+    ...    a request for returning a App Descriptor referred with a wrong App Package ID
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.2",
+    ...    ETSI GS MEC 010-2 2.2.1, clause 6.2.1.2
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
+    Get AppD by    ${NON_EXISTENT_APPD_ID}
+    Check HTTP Response Status Code Is    404   
 
 
-TC_MEC_MEC010p2_MEPM_PKGM_011_01_NF
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_011_01_NF
+
+TC_MEC_MEC010p2_MEPM_PKGM_010_FO
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_010_FO
+    ...    Check that MEPM responds with an error when it receives 
+    ...    a PUT request referring an application descriptor AppD
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.3
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
+    Put on AppD endpoint    ${NON_EXISTENT_APP_PKG_ID}
+    Check HTTP Response Status Code Is    403      
+
+TC_MEC_MEC010p2_MEPM_PKGM_011_NA
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_011_NA
+    ...    Check that MEPM responds with an error when it receives 
+    ...    a DELETE request referring an application descriptor AppD
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.6.3.4
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
+    Delete on AppD endpoint    ${APP_PKG_ID}
+    Check HTTP Response Status Code Is    405
+
+
+TC_MEC_MEC010p2_MEPM_PKGM_012_01_OK
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_012_01_OK
     ...    Check that MEPM fetches the on-boarded application package content identified by appPkgId when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.7.3.2
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Get onboarded application package   ${NON_EXISTENT_APPD_ID}
-    Check HTTP Response Status Code Is    404
+    Get application package by AppId  ${APP_PKG_ID}
+    Check HTTP Response Status Code Is    200
     
-
-TC_MEC_MEC010p2_MEPM_PKGM_011_02_NF
-    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_011_02_NF
+TC_MEC_MEC010p2_MEPM_PKGM_012_02_OK
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_012_02_OK
     ...    Check that MEPM fetches the on-boarded application package content identified by appDId when requested
     ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.7.3.2
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    Get onboarded application package by AppdId   ${NON_EXISTENT_APPD_ID}
-    Check HTTP Response Status Code Is    404
+    Get onboarded application package by AppdId   ${APPD_ID}
+    Check HTTP Response Status Code Is    200
+    
+
+TC_MEC_MEC010p2_MEPM_PKGM_012_01_NF
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_012_01_NF
+    ...    Check that MEPM returns an error when performing
+    ...    a request for returning a App Descriptor referred with a wrong App Package ID
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.7.3.2
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
+    Get application package by AppId    ${NON_EXISTENT_APP_PKG_ID}
+    Check HTTP Response Status Code Is    404     
+
+
+TC_MEC_MEC010p2_MEPM_PKGM_012_02_NF
+    [Documentation]    TP_MEC_MEC010p2_MEPM_PKGM_012_02_NF
+    ...    Check that MEPM returns an error when performing
+    ...    a request for returning an onboarded App Descriptor referred with a wrong App Package ID
+    ...    ETSI GS MEC 010-2 2.2.1, clause 7.3.7.3.2
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
+    Get onboarded application package by AppdId    ${NON_EXISTENT_APP_PKG_ID}
+    Check HTTP Response Status Code Is    404      
  
 
 *** Keywords ***
@@ -375,7 +338,6 @@ Get AppD from onboarded app packages by
 
 Post AppD by
     [Arguments]    ${appdId}
-    Log    Getting App Descriptor by its identigier
     Set Headers    {"Accept":"${ACCEPTED_CONTENT_TYPE}"}
     Set Headers    {"Authorization":"${TOKEN}"}
     Post    ${apiRoot}/${apiName}/${apiVersion}/app_packages/${appdId}/appd
@@ -384,7 +346,7 @@ Post AppD by
 
 Post AppD from onboarded app packages by
     [Arguments]    ${appdId}
-    Log    Getting App Descriptor by its identigier
+    Log    Getting App Descriptor by its identifier
     Set Headers    {"Accept":"${ACCEPTED_CONTENT_TYPE}"}
     Set Headers    {"Authorization":"${TOKEN}"}
     Post    ${apiRoot}/${apiName}/${apiVersion}/onboarded_app_packages/${appdId}/appd
@@ -392,7 +354,25 @@ Post AppD from onboarded app packages by
     Set Suite Variable    ${response}    ${output} 
 
 
-Get onboarded application package
+
+Put on AppD endpoint
+    [Arguments]    ${appdId}
+    Set Headers    {"Accept":"${ACCEPTED_CONTENT_TYPE}"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Put    ${apiRoot}/${apiName}/${apiVersion}/onboarded_app_packages/${appdId}/appd
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output} 
+    
+Delete on AppD endpoint
+    [Arguments]    ${appdId}
+    Set Headers    {"Accept":"${ACCEPTED_CONTENT_TYPE}"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Delete    ${apiRoot}/${apiName}/${apiVersion}/onboarded_app_packages/${appdId}/appd
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output} 
+
+
+Get application package by AppId
     [Arguments]    ${appPkgId}
     Log    Getting App descriptor for App Package
     Set Headers    {"Accept":"${ACCEPTED_CONTENT_TYPE}"}
