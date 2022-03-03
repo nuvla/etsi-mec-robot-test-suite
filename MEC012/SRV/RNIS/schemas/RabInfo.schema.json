@@ -1,0 +1,152 @@
+{
+  "type": "object",
+  "properties": {
+    "appInstanceId": {
+      "description": "Unique identifier for the MEC application instance.",
+      "type": "string",
+      "x-etsi-mec-cardinality": "1",
+      "x-etsi-mec-origin-type": "String"
+    },
+    "cellUserInfo": {
+      "description": "The information on users per cell as defined below.",
+      "items": {
+        "properties": {
+          "ecgi": {
+            "properties": {
+              "cellId": {
+                "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3].",
+                "type": "string"
+              },
+              "plmn": {
+                "properties": {
+                  "mcc": {
+                    "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3].",
+                    "type": "string",
+                    "x-etsi-mec-cardinality": "1",
+                    "x-etsi-mec-origin-type": "String"
+                  },
+                  "mnc": {
+                    "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3].",
+                    "type": "string",
+                    "x-etsi-mec-cardinality": "1",
+                    "x-etsi-mec-origin-type": "String"
+                  }
+                },
+                "required": [
+                  "mcc",
+                  "mnc"
+                ],
+                "type": "object",
+                "x-etsi-ref": "6.5.5"
+              }
+            },
+            "required": [
+              "plmn",
+              "cellId"
+            ],
+            "type": "object",
+            "x-etsi-ref": "6.5.6"
+          },
+          "ueInfo": {
+            "description": "Information on UEs in the specific cell as defined below.",
+            "items": {
+              "properties": {
+                "associateId": {
+                  "description": "0 to N identifiers to associate the event for a specific UE or flow.",
+                  "items": {
+                    "properties": {
+                      "type": {
+                        "description": "Numeric value (0-255) corresponding to specified type of identifier as following:\n0 = reserved.\n1= UE_IPv4_ADDRESS.\n2 = UE_IPV6_ADDRESS.\n3 = NATED_IP_ADDRESS.\n4 = GTP_TEID.",
+                        "type": "number",
+                        "x-etsi-mec-cardinality": "1",
+                        "x-etsi-mec-origin-type": "Enum"
+                      },
+                      "value": {
+                        "description": "Value for the identifier.",
+                        "type": "string",
+                        "x-etsi-mec-cardinality": "1",
+                        "x-etsi-mec-origin-type": "String"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "type": "object",
+                    "x-etsi-ref": "6.5.4"
+                  },
+                  "type": "array",
+                  "x-etsi-mec-cardinality": "0..N",
+                  "x-etsi-mec-origin-type": "AssociateId"
+                },
+                "erabInfo": {
+                  "description": "Information on E-RAB as defined below.",
+                  "items": {
+                    "type": "object"
+                  },
+                  "properties": {
+                    "erabId": {
+                      "description": "The attribute that uniquely identifies a Radio Access bearer for specific UE as defined in ETSI TS 136 413 [i.3].",
+                      "type": "integer",
+                      "x-etsi-mec-cardinality": "1",
+                      "x-etsi-mec-origin-type": "Integer"
+                    },
+                    "erabQosParameters": {
+                      "description": "QoS parameters for the E-RAB as defined below.",
+                      "type": "object",
+                      "x-etsi-mec-cardinality": "0..1",
+                      "x-etsi-mec-origin-type": "Structure (inlined)"
+                    }
+                  },
+                  "required": [
+                    "erabId"
+                  ],
+                  "type": "array",
+                  "x-etsi-mec-cardinality": "1..N",
+                  "x-etsi-mec-origin-type": "Structure (inlined)"
+                }
+              },
+              "type": "object"
+            },
+            "required": [
+              "erabInfo"
+            ],
+            "type": "array",
+            "x-etsi-mec-cardinality": "1..N",
+            "x-etsi-mec-origin-type": "Structure (inlined)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ecgi",
+          "ueInfo"
+        ]
+      },
+      "type": "array",
+      "x-etsi-mec-cardinality": "0..N",
+      "x-etsi-mec-origin-type": "Structure (inlined)"
+    },
+    "requestId": {
+      "description": "Unique identifier allocated by the service consumer for the RAB Information request.",
+      "type": "string",
+      "x-etsi-mec-cardinality": "1",
+      "x-etsi-mec-origin-type": "String"
+    },
+    "timeStamp": {
+      "properties": {
+        "nanoSeconds": {
+          "type": "number"
+        },
+        "seconds": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "seconds",
+        "nanoSeconds"
+      ],
+      "type": "object",
+      "x-etsi-ref": "6.5.3"
+    }
+  }
+}

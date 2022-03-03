@@ -1,0 +1,104 @@
+{
+  "type": "object",
+  "required": [
+    "subscriptionType",
+    "callbackUri"
+  ],
+  "properties": {
+    "subscriptionType": {
+      "description": "Shall be set to AppInstanceStateChange.",
+      "type": "string"
+    },
+    "callbackUri": {
+      "description": "The URI of the endpoint for the notification to be sent to.",
+      "type": "string",
+      "format": "uri"
+    },
+    "appInstanceState": {
+      "description": "Only send notifications for application instances that are in one of the states listed in this attribute. If this attribute is absent, match all states.",
+      "type": "string",
+      "format": "enum",
+      "enum": [
+        "NOT_INSTANTIATED",
+        "STARTED",
+        "STOPPED"
+      ]
+    },
+    "appInstanceSubscriptionFilter": {
+      "description": "'This data type represents subscription filter criteria to match application instances. '",
+      "type": "object",
+      "required": [
+        "appInstSelectorType"
+      ],
+      "properties": {
+        "appInstSelectorType": {
+          "description": "0 = void",
+          "type": "string",
+          "enum": [
+            "VOID",
+            "APP_IDENTITY",
+            "APP_NAME",
+            "APP_D_ID",
+            "APP_FROM_PROVIDER"
+          ]
+        },
+        "appInstances": {
+          "type": "array",
+          "items": {
+            "description": "If appInstIdSelector = APP_IDENTITY match existing application instances with an application instance identifier listed in this attribute.",
+            "type": "string"
+          }
+        },
+        "appsFromProviders": {
+          "type": "array",
+          "items": {
+            "description": "'Present only if appInstIdSelector = APP_FROM_PROVIDER. Match existing application instances, or those created in the future whilst the subscription is active, that belong to applications from certain providers.'",
+            "type": "object",
+            "required": [
+              "appProvider"
+            ],
+            "properties": {
+              "appProvider": {
+                "description": "Provider of the application and of the AppD.",
+                "type": "string"
+              },
+              "appProducts": {
+                "description": "'If present, match application instances that belong to application products with certain product names, from one particular provider.'",
+                "type": "object",
+                "required": [
+                  "appName"
+                ],
+                "properties": {
+                  "appName": {
+                    "description": "Name to identify the MEC application.",
+                    "type": "string"
+                  },
+                  "versions": {
+                    "description": "'If present, match application instances that belong to application products with certain versions and a certain product name, from one particular provider.'",
+                    "type": "object",
+                    "required": [
+                      "appSoftVersion"
+                    ],
+                    "properties": {
+                      "appSoftVersion": {
+                        "description": "Identifies the version of software of the MEC application.",
+                        "type": "string"
+                      },
+                      "appDVersion": {
+                        "type": "array",
+                        "items": {
+                          "description": "Identifies the version of the application descriptor.",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

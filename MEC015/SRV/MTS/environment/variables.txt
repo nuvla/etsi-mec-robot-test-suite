@@ -1,0 +1,24 @@
+*** Variables ***
+# Generic variables
+${SCHEMA}                   http
+${HOST}                     127.0.0.1
+${PORT}                     8082
+${response}                         {}
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        
+${apiName}        mts
+${apiVersion}     v1
+
+# Specific variables
+${APP_INSTANCE_ID}					appInstId01
+${NOT_EXISTING_APP_INSTANCE_ID}		NOT_EXISTING_APP_INS_ID
+${CORRECT_FILTER}					app_instance_id
+${BAD_FILTER}						appInsId
+
+${SESSION_ID}						1
+${WRONG_SESSION_ID}					WRONG_SESSION_ID
+${NOT_EXISTING_SESSION_ID}			NOT_EXISTING_SESSION_ID
+
+${REQUEST_TYPE_APPLICATION}			1
+${MTS_LOW_MODE_COST}				0
+${TRAFFIC_DIRECTION_DL}				00

@@ -1,0 +1,28 @@
+*** Variables ***
+# Generic variables
+${MEO_SCHEMA}                   http
+#${MEO_HOST}                     10.192.2.172
+${MEO_HOST}                     127.0.0.1
+${MEO_PORT}                     8081
+${response}                         {}
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        
+${apiName}        granting
+${apiVersion}     v1
+
+# Specific variables
+${GRANT_ID}                        e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${GRANT_ID_ACCEPTED}               abcdee2b-6e50-4f33-ab09-8bf05850abcd
+${NOT_EXISTING_GRANT_ID}           NOT_EXISTING_GRANT_ID
+${APP_INSTANCE_ID}                 456
+
+
+# Notifications variables
+${MOCK_SERVER_JAR}    ../../../bin/mockserver-netty-5.5.0-jar-with-dependencies.jar
+
+${callback_port}    9091
+${callback_uri}    http://172.22.1.7:${callback_port}
+${callback_endpoint}    /granting/subscriptions
+${callback_endpoint_error}    /subs_404
+${total_polling_time}   2 min
+${polling_interval}     10 sec

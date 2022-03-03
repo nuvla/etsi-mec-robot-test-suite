@@ -1,0 +1,12 @@
+{
+		"appInsId": "myAppInstId",
+		"requestType": 0,
+		"qosD": {
+			"minTpt": 10
+		},
+		"mtsMode": 0,
+		"trafficDirection": "00",
+        "qosD":{
+             "minTpt":10
+        }
+}

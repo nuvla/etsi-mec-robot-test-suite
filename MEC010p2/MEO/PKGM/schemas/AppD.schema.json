@@ -1,0 +1,879 @@
+{
+	"properties": {
+		"appDId": {
+			"description": "Identifier of this MEC application descriptor. This attribute shall be globally unique. See note 1.",
+			"type": "string",
+			"x-etsi-mec-cardinality": "1",
+			"x-etsi-mec-origin-type": "String"
+		},
+		"appDNSRule": {
+			"description": "Describes DNS rules the MEC application requires.",
+			"items": {
+				"properties": {
+					"dnsRuleId": {
+						"description": "Identifies the DNS Rule",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					},
+					"domainName": {
+						"description": "FQDN of the DNS rule",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					},
+					"ipAddress": {
+						"description": "IP address given by the DNS rule",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					},
+					"ipAddressType": {
+						"description": "Specifies the IP address type",
+						"type": "string",
+						"enum": [
+							"IP_V6",
+							"IP_V4"
+						]
+					},
+					"ttl": {
+						"description": "Time-to-live value",
+						"type": "integer",
+						"x-etsi-mec-cardinality": "0..1",
+						"x-etsi-mec-origin-type": "Int"
+					}
+				},
+				"required": [
+					"dnsRuleId",
+					"domainName",
+					"ipAddressType",
+					"ipAddress"
+				],
+				"type": "object",
+				"x-etsi-ref": "6.2.1.13"
+			},
+			"minItems": 0,
+			"type": "array",
+			"x-etsi-mec-cardinality": "0..N",
+			"x-etsi-mec-origin-type": "DNSRuleDescriptor"
+		},
+		"appDVersion": {
+			"description": "Identifies the version of the application descriptor.",
+			"type": "string",
+			"x-etsi-mec-cardinality": "1",
+			"x-etsi-mec-origin-type": "String"
+		},
+		"appDescription": {
+			"description": "Human readable description of the MEC application.",
+			"type": "string",
+			"x-etsi-mec-cardinality": "1",
+			"x-etsi-mec-origin-type": "String"
+		},
+		"appExtCpd": {
+			"description": "Describes external interface(s) exposed by this MEC application.",
+			"items": {
+				"properties": {
+					"inherited_attributes": {
+						"description": "All attributes inherited from Cpd.",
+						"type": "object",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "inherited_attributes"
+					},
+					"virtualNetworkInterfaceRequirements": {
+						"description": "Specifies requirements on a virtual network interface realizing the CPs instantiated from this CPD.",
+						"items": {
+							"type": "string"
+						},
+						"minItems": 0,
+						"type": "array",
+						"x-etsi-mec-cardinality": "0..N"
+					}
+				},
+				"required": [
+					"inherited_attributes"
+				],
+				"type": "object",
+				"x-etsi-ref": "6.2.1.6"
+			},
+			"minItems": 0,
+			"type": "array",
+			"x-etsi-mec-cardinality": "0..N",
+			"x-etsi-mec-origin-type": "AppExternalCpd"
+		},
+		"appFeatureOptional": {
+			"description": "Describes features a MEC application may use if available.",
+			"items": {
+				"properties": {
+					"featureName": {
+						"description": "The name of the feature, for example, UserApps, UEIdentity, etc.",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					},
+					"version": {
+						"description": "The version of the feature.",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					}
+				},
+				"required": [
+					"featureName",
+					"version"
+				],
+				"type": "object",
+				"x-etsi-ref": "6.2.1.8"
+			},
+			"minItems": 0,
+			"type": "array",
+			"x-etsi-mec-cardinality": "0..N",
+			"x-etsi-mec-origin-type": "FeatureDependency"
+		},
+		"appFeatureRequired": {
+			"description": "Describes features a MEC application requires to run.",
+			"items": {
+				"properties": {
+					"featureName": {
+						"description": "The name of the feature, for example, UserApps, UEIdentity, etc.",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					},
+					"version": {
+						"description": "The version of the feature.",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					}
+				},
+				"required": [
+					"featureName",
+					"version"
+				],
+				"type": "object",
+				"x-etsi-ref": "6.2.1.8"
+			},
+			"minItems": 0,
+			"type": "array",
+			"x-etsi-mec-cardinality": "0..N",
+			"x-etsi-mec-origin-type": "FeatureDependency"
+		},
+		"appInfoName": {
+			"description": "Human readable name for the MEC application.",
+			"type": "string",
+			"x-etsi-mec-cardinality": "0..1",
+			"x-etsi-mec-origin-type": "String"
+		},
+		"appLatency": {
+			"properties": {
+				"maxLatency": {
+					"description": "The value of the maximum latency in nano seconds tolerated by the MEC application. See note.",
+					"format": "Uint32",
+					"type": "integer",
+					"x-etsi-mec-cardinality": "1",
+					"x-etsi-mec-origin-type": "Uint32"
+				}
+			},
+			"required": [
+				"maxLatency"
+			],
+			"type": "object",
+			"x-etsi-notes": "NOTE:\tThe latency is considered to be the one way end-to-end latency between the client application (e.g. in a device) and the service (i.e. the MEC Application instance).",
+			"x-etsi-ref": "6.2.1.14"
+		},
+		"appName": {
+			"description": "Name to identify the MEC application.",
+			"type": "string",
+			"x-etsi-mec-cardinality": "1",
+			"x-etsi-mec-origin-type": "String"
+		},
+		"appProvider": {
+			"description": "Provider of the application and of the AppD.",
+			"type": "string",
+			"x-etsi-mec-cardinality": "1",
+			"x-etsi-mec-origin-type": "String"
+		},
+		"appServiceOptional": {
+			"description": "Describes services a MEC application may use if available.",
+			"items": {
+				"properties": {
+					"requestedPermissions": {
+						"description": "Requested permissions regarding the access of the application to the service. See clause 8.2 of ETSI GS MEC 009 [4].\nThe format of this attribute is left for the data model design stage.",
+						"items": {
+							"type": "string"
+						},
+						"minItems": 0,
+						"type": "array",
+						"x-etsi-mec-cardinality": "0..N",
+						"x-etsi-mec-origin-type": "Not_specified"
+					},
+					"serCategory": {
+						"description": "See MEC011"
+					},
+					"serName": {
+						"description": "The name of the service, for example, RNIS, LocationService, etc.",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					},
+					"serTransportDependencies": {
+						"description": "Indicates transport and serialization format dependencies of consuming the service. Defaults to REST + JSON if absent. See note.",
+						"items": {
+							"properties": {
+								"labels": {
+									"description": "Set of labels that allow to define groups of transport bindings. The mechanism of the grouping is defined below this table.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 1,
+									"type": "array",
+									"x-etsi-mec-cardinality": "1..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"serializers": {
+									"description": "Information about the serializers in this transport binding, as defined in the SerializerTypes type in ETSI GS MEC 011 [i.4]. Support for at least one of the entries is required in conjunction with the transport.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 1,
+									"type": "array",
+									"x-etsi-mec-cardinality": "1..N",
+									"x-etsi-mec-origin-type": "SerializerTypes"
+								},
+								"transport": {
+									"properties": {
+										"protocol": {
+											"description": "The name of the protocol used. Shall be set to HTTP for a REST API.",
+											"type": "string",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"security": {
+											"description": "See MEC011"
+										},
+										"type": {
+											"type": "string"
+										},
+										"version": {
+											"description": "The version of the protocol used.",
+											"type": "string",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "String"
+										}
+									},
+									"required": [
+										"type",
+										"protocol",
+										"version",
+										"security"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.2.1.19"
+								}
+							},
+							"required": [
+								"transport",
+								"serializers",
+								"labels"
+							],
+							"type": "object",
+							"x-etsi-ref": "6.2.1.18"
+						},
+						"minItems": 0,
+						"type": "array",
+						"x-etsi-mec-cardinality": "0..N",
+						"x-etsi-mec-origin-type": "TransportDependency"
+					},
+					"version": {
+						"description": "The version of the service.",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					}
+				},
+				"required": [
+					"serName",
+					"version"
+				],
+				"type": "object",
+				"x-etsi-notes": "NOTE:\tThis attribute indicates groups of transport bindings that a service-consuming MEC application supports for the consumption of the MEC service defined by this ServiceDependency structure. If at least one of the indicated groups is supported by the service it may be consumed by the application.",
+				"x-etsi-ref": "6.2.1.17"
+			},
+			"minItems": 0,
+			"type": "array",
+			"x-etsi-mec-cardinality": "0..N",
+			"x-etsi-mec-origin-type": "ServiceDependency"
+		},
+		"appServiceProduced": {
+			"description": "Describes services a MEC application is able to produce to the platform or other MEC applications. Only relevant for service-producing apps.",
+			"items": {
+				"description": "'The ServiceDescriptor data type describes a MEC service produced by a service-providing MEC application.'",
+				"type": "object",
+				"required": [
+					"serName",
+					"version"
+				],
+				"properties": {
+					"serName": {
+						"description": "The name of the service, for example, RNIS, LocationService, etc.",
+						"type": "string"
+					},
+					"serCategory": {
+						"description": "See MEC011"
+					},
+					"version": {
+						"description": "The version of the service.",
+						"type": "string"
+					},
+					"transportsSupported": {
+						"description": "'Indicates transports and serialization formats supported made available to the service-consuming application. Defaults to REST + JSON if absent.'",
+						"type": "object",
+						"required": [
+							"featureName",
+							"version"
+						],
+						"properties": {
+							"transport": {
+								"properties": {
+									"protocol": {
+										"description": "The name of the protocol used. Shall be set to HTTP for a REST API.",
+										"type": "string",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "String"
+									},
+									"security": {
+										"description": "See MEC011"
+									},
+									"type": {
+										"type": "string"
+									},
+									"version": {
+										"description": "The version of the protocol used.",
+										"type": "string",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "String"
+									}
+								},
+								"required": [
+									"type",
+									"protocol",
+									"version",
+									"security"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.2.1.19"
+							},
+							"serializers": {
+								"description": "'Information about the serializers in this binding, as defined in the SerializerTypes type in ETSI GS MEC 011 '",
+								"type": "array",
+								"minItems": 1,
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"minItems": 0,
+			"type": "array",
+			"x-etsi-mec-cardinality": "0..N",
+			"x-etsi-mec-origin-type": "ServiceDescriptor"
+		},
+		"appServiceRequired": {
+			"description": "Describes services a MEC application requires to run.",
+			"items": {
+				"properties": {
+					"requestedPermissions": {
+						"description": "Requested permissions regarding the access of the application to the service. See clause 8.2 of ETSI GS MEC 009 [4].\nThe format of this attribute is left for the data model design stage.",
+						"items": {
+							"type": "string"
+						},
+						"minItems": 0,
+						"type": "array",
+						"x-etsi-mec-cardinality": "0..N",
+						"x-etsi-mec-origin-type": "Not_specified"
+					},
+					"serCategory": {
+						"description": "See MEC011"
+					},
+					"serName": {
+						"description": "The name of the service, for example, RNIS, LocationService, etc.",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					},
+					"serTransportDependencies": {
+						"description": "Indicates transport and serialization format dependencies of consuming the service. Defaults to REST + JSON if absent. See note.",
+						"items": {
+							"properties": {
+								"labels": {
+									"description": "Set of labels that allow to define groups of transport bindings. The mechanism of the grouping is defined below this table.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 1,
+									"type": "array",
+									"x-etsi-mec-cardinality": "1..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"serializers": {
+									"description": "Information about the serializers in this transport binding, as defined in the SerializerTypes type in ETSI GS MEC 011 [i.4]. Support for at least one of the entries is required in conjunction with the transport.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 1,
+									"type": "array",
+									"x-etsi-mec-cardinality": "1..N",
+									"x-etsi-mec-origin-type": "SerializerTypes"
+								},
+								"transport": {
+									"properties": {
+										"protocol": {
+											"description": "The name of the protocol used. Shall be set to HTTP for a REST API.",
+											"type": "string",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"security": {
+											"description": "See MEC011"
+										},
+										"type": {
+											"type": "string"
+										},
+										"version": {
+											"description": "The version of the protocol used.",
+											"type": "string",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "String"
+										}
+									},
+									"required": [
+										"type",
+										"protocol",
+										"version",
+										"security"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.2.1.19"
+								}
+							},
+							"required": [
+								"transport",
+								"serializers",
+								"labels"
+							],
+							"type": "object",
+							"x-etsi-ref": "6.2.1.18"
+						},
+						"minItems": 0,
+						"type": "array",
+						"x-etsi-mec-cardinality": "0..N",
+						"x-etsi-mec-origin-type": "TransportDependency"
+					},
+					"version": {
+						"description": "The version of the service.",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					}
+				},
+				"required": [
+					"serName",
+					"version"
+				],
+				"type": "object",
+				"x-etsi-notes": "NOTE:\tThis attribute indicates groups of transport bindings that a service-consuming MEC application supports for the consumption of the MEC service defined by this ServiceDependency structure. If at least one of the indicated groups is supported by the service it may be consumed by the application.",
+				"x-etsi-ref": "6.2.1.17"
+			},
+			"minItems": 0,
+			"type": "array",
+			"x-etsi-mec-cardinality": "0..N",
+			"x-etsi-mec-origin-type": "ServiceDependency"
+		},
+		"appSoftVersion": {
+			"description": "Identifies the version of software of the MEC application.",
+			"type": "string",
+			"x-etsi-mec-cardinality": "1",
+			"x-etsi-mec-origin-type": "String"
+		},
+		"appTrafficRule": {
+			"description": "Describes traffic rules the MEC application requires.",
+			"items": {
+				"properties": {
+					"action": {
+						"description": "'Identifies the action of the MEC host data plane, when a packet matches the trafficFilter.'",
+						"type": "string",
+						"enum": [
+							"DROP",
+							"FORWARD_DECAPSULATED",
+							"FORWARD_AS_IS",
+							"PASSTHROUGH",
+							"DUPLICATED_DECAPSULATED",
+							"DUPLICATE_AS_IS"
+						]
+					},
+					"dstInterface": {
+						"type": "array",
+						"minItems": 0,
+						"maxItems": 2,
+						"items": {
+							"properties": {
+								"dstIPAddress": {
+									"description": "If the interface type is IP, the destination address identifies the IP address of the destination. Only used for dstInterface.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"dstMACAddress": {
+									"description": "If the interface type is MAC, the destination address identifies the MAC address of the destination. Only used for dstInterface.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"interfaceType": {
+									"description": "Type of interface.",
+									"type": "string",
+									"enum": [
+										"TUNNEL",
+										"MAC",
+										"IP"
+									]
+								},
+								"srcMACAddress": {
+									"description": "If the interface type is MAC, the source address identifies the MAC address of the interface.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"tunnelInfo": {
+									"properties": {
+										"tunnelDstAddress": {
+											"description": "Destination address of the tunnel.",
+											"type": "string",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"tunnelSpecificData": {
+											"type": "string"
+										},
+										"tunnelSrcAddress": {
+											"description": "Source address of the tunnel.",
+											"type": "string",
+											"x-etsi-mec-cardinality": "1",
+											"x-etsi-mec-origin-type": "String"
+										},
+										"tunnelType": {
+											"description": "Type of tunnel.",
+											"type": "string",
+											"enum": [
+												"GTP-U",
+												"GRE"
+											]
+										}
+									},
+									"required": [
+										"tunnelType",
+										"tunnelDstAddress",
+										"tunnelSrcAddress"
+									],
+									"type": "object",
+									"x-etsi-ref": "6.2.1.12"
+								}
+							},
+							"required": [
+								"interfaceType"
+							],
+							"type": "object",
+							"x-etsi-ref": "6.2.1.11"
+						}
+					},
+					"filterType": {
+						"description": "Definition of filter type: per FLOW or PACKET",
+						"type": "string",
+						"enum": [
+							"FLOW",
+							"PACKET"
+						]
+					},
+					"priority": {
+						"description": "Priority of this traffic rule. If traffic rule conflicts, the one with higher priority take precedence.",
+						"type": "integer",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "Int"
+					},
+					"trafficFilter": {
+						"description": "The filter used to identify specific flow/packets that need to be handled by the MEC host.",
+						"items": {
+							"properties": {
+								"dSCP": {
+									"description": "Used to match all IPv4 packets that have the same DSCP.",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "Int"
+								},
+								"dstAddress": {
+									"description": "A IP address or a range of IP addresses.For IPv4, the IP address could be an IP address plus mask, or an individual IP address, or a range of IP addresses.For IPv6, the IP address could be an IP prefix, or a range of IP prefixes.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 0,
+									"type": "array",
+									"x-etsi-mec-cardinality": "0..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"dstPort": {
+									"description": "A port or a range of ports.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 0,
+									"type": "array",
+									"x-etsi-mec-cardinality": "0..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"dstTunnelPort": {
+									"description": "Used for GTP tunnel based traffic rule.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 0,
+									"type": "array",
+									"x-etsi-mec-cardinality": "0..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"protocol": {
+									"description": "Specify the protocol of the traffic filter.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 0,
+									"type": "array",
+									"x-etsi-mec-cardinality": "0..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"qCI": {
+									"description": "Used to match all packets that have the same QCI.",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "Int"
+								},
+								"srcAddress": {
+									"description": "An IP address or a range of IP addresses.For IPv4, the IP address could be an IP address plus mask, or an individual IP address, or a range of IP addresses.For IPv6, the IP address could be an IP prefix, or a range of IP prefixes.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 0,
+									"type": "array",
+									"x-etsi-mec-cardinality": "0..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"srcPort": {
+									"description": "A port or a range of ports.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 0,
+									"type": "array",
+									"x-etsi-mec-cardinality": "0..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"srcTunnelAddress": {
+									"description": "Used for GTP tunnel based traffic rule.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 0,
+									"type": "array",
+									"x-etsi-mec-cardinality": "0..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"srcTunnelPort": {
+									"description": "Used for GTP tunnel based traffic rule.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 0,
+									"type": "array",
+									"x-etsi-mec-cardinality": "0..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"tC": {
+									"description": "Used to match all IPv6 packets that have the same TC.",
+									"type": "integer",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "Int"
+								},
+								"tag": {
+									"description": "Used for tag based traffic rule.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 0,
+									"type": "array",
+									"x-etsi-mec-cardinality": "0..N",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"tgtTunnelAddress": {
+									"description": "Used for GTP tunnel based traffic rule.",
+									"items": {
+										"type": "string"
+									},
+									"minItems": 0,
+									"type": "array",
+									"x-etsi-mec-cardinality": "0..N",
+									"x-etsi-mec-origin-type": "String"
+								}
+							},
+							"type": "object",
+							"x-etsi-ref": "6.2.1.10"
+						},
+						"minItems": 1,
+						"type": "array",
+						"x-etsi-mec-cardinality": "1..N",
+						"x-etsi-mec-origin-type": "TrafficFilter"
+					},
+					"trafficRuleId": {
+						"description": "Identifies the traffic rule.",
+						"type": "string",
+						"x-etsi-mec-cardinality": "1",
+						"x-etsi-mec-origin-type": "String"
+					}
+				},
+				"required": [
+					"trafficRuleId",
+					"filterType",
+					"priority",
+					"trafficFilter",
+					"action"
+				],
+				"type": "object",
+				"x-etsi-ref": "6.2.1.9"
+			},
+			"minItems": 0,
+			"type": "array",
+			"x-etsi-mec-cardinality": "0..N",
+			"x-etsi-mec-origin-type": "TrafficRuleDescriptor"
+		},
+		"changeAppInstanceStateOpConfig": {
+			"description": "NFV",
+			"type": "string"
+		},
+		"mecVersion": {
+			"description": "Identifies version(s) of MEC system compatible with the MEC application described in this version of the AppD.",
+			"items": {
+				"type": "string"
+			},
+			"minItems": 1,
+			"type": "array",
+			"x-etsi-mec-cardinality": "1..N",
+			"x-etsi-mec-origin-type": "String"
+		},
+		"swImageDescriptor": {
+			"description": "Ref NFV",
+			"type": "string"
+		},
+		"terminateAppInstanceOpConfig": {
+			"description": "NFV",
+			"type": "string",
+			"x-etsi-ref": "6.2.2.9"
+		},
+		"transportDependencies": {
+			"description": "Transports, if any, that this application requires to be provided by the platform. These transports will be used by the application to deliver services provided by this application. Only relevant for service-producing apps. See note 2.",
+			"items": {
+				"properties": {
+					"labels": {
+						"description": "Set of labels that allow to define groups of transport bindings. The mechanism of the grouping is defined below this table.",
+						"items": {
+							"type": "string"
+						},
+						"minItems": 1,
+						"type": "array",
+						"x-etsi-mec-cardinality": "1..N",
+						"x-etsi-mec-origin-type": "String"
+					},
+					"serializers": {
+						"description": "Information about the serializers in this transport binding, as defined in the SerializerTypes type in ETSI GS MEC 011 [i.4]. Support for at least one of the entries is required in conjunction with the transport.",
+						"items": {
+							"type": "string"
+						},
+						"minItems": 1,
+						"type": "array",
+						"x-etsi-mec-cardinality": "1..N",
+						"x-etsi-mec-origin-type": "SerializerTypes"
+					},
+					"transport": {
+						"properties": {
+							"protocol": {
+								"description": "The name of the protocol used. Shall be set to HTTP for a REST API.",
+								"type": "string",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "String"
+							},
+							"security": {
+								"description": "See MEC011"
+							},
+							"type": {
+								"type": "string"
+							},
+							"version": {
+								"description": "The version of the protocol used.",
+								"type": "string",
+								"x-etsi-mec-cardinality": "1",
+								"x-etsi-mec-origin-type": "String"
+							}
+						},
+						"required": [
+							"type",
+							"protocol",
+							"version",
+							"security"
+						],
+						"type": "object",
+						"x-etsi-ref": "6.2.1.19"
+					}
+				},
+				"required": [
+					"transport",
+					"serializers",
+					"labels"
+				],
+				"type": "object",
+				"x-etsi-ref": "6.2.1.18"
+			},
+			"minItems": 0,
+			"type": "array",
+			"x-etsi-mec-cardinality": "0..N",
+			"x-etsi-mec-origin-type": "TransportDependency"
+		},
+		"virtualComputeDescriptor": {
+			"description": "Ref NFV",
+			"type": "string"
+		},
+		"virtualStorageDescriptor": {
+			"description": "Defines descriptors of virtual storage resources to be used by the MEC application.",
+			"items": {
+				"description": "Ref NFV",
+				"type": "string"
+			},
+			"minItems": 0,
+			"type": "array",
+			"x-etsi-mec-cardinality": "0..N",
+			"x-etsi-mec-origin-type": "VirtualStorageDescriptor"
+		}
+	},
+	"required": [
+		"appDId",
+		"appName",
+		"appProvider",
+		"appSoftVersion",
+		"appDVersion",
+		"mecVersion",
+		"appDescription",
+		"virtualComputeDescriptor",
+		"swImageDescriptor"
+	],
+	"type": "object",
+	"x-etsi-notes": "NOTE 1:\tThe appDId shall be used as the unique identifier of the application package that contains this AppD.\nNOTE 2:\tThis attribute indicates groups of transport bindings which a service-producing MEC application requires to be supported by the platform in order to be able to produce its services. At least one of the indicated groups needs to be supported to fulfil the requirements.",
+	"x-etsi-ref": "6.2.1.2"
+}

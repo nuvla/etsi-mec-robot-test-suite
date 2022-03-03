@@ -1,0 +1,10 @@
+{
+  "id": "1234",
+  "subscriptionType": "AppPackageOnBoardingSubscription",
+  "callbackUri": "http://172.22.1.7:9091",
+  "_links": {
+    "self": {
+      "href": "https://app_lcm/subscriptions/1234"
+    }
+  }
+}

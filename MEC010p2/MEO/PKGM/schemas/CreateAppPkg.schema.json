@@ -1,0 +1,57 @@
+{
+  "properties": {
+    "appPkgName": {
+      "description": "Name of the application package to be onboarded.",
+      "type": "string",
+      "x-etsi-mec-cardinality": "1",
+      "x-etsi-mec-origin-type": "String"
+    },
+    "appPkgPath": {
+      "type": "string"
+    },
+    "appPkgVersion": {
+      "description": "Version of the application package to be onboarded.\nThe appPkgName with appPkgVersion can be used to uniquely identify the application package.",
+      "type": "string",
+      "x-etsi-mec-cardinality": "1",
+      "x-etsi-mec-origin-type": "String"
+    },
+    "appProvider": {
+      "description": "The provider's name of the application package to be onboarded.",
+      "type": "string",
+      "x-etsi-mec-cardinality": "0..1",
+      "x-etsi-mec-origin-type": "String"
+    },
+    "checksum": {
+      "description": "",
+      "properties": {
+        "algorithm": {
+          "description": " Name of the algorithm used to generate the checksum,  as defined in ETSI GS NFV-SOL 004. For example, SHA-256, SHA-512.",
+          "type": "string"
+        },
+        "hash": {
+          "description": "'String 1 The hexadecimal value of the checksum'",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "hash"
+      ],
+      "type": "object"
+    },
+    "userDefinedData": {
+      "description": "'This data type represents a list of key-value pairs. The order of the pairs in the list is not significant. In JSON, a set of key-value pairs is represented as an object. It shall comply with the provisions defined in clause 4 of IETF RFC 8259'",
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "appPkgName",
+    "appPkgVersion",
+    "checksum",
+    "appPkgPath"
+  ],
+  "type": "object",
+  "x-etsi-notes": "NOTE:\tIt is for further study how to convey appPkgPath, and align with ETSI GS NFV-SOL 005 [i.7].",
+  "x-etsi-ref": "6.2.3.2"
+}

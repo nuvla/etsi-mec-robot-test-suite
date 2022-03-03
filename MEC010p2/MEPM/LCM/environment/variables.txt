@@ -1,0 +1,15 @@
+*** Variables ***
+# Generic variables
+${MEPM_SCHEMA}                   http
+${MEPM_HOST}                     127.0.0.1
+${MEPM_PORT}                     8081
+${response}                      {}
+${TOKEN}                         Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        
+${apiName}        app_lcm
+${apiVersion}     v1
+
+
+# Specific variables
+${APP_INSTANCE_ID}                       e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${NOT_EXISTING_APP_INSTANCE_ID}          NOT_EXISTING_APP_INSTANCE_ID

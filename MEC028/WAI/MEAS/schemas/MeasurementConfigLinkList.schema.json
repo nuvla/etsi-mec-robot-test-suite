@@ -1,0 +1,46 @@
+{
+	"required": [
+		"_links"
+	],
+	"properties": {
+		"_links": {
+			"required": [
+				"self"
+			],
+			"properties": {
+				"self": {
+					"properties": {
+						"href": {
+							"description": "URI referring to a resource",
+							"type": "string",
+							"x-etsi-mec-cardinality": "1",
+							"x-etsi-mec-origin-type": "String"
+						}
+					},
+					"required": [
+						"href"
+					],
+					"type": "object",
+					"x-etsi-ref": "6.5.23"
+				}
+			}
+		},
+		"measurementConfig": {
+			"type": "array",
+			"items": {
+				"required": [
+					"href",
+					"measurementId"
+				],
+				"properties": {
+					"href": {
+						"type": "string"
+					},
+					"measurementId": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}

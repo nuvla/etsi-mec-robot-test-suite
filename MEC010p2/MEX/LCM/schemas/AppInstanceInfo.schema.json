@@ -1,0 +1,197 @@
+ {
+				"description": "'The data type of AppInstanceInfo represents the parameters of instantiated application instance resources.'",
+				"type": "object",
+				"required": [
+					"id",
+					"appDId",
+					"appProvider",
+					"appName",
+					"appSoftVersion",
+					"appDVersion",
+					"appPkgId",
+					"instantiationState",
+					"_links"
+				],
+				"properties": {
+					"id": {
+						"description": "Identifier of application instance.",
+						"type": "string"
+					},
+					"appInstanceName": {
+						"description": "Name of the application instance.",
+						"type": "string"
+					},
+					"appInstanceDescription": {
+						"description": "Human-readable description of the application instance to be created.",
+						"type": "string"
+					},
+					"appDId": {
+						"description": "Identifier of this MEC application descriptor. This attribute shall be globally unique.",
+						"type": "string"
+					},
+					"appProvider": {
+						"description": "Provider of the application and of the AppD.",
+						"type": "string"
+					},
+					"appName": {
+						"description": "Name to identify the MEC application.",
+						"type": "string"
+					},
+					"appSoftVersion": {
+						"description": "Identifies the version of software of the MEC application.",
+						"type": "string"
+					},
+					"appDVersion": {
+						"description": "Identifies the version of the application descriptor.",
+						"type": "string"
+					},
+					"appPkgId": {
+						"description": "Identifier of the onboarded application package.",
+						"type": "string"
+					},
+					"vimConnectionInfo": {
+						"type": "array",
+						"items": {
+							"properties": {
+								"accessInfo": {
+									"description": "'This data type represents a list of key-value pairs. The order of the pairs in the list is not significant. In JSON, a set of key-value pairs is represented as an object. It shall comply with the provisions defined in clause 4 of IETF RFC 8259'",
+									"type": "object",
+									"additionalProperties": true
+								},
+								"extra": {
+									"description": "'This data type represents a list of key-value pairs. The order of the pairs in the list is not significant. In JSON, a set of key-value pairs is represented as an object. It shall comply with the provisions defined in clause 4 of IETF RFC 8259'",
+									"type": "object",
+									"additionalProperties": true
+								},
+								"id": {
+									"description": "The identifier of the VIM Connection. This identifier is managed by the MEO.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"interfaceInfo": {
+									"description": "'This data type represents a list of key-value pairs. The order of the pairs in the list is not significant. In JSON, a set of key-value pairs is represented as an object. It shall comply with the provisions defined in clause 4 of IETF RFC 8259'",
+									"type": "object",
+									"additionalProperties": true
+								},
+								"vimId": {
+									"description": "The identifier of the VIM instance. This identifier is managed by the MEO.Shall be present to address additional information about the VIM if such information has been configured into the MEPM by means outside the scope of the present document, and should be absent otherwise.",
+									"type": "string",
+									"x-etsi-mec-cardinality": "0..1",
+									"x-etsi-mec-origin-type": "String"
+								},
+								"vimType": {
+									"description": "Discriminator for the different types of the VIM information.The value of this attribute determines the structure of the \"interfaceInfo\" and \"accessInfo\" attributes, based on the type of the VIM.The set of permitted values is expected to change over time as new types or versions of VIMs become available. ",
+									"type": "string",
+									"x-etsi-mec-cardinality": "1",
+									"x-etsi-mec-origin-type": "String"
+								}
+							},
+							"required": [
+								"id",
+								"vimType"
+							],
+							"type": "object",
+							"x-etsi-ref": "6.2.2.18"
+						}
+					},
+					"instantiationState": {
+						"description": "Instantiation state of the application instance",
+						"type": "string",
+						"enum": [
+							"NOT_INSTANTIATED",
+							"INSTANTIATED"
+						]
+					},
+					"instantiatedAppState": {
+						"description": "'Information specific to an instantiated application. This attribute shall be present if the instantiationState attribute value is INSTANTIATED.'",
+						"type": "object",
+						"required": [
+							"operationalState"
+						],
+						"properties": {
+							"operationalState": {
+								"description": "Operational state is applicable in the instantiation state INSTANTIATED",
+								"type": "string",
+								"enum": [
+									"STARTED",
+									"STOPPED"
+								]
+							}
+						}
+					},
+					"_links": {
+						"description": "Links to resources related to this resource.",
+						"type": "object",
+						"required": [
+							"self"
+						],
+						"properties": {
+							"self": {
+								"properties": {
+									"href": {
+										"description": "URI referring to a resource",
+										"format": "uri",
+										"type": "string",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "URI"
+									}
+								},
+								"required": [
+									"href"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.2"
+							},
+							"instantiate": {
+								"properties": {
+									"href": {
+										"description": "URI referring to a resource",
+										"format": "uri",
+										"type": "string",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "URI"
+									}
+								},
+								"required": [
+									"href"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.2"
+							},
+							"terminate": {
+								"properties": {
+									"href": {
+										"description": "URI referring to a resource",
+										"format": "uri",
+										"type": "string",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "URI"
+									}
+								},
+								"required": [
+									"href"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.2"
+							},
+							"operate": {
+								"properties": {
+									"href": {
+										"description": "URI referring to a resource",
+										"format": "uri",
+										"type": "string",
+										"x-etsi-mec-cardinality": "1",
+										"x-etsi-mec-origin-type": "URI"
+									}
+								},
+								"required": [
+									"href"
+								],
+								"type": "object",
+								"x-etsi-ref": "6.5.2"
+							}
+						}
+					}
+				}
+			}

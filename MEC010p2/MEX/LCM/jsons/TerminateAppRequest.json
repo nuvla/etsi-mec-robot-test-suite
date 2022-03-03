@@ -1,0 +1,4 @@
+{
+  "terminationType": "FORCEFUL",
+  "gracefulTerminationTimeout": 0
+}

@@ -1,0 +1,16 @@
+{
+  "staId": [
+    {
+      "macId": "123"
+    }
+  ],
+  "measurementId": "123",
+  "measurementInfo": {
+    "measurementDuration": 50
+  },
+  "_links": {
+    "self": {
+      "href": "/link/"
+    }
+  }
+}

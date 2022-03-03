@@ -1,0 +1,628 @@
+{
+  "description": "'This type represents a grant. Refer to clause 9.5.2.3 of ETSI GS NFV-SOL 003 '",
+  "type": "object",
+  "required": [
+    "id",
+    "appInstanceId",
+    "appLcmOpOccId",
+    "_links"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "appInstanceId": {
+      "description": "Identifier of application instance.",
+      "type": "string"
+    },
+    "appLcmOpOccId": {
+      "description": "Identifier of application lifecycle management operation occurrence.",
+      "type": "string"
+    },
+    "vimConnections": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "accessInfo": {
+            "description": "'This data type represents a list of key-value pairs. The order of the pairs in the list is not significant. In JSON, a set of key-value pairs is represented as an object. It shall comply with the provisions defined in clause 4 of IETF RFC 8259'",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "extra": {
+            "description": "'This data type represents a list of key-value pairs. The order of the pairs in the list is not significant. In JSON, a set of key-value pairs is represented as an object. It shall comply with the provisions defined in clause 4 of IETF RFC 8259'",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "id": {
+            "description": "The identifier of the VIM Connection. This identifier is managed by the MEO.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "interfaceInfo": {
+            "description": "'This data type represents a list of key-value pairs. The order of the pairs in the list is not significant. In JSON, a set of key-value pairs is represented as an object. It shall comply with the provisions defined in clause 4 of IETF RFC 8259'",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "vimId": {
+            "description": "The identifier of the VIM instance. This identifier is managed by the MEO.Shall be present to address additional information about the VIM if such information has been configured into the MEPM by means outside the scope of the present document, and should be absent otherwise.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "vimType": {
+            "description": "Discriminator for the different types of the VIM information. The value of this attribute determines the structure of the \"interfaceInfo\" and \"accessInfo\" attributes, based on the type of the VIM.The set of permitted values is expected to change over time as new types or versions of VIMs become available. ",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "id",
+          "vimType"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.2.2.18"
+      }
+    },
+    "zones": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "id": {
+            "description": "The identifier of this ZoneInfo instance, for the purpose of referencing it from other structures in the \"Grant\" structure.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "vimConnectionId": {
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "zoneId": {
+            "description": "The identifier of the resource zone, as managed by the resource management layer (typically, the VIM).",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "id",
+          "zoneId"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.2.4.6f"
+      }
+    },
+    "zoneGroups": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "zoneId": {
+            "description": "References of identifiers of \"ZoneInfo\" structures, each of which provides information about a resource zone that belongs to this group.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "x-etsi-mec-cardinality": "1..N",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "zoneId"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.2.4.7"
+      }
+    },
+    "addResources": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "resourceDefinitionId": {
+            "description": "Identifier of the related \"ResourceDefinition\" structure from the related \"GrantRequest\" structure.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "resourceGroupId": {
+            "description": "Identifier of the \"infrastructure resource group\", logical grouping of virtual resources assigned to a tenant within an Infrastructure Domain, to be provided when allocating the resource.If the VIM connection referenced by \"vimConnectionId\" applies to multiple infrastructure resource groups, this attribute shall be present for new resources.If the VIM connection referenced by \"vimConnectionId\" applies to a single infrastructure resource group, this attribute may be present for new resources. This attribute shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "vimConnectionId": {
+            "description": "Identifier of the VIM connection to be used to manage this resource. Shall be present for new resources, and shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "zoneId": {
+            "description": "Reference to the identifier of the \"ZoneInfo\" structure in the \"Grant\" structure defining the resource zone into which this resource is to be placed. Shall be present for new resources if the zones concept is applicable to them (typically, Compute resources), and shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "resourceDefinitionId"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.2.4.5"
+      }
+    },
+    "tempResources": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "resourceDefinitionId": {
+            "description": "Identifier of the related \"ResourceDefinition\" structure from the related \"GrantRequest\" structure.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "resourceGroupId": {
+            "description": "Identifier of the \"infrastructure resource group\", logical grouping of virtual resources assigned to a tenant within an Infrastructure Domain, to be provided when allocating the resource.If the VIM connection referenced by \"vimConnectionId\" applies to multiple infrastructure resource groups, this attribute shall be present for new resources.If the VIM connection referenced by \"vimConnectionId\" applies to a single infrastructure resource group, this attribute may be present for new resources. This attribute shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "vimConnectionId": {
+            "description": "Identifier of the VIM connection to be used to manage this resource. Shall be present for new resources, and shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "zoneId": {
+            "description": "Reference to the identifier of the \"ZoneInfo\" structure in the \"Grant\" structure defining the resource zone into which this resource is to be placed. Shall be present for new resources if the zones concept is applicable to them (typically, Compute resources), and shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "resourceDefinitionId"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.2.4.5"
+      }
+    },
+    "removeResources": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "resourceDefinitionId": {
+            "description": "Identifier of the related \"ResourceDefinition\" structure from the related \"GrantRequest\" structure.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "resourceGroupId": {
+            "description": "Identifier of the \"infrastructure resource group\", logical grouping of virtual resources assigned to a tenant within an Infrastructure Domain, to be provided when allocating the resource.If the VIM connection referenced by \"vimConnectionId\" applies to multiple infrastructure resource groups, this attribute shall be present for new resources.If the VIM connection referenced by \"vimConnectionId\" applies to a single infrastructure resource group, this attribute may be present for new resources. This attribute shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "vimConnectionId": {
+            "description": "Identifier of the VIM connection to be used to manage this resource. Shall be present for new resources, and shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "zoneId": {
+            "description": "Reference to the identifier of the \"ZoneInfo\" structure in the \"Grant\" structure defining the resource zone into which this resource is to be placed. Shall be present for new resources if the zones concept is applicable to them (typically, Compute resources), and shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "resourceDefinitionId"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.2.4.5"
+      }
+    },
+    "updateResources": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "resourceDefinitionId": {
+            "description": "Identifier of the related \"ResourceDefinition\" structure from the related \"GrantRequest\" structure.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "resourceGroupId": {
+            "description": "Identifier of the \"infrastructure resource group\", logical grouping of virtual resources assigned to a tenant within an Infrastructure Domain, to be provided when allocating the resource.If the VIM connection referenced by \"vimConnectionId\" applies to multiple infrastructure resource groups, this attribute shall be present for new resources.If the VIM connection referenced by \"vimConnectionId\" applies to a single infrastructure resource group, this attribute may be present for new resources. This attribute shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "vimConnectionId": {
+            "description": "Identifier of the VIM connection to be used to manage this resource. Shall be present for new resources, and shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "zoneId": {
+            "description": "Reference to the identifier of the \"ZoneInfo\" structure in the \"Grant\" structure defining the resource zone into which this resource is to be placed. Shall be present for new resources if the zones concept is applicable to them (typically, Compute resources), and shall be absent for resources that have already been allocated.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "resourceDefinitionId"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.2.4.5"
+      }
+    },
+    "vimAssets": {
+      "description": "Information about assets for the application that are managed by the MEO in the VIM, such as software images.",
+      "type": "object",
+      "properties": {
+        "softwareImages": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "appDSoftwareImageId": {
+                "description": "Identifier which references the software image descriptor in the AppD.",
+                "type": "string",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "String"
+              },
+              "vimConnectionId": {
+                "description": "Identifier of the VIM connection to access the software image referenced in this structure. ",
+                "type": "string",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "String"
+              },
+              "vimSoftwareImageId": {
+                "description": "Identifier of the software image in the resource management layer (i.e. VIM).",
+                "type": "string",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "String"
+              }
+            },
+            "required": [
+              "appDSoftwareImageId",
+              "vimSoftwareImageId"
+            ],
+            "type": "object",
+            "x-etsi-ref": "6.2.4.11"
+          }
+        }
+      }
+    },
+    "extVirtualLinks": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "extCps": {
+            "description": "External CPs of the application instance to be connected to this external VL.",
+            "items": {
+              "properties": {
+                "cpConfig": {
+                  "description": "List of instance data that need to be configured on the CP instances created from the respective CPD.",
+                  "items": {
+                    "properties": {
+                      "cpInstanceId": {
+                        "description": "Identifier of the external CP instance to which this set of configuration parameters is requested to be applied. \n\nShall be present if this instance has already been created. ",
+                        "type": "string",
+                        "x-etsi-mec-cardinality": "0..1",
+                        "x-etsi-mec-origin-type": "String"
+                      },
+                      "cpProtocolData": {
+                        "description": "Parameters for configuring the network protocols on the link port that connects the CP to a VL. See note.",
+                        "items": {
+                          "properties": {
+                            "ipOverEthernet": {
+                              "description": "'This type represents network address data for IP over Ethernet. Refer to clause 4.4.1.10c of ETSI GS NFV SOL 003'",
+                              "type": "object",
+                              "properties": {
+                                "macAddress": {
+                                  "description": "'MAC address. If this attribute is not present, it shall be chosen by the VIM'",
+                                  "type": "string"
+                                },
+                                "ipAddresses": {
+                                  "description": "List of IP addresses to assign to the CP instance. Each entry represents IP address data for fixed or dynamic IP address assignment per subnet.",
+                                  "type": "array",
+                                  "items": {
+                                    "description": "'IP addresses to assign to the CP instance. Each entry represents IP address data for fixed or dynamic IP address assignment per subnet.'",
+                                    "type": "object",
+                                    "required": [
+                                      "type"
+                                    ],
+                                    "properties": {
+                                      "type": {
+                                        "description": "The type of the IP addresses.",
+                                        "type": "string",
+                                        "enum": [
+                                          "IPV4",
+                                          "IPV6"
+                                        ]
+                                      },
+                                      "fixedAddresses": {
+                                        "description": "Fixed addresses to assign (from the subnet defined by subnetId if provided).",
+                                        "type": "array",
+                                        "items": {
+                                          "description": "Fixed addresses to assign (from the subnet defined by subnetId if provided)",
+                                          "type": "string"
+                                        }
+                                      },
+                                      "numDynamicAddresses": {
+                                        "description": "Number of dynamic addresses to assign (from the subnet defined by subnetId if provided)",
+                                        "type": "integer"
+                                      },
+                                      "addressRange": {
+                                        "description": "An IP address range to be used, e.g. in case of egress connections.",
+                                        "type": "object",
+                                        "required": [
+                                          "minAddress",
+                                          "maxAddress"
+                                        ],
+                                        "properties": {
+                                          "minAddress": {
+                                            "description": "Lowest IP address belonging to the range.",
+                                            "type": "string"
+                                          },
+                                          "maxAddress": {
+                                            "description": "Highest IP address belonging to the range.",
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "subnetId": {
+                                        "description": "Subnet defined by the identifier of the subnet resource in the VIM.",
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "layerProtocol": {
+                              "description": "'This type represents network address data for IP over Ethernet. Refer to clause 4.4.1.10c of ETSI GS NFV SOL 003'",
+                              "type": "object",
+                              "properties": {
+                                "macAddress": {
+                                  "description": "'MAC address. If this attribute is not present, it shall be chosen by the VIM'",
+                                  "type": "string"
+                                },
+                                "ipAddresses": {
+                                  "description": "List of IP addresses to assign to the CP instance. Each entry represents IP address data for fixed or dynamic IP address assignment per subnet.",
+                                  "type": "array",
+                                  "items": {
+                                    "description": "'IP addresses to assign to the CP instance. Each entry represents IP address data for fixed or dynamic IP address assignment per subnet.'",
+                                    "type": "object",
+                                    "required": [
+                                      "type"
+                                    ],
+                                    "properties": {
+                                      "type": {
+                                        "description": "The type of the IP addresses.",
+                                        "type": "string",
+                                        "enum": [
+                                          "IPV4",
+                                          "IPV6"
+                                        ]
+                                      },
+                                      "fixedAddresses": {
+                                        "description": "Fixed addresses to assign (from the subnet defined by subnetId if provided).",
+                                        "type": "array",
+                                        "items": {
+                                          "description": "Fixed addresses to assign (from the subnet defined by subnetId if provided)",
+                                          "type": "string"
+                                        }
+                                      },
+                                      "numDynamicAddresses": {
+                                        "description": "Number of dynamic addresses to assign (from the subnet defined by subnetId if provided)",
+                                        "type": "integer"
+                                      },
+                                      "addressRange": {
+                                        "description": "An IP address range to be used, e.g. in case of egress connections.",
+                                        "type": "object",
+                                        "required": [
+                                          "minAddress",
+                                          "maxAddress"
+                                        ],
+                                        "properties": {
+                                          "minAddress": {
+                                            "description": "Lowest IP address belonging to the range.",
+                                            "type": "string"
+                                          },
+                                          "maxAddress": {
+                                            "description": "Highest IP address belonging to the range.",
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "subnetId": {
+                                        "description": "Subnet defined by the identifier of the subnet resource in the VIM.",
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "layerProtocol"
+                          ],
+                          "type": "object",
+                          "x-etsi-notes": "NOTE:\tThis attribute allows to signal the addition of further types of layer and protocol in future versions of the present document in a backwards-compatible way. In the current version of the present document, only IP over Ethernet is supported.",
+                          "x-etsi-ref": "6.2.4.14"
+                        },
+                        "minItems": 0,
+                        "type": "array",
+                        "x-etsi-mec-cardinality": "0..N",
+                        "x-etsi-mec-origin-type": "CpProtocolData"
+                      },
+                      "linkPortId": {
+                        "description": "Identifier of a pre-configured link port to which the external CP will be associated. See note.",
+                        "type": "string",
+                        "x-etsi-mec-cardinality": "0..1",
+                        "x-etsi-mec-origin-type": "String"
+                      }
+                    },
+                    "type": "object",
+                    "x-etsi-notes": "NOTE:\tThe following conditions apply to the attributes \"linkPortId\" and \" cpProtocolData\": \nThe \"linkPortId\" and \"cpProtocolData\" attributes shall both be absent for the deletion of an existing external CP instance addressed by cpInstanceId. \nAt least one of these attributes shall be present for a to-be-created external CP instance or an existing external CP instance.\nIf the \"linkPortId\" attribute is absent, the MEPM shall create a link port.\nIf the \"cpProtocolData\" attribute is absent, the \"linkPortId\" attribute shall be provided referencing a pre-created link port, and the MEPM can use means outside the scope of the present document to obtain the pre-configured address information for the connection point from the resource representing the link port.\nIf both \"cpProtocolData\" and \"linkportId\" are provided, the API consumer shall ensure that the cpProtocolData can be used with the pre-created link port referenced by \"linkPortId\".",
+                    "x-etsi-ref": "6.2.4.13"
+                  },
+                  "minItems": 1,
+                  "type": "array",
+                  "x-etsi-mec-cardinality": "1..N",
+                  "x-etsi-mec-origin-type": "AppExtCpConfig"
+                },
+                "cpdId": {
+                  "description": "The identifier of the CPD in the AppD.",
+                  "type": "string",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "String"
+                }
+              },
+              "required": [
+                "cpdId",
+                "cpConfig"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.2.4.12"
+            },
+            "minItems": 1,
+            "type": "array",
+            "x-etsi-mec-cardinality": "1..N",
+            "x-etsi-mec-origin-type": "AppExtCpData"
+          },
+          "extLinkPorts": {
+            "description": "Externally provided link ports to be used to connect external connection points to this external VL. If this attribute is not present, the MEPM shall create the link ports on the external VL.",
+            "items": {
+              "properties": {
+                "id": {
+                  "description": "Identifier of this link port as provided by the entity that has created the link port.",
+                  "type": "string",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "String"
+                },
+                "resourceHandle": {
+                  "properties": {
+                    "resourceId": {
+                      "description": "Identifier of the resource in the scope of the VIM.",
+                      "type": "string",
+                      "x-etsi-mec-cardinality": "1",
+                      "x-etsi-mec-origin-type": "String"
+                    },
+                    "vimConnectionId": {
+                      "description": "Identifier of the VIM connection to manage the resource.The applicable \"VimConnectionInfo\" structure, which is referenced by vimConnectionId, can be obtained from the \"vimConnectionInfo\" attribute of the \"AppInstance\" structure.",
+                      "type": "string",
+                      "x-etsi-mec-cardinality": "0..1",
+                      "x-etsi-mec-origin-type": "String"
+                    },
+                    "vimLevelResourceType": {
+                      "description": "Type of the resource in the scope of the VIM. See note.",
+                      "type": "string",
+                      "x-etsi-mec-cardinality": "0..1",
+                      "x-etsi-mec-origin-type": "String"
+                    }
+                  },
+                  "required": [
+                    "resourceId"
+                  ],
+                  "type": "object",
+                  "x-etsi-notes": "NOTE:\tThe value set of the \"vimLevelResourceType\" attribute is within the scope of the VIM and can be used as information that complements the ResourceHandle. This value set is different from the value set of the \"type\" attribute in the ResourceDefinition.",
+                  "x-etsi-ref": "6.2.4.10"
+                }
+              },
+              "required": [
+                "id",
+                "resourceHandle"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.2.4.9"
+            },
+            "minItems": 0,
+            "type": "array",
+            "x-etsi-mec-cardinality": "0..N",
+            "x-etsi-mec-origin-type": "ExtLinkPortData"
+          },
+          "id": {
+            "description": "The identifier of the external VL instance. The identifier is assigned by the MEC entity that manages this VL instance.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "resourceId": {
+            "description": "The identifier of the resource in the scope of the VIM.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "vimConnectionId": {
+            "description": "Identifier of the VIM connection to manage this resource. ",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "id",
+          "resourceId",
+          "extCps"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.2.4.8"
+      }
+    },
+    "additionalParams": {
+      "description": "'This data type represents a list of key-value pairs. The order of the pairs in the list is not significant. In JSON, a set of key-value pairs is represented as an object. It shall comply with the provisions defined in clause 4 of IETF RFC 8259'",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "_links": {
+      "description": "Links to resources related to this resource.",
+      "type": "object",
+      "required": [
+        "appLcmOpOcc",
+        "appInstance"
+      ],
+      "properties": {
+        "appLcmOpOcc": {
+          "properties": {
+            "href": {
+              "description": "URI referring to a resource",
+              "format": "uri",
+              "type": "string",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "URI"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.5.2"
+        },
+        "appInstance": {
+          "properties": {
+            "href": {
+              "description": "URI referring to a resource",
+              "format": "uri",
+              "type": "string",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "URI"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.5.2"
+        }
+      }
+    }
+  }
+}

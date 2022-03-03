@@ -1,0 +1,4 @@
+{
+  "callbackUri": "http://some.url/somepath",
+  "subscriptionType": "ON-BOARDING"
+}

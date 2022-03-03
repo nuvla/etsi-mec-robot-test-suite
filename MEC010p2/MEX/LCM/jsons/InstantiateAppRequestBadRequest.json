@@ -1,0 +1,10 @@
+{
+	"appERRORId": "1234",
+	"selectedMECHostInfo": [{
+		"hostId": {
+			"key1": 123,
+			"key2": 456
+		},
+		"hostName": "hostname"
+	}]
+}
