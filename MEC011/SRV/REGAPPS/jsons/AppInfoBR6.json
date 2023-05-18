@@ -1,0 +1,8 @@
+{
+	"appName": "appNameWithoutAppDId",
+	"appIappServiceRequirednstanceID": "appInstanceIdWithoutAppDId",
+	"appFeatureOptional": [{
+		"featureName": "appFeatureOptinalName",
+		"version": "0.1"
+	}]
+}

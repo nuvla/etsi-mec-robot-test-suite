@@ -1,0 +1,16 @@
+*** Variables ***
+# Generic variables
+${SCHEMA}                   http
+${HOST}                     127.0.0.1
+${PORT}                     8081
+${response}                         {}
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        
+${apiName}        mec_app_support
+${apiVersion}     v2
+
+# Specific variables
+${APP_NAME}                 		appName
+${APP_INSTANCE_ID}          		appInstanceId
+${NOT_EXISTING_APP_INSTANCE_ID} 	notExistingAppInstanceId
+${APPD_ID}                  		appDId

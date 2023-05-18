@@ -1,0 +1,9 @@
+{
+	"appName": "appNameWithoutAppDId",
+	"appIappServiceRequirednstanceID": "appInstanceIdWithoutAppDId",
+	"appServiceRequired": [{
+		"serName": "serviceName",
+		"version": "0.1"
+	}]
+
+}
