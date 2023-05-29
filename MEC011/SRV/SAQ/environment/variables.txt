@@ -19,7 +19,7 @@ ${NON_EXISTENT_SERVICE_ID}          NON_EXISTENT_SERVICE_ID
 
 
 
-${APP_INSTANCE_ID}                       5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
+${APP_INSTANCE_ID}                  5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 ${INSTANCE_ID}                      instance_id
 ${FAKE_INSTANCE_ID_VALUE}           5
 ${NON_EXISTENT_APP_INSTANCE_ID}     NON_ESISTENT_APP_INSTANCE_ID

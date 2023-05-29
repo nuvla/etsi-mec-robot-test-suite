@@ -19,8 +19,9 @@ TP_MEC_MEC011_SRV_SAQ_001_OK
     ...    Check that the IUT responds with a list of available MEC services
     ...    when queried by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.3.3.1
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfoList
+    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.5",
+    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 8.2.3.3.1"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get list of available MEC services
@@ -33,7 +34,9 @@ TP_MEC_MEC011_SRV_SAQ_001_BR
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.3.3.1
+    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.5",
+    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 8.2.3.3.1"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get list of available MEC services with parameters    instance_id    ${INVALID_VALUE}
@@ -45,9 +48,9 @@ TP_MEC_MEC011_SRV_SAQ_002_OK
     ...    Check that the IUT responds with the information on a specific service
     ...    when queried by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.4.3.1
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfoList
-
+    ...    "ETSI GS MEC 011 3.2.1, clause 5.2.5",
+    ...    "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...    "ETSI GS MEC 011 3.2.1, clause 8.2.4.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get specific MEC service    ${SERVICE_ID}
     Check HTTP Response Status Code Is    200
@@ -60,8 +63,9 @@ TP_MEC_MEC011_SRV_SAQ_002_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.4.3.1
-
+    ...    "ETSI GS MEC 011 3.2.1, clause 5.2.5",
+    ...    "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...    "ETSI GS MEC 011 3.2.1, clause 8.2.4.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get specific MEC service    ${NON_EXISTENT_SERVICE_ID}
     Check HTTP Response Status Code Is    404
