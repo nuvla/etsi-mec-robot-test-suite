@@ -1,10 +1,10 @@
 {
-  "subscriptionType": "AppTerminationNotificationSubscription",
+  "subscriptionType": "INVALID_SUBSCRIPTION_TYPE",
   "callbackReference": "https://somewhere.com/mecAppSuptApi/example",
   "_links": {
     "self": {
       "href": "https://somewhere.com/mecAppSuptApi/example"
     }
   },
-  "appInstanceId": "appIntanceId"
+  "appInstanceId": "appInstanceId"
 }
