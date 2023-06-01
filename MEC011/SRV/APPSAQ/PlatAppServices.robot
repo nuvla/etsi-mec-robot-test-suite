@@ -18,8 +18,9 @@ TP_MEC_MEC011_SRV_APPSAQ_001_OK
     ...    Check that the IUT responds with a list of available MEC services
     ...    for a given application instance when queried by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.6.3.1
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfo 
+    ...    Reference    ETSI GS MEC 011 3.2.1, clause 5.2.5
+    ...    Reference    ETSI GS MEC 011 3.2.1, clause 8.1.2.2
+    ...    Reference    ETSI GS MEC 011 3.2.1, clause 8.2.6.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
 
@@ -33,8 +34,9 @@ TP_MEC_MEC011_SRV_APPSAQ_001_BR
     ...   Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.6.3.1
-
+    ...    Reference    ETSI GS MEC 011 3.2.1, clause 5.2.5
+    ...    Reference    ETSI GS MEC 011 3.2.1, clause 8.1.2.2
+    ...    Reference    ETSI GS MEC 011 3.2.1, clause 8.2.6.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
 
     # Wrong query parameter name should trigger an error response.
@@ -47,8 +49,9 @@ TP_MEC_MEC011_SRV_APPSAQ_002_OK
     ...    Check that the IUT notifies the authorised relevant (subscribed) application
     ...    instances when a new service for a given application instance is registered
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.6.3.4
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfo
+    ...    Reference     "ETSI GS MEC 011 3.2.1, clause 5.2.5",
+    ...    Reference     "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...    Reference     "ETSI GS MEC 011 3.2.1, clause 8.2.6.3.4"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create new service    ServiceInfo    ${APP_INSTANCE_ID}
@@ -56,15 +59,16 @@ TP_MEC_MEC011_SRV_APPSAQ_002_OK
     Check HTTP Response Body Json Schema Is    ServiceInfo
     Check HTTP Response Header Contains    Location
     Check Response Contains    ${response['body']}    serName    ${NEW_SERVICE_NAME}
-
+   
 
 TP_MEC_MEC011_SRV_APPSAQ_002_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.6.3.4
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfo
+    ...    Reference     "ETSI GS MEC 011 3.2.1, clause 5.2.5",
+    ...    Reference     "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...    Reference     "ETSI GS MEC 011 3.2.1, clause 8.2.6.3.4"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create new service    ServiceInfoError    ${APP_INSTANCE_ID}
@@ -76,7 +80,9 @@ TP_MEC_MEC011_SRV_APPSAQ_002_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.6.3.4
+    ...    Reference     "ETSI GS MEC 011 3.2.1, clause 5.2.5",
+    ...    Reference     "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...    Reference     "ETSI GS MEC 011 3.2.1, clause 8.2.6.3.4"
     ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfo
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
@@ -89,8 +95,9 @@ TP_MEC_MEC011_SRV_APPSAQ_003_OK
     ...    Check that the IUT responds with the information on a specific service
     ...    for a given application instance when queried by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.7.3.1
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfo
+    ...  Reference      "ETSI GS MEC 011 3.2.1, clause 5.2.5",
+    ...  Reference      "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...  Reference      "ETSI GS MEC 011 3.2.1, clause 8.2.7.3.1"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get individual service    ${APP_INSTANCE_ID}    ${SERVICE_ID}
@@ -104,8 +111,9 @@ TP_MEC_MEC011_SRV_APPSAQ_003_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.7.3.1
-
+    ...  Reference      "ETSI GS MEC 011 3.2.1, clause 5.2.5",
+    ...  Reference      "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...  Reference      "ETSI GS MEC 011 3.2.1, clause 8.2.7.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get individual service    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SERVICE_ID}
     Check HTTP Response Status Code Is    404
@@ -116,9 +124,9 @@ TP_MEC_MEC011_SRV_APPSAQ_004_OK
     ...    Check that the IUT updates a service information for a given
     ...    application instance when commanded by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.7.3.2
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfo
-
+    ...    Reference         "ETSI GS MEC 011 3.2.1, clause 5.2.4",
+    ...    Reference         "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...    Reference         "ETSI GS MEC 011 3.2.1, clause 8.2.7.3.2"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Update service    ${APP_INSTANCE_ID}    ${SERVICE_ID}    ServiceInfoUpdated
     Check HTTP Response Status Code Is    200
@@ -131,9 +139,9 @@ TP_MEC_MEC011_SRV_APPSAQ_004_BR
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.7.3.2
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfo
-
+    ...    Reference         "ETSI GS MEC 011 3.2.1, clause 5.2.4",
+    ...    Reference         "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...    Reference         "ETSI GS MEC 011 3.2.1, clause 8.2.7.3.2"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Update service    ${APP_INSTANCE_ID}    ${SERVICE_ID}    ServiceInfoUpdatedError
     Check HTTP Response Status Code Is    400
@@ -144,9 +152,9 @@ TP_MEC_MEC011_SRV_APPSAQ_004_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.7.3.2
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfo
-
+    ...    Reference         "ETSI GS MEC 011 3.2.1, clause 5.2.4",
+    ...    Reference         "ETSI GS MEC 011 3.2.1, clause 8.1.2.2",
+    ...    Reference         "ETSI GS MEC 011 3.2.1, clause 8.2.7.3.2"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Update service    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SERVICE_ID}    ServiceInfoUpdated
     Check HTTP Response Status Code Is    404
@@ -157,8 +165,7 @@ TP_MEC_MEC011_SRV_APPSAQ_005_OK
     ...    Check that the IUT executes the deletion of a service 
     ...    for a given application instance when requested by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.7.3.5
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecServiceMgmtApi.yaml#/definitions/ServiceInfo
+    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 8.2.7.3.5"
 
    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
    Remove individual service    ${APP_INSTANCE_ID}    ${SERVICE_ID}
@@ -170,7 +177,7 @@ TP_MEC_MEC011_SRV_APPSAQ_005_NF
     ...    Check that the IUT responds with an error when
     ...    a request for deletion of a unknown service is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 8.2.7.3.5
+    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 8.2.7.3.5"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Remove individual service    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SERVICE_ID}
     Check HTTP Response Status Code Is    404
