@@ -21,9 +21,9 @@ TP_MEC_MEC011_SRV_CONFTASK_001_OK
     ...    Check that the IUT responds that it has completed 
     ...    the application level termination
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.11.3.4
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/AppTerminationConfirmation
-
+    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.3",
+    ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
+    ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Request termination of MEC Application    ${APP_INSTANCE_ID}    AppTerminationConfirmation
     Check HTTP Response Status Code Is    204
@@ -34,11 +34,11 @@ TP_MEC_MEC011_SRV_CONFTASK_001_NF
     ...    Check that the IUT responds with an error
     ...    when requested graceful termination/stop of an unknown MEC Application instance
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.11.3.4
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/AppTerminationConfirmation
-
+    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.3",
+    ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
+    ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Request termination of MEC Application    ${NON_ESISTENT_APP_INSTANCE_ID}    AppTerminationConfirmation
+    Request termination of MEC Application    ${NON_EXISTING_APP_INSTANCE_ID}    AppTerminationConfirmation
     Check HTTP Response Status Code Is    404
     
 
@@ -49,9 +49,9 @@ TP_MEC_MEC011_SRV_CONFTASK_002_OK
     ...    Check that the IUT responds with an acknowledge
     ...    when requested readiness status for a MEC Application instance
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.12.3.4
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/AppReadyConfirmation
-
+    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.3",
+    ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
+    ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Request readiness status of MEC Application    ${APP_INSTANCE_ID}    AppReadyConfirmation
     Check HTTP Response Status Code Is    204
@@ -62,11 +62,11 @@ TP_MEC_MEC011_SRV_CONFTASK_002_NF
     ...    Check that the IUT responds with an error
     ...    when requested readiness status for an unknown MEC Application instance
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.12.3.4
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/AppReadyConfirmation
-
+    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.3",
+    ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
+    ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Request readiness status of MEC Application    ${NON_ESISTENT_APP_INSTANCE_ID}   AppReadyConfirmation
+    Request readiness status of MEC Application    ${NON_EXISTING_APP_INSTANCE_ID}   AppReadyConfirmation
     Check HTTP Response Status Code Is    404
 
 
