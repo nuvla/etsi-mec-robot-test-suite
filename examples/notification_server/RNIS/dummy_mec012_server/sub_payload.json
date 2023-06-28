@@ -1,0 +1,13 @@
+{
+	"subscriptionType": "CellChangeSubscription",
+	"callbackReference": "https://10.30.8.200:8080/notificationEndpoint",
+	"filterCriteriaAssocHo": {
+		"ecgi": [{
+			"plmn": {
+				"mnc": "01",
+				"mcc": "001"
+			},
+			"cellId": "ACBDEFA"
+		}]
+	}
+}

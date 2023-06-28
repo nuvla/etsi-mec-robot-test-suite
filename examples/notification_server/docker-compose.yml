@@ -1,0 +1,20 @@
+version: '2'
+services:
+  robot:
+    build:
+      context: .
+    hostname: robot
+    image: robot:local
+    volumes:
+      - ./logs:/home/robot/logs
+    ports:
+      - 9090:9090
+    environment:
+      - RNIS_URL=http://rnis:8080
+  RNIS:
+    build:
+      context: RNIS/dummy_mec012_server
+    image: rnis:latest
+    hostname: rnis
+    ports:
+      - 8080:8080
