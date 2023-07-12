@@ -22,3 +22,4 @@ ${NEW_SERVICE_NAME}                NEW_SERVICE_NAME
 
 ## this parameter should be the same as in jsons/ServiceInfoUpdated.json on param sversion
 ${SVC_NEW_VERSION}                 v2.0
+${INVALID_ETAG}                    INVALID_ETAG
