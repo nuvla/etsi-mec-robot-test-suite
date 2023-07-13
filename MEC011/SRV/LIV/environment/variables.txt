@@ -6,8 +6,6 @@ ${PORT}                     8081
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
-${apiName}        mec_app_support
-${apiVersion}     v1
 
 # Specific variables
 ${URL_SERVICE_MEC_LIVENESS} 	/link/to/individual/mecServiceLiveness
