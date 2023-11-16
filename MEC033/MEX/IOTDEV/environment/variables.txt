@@ -1,0 +1,20 @@
+*** Variables ***
+# Generic variables
+${SCHEMA}                 http
+${HOST}                   127.0.0.1
+${PORT}                   8084
+${response}                         {}
+${TOKEN}                  asic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        
+${apiName}                amsi
+${apiVersion}             v1
+${EXPECTED_IMSI}          310170845466094
+${EXPECTED_SUPI}          310170845466094
+${EXPECTED_ENABLED}       false
+
+${FILTER_ON_ENABLE}     (eq,enabled,false) 
+${DEVICE_ID_FIELDS}     fields=deviceId
+
+${FIELDS_AND_FILTER}        fields=deviceId&filter=(eq,enabled,false)
+${DEVICE_ID}                deviceId
+${NOT_EXISTING_DEVICE_ID}   notExistingDeviceId
