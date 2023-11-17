@@ -1,0 +1,44 @@
+{
+    "iotPlatformId": "newIoTPlatformId",
+    "userTransportInfo": [
+        {
+            "id": "IoTPlatformId",
+            "name": "nameUserTransportInfo",
+            "type": "REST_HTTP",
+            "protocol": "HTTP",
+            "version": "1.00",
+            "endpoint": {
+                "alternative": "alternative",
+                "fqdn": [
+                    "fqdn"
+                ],
+                "addresses": [
+                    {
+                        "host": "somehost.com",
+                        "port": 1234
+                    }
+                ]
+            },
+            "security": {
+                "oAuth2Info": {
+                    "grantTypes": [
+                        "OAUTH2_AUTHORIZATION_CODE"
+                    ],
+                    "tokenEndpoint": "https://IqNooo.tosnwuA0fdU9jlKNmu3uyYD"
+                }
+            },
+            "implSpecificInfo": {
+                "downlinkTopics": [
+                    "downlinkTopic01"
+                ],
+                "uplinkTopics": [
+                    "uplinkTopic01"
+                ],
+                "eventTopics": [
+                    "eventTopics"
+                ]
+            },
+            "description": "desc"
+        }
+    ]
+}

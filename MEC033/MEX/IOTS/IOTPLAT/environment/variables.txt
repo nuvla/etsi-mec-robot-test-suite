@@ -1,0 +1,13 @@
+*** Variables ***
+# Generic variables
+${SCHEMA}                 http
+${HOST}                   127.0.0.1
+${PORT}                   8084
+${response}                         {}
+${TOKEN}                  asic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        
+${apiName}                amsi
+${apiVersion}             v1
+
+${IOT_PLATFORM_ID}                iotPlatformId
+${NOT_EXISTING_IOT_PLATFORM_ID}   notExistingIotPlatformId

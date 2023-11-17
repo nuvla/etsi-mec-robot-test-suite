@@ -1,0 +1,328 @@
+{
+        "title": "IotPlatformInfo",
+        "type": "object",
+        "properties": {
+            "iotPlatformId": {
+                "description": "Identifier of the IoT platform.",
+                "type": "string"
+            },
+            "userTransportInfo": {
+                "description": "Information about the user transport(s)  provided by the IoT platform.",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "title": "MBTransportInfo",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "description": "The identifier of this transport as per ETSI GS MEC 011 [i.2].",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "The name of this transport as per ETSI GS MEC 011 [i.2].",
+                            "type": "string"
+                        },
+                        "description": {
+                            "description": "Human-readable description of this transport as per ETSI GS MEC 011 [i.2].",
+                            "type": "string"
+                        },
+                        "type": {
+                            "description'": "Type of the transport. The attribute shall be set to \"MB_TOPIC_BASED.\"",
+                            "type": "string",
+                            "enum": [
+                                "REST_HTTP",
+                                "MB_TOPIC_BASED",
+                                "MB_ROUTING",
+                                "MB_PUBSUB",
+                                "RPC",
+                                "RPC_STREAMING",
+                                "WEBSOCKET"
+                            ],
+                            "description": "Enumeration representing types of transports."
+                        },
+                        "protocol": {
+                            "description": "The name of the protocol used. Being the transport of MB_TOPIC_BASED type, this attribute should be typically set to \"MQTT\" or \"AMQP.\"",
+                            "type": "string"
+                        },
+                        "version": {
+                            "description": "The version of the protocol used as per ETSI GS MEC 011 [i.2].",
+                            "type": "string"
+                        },
+                        "endpoint": {
+                            "description'": "Information about the endpoint to access the transport as per ETSI GS MEC 011 [i.2].",
+                            "title": "EndPointInfo",
+                            "type": "object",
+                            "properties": {
+                                "uris": {
+                                    "description": "Entry point information of the service as string, formatted according to URI syntax (see IETF RFC 3986 [8]). Shall be used for REST APIs. See note.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "fqdn": {
+                                    "description": "Fully Qualified Domain Name of the service. See note.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "addresses": {
+                                    "type": "array",
+                                    "items": {
+                                        "description": "Entry point information of the service as one or more pairs of IP address and port. See note.",
+                                        "type": "object",
+                                        "properties": {
+                                            "host": {
+                                                "description": "Host portion of the address.",
+                                                "type": "string"
+                                            },
+                                            "port": {
+                                                "description": "Port portion of the address.",
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "required": [
+                                            "host",
+                                            "port"
+                                        ]
+                                    }
+                                },
+                                "alternative": {
+                                    "description": "Entry point information of the service in a format defined by an implementation, or in an external specification. See note.",
+                                    "type": "string"
+                                }
+                            },
+                            "description": "NOTE: Exactly one of \"uris\", \"fqdn\", \"addresses\" or \"alternative\" shall be present. \n"
+                        },
+                        "security": {
+                            "description": "Information about the security used by the transport as per ETSI GS MEC 011 [i.2].",
+                            "type": "object",
+                            "properties": {
+                                "oAuth2Info": {
+                                    "description": "Parameters related to use of OAuth 2.0. Shall be present in case OAuth 2.0 (see IETF RFC 6749 [13]) is supported to secure the provision of the service over the transport.",
+                                    "type": "object",
+                                    "properties": {
+                                        "grantTypes": {
+                                            "type": "array",
+                                            "description": "List of supported OAuth 2.0 grant types.\nEach entry shall be one of the following permitted values:\n- OAUTH2_AUTHORIZATION_CODE: Authorization code grant type\n- OAUTH2_IMPLICIT_GRANT: Implicit grant type\n- OAUTH2_RESOURCE_OWNER: Resource owner password credentials grant type\n- OAUTH2_CLIENT_CREDENTIALS: Client credentials grant type\nOnly the value \"OAUTH2_CLIENT_CREDENTIALS\" is supported in the present document.\n",
+                                            "items": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "OAUTH2_AUTHORIZATION_CODE",
+                                                    "OAUTH2_IMPLICIT_GRANT",
+                                                    "OAUTH2_RESOURCE_OWNER",
+                                                    "OAUTH2_CLIENT_CREDENTIALS"
+                                                ]
+                                            }
+                                        },
+                                        "tokenEndpoint": {
+                                            "description": "The token endpoint. Shall be present unless the grant type is OAUTH2_IMPLICIT_GRANT.",
+                                            "type": "string",
+                                            "format": "uri"
+                                        }
+                                    },
+                                    "required": [
+                                        "grantTypes"
+                                    ]
+                                },
+                                "extensions": {
+                                    "description": "Extensions for alternative transport mechanisms. These extensions depend on the actual transport and are out of scope of the present document. For instance, such extensions may be used to signal the necessary parameters for the client to use TLS-based authorization defined for alternative transports (see ETSI GS MEC 009 [5] for more information).\n",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "implSpecificInfo": {
+                            "description": "Additional implementation specific details of the transport.",
+                            "type": "object",
+                            "properties": {
+                                "eventTopics": {
+                                    "description": "Topics used to publish events related to the established session between the IoT device(s) and the end IoT application(s) on the user transport.",
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "uplinkTopics": {
+                                    "description": "Topics used to publish data generated by the IoT device(s) on the user transport, in order to be consumed by the end IoT application(s).",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "downlinkTopics": {
+                                    "description": "Topics used to publish data generated by the IoT applications(s) on the user transport, in order to be consumed by the end IoT device(s).",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "name",
+                        "type",
+                        "protocol",
+                        "version",
+                        "endpoint",
+                        "security",
+                        "implSpecificInfo"
+                    ]
+                }
+            },
+            "customServicesTransportInfo": {
+                "description": "Transport enabling access to vendor-specific services provided by the IoT platform. The data type definition is as per ETSI GS MEC 011 [i.2].",
+                "type": "array",
+                "minItems": 0,
+                "items": {
+                    "title": "TransportInfo",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "description": "The identifier of this transport.",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "The name of this transport.",
+                            "type": "string"
+                        },
+                        "description": {
+                            "description": "Human-readable description of this transport.",
+                            "type": "string"
+                        },
+                        "type": {
+                            "description'": "Type of the transport.",
+                            "type": "string",
+                            "enum": [
+                                "REST_HTTP",
+                                "MB_TOPIC_BASED",
+                                "MB_ROUTING",
+                                "MB_PUBSUB",
+                                "RPC",
+                                "RPC_STREAMING",
+                                "WEBSOCKET"
+                            ],
+                            "description": "Enumeration representing types of transports."
+                        },
+                        "protocol": {
+                            "description": "The name of the protocol used. Shall be set to \"HTTP\" for a REST API.",
+                            "type": "string"
+                        },
+                        "version": {
+                            "description": "The version of the protocol used.",
+                            "type": "string"
+                        },
+                        "endpoint": {
+                            "description'": "Information about the endpoint to access the transport.",
+                            "title": "EndPointInfo",
+                            "type": "object",
+                            "properties": {
+                                "uris": {
+                                    "description": "Entry point information of the service as string, formatted according to URI syntax (see IETF RFC 3986 [8]). Shall be used for REST APIs. See note.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "fqdn": {
+                                    "description": "Fully Qualified Domain Name of the service. See note.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "addresses": {
+                                    "type": "array",
+                                    "items": {
+                                        "description": "Entry point information of the service as one or more pairs of IP address and port. See note.",
+                                        "type": "object",
+                                        "properties": {
+                                            "host": {
+                                                "description": "Host portion of the address.",
+                                                "type": "string"
+                                            },
+                                            "port": {
+                                                "description": "Port portion of the address.",
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "required": [
+                                            "host",
+                                            "port"
+                                        ]
+                                    }
+                                },
+                                "alternative": {
+                                    "description": "Entry point information of the service in a format defined by an implementation, or in an external specification. See note.",
+                                    "type": "string"
+                                }
+                            },
+                            "description": "NOTE: Exactly one of \"uris\", \"fqdn\", \"addresses\" or \"alternative\" shall be present. \n"
+                        },
+                        "security": {
+                            "description'": "Information about the security used by the transport.",
+                            "type": "object",
+                            "properties": {
+                                "oAuth2Info": {
+                                    "description": "Parameters related to use of OAuth 2.0. Shall be present in case OAuth 2.0 (see IETF RFC 6749 [13]) is supported to secure the provision of the service over the transport.",
+                                    "type": "object",
+                                    "properties": {
+                                        "grantTypes": {
+                                            "type": "array",
+                                            "description": "List of supported OAuth 2.0 grant types.\nEach entry shall be one of the following permitted values:\n- OAUTH2_AUTHORIZATION_CODE: Authorization code grant type\n- OAUTH2_IMPLICIT_GRANT: Implicit grant type\n- OAUTH2_RESOURCE_OWNER: Resource owner password credentials grant type\n- OAUTH2_CLIENT_CREDENTIALS: Client credentials grant type\nOnly the value \"OAUTH2_CLIENT_CREDENTIALS\" is supported in the present document.\n",
+                                            "items": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "OAUTH2_AUTHORIZATION_CODE",
+                                                    "OAUTH2_IMPLICIT_GRANT",
+                                                    "OAUTH2_RESOURCE_OWNER",
+                                                    "OAUTH2_CLIENT_CREDENTIALS"
+                                                ]
+                                            }
+                                        },
+                                        "tokenEndpoint": {
+                                            "description": "The token endpoint. Shall be present unless the grant type is OAUTH2_IMPLICIT_GRANT.",
+                                            "type": "string",
+                                            "format": "uri"
+                                        }
+                                    },
+                                    "required": [
+                                        "grantTypes"
+                                    ]
+                                },
+                                "extensions": {
+                                    "description": "Extensions for alternative transport mechanisms. These extensions depend on the actual transport and are out of scope of the present document. For instance, such extensions may be used to signal the necessary parameters for the client to use TLS-based authorization defined for alternative transports (see ETSI GS MEC 009 [5] for more information).\n",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "implSpecificInfo": {
+                            "description": "Additional implementation specific details of the transport.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "name",
+                        "type",
+                        "protocol",
+                        "version",
+                        "endpoint",
+                        "security"
+                    ]
+                }
+            },
+            "enabled": {
+                "description": "Indication whether the IoT platform is capable of providing user transports and vendor-specific services (TRUE) or not (FALSE).",
+                "type": "boolean"
+            }
+        },
+        "required": [
+            "iotPlatformId",
+            "userTransportInfo",
+            "enabled"
+        ]
+    }

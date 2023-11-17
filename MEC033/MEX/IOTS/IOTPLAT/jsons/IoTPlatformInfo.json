@@ -1,0 +1,47 @@
+[{
+    "iotPlatformId": "cupidatat",
+    "userTransportInfo": [
+        {
+            "id": "IoTPlatformId",
+            "name": "nameUserTransportInfo",
+            "type": "REST_HTTP",
+            "protocol": "HTTP",
+            "version": "1.00",
+            "endpoint": {
+                "alternative": "amet commodo ad qui cupidatat",
+                "fqdn": [
+                    "fqdn"
+                ],
+                "addresses": [
+                    {
+                        "host": "somehost.com",
+                        "port": 1234
+                    }
+                ]
+            },
+            "security": {
+                "oAuth2Info": {
+                    "grantTypes": [
+                        "OAUTH2_AUTHORIZATION_CODE",
+                        "OAUTH2_RESOURCE_OWNER",
+                        "OAUTH2_RESOURCE_OWNER"
+                    ],
+                    "tokenEndpoint": "https://IqNooo.tosnwuA0fdU9jlKNmu3uyYD"
+                }
+            },
+            "implSpecificInfo": {
+                "downlinkTopics": [
+                    "downlinkTopic01"
+                ],
+                "uplinkTopics": [
+                    "uplinkTopic01"
+                ],
+                "eventTopics": [
+                    "eventTopics"
+                ]
+            },
+            "description": "desc"
+        }
+    ]
+}
+]
