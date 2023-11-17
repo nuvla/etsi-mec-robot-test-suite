@@ -1,0 +1,24 @@
+{
+  "title": "SystemInfo",
+  "type": "object",
+  "description": "This type represents an information provided by the MEC orchestrator as a part of the \"Registration of MEC system to the federation\"",
+  "properties": {
+    "systemId": {
+      "description": "Identifier of the MEC system. For the uniqueness of the identifier across the federated MEC systems, UUID format [i.9] is recommended. Shall be absent in POST request, and present otherwise.",
+      "type": "string"
+    },
+    "systemName": {
+      "description": "The name of the MEC system. This is how the MEC system identifies other MEC systems",
+      "type": "string"
+    },
+    "systemProvider": {
+      "description": "Provider of the MEC system.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "systemId",
+    "systemName",
+    "systemProvider"
+  ]
+}
