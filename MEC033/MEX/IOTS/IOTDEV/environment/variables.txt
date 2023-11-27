@@ -8,13 +8,14 @@ ${TOKEN}                  asic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
 ${apiName}                amsi
 ${apiVersion}             v1
-${EXPECTED_IMSI}          310170845466094
-${EXPECTED_SUPI}          310170845466094
-${EXPECTED_ENABLED}       false
+
+${REGISTER_ACTION}        REGISTER
+${REMOVE_ACTION}          REMOVE 
+${NO_ACTION}              NO_ACTION
 
 ${FILTER_ON_ENABLE}     (eq,enabled,false) 
 ${DEVICE_ID_FIELDS}     fields=deviceId
 
 ${FIELDS_AND_FILTER}        fields=deviceId&filter=(eq,enabled,false)
-${DEVICE_ID}                deviceId
+${DEVICE_ID_PLACEHOLDER}    PLACEHOLDER_DEVICEID
 ${NOT_EXISTING_DEVICE_ID}   notExistingDeviceId

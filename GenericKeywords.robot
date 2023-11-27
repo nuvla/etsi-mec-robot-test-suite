@@ -63,4 +63,12 @@ Check HTTP Response Contain Header with value
     Check HTTP Response Header Contains    ${HEADER_TOCHECK}
     Should Be Equal As Strings    ${value}    ${response['headers']['Content-Type']}    
 
+Get value entry from JSON file 
+    [Arguments]       ${filename}   ${key}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${filename}    .json
+    ${body}=    Get File    ${file}
+    ${data}=   Evaluate    ${body}
+    ${value_key}    Set Variable   ${data}[${key}]
+    [return]   ${value_key}
 
+        

@@ -1,6 +1,6 @@
 {
   "deviceAuthenticationInfo": "Some custom info",
-  "deviceId": "deviceA",
+  "deviceId": "deviceId",
   "imsi": "310170845466094",
   "supi": "310170845466094"
 }
