@@ -1,5 +1,5 @@
-[{
-    "iotPlatformId": "cupidatat",
+{
+    "iotPlatformId": "iotPlatformId",
     "userTransportInfo": [
         {
             "id": "IoTPlatformId",
@@ -44,4 +44,3 @@
         }
     ]
 }
-]
