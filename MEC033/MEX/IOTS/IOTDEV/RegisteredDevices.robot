@@ -81,7 +81,7 @@ TC_MEC_MEC033_IOTS_IOTDEV_002_OK
     ...  Check that the IUT registers the information of an IoT device when requested by a Service Consumer
     ...  ETSI GS MEC 033 V3.1.1, clause 7.3.3.4
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
-    [Setup]   Test Setup   ${None}    DeviceInfo       ${REGISTER_ACTION}
+    [Setup]   Test Setup   ${DEVICE_ID}   ${None}       ${REMOVE_ACTION}
       
     Register IOT Device information     DeviceInfo
     Check HTTP Response Status Code Is    201
@@ -201,8 +201,6 @@ TC_MEC_MEC033_IOTS_IOTDEV_005_NF
 
       
 *** Keywords ***
-
-
 Test Setup 
     [Arguments]     ${deviceId}    ${content}   ${action}
     Set Headers    {"Accept":"application/json"}

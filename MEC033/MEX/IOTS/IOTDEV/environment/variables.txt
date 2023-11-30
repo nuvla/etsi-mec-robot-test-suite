@@ -15,7 +15,7 @@ ${NO_ACTION}              NO_ACTION
 
 ${FILTER_ON_ENABLE}     (eq,enabled,false) 
 ${DEVICE_ID_FIELDS}     fields=deviceId
-
+${DEVICE_ID} 			deviceId
 ${FIELDS_AND_FILTER}        fields=deviceId&filter=(eq,enabled,false)
 ${DEVICE_ID_PLACEHOLDER}    PLACEHOLDER_DEVICEID
 ${NOT_EXISTING_DEVICE_ID}   notExistingDeviceId
