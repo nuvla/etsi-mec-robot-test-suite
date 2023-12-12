@@ -10,8 +10,15 @@ ${apiRoot}
 ${apiName}        granting
 ${apiVersion}     v1
 
+
+${REGISTER_ACTION}        REGISTER
+${REMOVE_ACTION}          REMOVE 
+${NO_ACTION}              NO_ACTION
+
+
 # Specific variables
 ${GRANT_ID}                        e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${GRANT_ID_PLACEHOLDER}            grantIdPlaceHolder
 ${GRANT_ID_ACCEPTED}               abcdee2b-6e50-4f33-ab09-8bf05850abcd
 ${NOT_EXISTING_GRANT_ID}           NOT_EXISTING_GRANT_ID
 ${APP_INSTANCE_ID}                 456
