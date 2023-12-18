@@ -7,13 +7,13 @@ Resource    ../../../GenericKeywords.robot
 Resource    environment/variables.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem    
-
+Library     String
 Default Tags    TC_MEC_SRV_APPSUB
 
 
 *** Test Cases ***
 
-TP_MEC_MEC011_SRV_APPSUB_001_OK
+TC_MEC_MEC011_SRV_APPSUB_001_OK
     [Documentation]
     ...    Check that the IUT responds with a list of subscriptions for notifications
     ...    on services availability when queried by a MEC Application
@@ -21,12 +21,16 @@ TP_MEC_MEC011_SRV_APPSUB_001_OK
     ...    Reference          "ETSI GS MEC 011 3.2.1, clause 5.2.6",
     ...                       "ETSI GS MEC 011 3.2.1, clause 7.2.3.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]  Create new subscription    ${APP_INSTANCE_ID}    AppTerminationNotificationSubscription
+    ${elements} =  Split String    ${response['body']['_links']['self']['href']}     /
+    Set Suite Variable    ${SUB_ID}    ${elements[3]}
     Get Subscriptions list    ${APP_INSTANCE_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    SubscriptionsLinkList
+    [TearDown]   Remove subscription   ${APP_INSTANCE_ID}    ${SUB_ID}
+    
 
-
-TP_MEC_MEC011_SRV_APPSUB_001_NF
+TC_MEC_MEC011_SRV_APPSUB_001_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
@@ -34,11 +38,12 @@ TP_MEC_MEC011_SRV_APPSUB_001_NF
     ...    Reference          "ETSI GS MEC 011 3.2.1, clause 5.2.6",
     ...                       "ETSI GS MEC 011 3.2.1, clause 7.2.3.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [TearDown]   Remove subscription   ${NON_EXISTENT_APP_INSTANCE_ID}    ${SUB_ID}
     Get Subscriptions list    ${NON_EXISTENT_APP_INSTANCE_ID}
     Check HTTP Response Status Code Is    404
 
 
-TP_MEC_MEC011_SRV_APPSUB_002_OK
+TC_MEC_MEC011_SRV_APPSUB_002_OK
     [Documentation]
     ...    Check that the IUT acknowledges the subscription by a MEC Application
     ...    to notifications on service availability events
@@ -47,14 +52,18 @@ TP_MEC_MEC011_SRV_APPSUB_002_OK
     ...                "ETSI GS MEC 011 3.2.1, clause 7.2.3.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create new subscription    ${APP_INSTANCE_ID}    AppTerminationNotificationSubscription
+    ${elements} =  Split String    ${response['body']['_links']['self']['href']}     /
+    Set Suite Variable    ${SUB_ID}    ${elements[3]}
+ 
     Check HTTP Response Status Code Is    201
     Check HTTP Response Body Json Schema Is    AppTerminationNotificationSubscription
     Check HTTP Response Header Contains    Location
     Check Response Contains    ${response['body']}    subscriptionType    AppTerminationNotificationSubscription
     Check Response Contains    ${response['body']}    callbackReference    ${APP_TERM_NOTIF_CALLBACK_URI}
+    [TearDown]   Remove subscription   ${APP_INSTANCE_ID}    ${SUB_ID}
 
 
-TP_MEC_MEC011_SRV_APPSUB_002_BR
+TC_MEC_MEC011_SRV_APPSUB_002_BR
     [Documentation]
     ...    Check that the IUT responds with the information on a specific subscription
     ...    when queried by a MEC Application
@@ -66,7 +75,7 @@ TP_MEC_MEC011_SRV_APPSUB_002_BR
     Check HTTP Response Status Code Is    400
 
          
-TP_MEC_MEC011_SRV_APPSUB_003_OK
+TC_MEC_MEC011_SRV_APPSUB_003_OK
     [Documentation]
     ...    Check that the IUT responds with the information on a specific subscription
     ...    when queried by a MEC Application
@@ -74,12 +83,16 @@ TP_MEC_MEC011_SRV_APPSUB_003_OK
     ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.6",
     ...                 "ETSI GS MEC 011 3.2.1, clause 7.2.4.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Get individual subscription    ${APP_INSTANCE_ID}    ${SUBSCRIPTION_ID} 
+    [Setup]   Create new subscription    ${APP_INSTANCE_ID}    AppTerminationNotificationSubscription
+    ${elements} =  Split String    ${response['body']['_links']['self']['href']}     /
+    Set Suite Variable    ${SUB_ID}    ${elements[3]} 
+    Get individual subscription    ${APP_INSTANCE_ID}    ${SUB_ID} 
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    AppTerminationNotificationSubscription
+    [TearDown]   Remove subscription   ${APP_INSTANCE_ID}    ${SUB_ID}
     
 
-TP_MEC_MEC011_SRV_APPSUB_003_NF
+TC_MEC_MEC011_SRV_APPSUB_003_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
@@ -87,11 +100,12 @@ TP_MEC_MEC011_SRV_APPSUB_003_NF
     ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.6",
     ...                 "ETSI GS MEC 011 3.2.1, clause 7.2.4.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Remove subscription   ${APP_INSTANCE_ID}    ${NON_EXISTENT_SUBSCRIPTION_ID}
     Get individual subscription    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404
 
 
-TP_MEC_MEC011_SRV_APPSUB_004_OK
+TC_MEC_MEC011_SRV_APPSUB_004_OK
     [Documentation]
     ...    Check that the IUT acknowledges the unsubscribe from service availability event notifications
     ...    when commanded by a MEC Application
@@ -99,11 +113,12 @@ TP_MEC_MEC011_SRV_APPSUB_004_OK
     ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.6",
     ...                 "ETSI GS MEC 011 3.2.1, clause 7.2.4.3.5"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Create new subscription    ${APP_INSTANCE_ID}    AppTerminationNotificationSubscription
     Remove subscription    ${APP_INSTANCE_ID}    ${SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    204
 
 
-TP_MEC_MEC011_SRV_APPSUB_004_NF
+TC_MEC_MEC011_SRV_APPSUB_004_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
@@ -111,6 +126,7 @@ TP_MEC_MEC011_SRV_APPSUB_004_NF
     ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.6",
     ...                 "ETSI GS MEC 011 3.2.1, clause 7.2.4.3.5"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Remove subscription   ${NON_EXISTENT_APP_INSTANCE_ID}    ${SUBSCRIPTION_ID}
     Remove subscription    ${NON_EXISTENT_APP_INSTANCE_ID}    ${SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404
 
@@ -136,6 +152,7 @@ Create new subscription
     Post    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/subscriptions    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
+    
     
 
 Get individual subscription    
