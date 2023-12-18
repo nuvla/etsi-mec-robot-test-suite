@@ -21,3 +21,7 @@ ${CALLBACK_URI}                     https://callback.uri/path
 ${SUB_TYPE}                     AppInstanceStateChangeSubscription
 ${SUBSCRIPTION_ID}                  01234e2b-6e50-4f33-ab09-8bf05850890
 ${NOT_EXISTING_SUBSCRIPTION_ID}     NOT_EXISTING_SUBSCRIPTION_ID
+
+${REQ_SUBSCRIPTION_TYPE}
+${REQ_CALLBACK_URI}
+${SUB_ID}
