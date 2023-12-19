@@ -1,3 +1,9 @@
 {
-
+    "appPkgNameERR": "APP_NAME",
+    "appPkgVersion": "APP_SOFTWARE_VERSION",
+    "checksum": {
+        "algorithm": "SHA-256",
+        "hash": "0x1234567890abcdef"
+    },
+    "appPkgPath": "someuri.com"
 }

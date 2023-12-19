@@ -9,6 +9,13 @@ ${apiRoot}
 ${apiName}                              fed-enablement
 ${apiVersion}                           v1
 
+${REGISTER_ACTION}        REGISTER
+${REMOVE_ACTION}          REMOVE 
+${NO_ACTION}              NO_ACTION
+
+
+${SYSTEM_ID_PLACEHOLDER}        		SYSTEM_ID_PLACEHOLDER
+
 ${EXPECTED_SYSTEM_ID}                   SYSTEM_ID
 ${NOT_EXISTING_SYSTEM_ID}               NOT_EXISTING_SYS_ID
 ${EXPECTED_SYSTEM_ID2}                  SYSTEM_ID2

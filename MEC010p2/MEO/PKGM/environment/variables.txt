@@ -10,6 +10,12 @@ ${apiRoot}
 ${apiName}        app_pkgm
 ${apiVersion}     v1
 
+
+${REGISTER_ACTION}        REGISTER
+${REMOVE_ACTION}          REMOVE 
+${NO_ACTION}              NO_ACTION
+${APP_PKG_ID_PLACEHOLDER}    APP_PKG_ID_PLACEHOLDER
+
 # Specific variables
 ${APP_PKG_NAME}                     appName
 ${APP_PKG_VERSION}                  APP_PKG_VERSION
