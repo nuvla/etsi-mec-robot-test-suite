@@ -4,11 +4,16 @@ ${apiName}        wai
 ${apiVersion}     v2
 
 ${MEC-APP_SCHEMA}                   http
-${MEC-APP_HOST}                     127.0.0.1
-${MEC-APP_PORT}                     8082
+${MEC-APP_HOST}                     mockoon
+${MEC-APP_PORT}                     3001
 
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
  
 ${MAC_ID}          macId01
-${filter}                           (eq,apId/macId,macId01)
-${bad_filter}                           (eq,apId/mac,macId01)
+${filter}                           macId01
+${bad_filter}                           badMacId
+
+${REGISTER_ACTION}        REGISTER
+${REMOVE_ACTION}          REMOVE 
+${NO_ACTION}              NO_ACTION
+${DEVICE_ID_PLACEHOLDER}    PLACEHOLDER_DEVICEID

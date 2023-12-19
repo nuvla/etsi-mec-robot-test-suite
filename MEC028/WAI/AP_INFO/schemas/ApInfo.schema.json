@@ -248,7 +248,7 @@
         "geolocation": {
           "properties": {
             "altitude": {
-              "description": "The altitude value of location as defined in IETF RFC 6225 [6]",
+              "description": "The altitude value of location as defined in IETF RFC 6225 [6]",
               "format": "uint32",
               "type": "integer",
               "x-etsi-mec-cardinality": "0..1",
@@ -276,7 +276,7 @@
               "x-etsi-mec-origin-type": "Uint8"
             },
             "lat": {
-              "description": "The latitude value of location as defined in IETF RFC 6225 [6]",
+              "description": "The latitude value of location as defined in IETF RFCï¿½6225 [6]",
               "format": "int64",
               "type": "integer",
               "x-etsi-mec-cardinality": "1",
@@ -290,7 +290,7 @@
               "x-etsi-mec-origin-type": "Uint8"
             },
             "long": {
-              "description": "The longitude value of location as defined in IETF RFC 6225 [6]",
+              "description": "The longitude value of location as defined in IETF RFCï¿½6225 [6]",
               "format": "int64",
               "type": "integer",
               "x-etsi-mec-cardinality": "1",
@@ -375,7 +375,7 @@
           "x-etsi-mec-origin-type": "Uint16"
         },
         "channelUtilization": {
-          "description": "The percentage of time, linearly scaled with 255 representing 100 %, that the AP sensed the medium was busy, as indicated by either the physical or virtual Carrier Sense (CS) mechanism.",
+          "description": "The percentage of time, linearly scaled with 255 representing 100ï¿½%, that the AP sensed the medium was busy, as indicated by either the physical or virtual Carrier Sense (CS) mechanism.",
           "format": "uint8",
           "type": "integer",
           "x-etsi-mec-cardinality": "1",
@@ -435,7 +435,7 @@
           "x-etsi-mec-origin-type": "Uint8"
         },
         "spatStreamUnderUtil": {
-          "description": "The percentage of time, linearly scaled with 255 representing 100 %, that the AP has underutilized spatial domain resources for given busy time of the medium.",
+          "description": "The percentage of time, linearly scaled with 255 representing 100ï¿½%, that the AP has underutilized spatial domain resources for given busy time of the medium.",
           "format": "uint8",
           "type": "integer",
           "x-etsi-mec-cardinality": "1",
