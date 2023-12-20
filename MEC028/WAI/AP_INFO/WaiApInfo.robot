@@ -9,13 +9,12 @@ Library     String
 Library     OperatingSystem
 Library     REST    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}    ssl_verify=false
 
-
 *** Test Cases ***
-TP_MEC_MEC028_SRV_WAI_001_OK
+TC_MEC_MEC028_SRV_WAI_001_OK
     [Documentation] 
     ...  Check that the IUT responds with the list of WLAN Access Point
-    ...  Reference "ETSI GS MEC 028 2.2.1, clause 7.3.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/ApInfo ##Outdated
+    ...  Reference "ETSI GS MEC 028 2.3.1, clause 7.3.3.1
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.3.1/WlanInformationApi.yaml#/schemas/ApInfo
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve the access point information
@@ -28,11 +27,11 @@ TP_MEC_MEC028_SRV_WAI_001_OK
     END
     Should Be True    ${passed}
    
-TP_MEC_MEC028_SRV_WAI_002_OK
+TC_MEC_MEC028_SRV_WAI_002_OK
     [Documentation] 
     ...  Check that the IUT responds with the list of WLAN Access Point filtered by the macId provided as query parameter 
-    ...  Reference "ETSI GS MEC 028 2.2.1, clause 7.3.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/ApInfo ##Outdated
+    ...  Reference "ETSI GS MEC 028 2.3.1, clause 7.3.3.1
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.3.1/WlanInformationApi.yaml#/schemas/ApInfo
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve the access point information using filters    ${filter} 
@@ -46,11 +45,11 @@ TP_MEC_MEC028_SRV_WAI_002_OK
     Should Be True    ${passed}
    
 
-TP_MEC_MEC028_SRV_WAI_002_BR
+TC_MEC_MEC028_SRV_WAI_002_BR
     [Documentation] 
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application 
-    ...  Reference "ETSI GS MEC 028 2.2.1, clause 7.3.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/ApInfo ##Outdated
+    ...  Reference "ETSI GS MEC 028 2.3.1, clause 7.3.3.1
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.3.1/WlanInformationApi.yaml#/schemas/ApInfo
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve the access point information using filters    ${bad_filter} 
@@ -79,3 +78,6 @@ Retrieve the access point information using filters
     GET     ${apiRoot}/${apiName}/${apiVersion}/queries/ap/ap_information?filter=${filter}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
+
+
+      
