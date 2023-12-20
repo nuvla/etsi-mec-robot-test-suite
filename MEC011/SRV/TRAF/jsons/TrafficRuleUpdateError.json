@@ -1,35 +1,33 @@
 {
-  "trafficRuleId": "elit sint id occaecat mollit",
+  "trafficRuleId": "traffic_rule_01",
   "filterType": "FLOW",
   "priority": 1,
   "trafficFilter": [
     {
       "srcAddress": [
-        "magna tempor do",
-        "nisi reprehenderit veniam adipisicing",
-        "sed ut tempor voluptate esse",
-        "consectetur magna culpa"
+        "192.168.1.1",
+        "192.168.2.1",
+        "192.168.3.1"
       ],
       "dstAddress": [
-        "dolor dolore",
-        "Excepteur ut aliquip"
+        "192.168.1.2",
+        "192.168.2.2",
+        "192.168.3.2"
       ],
       "srcPort": [
-        "et anim",
-        "nulla in minim ea cillum",
-        "ipsum sunt quis qui Ut"
+        "30078",
+        "1029",
+        "30089"
       ],
       "dstPort": [
-        "dolore tempor ut voluptate dolor",
-        "consequat incididunt ad sed mollit",
-        "in amet aute non"
+        "30099",
+        "30098",
+        "30097"
       ],
       "protocol": [
-        "mollit Duis",
-        "irure ullamco Lorem ex tempor",
-        "ullamco in dolor incididunt",
-        "elit ea ad",
-        "magna officia et ad"
+        "TCP",
+        "HTTP",
+        "UDP"
       ],
       "token": [
         "occaecat",
@@ -39,84 +37,81 @@
         "irure"
       ],
       "srcTunnelAddress": [
-        "ut exercitation",
-        "ea",
-        "magna et"
+        "159.10.1.1",
+        "159.10.2.1",
+        "159.10.3.1"
       ],
       "tgtTunnelAddress": [
-        "et anim aliqua",
-        "dolor in sint consectetur culpa",
-        "eu",
-        "deserunt qui mollit sint commodo"
+        "159.10.1.2",
+        "159.10.2.2",
+        "159.10.3.2"
       ],
       "srcTunnelPort": [
-        "dolore laborum",
-        "consequat",
-        "nostrud nulla",
-        "est id dolore commodo aliquip",
-        "qui dolor id dolore"
+        "5566",
+        "5567",
+        "5568"
       ],
       "dstTunnelPort": [
-        "Ut nostrud Excepteur",
-        "dolor culpa",
-        "in",
-        "incididunt"
+        "5576",
+        "5578",
+        "5579"
       ],
-      "qCI": 22902321,
-      "dSCP": -86264428,
-      "tC": -40655175
+      "qCI": 1,
+      "dSCP": 0,
+      "tC": 1
     },
     {
       "srcAddress": [
-        "incididunt sit qui",
-        "laborum dolore voluptate exercitation",
-        "ut"
+        "192.157.1.1",
+        "192.157.2.1",
+        "192.157.3.1"
       ],
       "dstAddress": [
-        "pariatur sunt",
-        "id elit aute ut",
-        "voluptate",
-        "irure laboris consectetur ullamco id",
-        "reprehenderit laborum"
+        "192.157.1.2",
+        "192.157.2.2",
+        "192.157.3.2"
       ],
       "srcPort": [
-        "nisi tempor ut in",
-        "culpa sed"
+        "30078",
+        "1029",
+        "30089"
       ],
       "dstPort": [
-        "amet laboris exercitation voluptate veniam"
+        "30099",
+        "30098",
+        "30097"
       ],
       "protocol": [
-        "incididunt sint Lorem qui"
+        "TCP",
+        "HTTP",
+        "UDP"
       ],
       "token": [
-        "sunt",
-        "veniam labore quis dolor",
-        "Ut ex esse deserunt"
+        "token"
       ],
       "srcTunnelAddress": [
-        "cillum irure incididunt adipisicing",
-        "Duis officia laboris ea dolor"
+        "159.20.1.1",
+        "159.20.2.1",
+        "159.20.3.1"
       ],
       "tgtTunnelAddress": [
-        "eu deserunt et",
-        "cupidatat proident Excepteur nisi",
-        "consequat fugiat Lorem adipisicing"
+        "159.20.1.2",
+        "159.20.2.2",
+        "159.20.3.2"
       ],
       "srcTunnelPort": [
-        "velit Lorem cillum ex",
-        "consectetur in ad",
-        "officia est adipisicing irure aute"
+        "5566",
+        "5567",
+        "5568"
       ],
       "dstTunnelPort": [
-        "proident velit Lorem labore do",
-        "magna sit sed ea",
-        "cillum",
-        "nostrud"
+        "5576",
+        "5578",
+        "5579"
       ],
-      "qCI": -69609374,
-      "dSCP": 46042141,
-      "tC": 67400065
+      "qCI": 2,
+      "dSCP": 0,
+      "tC": 4
     }
   ],
   "action": "UNKNOWN_VALUE",
@@ -125,10 +120,10 @@
     "interfaceType": "TUNNEL",
     "tunnelInfo": {
       "tunnelType": "GTP_U",
-      "tunnelDstAddress": "est",
-      "tunnelSrcAddress": "culpa nostrud amet labore"
+      "tunnelDstAddress": "169.54.61.15",
+      "tunnelSrcAddress": "169.54.61.31"
     },
-    "srcMacAddress": "esse",
-    "dstMacAddress": "ut nostrud voluptate ipsum cupidatat"
+    "srcMacAddress": "fc:3f:2b:42:dc:ba",
+    "dstMacAddress": "02:42:2c:58:6a:7d"
   }
 }

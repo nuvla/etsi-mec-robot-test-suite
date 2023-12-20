@@ -1,5 +1,5 @@
 {
-  "subscription": "SerAvailabilityNotificationSubscription",
+  "subscriptionType": "INVALID_SUBSCRIPTION",
   "callbackReference": "http://127.0.0.1/subscribe",
   "_links": {
     "self": {
