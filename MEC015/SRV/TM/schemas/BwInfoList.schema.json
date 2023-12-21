@@ -1,4 +1,5 @@
 {
+ "items": {
 	"properties": {
 		"allocationDirection": {
 			"description": "The direction of the requested BW allocation: 00 = Downlink (towards the UE) 01 = Uplink (towards the application/session) 10 = Symmetrical",
@@ -122,4 +123,5 @@
 	],
 	"type": "object",
 	"x-etsi-ref": "7.2.2"
+}
 }
