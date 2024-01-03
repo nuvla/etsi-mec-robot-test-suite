@@ -3,7 +3,7 @@
   "callbackReference": "http://meAppClient.example.com/wai/v2/notifications/1",
   "_links": {
     "self": {
-      "href": "/wai/v2/subscriptions/sub123"
+      "href": "http://meAppServer.example.com/wai/v2/subscriptions/sub123"
     }
   },
   "expiryDeadline": {
