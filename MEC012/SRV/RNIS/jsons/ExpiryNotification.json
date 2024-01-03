@@ -1,0 +1,12 @@
+{
+    "notificationType": "ExpiryNotification",
+    "_links": {
+        "subscription": {
+            "href": "somesuburl/subscriptions/subscriptionId"
+        }
+    },
+    "expiryDeadline": {
+        "nanoSeconds": 34684608,
+        "seconds": 21329786
+    }
+}

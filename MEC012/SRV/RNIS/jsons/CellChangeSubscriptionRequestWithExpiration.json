@@ -1,0 +1,18 @@
+{
+    "subscriptionType": "CellChangeSubscription",
+    "callbackReference": "http://10.30.8.189:8888/callback_url",
+    "_links": {
+        "self": {
+            "href": "someLinks"
+        }
+    },
+    "filterCriteriaAssocHo": {
+        "associateId": [
+            "associatedId"
+        ]
+    },
+    "expiryDeadline":{ 
+    	"seconds":199999,
+    	"nanoSeconds":0
+    }
+}

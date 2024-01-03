@@ -1,5 +1,5 @@
 {
-        "title": "RabModNotification",
+        "title": "MeasTaNotification",
         "allOf": [
           {
             "title": "InlineNotification",
@@ -32,7 +32,7 @@
           {
             "required": [
               "ecgi",
-              "erabId",
+              "timingAdvance",
               "_links"
             ],
             "type": "object",
@@ -64,7 +64,7 @@
                     }
                   }
                 },
-                "description": "0 to N identifiers to bind the event for a specific UE or flow."
+                "description": "0 to N identifiers to associate the event for a specific UE or flow."
               },
               "ecgi": {
                 "title": "Ecgi",
@@ -98,59 +98,6 @@
                   }
                 }
               },
-              "erabId": {
-                "type": "integer",
-                "description": "The attribute that uniquely identifies a Radio Access bearer for specific UE as defined in ETSI TS 136 413 [i.3].",
-                "contentEncoding": "int32"
-              },
-              "erabQosParameters": {
-                "title": "ErabQosParameters2",
-                "required": [
-                  "qci"
-                ],
-                "type": "object",
-                "properties": {
-                  "qci": {
-                    "type": "integer",
-                    "description": "QoS Class Identifier as defined in ETSI TS 123 401 [i.4].",
-                    "contentEncoding": "int32"
-                  },
-                  "qosInformation": {
-                    "title": "QosInformation2",
-                    "required": [
-                      "erabGbrDl",
-                      "erabGbrUl",
-                      "erabMbrDl",
-                      "erabMbrUl"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "erabGbrDl": {
-                        "type": "integer",
-                        "description": "This attribute indicates the guaranteed downlink E-RAB Bit Rate as defined in ETSI TS 123 401 [i.4] for this bearer.",
-                        "contentEncoding": "int32"
-                      },
-                      "erabGbrUl": {
-                        "type": "integer",
-                        "description": "This attribute indicates the guaranteed uplink E-RAB Bit Rate as defined in ETSI TS 123 401 [i.4] for this bearer.",
-                        "contentEncoding": "int32"
-                      },
-                      "erabMbrDl": {
-                        "type": "integer",
-                        "description": "This attribute indicates the maximum downlink E-RAB Bit Rate as defined in ETSI TS 123 401 [i.4] for this bearer.",
-                        "contentEncoding": "int32"
-                      },
-                      "erabMbrUl": {
-                        "type": "integer",
-                        "description": "This attribute indicates the maximum uplink E-RAB Bit Rate as defined in ETSI TS 123 401 [i.4] for this bearer.",
-                        "contentEncoding": "int32"
-                      }
-                    },
-                    "description": "The QoS Information for the E-RAB as defined below."
-                  }
-                },
-                "description": "The QoS parameters for the E-RAB as defined below."
-              },
               "timeStamp": {
                 "title": "TimeStamp",
                 "required": [
@@ -170,6 +117,11 @@
                     "contentEncoding": "int32"
                   }
                 }
+              },
+              "timingAdvance": {
+                "type": "integer",
+                "description": "The timing advance as defined in ETSI TS 136 214 [i.5].",
+                "contentEncoding": "int32"
               },
               "_links": {
                 "description": "Links to resources related to this notification.",

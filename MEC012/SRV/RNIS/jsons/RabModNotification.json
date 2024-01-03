@@ -1,0 +1,16 @@
+{
+    "notificationType": "RabModNotification",
+    "ecgi": {
+        "cellId": "cellId",
+        "plmn": {
+            "mcc": "999",
+            "mnc": "99"
+        }
+    },
+    "erabId": 1234,
+    "_links": {
+        "subscription": {
+            "href": "somesuburl/subscriptions/subscriptionId"
+        }
+    }
+}

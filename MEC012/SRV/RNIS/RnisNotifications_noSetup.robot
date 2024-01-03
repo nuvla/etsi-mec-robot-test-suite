@@ -21,10 +21,10 @@ TC_MEC_MEC012_SRV_RNIS_001_OK
     ...  service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.2
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    CellChangeSubscriptionRequest
-    Spawn Notification Server     CellChangeNotification    
+    #[Setup]  Send a request for a subscription    CellChangeSubscriptionRequest
+    Spawn Notification Server  10.30.8.189  8888  ${NOTIFICATION_SERVER_TIMEOUT}  POST  /callback_url        CellChangeNotification    
     Validate Json   CellChangeNotification.schema.json    ${payload_notification}
-    [TearDown]   Delete subscription   ${SUB_ID} 
+    #[TearDown]   Delete subscription   ${SUB_ID} 
 
 TC_MEC_MEC012_SRV_RNIS_002_OK
     [Documentation]   
@@ -32,10 +32,10 @@ TC_MEC_MEC012_SRV_RNIS_002_OK
     ...  if the RNIS service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.3
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    RabEstSubscriptionRequest
-    Spawn Notification Server     RabEstNotification
+    #[Setup]  Send a request for a subscription    RabEstSubscriptionRequest
+    Spawn Notification Server  10.30.8.189  8888  ${NOTIFICATION_SERVER_TIMEOUT}  POST  /callback_url         RabEstNotification
     Validate Json   RabEstNotification.schema.json    ${payload_notification}
-    [TearDown]   Delete subscription   ${SUB_ID} 
+    #[TearDown]   Delete subscription   ${SUB_ID} 
     
 
 
@@ -45,10 +45,10 @@ TC_MEC_MEC012_SRV_RNIS_003_OK
     ...  if the RNIS service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.4
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    RabModSubscription
-    Spawn Notification Server    RabModNotification
+    #[Setup]  Send a request for a subscription    RabModSubscription
+    Spawn Notification Server  10.30.8.189  8888  ${NOTIFICATION_SERVER_TIMEOUT}  POST  /callback_url      RabModNotification
     Validate Json   RabModNotification.schema.json    ${payload_notification}
-    [TearDown]   Delete subscription   ${SUB_ID} 
+    #[TearDown]   Delete subscription   ${SUB_ID} 
     
     
 TC_MEC_MEC012_SRV_RNIS_004_OK
@@ -57,10 +57,10 @@ TC_MEC_MEC012_SRV_RNIS_004_OK
     ...  if the RNIS service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.5
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    RabRelSubscription
-    Spawn Notification Server    RabRelNotification
+    #[Setup]  Send a request for a subscription    RabRelSubscription
+    Spawn Notification Server  10.30.8.189  8888  5  POST  /callback_url      RabRelNotification
     Validate Json   RabRelNotification.schema.json    ${payload_notification}
-    [TearDown]   Delete subscription   ${SUB_ID} 
+    #[TearDown]   Delete subscription   ${SUB_ID} 
         
 
 TC_MEC_MEC012_SRV_RNIS_005_OK
@@ -69,10 +69,10 @@ TC_MEC_MEC012_SRV_RNIS_005_OK
     ...  if the RNIS service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.6
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    MeasRepUeSubscription
-    Spawn Notification Server        MeasRepUeNotification
+    #[Setup]  Send a request for a subscription    MeasRepUeSubscription
+    Spawn Notification Server  10.30.8.189  8888  ${NOTIFICATION_SERVER_TIMEOUT}  POST  /callback_url        MeasRepUeNotification
     Validate Json   MeasRepUeNotification.schema.json    ${payload_notification}
-    [TearDown]   Delete subscription   ${SUB_ID} 
+    #[TearDown]   Delete subscription   ${SUB_ID} 
 
 TC_MEC_MEC012_SRV_RNIS_006_OK
     [Documentation]   
@@ -80,10 +80,10 @@ TC_MEC_MEC012_SRV_RNIS_006_OK
     ...  if the RNIS service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.7
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    MeasTaSubscription
-    Spawn Notification Server      MeasTaNotification
+    #[Setup]  Send a request for a subscription    MeasTaSubscription
+    Spawn Notification Server  10.30.8.189  8888  ${NOTIFICATION_SERVER_TIMEOUT}  POST  /callback_url        MeasTaNotification
     Validate Json   MeasTaNotification.schema.json    ${payload_notification}
-    [TearDown]   Delete subscription   ${SUB_ID} 
+    #[TearDown]   Delete subscription   ${SUB_ID} 
     
 
 TC_MEC_MEC012_SRV_RNIS_007_OK
@@ -92,10 +92,10 @@ TC_MEC_MEC012_SRV_RNIS_007_OK
     ...  if the RNIS service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.8
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    CaReconfSubscription
-    Spawn Notification Server     CaReconfNotification
+    #[Setup]  Send a request for a subscription    CaReconfSubscription
+    Spawn Notification Server  10.30.8.189  8888  ${NOTIFICATION_SERVER_TIMEOUT}  POST  /callback_url     CaReconfNotification
     Validate Json   CaReconfNotification.schema.json    ${payload_notification}
-    [TearDown]   Delete subscription   ${SUB_ID} 
+    #[TearDown]   Delete subscription   ${SUB_ID} 
 
 
 TC_MEC_MEC012_SRV_RNIS_008_OK
@@ -104,10 +104,10 @@ TC_MEC_MEC012_SRV_RNIS_008_OK
     ...  if the RNIS service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.10
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    S1BearerSubscription
-    Spawn Notification Server       S1BearerNotification
+    #[Setup]  Send a request for a subscription    S1BearerSubscription
+    Spawn Notification Server  10.30.8.189  8888  ${NOTIFICATION_SERVER_TIMEOUT}  POST  /callback_url          S1BearerNotification
     Validate Json   S1BearerNotification.schema.json    ${payload_notification}
-    [TearDown]   Delete subscription   ${SUB_ID} 
+    #[TearDown]   Delete subscription   ${SUB_ID} 
 
 
 TC_MEC_MEC012_SRV_RNIS_009_OK
@@ -116,10 +116,10 @@ TC_MEC_MEC012_SRV_RNIS_009_OK
     ...  if the RNIS service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.11
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    NrMeasRepUeSubscription
-    Spawn Notification Server     NrMeasRepUeNotification
+    #[Setup]  Send a request for a subscription    NrMeasRepUeSubscription
+    Spawn Notification Server  10.30.8.189  8888  ${NOTIFICATION_SERVER_TIMEOUT}  POST  /callback_url      NrMeasRepUeNotification
     Validate Json   NrMeasRepUeNotification.schema.json    ${payload_notification}
-    [TearDown]   Delete subscription   ${SUB_ID} 
+    #[TearDown]   Delete subscription   ${SUB_ID} 
 
 TC_MEC_MEC012_SRV_RNIS_010_OK
     [Documentation]   
@@ -127,10 +127,10 @@ TC_MEC_MEC012_SRV_RNIS_010_OK
     ...  service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.2
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    CellChangeSubscriptionRequestWithExpiration
-    Spawn Notification Server       ExpiryNotification
+    #[Setup]  Send a request for a subscription    CellChangeSubscriptionRequestWithExpiration
+    Spawn Notification Server  10.30.8.189  8888  ${NOTIFICATION_SERVER_TIMEOUT}  POST  /callback_url        ExpiryNotification
     Validate Json   ExpiryNotification.schema.json    ${payload_notification}
-    [TearDown]   Delete subscription   ${SUB_ID} 
+    #[TearDown]   Delete subscription   ${SUB_ID} 
     
     
 *** Keywords ***
@@ -160,6 +160,6 @@ Delete subscription
 
 
 Spawn Notification Server
-    [Arguments]  ${payload_notification}
-    ${output}   Spawn Web Server  ${NOTIFICATION_SERVER_IP}  ${NOTIFICATION_SERVER_PORT}  ${NOTIFICATION_SERVER_TIMEOUT}  ${NOTIFICATION_SERVER_HTTP_METHOD}  ${NOTIFICATION_SERVER_URI}   ${payload_notification} 
+    [Arguments]  ${host}  ${port}  ${timeout}  ${method}  ${endpoint}         ${payload_notification}
+    ${output}   Spawn Web Server  ${host}  ${port}  ${timeout}  ${method}  ${endpoint}    ${payload_notification} 
     Set Suite Variable    ${payload_notification}    ${output}
