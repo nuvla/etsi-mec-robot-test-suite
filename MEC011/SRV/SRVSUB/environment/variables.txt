@@ -2,7 +2,7 @@
 # Generic variables
 ${SCHEMA}                   http
 ${HOST}                     127.0.0.1
-${PORT}                     8081
+${PORT}                     8082
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
@@ -15,3 +15,12 @@ ${NON_EXISTENT_INSTANCE_ID}              NON_EXISTENT_INSTANCE_ID
 ${APP_SRVSUB_NOTIF_CALLBACK_URI}         http://127.0.0.1/subscribe
 ${SUBSCRIPTION_ID}                       e0deee2b-6e50-4f33-ab09-8bf0585025d3
 ${NON_EXISTENT_SUBSCRIPTION_ID}          NON_EXISTENT_SUBSCRIPTION_ID
+
+
+##Registration app setup test case variables
+${HOST_REGAPP}                     127.0.0.1
+${PORT_REGAPP}                     8081
+${apiRoot_REGAPP}
+${apiName_REGAPP}          mec_app_support
+${apiVersion_REGAPP}       v2
+

@@ -2,7 +2,7 @@
 # Generic variables
 ${SCHEMA}                   http
 ${HOST}                     127.0.0.1
-${PORT}                     8081
+${PORT}                     8082
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
@@ -39,3 +39,12 @@ ${INVALID_ETAG}                     INVALID_ETAG
 # ${callback_endpoint_error}    /subs_404
 # ${total_polling_time}   2 min
 # ${polling_interval}     10 sec
+
+#Variables for test setups and teardowns
+${HOST_APP_SAQ}          127.0.0.1
+${PORT_APP_SAQ}          8082
+${apiRoot_APP_SAQ}   
+${apiName_APP_SAQ}       mec_service_mgmt
+${apiVersion_APP_SAQ}    v1
+${APP_INSTANCE_ID}       appInstanceId
+${SERVICE_NAME}

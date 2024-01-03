@@ -9,6 +9,14 @@ ${apiRoot}
 ${apiName}        mec_app_support
 ${apiVersion}     v2
 
+
+${HOST_REG_APP}             127.0.0.1
+${PORT_REG_APP}             8082
+${apiRoot_REG_APP}          
+${apiName_REG_APP}          mec_app_support         
+${apiVersion_REG_APP}       v2
+
+
 # Specific variables
 ${APP_INSTANCE_ID}                       5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 ${NON_EXISTING_APP_INSTANCE_ID}            NON_EXISTING_APP_INSTANCE_ID

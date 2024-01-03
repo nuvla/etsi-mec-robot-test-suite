@@ -10,3 +10,13 @@ ${apiRoot}
 # Specific variables
 ${URL_SERVICE_MEC_LIVENESS} 	/link/to/individual/mecServiceLiveness
 ${NOT_EXISING_URL_SERVICE_MEC_LIVENESS} 	/not_existing_link/to/individual/mecServiceLiveness
+
+
+#Variables for test setups and teardowns
+${HOST_APP_SAQ}          127.0.0.1
+${PORT_APP_SAQ}          8082
+${apiRoot_APP_SAQ}   
+${apiName_APP_SAQ}       mec_service_mgmt
+${apiVersion_APP_SAQ}    v1
+${APP_INSTANCE_ID}       appInstanceId
+${SERVICE_NAME}

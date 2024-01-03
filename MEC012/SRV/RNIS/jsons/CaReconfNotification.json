@@ -1,0 +1,15 @@
+{
+    "notificationType": "CaReconfNotification",
+    "ecgi": {
+        "cellId": "cellId",
+        "plmn": {
+            "mcc": "999",
+            "mnc": "99"
+        }
+    },
+    "_links": {
+        "subscription": {
+            "href": "somesuburl/subscriptions/subscriptionId"
+        }
+    }
+}

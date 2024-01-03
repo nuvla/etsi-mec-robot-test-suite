@@ -1,7 +1,7 @@
 *** Settings ***
 
 Documentation
-...    A test suite for validating DNS rules (DNS) operations.
+...    A test suite for validating Platform Configuration (CONF) operations.
 
 Resource    ../../../GenericKeywords.robot
 Resource    environment/variables.txt
@@ -16,7 +16,7 @@ Default Tags    TC_MEC_SRV_CONF
 
 *** Test Cases ***
 
-TP_MEC_MEC011_SRV_CONFTASK_001_OK
+TC_MEC_MEC011_SRV_CONFTASK_001_OK
     [Documentation]
     ...    Check that the IUT responds that it has completed 
     ...    the application level termination
@@ -25,11 +25,13 @@ TP_MEC_MEC011_SRV_CONFTASK_001_OK
     ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
     ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Request termination of MEC Application    ${APP_INSTANCE_ID}    AppTerminationConfirmation
+    [Setup]   Create a new MEC application instance profile  AppInfo       
+    Request termination of MEC Application   ${APP_INSTANCE_ID}    AppTerminationConfirmation
     Check HTTP Response Status Code Is    204
+    [Teardown]   Delete MEC application instance profile   ${APP_INSTANCE_ID}
+    
 
-
-TP_MEC_MEC011_SRV_CONFTASK_001_NF
+TC_MEC_MEC011_SRV_CONFTASK_001_NF
     [Documentation]
     ...    Check that the IUT responds with an error
     ...    when requested graceful termination/stop of an unknown MEC Application instance
@@ -38,13 +40,14 @@ TP_MEC_MEC011_SRV_CONFTASK_001_NF
     ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
     ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Teardown]   Delete MEC application instance profile   ${NON_EXISTING_APP_INSTANCE_ID}
     Request termination of MEC Application    ${NON_EXISTING_APP_INSTANCE_ID}    AppTerminationConfirmation
     Check HTTP Response Status Code Is    404
     
 
 
 
-TP_MEC_MEC011_SRV_CONFTASK_002_OK
+TC_MEC_MEC011_SRV_CONFTASK_002_OK
     [Documentation]
     ...    Check that the IUT responds with an acknowledge
     ...    when requested readiness status for a MEC Application instance
@@ -53,11 +56,13 @@ TP_MEC_MEC011_SRV_CONFTASK_002_OK
     ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
     ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Create a new MEC application instance profile  AppInfo       
     Request readiness status of MEC Application    ${APP_INSTANCE_ID}    AppReadyConfirmation
     Check HTTP Response Status Code Is    204
+    [Teardown]   Delete MEC application instance profile   ${APP_INSTANCE_ID}
+ 
 
-
-TP_MEC_MEC011_SRV_CONFTASK_002_NF
+TC_MEC_MEC011_SRV_CONFTASK_002_NF
     [Documentation]
     ...    Check that the IUT responds with an error
     ...    when requested readiness status for an unknown MEC Application instance
@@ -66,11 +71,37 @@ TP_MEC_MEC011_SRV_CONFTASK_002_NF
     ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
     ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Teardown]   Delete MEC application instance profile   ${NON_EXISTING_APP_INSTANCE_ID}
     Request readiness status of MEC Application    ${NON_EXISTING_APP_INSTANCE_ID}   AppReadyConfirmation
     Check HTTP Response Status Code Is    404
 
 
 *** Keywords ***
+Create a new MEC application instance profile
+    [Arguments]    ${content}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    #Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    POST      http://${HOST_REG_APP}:${PORT_REG_APP}/${apiRoot_REG_APP}${apiName_REG_APP}/${apiVersion_REG_APP}/registrations    ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+    Set Suite Variable    ${APP_INSTANCE_ID}   ${response['body']['appInstanceId']}
+
+
+
+Delete MEC application instance profile
+    [Arguments]    ${app_instance_id}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    #Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Delete    http://${HOST_REG_APP}:${PORT_REG_APP}/${apiRoot_REG_APP}${apiName_REG_APP}/${apiVersion_REG_APP}/registrations/${app_instance_id}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
 Request termination of MEC Application
     [Arguments]    ${appInstanceId}    ${content}
     Set Headers    {"Accept":"application/json"}

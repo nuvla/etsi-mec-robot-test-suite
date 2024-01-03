@@ -14,27 +14,26 @@ Default Tags    TC_MEC_SRV_TIME
 
 *** Test Cases ***
 
-TP_MEC_MEC011_SRV_TIME_001_OK
+TC_MEC_MEC011_SRV_TIME_001_OK
     [Documentation]
     ...    Check that the IUT responds with timing capabilities
     ...    when queried by a MEC Application
-    ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.5.3.1
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/TimingCaps
-
+    ...     ETSI GS MEC 011 3.2.1, clause 5.2.10.3,
+    ...     ETSI GS MEC 011 3.2.1, clause 7.1.2.4,
+    ...     ETSI GS MEC 011 3.2.1, clause 7.2.5.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get time capabilities
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    TimingCaps
 
 
-TP_MEC_MEC011_SRV_TIME_002_OK
+TC_MEC_MEC011_SRV_TIME_002_OK
     [Documentation]
     ...    Check that the IUT responds with current time
     ...    when queried by a MEC Application
-    ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.6.3.1
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/CurrentTime
+    ...    ETSI GS MEC 011 3.2.1, clause 5.2.10.2,
+    ...    ETSI GS MEC 011 3.2.1, clause 7.1.2.5,
+    ...    ETSI GS MEC 011 3.2.1, clause 7.2.5.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get current time

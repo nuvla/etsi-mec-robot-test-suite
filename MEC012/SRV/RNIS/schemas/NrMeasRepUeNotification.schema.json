@@ -1,0 +1,723 @@
+{
+        "title": "NrMeasRepUeNotification",
+        "allOf": [
+          {
+            "title": "InlineNotification",
+            "required": [
+              "notificationType"
+            ],
+            "type": "object",
+            "properties": {
+              "notificationType": {
+                "type": "string"
+              }
+            },
+            "discriminator": {
+              "propertyName": "notificationType",
+              "mapping": {
+                "CaReconfNotification": "#/components/schemas/CaReconfNotification",
+                "CellChangeNotification": "#/components/schemas/CellChangeNotification",
+                "MeasRepUeNotification": "#/components/schemas/MeasRepUeNotification",
+                "MeasTaNotification": "#/components/schemas/MeasTaNotification",
+                "NrMeasRepUeNotification": "#/components/schemas/NrMeasRepUeNotification",
+                "RabEstNotification": "#/components/schemas/RabEstNotification",
+                "RabModNotification": "#/components/schemas/RabModNotification",
+                "RabRelNotification": "#/components/schemas/RabRelNotification",
+                "S1BearerNotification": "#/components/schemas/S1BearerNotification",
+                "ExpiryNotification": "#/components/schemas/ExpiryNotification",
+                "TestNotification": "#/components/schemas/TestNotification"
+              }
+            }
+          },
+          {
+            "required": [
+              "triggerNr",
+              "_links"
+            ],
+            "type": "object",
+            "properties": {
+              "associateId": {
+                "type": "array",
+                "items": {
+                  "title": "AssociateId",
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "title": "Type",
+                      "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4
+                      ],
+                      "type": "integer",
+                      "description": "Numeric value (0-255) corresponding to specified type of identifier as following: <p>0 = reserved. <p>1 = UE_IPv4_ADDRESS. <p>2 = UE_IPV6_ADDRESS. <p>3 = NATED_IP_ADDRESS. <p>4 = GTP_TEID.",
+                      "examples": [
+                        0
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Value for the identifier."
+                    }
+                  }
+                },
+                "description": "0 to N identifiers to associate the event for a specific UE or flow."
+              },
+              "eutraNeighCellMeasInfo": {
+                "type": "array",
+                "items": {
+                  "title": "EutraNeighCellMeasInfo",
+                  "type": "object",
+                  "required": [
+                    "ecgi"
+                  ],
+                  "properties": {
+                    "ecgi": {
+                      "description": "E-UTRAN Cell Global Identifier.",
+                      "title": "Ecgi",
+                      "required": [
+                        "cellId",
+                        "plmn"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "cellId": {
+                          "type": "string",
+                          "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3]."
+                        },
+                        "plmn": {
+                          "title": "Plmn",
+                          "required": [
+                            "mcc",
+                            "mnc"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "mcc": {
+                              "type": "string",
+                              "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                            },
+                            "mnc": {
+                              "type": "string",
+                              "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "rsrp": {
+                      "type": "integer",
+                      "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                      "contentEncoding": "int32"
+                    },
+                    "rsrq": {
+                      "type": "integer",
+                      "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                      "contentEncoding": "int32"
+                    },
+                    "sinr": {
+                      "type": "integer",
+                      "description": "Reference Signal plus Interference Noise Ratio as defined in ETSI TS138331[i.13].",
+                      "contentEncoding": "int32"
+                    }
+                  }
+                },
+                "description": "This parameter can be repeated to contain measurement information of all the neighbouring cells up to N. It shall not be included if nrNeighCellMeasInfo is included."
+              },
+              "nrNeighCellMeasInfo": {
+                "type": "array",
+                "items": {
+                  "title": "NrNeighCellMeasInfo",
+                  "type": "object",
+                  "required": [
+                    "nrcgi"
+                  ],
+                  "properties": {
+                    "measQuantityResultsCsiRsCell": {
+                      "title": "MeasQuantityResultsNr",
+                      "type": "object",
+                      "properties": {
+                        "rsrp": {
+                          "type": "integer",
+                          "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                          "contentEncoding": "int32"
+                        },
+                        "rsrq": {
+                          "type": "integer",
+                          "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                          "contentEncoding": "int32"
+                        },
+                        "sinr": {
+                          "type": "integer",
+                          "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                          "contentEncoding": "int32"
+                        }
+                      }
+                    },
+                    "measQuantityResultsSsbCell": {
+                      "title": "MeasQuantityResultsNr",
+                      "type": "object",
+                      "properties": {
+                        "rsrp": {
+                          "type": "integer",
+                          "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                          "contentEncoding": "int32"
+                        },
+                        "rsrq": {
+                          "type": "integer",
+                          "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                          "contentEncoding": "int32"
+                        },
+                        "sinr": {
+                          "type": "integer",
+                          "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                          "contentEncoding": "int32"
+                        }
+                      }
+                    },
+                    "nrcgi": {
+                      "description": "NR Cell Global Identifier.",
+                      "title": "Nrcgi",
+                      "required": [
+                        "nrCellId",
+                        "plmn"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "nrcellId": {
+                          "type": "string",
+                          "description": "String representing the NR Cell Identity. Encoded as a bit string (size (36)) as defined in ETSI TS 138 423 [i.17]."
+                        },
+                        "plmn": {
+                          "title": "Plmn",
+                          "required": [
+                            "mcc",
+                            "mnc"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "mcc": {
+                              "type": "string",
+                              "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                            },
+                            "mnc": {
+                              "type": "string",
+                              "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "rsIndexResults": {
+                      "title": "RsIndexResults",
+                      "required": [
+                        "resultsCsiRsIndexes",
+                        "resultsSsbIndexes"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "resultsCsiRsIndexes": {
+                          "title": "ResultsPerCsiRsIndexList",
+                          "type": "object",
+                          "properties": {
+                            "resultsPerCsiRsIndex": {
+                              "type": "array",
+                              "items": {
+                                "title": "ResultsPerCsiRsIndex",
+                                "required": [
+                                  "csiRsIndex"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "csiRsIndex": {
+                                    "type": "integer",
+                                    "contentEncoding": "int32"
+                                  },
+                                  "csiRsResults": {
+                                    "title": "MeasQuantityResultsNr",
+                                    "type": "object",
+                                    "properties": {
+                                      "rsrp": {
+                                        "type": "integer",
+                                        "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                                        "contentEncoding": "int32"
+                                      },
+                                      "rsrq": {
+                                        "type": "integer",
+                                        "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                                        "contentEncoding": "int32"
+                                      },
+                                      "sinr": {
+                                        "type": "integer",
+                                        "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                                        "contentEncoding": "int32"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "description": ""
+                            }
+                          }
+                        },
+                        "resultsSsbIndexes": {
+                          "title": "ResultsPerSsbIndexList",
+                          "type": "object",
+                          "properties": {
+                            "resultsPerSsbIndex": {
+                              "type": "array",
+                              "items": {
+                                "title": "ResultsPerSsbIndex",
+                                "required": [
+                                  "ssbIndex"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "ssbIndex": {
+                                    "type": "integer",
+                                    "contentEncoding": "int32"
+                                  },
+                                  "ssbResults": {
+                                    "title": "MeasQuantityResultsNr",
+                                    "type": "object",
+                                    "properties": {
+                                      "rsrp": {
+                                        "type": "integer",
+                                        "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                                        "contentEncoding": "int32"
+                                      },
+                                      "rsrq": {
+                                        "type": "integer",
+                                        "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                                        "contentEncoding": "int32"
+                                      },
+                                      "sinr": {
+                                        "type": "integer",
+                                        "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                                        "contentEncoding": "int32"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "description": ""
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "description": "This parameter can be repeated to contain measurement information of all the neighbouring cells up to N. It shall not be included if eutraNeighCellMeasInfo is included."
+              },
+              "servCellMeasInfo": {
+                "type": "array",
+                "items": {
+                  "title": "ServCellMeasInfo",
+                  "type": "object",
+                  "required": [
+                    "nrcgi",
+                    "sCell"
+                  ],
+                  "properties": {
+                    "nCell": {
+                      "title": "NCell",
+                      "type": "object",
+                      "properties": {
+                        "measQuantityResultsCsiRsCell": {
+                          "title": "MeasQuantityResultsNr",
+                          "type": "object",
+                          "properties": {
+                            "rsrp": {
+                              "type": "integer",
+                              "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            },
+                            "rsrq": {
+                              "type": "integer",
+                              "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            },
+                            "sinr": {
+                              "type": "integer",
+                              "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            }
+                          }
+                        },
+                        "measQuantityResultsSsbCell": {
+                          "title": "MeasQuantityResultsNr",
+                          "type": "object",
+                          "properties": {
+                            "rsrp": {
+                              "type": "integer",
+                              "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            },
+                            "rsrq": {
+                              "type": "integer",
+                              "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            },
+                            "sinr": {
+                              "type": "integer",
+                              "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            }
+                          }
+                        },
+                        "rsIndexResults": {
+                          "title": "RsIndexResults",
+                          "required": [
+                            "resultsCsiRsIndexes",
+                            "resultsSsbIndexes"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "resultsCsiRsIndexes": {
+                              "title": "ResultsPerCsiRsIndexList",
+                              "type": "object",
+                              "properties": {
+                                "resultsPerCsiRsIndex": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "ResultsPerCsiRsIndex",
+                                    "required": [
+                                      "csiRsIndex"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "csiRsIndex": {
+                                        "type": "integer",
+                                        "contentEncoding": "int32"
+                                      },
+                                      "csiRsResults": {
+                                        "title": "MeasQuantityResultsNr",
+                                        "type": "object",
+                                        "properties": {
+                                          "rsrp": {
+                                            "type": "integer",
+                                            "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          },
+                                          "rsrq": {
+                                            "type": "integer",
+                                            "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          },
+                                          "sinr": {
+                                            "type": "integer",
+                                            "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "description": ""
+                                }
+                              }
+                            },
+                            "resultsSsbIndexes": {
+                              "title": "ResultsPerSsbIndexList",
+                              "type": "object",
+                              "properties": {
+                                "resultsPerSsbIndex": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "ResultsPerSsbIndex",
+                                    "required": [
+                                      "ssbIndex"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "ssbIndex": {
+                                        "type": "integer",
+                                        "contentEncoding": "int32"
+                                      },
+                                      "ssbResults": {
+                                        "title": "MeasQuantityResultsNr",
+                                        "type": "object",
+                                        "properties": {
+                                          "rsrp": {
+                                            "type": "integer",
+                                            "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          },
+                                          "rsrq": {
+                                            "type": "integer",
+                                            "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          },
+                                          "sinr": {
+                                            "type": "integer",
+                                            "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "description": ""
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "description": "Measurement information relating to the best neighbour of this serving cell."
+                    },
+                    "nrcgi": {
+                      "title": "Nrcgi",
+                      "required": [
+                        "nrCellId",
+                        "plmn"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "nrcellId": {
+                          "type": "string",
+                          "description": "String representing the NR Cell Identity. Encoded as a bit string (size (36)) as defined in ETSI TS 138 423 [i.17]."
+                        },
+                        "plmn": {
+                          "title": "Plmn",
+                          "required": [
+                            "mcc",
+                            "mnc"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "mcc": {
+                              "type": "string",
+                              "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                            },
+                            "mnc": {
+                              "type": "string",
+                              "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "sCell": {
+                      "title": "SCell",
+                      "type": "object",
+                      "properties": {
+                        "measQuantityResultsCsiRsCell": {
+                          "title": "MeasQuantityResultsNr",
+                          "type": "object",
+                          "properties": {
+                            "rsrp": {
+                              "type": "integer",
+                              "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            },
+                            "rsrq": {
+                              "type": "integer",
+                              "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            },
+                            "sinr": {
+                              "type": "integer",
+                              "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            }
+                          }
+                        },
+                        "measQuantityResultsSsbCell": {
+                          "title": "MeasQuantityResultsNr",
+                          "type": "object",
+                          "properties": {
+                            "rsrp": {
+                              "type": "integer",
+                              "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            },
+                            "rsrq": {
+                              "type": "integer",
+                              "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            },
+                            "sinr": {
+                              "type": "integer",
+                              "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                              "contentEncoding": "int32"
+                            }
+                          }
+                        },
+                        "rsIndexResults": {
+                          "title": "RsIndexResults",
+                          "required": [
+                            "resultsCsiRsIndexes",
+                            "resultsSsbIndexes"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "resultsCsiRsIndexes": {
+                              "title": "ResultsPerCsiRsIndexList",
+                              "type": "object",
+                              "properties": {
+                                "resultsPerCsiRsIndex": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "ResultsPerCsiRsIndex",
+                                    "required": [
+                                      "csiRsIndex"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "csiRsIndex": {
+                                        "type": "integer",
+                                        "contentEncoding": "int32"
+                                      },
+                                      "csiRsResults": {
+                                        "title": "MeasQuantityResultsNr",
+                                        "type": "object",
+                                        "properties": {
+                                          "rsrp": {
+                                            "type": "integer",
+                                            "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          },
+                                          "rsrq": {
+                                            "type": "integer",
+                                            "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          },
+                                          "sinr": {
+                                            "type": "integer",
+                                            "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "description": ""
+                                }
+                              }
+                            },
+                            "resultsSsbIndexes": {
+                              "title": "ResultsPerSsbIndexList",
+                              "type": "object",
+                              "properties": {
+                                "resultsPerSsbIndex": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "ResultsPerSsbIndex",
+                                    "required": [
+                                      "ssbIndex"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "ssbIndex": {
+                                        "type": "integer",
+                                        "contentEncoding": "int32"
+                                      },
+                                      "ssbResults": {
+                                        "title": "MeasQuantityResultsNr",
+                                        "type": "object",
+                                        "properties": {
+                                          "rsrp": {
+                                            "type": "integer",
+                                            "description": "Reference Signal Received Power as defined in ETSI TS138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          },
+                                          "rsrq": {
+                                            "type": "integer",
+                                            "description": "Reference Signal Received Quality as defined in ETSI TS 138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          },
+                                          "sinr": {
+                                            "type": "integer",
+                                            "description": "Reference Signal to Interference & Noise Ratio as defined in ETSI TS 138 331 [i.13].",
+                                            "contentEncoding": "int32"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "description": ""
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "description": "Measurement information relating to this serving cell."
+                    }
+                  }
+                },
+                "description": "This parameter can be repeated to contain information of all the serving cells up to N."
+              },
+              "timeStamp": {
+                "title": "TimeStamp",
+                "required": [
+                  "nanoSeconds",
+                  "seconds"
+                ],
+                "type": "object",
+                "properties": {
+                  "nanoSeconds": {
+                    "type": "integer",
+                    "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                  },
+                  "seconds": {
+                    "type": "integer",
+                    "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                  }
+                }
+              },
+              "triggerNr": {
+                "title": "TriggerNr",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
+                  20,
+                  21,
+                  30,
+                  31
+                ],
+                "type": "integer",
+                "description": "The enumeration Trigger represents specified triggers for a 5G UE Measurement Report. Full details can be found in ETSI TS 138 331 [i.13]). <p>0 = NOT_AVAILABLE <p>1 = NR_PERIODICAL <p>2 = NR_CGI <p>10 = EVENT_A1 <p>11 = EVENT_A2 <p>12 = EVENT_A3 <p>13 = EVENT_A4 <p>14 = EVENT_A5 <p>15 = EVENT_A6 <p>20 = INTER_RAT_PERIODICAL <p>21 = INTER_RAT_CGI <p>30 = EVENT_B1 <p>31 = EVENT_B2",
+                "examples": [
+                  0
+                ]
+              },
+              "_links": {
+                "description": "Links to resources related to this notification.",
+                "required": [
+                  "subscription"
+                ],
+                "properties": {
+                  "subscription": {
+                    "description": "A link to the related subscription.",
+                    "title": "LinkType",
+                    "required": [
+                      "href"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "type": "string",
+                        "description": "URI referring to a resource"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }

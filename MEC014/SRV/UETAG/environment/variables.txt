@@ -2,12 +2,23 @@
 ${MEC-APP_SCHEMA}                   http
 #${MEC-APP_HOST}                     172.28.4.87
 #${MEC-APP_HOST}                     127.0.0.1
-${MEC-APP_HOST}                     192.168.56.1
-${MEC-APP_PORT}                     8081
+${MEC-APP_HOST}                     127.0.0.1
+${MEC-APP_PORT}                     8085
+${apiRoot}
+${apiName}                          ui
+${apiVersion}                       v1
+
 ${ZONE_ID}                          zone01
-${APP_INSTANCE_ID}                  appInst01
-${NON_EXISTENT_APP_INSTANCE_ID}     appInst99
-${UE_IDENTITY_TAG}                  UeTagA
+${APP_INSTANCE_ID}
+${NON_EXISTENT_APP_INSTANCE_ID}     NON_EXISTENT_APP_INSTANCE_ID
+${UE_IDENTITY_TAG}                  UeIdentityTag
 ${UE_IDENTITY_TAG_INVALID_STATE}    UeTagC
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+
+##Variables for App Instances management
+${APP_INST_HOST}                     127.0.0.1
+${APP_INST_PORT}                     8081
+${apiRoot_APP_INST}
+${apiName_APP_INST}                  app_lcm
+${apiVersion_APP_INST}               v1

@@ -39,9 +39,9 @@ Check PlmnInfo
 Check S1BearerInfo
     [Arguments]    ${received_value}
     log    ${received_value}
-    Should Be Equal As Strings    ${received_value['s1UeIffo']['ecgi']['cellId']}    ${CELL_ID}
+    Should Be Equal As Strings    ${received_value['s1UeInfo'][0]['ecgi'][0]['cellId']}    ${CELL_ID}
     
 Check L2MeasInfo
     [Arguments]    ${received_value}
     log    ${received_value}
-    Should Be Equal As Strings    ${received_value['cellInfo'][0]['ecgi']['cellId']}    ${CELL_ID}
+    Should Be Equal As Strings    ${received_value['cellInfo'][0]['ecgi'][0]['cellId']}    ${CELL_ID}

@@ -1,0 +1,33 @@
+{
+    "notificationType": "S1BearerNotification",
+    "s1Event": 0,
+    "s1UeInfo": {
+        "ecgi": [
+            {
+                "cellId": "cellId",
+                "plmn": {
+                    "mcc": "999",
+                    "mnc": "99"
+                }
+            }
+        ],
+        "s1BearerInfo": [
+            {
+                "enbInfo": {
+                    "ipAddress": "127.0.0.1",
+                    "tunnelIdaa": "tunnelId"
+                },
+                "erabId": 1234,
+                "sGwInfo": {
+                    "ipAddress": "127.0.0.1",
+                    "tunnelId": "tunnelId"
+                }
+            }
+        ]
+    },
+    "_links": {
+        "subscription": {
+            "href": "somesuburl/subscriptions/subscriptionId"
+        }
+    }
+}

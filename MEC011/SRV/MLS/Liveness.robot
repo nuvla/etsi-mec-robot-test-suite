@@ -10,8 +10,7 @@ Library     OperatingSystem
 
 
 *** Test Cases ***
-
-TP_MEC_MEC011_SRV_MSL_001_OK
+TC_MEC_MEC011_SRV_MSL_001_OK
     [Documentation]
     ...    Check that the IUT responds with the liveness of a MEC service instance 
     ...     when queried by a MEC Application
@@ -19,13 +18,14 @@ TP_MEC_MEC011_SRV_MSL_001_OK
     ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.2.4",
     ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.10.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Individual MEC service liveness  ${URL_SERVICE_MEC_LIVENESS} 
+    [Setup]   Create new service   ServiceInfo    ${APP_INSTANCE_ID}
+    Individual MEC service liveness  ${LIVENESS_URI} 
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    ServiceLivenessInfo
     Check Response Contains    ${response['body']}   state    ACTIVE
-
-
-TP_MEC_MEC011_SRV_MSL_001_NF
+    [TearDown]   Remove individual service    ${APP_INSTANCE_ID}   ${SERVICE_NAME}
+    
+TC_MEC_MEC011_SRV_MSL_001_NF
     [Documentation]
     ...   Check that the IUT responds with an error when
     ...   a request for an URI that cannot be mapped to a valid resource URI 
@@ -38,7 +38,7 @@ TP_MEC_MEC011_SRV_MSL_001_NF
     Check HTTP Response Status Code Is    404
 
 
-TP_MEC_MEC011_SRV_MSL_002_OK_01
+TC_MEC_MEC011_SRV_MSL_002_OK_01
     [Documentation]
     ...    Check that the IUT updates the liveness of a MEC service instance 
     ...    when requested by a MEC Application
@@ -49,13 +49,15 @@ TP_MEC_MEC011_SRV_MSL_002_OK_01
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ServiceLivenessUpdate    .json
     ${body}=    Get File    ${file}
+    [Setup]   Create new service   ServiceInfo    ${APP_INSTANCE_ID}
     Update MEC service liveness  ${URL_SERVICE_MEC_LIVENESS}  ${body}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    ServiceLivenessInfo
     Check Response Contains    ${response['body']}   state    ACTIVE
+    [TearDown]   Remove individual service    ${APP_INSTANCE_ID}   ${SERVICE_NAME}
 
 
-TP_MEC_MEC011_SRV_MSL_002_OK_02
+TC_MEC_MEC011_SRV_MSL_002_OK_02
     [Documentation]
     ...    Check that the IUT updates the liveness of a MEC service instance 
     ...    when requested by a MEC Application
@@ -71,7 +73,7 @@ TP_MEC_MEC011_SRV_MSL_002_OK_02
     Check HTTP Response Status Code Is    204
     
 
-TP_MEC_MEC011_SRV_MSL_002_BR
+TC_MEC_MEC011_SRV_MSL_002_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    incorrect parameters were sent by a MEC Application
@@ -88,6 +90,32 @@ TP_MEC_MEC011_SRV_MSL_002_BR
     
 
 *** Keywords ***
+Create new service
+    [Arguments]    ${content}    ${appInstanceId}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    #Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    POST      http://${HOST_APP_SAQ}:${PORT_APP_SAQ}/${apiRoot_APP_SAQ}${apiName_APP_SAQ}/${apiVersion_APP_SAQ}/applications/${appInstanceId}/services    ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+    Set Suite Variable     ${LIVENESS_URI}     ${response['body']['_links']['liveness']['href']}   
+    Set Suite Variable     ${SERVICE_NAME}     ${response['body']['serName']}   
+    
+
+
+Remove individual service
+    [Arguments]    ${appInstanceId}    ${serviceName} 
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Headers    {"Content-Type":"*/*"}
+    DELETE    http://${HOST_APP_SAQ}:${PORT_APP_SAQ}/${apiRoot_APP_SAQ}${apiName_APP_SAQ}/${apiVersion_APP_SAQ}/applications/${appInstanceId}/services/${serviceName}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output} 
+    
+    
 Individual MEC service liveness
     [Arguments]    ${URL_MEC_SERVICE_LIVENESS}
     Set Headers    {"Accept":"application/json"}

@@ -1,129 +1,201 @@
 {
-	"properties": {
-		"associateId": {
-			"description": "0 to N identifiers to bind the event for a specific UE or flow. ",
-			"items": {
-				"properties": {
-					"type": {
-						"description": "Numeric value (0-255) corresponding to specified type of identifier as following:\n0 = reserved.\n1= UE_IPv4_ADDRESS.\n2 = UE_IPV6_ADDRESS.\n3 = NATED_IP_ADDRESS.\n4 = GTP_TEID.",
-						"enum": [
-							"SEE_DESCRIPTION"
-						],
-						"type": "string",
-						"x-etsi-mec-cardinality": "1",
-						"x-etsi-mec-origin-type": "Enum"
-					},
-					"value": {
-						"description": "Value for the identifier.",
-						"type": "string",
-						"x-etsi-mec-cardinality": "1",
-						"x-etsi-mec-origin-type": "String"
-					}
-				},
-				"required": [
-					"type",
-					"value"
-				],
-				"type": "object",
-				"x-etsi-ref": "6.5.4"
-			},
-			"type": "array",
-			"x-etsi-mec-cardinality": "0..N",
-			"x-etsi-mec-origin-type": "AssociateId"
-		},
-		"ecgi": {
-			"properties": {
-				"cellId": {
-					"description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3].",
-					"type": "string"
-				},
-				"plmn": {
-					"properties": {
-						"mcc": {
-							"description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3].",
-							"type": "string",
-							"x-etsi-mec-cardinality": "1",
-							"x-etsi-mec-origin-type": "String"
-						},
-						"mnc": {
-							"description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3].",
-							"type": "string",
-							"x-etsi-mec-cardinality": "1",
-							"x-etsi-mec-origin-type": "String"
-						}
-					},
-					"required": [
-						"mcc",
-						"mnc"
-					],
-					"type": "object",
-					"x-etsi-ref": "6.5.5"
-				}
-			},
-			"required": [
-				"plmn",
-				"cellId"
-			],
-			"type": "object",
-			"x-etsi-ref": "6.5.6"
-		},
-		"erabId": {
-			"description": "The attribute that uniquely identifies a Radio Access bearer for specific UE as defined in ETSI TS 136 413 [i.3].",
-			"type": "integer",
-			"x-etsi-mec-cardinality": "1",
-			"x-etsi-mec-origin-type": "Integer"
-		},
-		"erabQosParameters": {
-			"description": "QoS parameters for the E-RAB as defined below.",
-			"properties": {
-				"qci": {
-					"description": "QoS Class Identifier as defined in ETSI TS 123 401 [i.4].",
-					"type": "integer",
-					"x-etsi-mec-cardinality": "1",
-					"x-etsi-mec-origin-type": "Integer"
-				}
-			},
-			"required": [
-				"qci"
-			],
-			"type": "object",
-			"x-etsi-mec-cardinality": "0..1",
-			"x-etsi-mec-origin-type": "Structure (inlined)"
-		},
-		"notificationType": {
-			"description": "Shall be set to \"RabEstNotification\".",
-			"type": "string",
-			"x-etsi-mec-cardinality": "1",
-			"x-etsi-mec-origin-type": "String"
-		},
-		"tempUeId": {
-			"description": "The temporary identifier allocated for the specific UE as defined below. ",
-			"type": "object",
-			"x-etsi-mec-cardinality": "0..1",
-			"x-etsi-mec-origin-type": "Structure (inlined)"
-		},
-		"timeStamp": {
-			"properties": {
-				"nanoSeconds": {
-					"type": "number"
-				},
-				"seconds": {
-					"type": "number"
-				}
-			},
-			"required": [
-				"seconds",
-				"nanoSeconds"
-			],
-			"type": "object",
-			"x-etsi-ref": "6.5.3"
-		}
-	},
-	"required": [
-		"notificationType",
-		"ecgi",
-		"erabId"
-	],
-	"type": "object",
-	"x-etsi-ref": "6.4.3"
-}
+        "title": "RabEstNotification",
+        "allOf": [
+          {
+            "title": "InlineNotification",
+            "required": [
+              "notificationType"
+            ],
+            "type": "object",
+            "properties": {
+              "notificationType": {
+                "type": "string"
+              }
+            },
+            "discriminator": {
+              "propertyName": "notificationType",
+              "mapping": {
+                "CaReconfNotification": "#/components/schemas/CaReconfNotification",
+                "CellChangeNotification": "#/components/schemas/CellChangeNotification",
+                "MeasRepUeNotification": "#/components/schemas/MeasRepUeNotification",
+                "MeasTaNotification": "#/components/schemas/MeasTaNotification",
+                "NrMeasRepUeNotification": "#/components/schemas/NrMeasRepUeNotification",
+                "RabEstNotification": "#/components/schemas/RabEstNotification",
+                "RabModNotification": "#/components/schemas/RabModNotification",
+                "RabRelNotification": "#/components/schemas/RabRelNotification",
+                "S1BearerNotification": "#/components/schemas/S1BearerNotification",
+                "ExpiryNotification": "#/components/schemas/ExpiryNotification",
+                "TestNotification": "#/components/schemas/TestNotification"
+              }
+            }
+          },
+          {
+            "required": [
+              "ecgi",
+              "erabId",
+              "_links"
+            ],
+            "type": "object",
+            "properties": {
+              "associateId": {
+                "type": "array",
+                "items": {
+                  "title": "AssociateId",
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "title": "Type",
+                      "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4
+                      ],
+                      "type": "integer",
+                      "description": "Numeric value (0-255) corresponding to specified type of identifier as following: <p>0 = reserved. <p>1 = UE_IPv4_ADDRESS. <p>2 = UE_IPV6_ADDRESS. <p>3 = NATED_IP_ADDRESS. <p>4 = GTP_TEID.",
+                      "examples": [
+                        0
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Value for the identifier."
+                    }
+                  }
+                },
+                "description": "0 to N identifiers to bind the event for a specific UE or flow."
+              },
+              "ecgi": {
+                "title": "Ecgi",
+                "required": [
+                  "cellId",
+                  "plmn"
+                ],
+                "type": "object",
+                "properties": {
+                  "cellId": {
+                    "type": "string",
+                    "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3]."
+                  },
+                  "plmn": {
+                    "title": "Plmn",
+                    "required": [
+                      "mcc",
+                      "mnc"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "mcc": {
+                        "type": "string",
+                        "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                      },
+                      "mnc": {
+                        "type": "string",
+                        "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                      }
+                    }
+                  }
+                }
+              },
+              "erabId": {
+                "type": "integer",
+                "description": "The attribute that uniquely identifies a Radio Access bearer for specific UE as defined in ETSI TS 136 413 [i.3].",
+                "contentEncoding": "int32"
+              },
+              "erabQosParameters": {
+                "title": "ErabQosParameters",
+                "required": [
+                  "qci"
+                ],
+                "type": "object",
+                "properties": {
+                  "qci": {
+                    "type": "integer",
+                    "description": "QoS Class Identifier as defined in ETSI TS 123 401 [i.4].",
+                    "contentEncoding": "int32"
+                  },
+                  "qosInformation": {
+                    "title": "QosInformation",
+                    "required": [
+                      "erabGbrDl",
+                      "erabGbrUl",
+                      "erabMbrDl",
+                      "erabMbrUl"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "erabGbrDl": {
+                        "type": "integer",
+                        "description": "This attribute indicates the guaranteed downlink E-RAB Bit Rate as defined in ETSI TS 123 401 [i.4] for this bearer.",
+                        "contentEncoding": "int32"
+                      },
+                      "erabGbrUl": {
+                        "type": "integer",
+                        "description": "This attribute indicates the guaranteed uplink E-RAB Bit Rate as defined in ETSI TS 123 401 [i.4] for this bearer.",
+                        "contentEncoding": "int32"
+                      },
+                      "erabMbrDl": {
+                        "type": "integer",
+                        "description": "This attribute indicates the maximum downlink E-RAB Bit Rate as defined in ETSI TS 123 401 [i.4] for this bearer.",
+                        "contentEncoding": "int32"
+                      },
+                      "erabMbrUl": {
+                        "type": "integer",
+                        "description": "This attribute indicates the maximum uplink E-RAB Bit Rate as defined in ETSI TS 123 401 [i.4] for this bearer.",
+                        "contentEncoding": "int32"
+                      }
+                    },
+                    "description": "The QoS information for the E-RAB."
+                  }
+                },
+                "description": "QoS parameters for the E-RAB as defined below."
+              },
+              "tempUeId": {
+                "title": "TempUeId",
+                "required": [
+                  "mmec",
+                  "mtmsi"
+                ],
+                "type": "object",
+                "properties": {
+                  "mmec": {
+                    "type": "string",
+                    "description": "MMEC as defined in ETSI TS 136 413 [i.3]."
+                  },
+                  "mtmsi": {
+                    "type": "string",
+                    "description": "M-TMSI as defined in ETSI TS 136 413 [i.3]."
+                  }
+                },
+                "description": "The temporary identifier allocated for the specific UE as defined below."
+              },
+              "timeStamp": {
+                "_links": null,
+                "description": "Links to resources related to this notification.",
+                "required": [
+                  "subscription"
+                ],
+                "properties": {
+                  "subscription": {
+                    "description": "A link to the related subscription.",
+                    "title": "LinkType",
+                    "required": [
+                      "href"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "type": "string",
+                        "description": "URI referring to a resource"
+                      }
+                    }
+                  }
+                },
+                "title": "TimeStamp",
+                "type": "object"
+              }
+            }
+          }
+        ]
+      }

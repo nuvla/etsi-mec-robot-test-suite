@@ -1,0 +1,16 @@
+{
+    "notificationType": "MeasTaNotification",
+    "ecgi": {
+      "cellId": "cellId",
+      "plmn": {
+        "mcc": "999",
+        "mnc": "99"
+      }
+    },
+    "timingAdvance": 1234567,
+      "_links": {
+      "subscription": {
+        "href": "somesuburl/subscriptions/subscriptionId"
+      }
+    }
+  }
