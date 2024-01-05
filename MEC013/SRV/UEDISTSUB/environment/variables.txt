@@ -1,18 +1,19 @@
 *** Variables ***
 # Generic variables
 ${SCHEMA}                   http
-${HOST}                     10.192.2.172
+${HOST}                     127.0.0.1
 ${PORT}                     8081
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
 ${apiName}        location
-${apiVersion}     v2
+${apiVersion}     v3
 
-# Specific variables
-${UEDISTSUB_CLIENT_ID}                0123
-${APP_SRVSUB_NOTIF_CALLBACK_URI}      "callbackReference": {"callbackData": "1234","notifyURL": "http://application.example.com/notifications/distance_notifications/123456"}
-${UEDISTSUB_MONITORED_IP_ADDRESS}     ["acr:10.0.0.1", "acr:10.0.0.2"]
-${UEDISTSUB_IP_ADDRESS}               acr:10.0.0.3
-${SUBSCRIPTION_ID}                    e0deee2b-6e50-4f33-ab09-8bf0585025d3
-${NON_EXISTENT_SUBSCRIPTION_ID}       NON_EXISTENT_SUBSCRIPTION_ID
+##Notification Server variables
+${NOTIFICATION_SERVER_IP}      127.0.0.1
+${NOTIFICATION_SERVER_PORT}      8888
+${NOTIFICATION_SERVER_HTTP_METHOD}      POST
+${NOTIFICATION_SERVER_URI}      /callback_url
+${NOTIFICATION_SERVER_TIMEOUT}      5
+${SUB_ID}
+${NON_EXISTING_SUBSCRIPTION_ID}       NON_EXISTING_SUBSCRIPTION_ID

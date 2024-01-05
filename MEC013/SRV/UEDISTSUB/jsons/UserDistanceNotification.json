@@ -1,0 +1,24 @@
+{
+    "notificationType": "UserDistanceNotification",
+    "_links": {
+        "subscription": {
+            "href": "https://sDZdgInDNnbFYppR.rt/aa"
+        }
+    },
+    "distanceEvent": "AllWithinDistance",
+    "monitoredUsers": {
+        "resourceURL": "http://meAppServer.example.com/location/v3/queries/users",
+        "user": [
+            {
+                "address": "acr:10.0.0.1",
+                "accessPointId": "001010000000000000000000000000001",
+                "zoneId": "zone01",
+                "resourceURL": "sunt",
+                "timestamp": {
+                    "nanoSeconds": 22688093,
+                    "seconds": 0
+                }
+            }
+        ]
+    }
+}
