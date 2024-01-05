@@ -23,7 +23,9 @@ TC_MEC_MEC016_MEO_UEAPPCTX_001_OK
     Check HTTP Response Body Json Schema Is   AppContext
     Check HTTP Response Header Contains    Location
     Should Be Equal As Strings   ${response['body']['appInfo']['appName']}    MyNewWornderfulApp
-    Set Suite Variable    ${contextId}    ${response['body']['contextId']}
+    Set Suite Variable    ${contextId_tbd}    ${response['body']['contextId']}
+    
+    [Teardown]    Delete application context    ${contextId_tbd}
 
 
 TC_MEC_MEC016_MEO_UEAPPCTX_001_BR
@@ -55,9 +57,16 @@ TC_MEC_MEC016_MEO_UEAPPCTX_002_OK
     ...  Reference https://forge.etsi.org/gitlab/mec/gs016-ue-app-api/blob/master/UEAppInterfaceApi.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
+
+    [Setup]    Create application context    AppContext.json
+    Set Suite Variable    ${contextId_tbu}    ${response['body']['contextId']}  
+
     # Test Body
-    Update application context    ${context-id}    UpdateAppContext.json
+    Update application context    ${contextId_tbu}    UpdateAppContext.json
     Check HTTP Response Status Code Is    204
+
+    [Teardown]    Delete application context    ${contextId_tbu}
+
 
 TC_MEC_MEC016_MEO_UEAPPCTX_002_BR
     [Documentation]   
@@ -66,9 +75,15 @@ TC_MEC_MEC016_MEO_UEAPPCTX_002_BR
     ...  Reference https://forge.etsi.org/gitlab/mec/gs016-ue-app-api/blob/master/UEAppInterfaceApi.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
+
+    [Setup]    Create application context    AppContext.json
+    Set Suite Variable    ${contextId_tbu}    ${response['body']['contextId']}
+
     Update application context    ${context-id}    UpdateAppContext_BR.json
     Check HTTP Response Status Code Is    400
 
+    [Teardown]    Delete application context    ${contextId_tbu}
+    
 
 TC_MEC_MEC016_MEO_UEAPPCTX_002_NF
     [Documentation]   
@@ -78,6 +93,7 @@ TC_MEC_MEC016_MEO_UEAPPCTX_002_NF
     # Preamble
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
+
     Update application context using wrong endpoint    ${context-id}    UpdateAppContext.json
     Check HTTP Response Status Code Is    404
 
