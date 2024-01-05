@@ -4,6 +4,9 @@
       "macId": "123"
     }
   ],
+  "staIdentity": {
+    "staId": "123"
+  },
   "measurementId": "123",
   "measurementInfo": {
     "measurementDuration": 50

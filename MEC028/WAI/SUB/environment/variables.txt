@@ -4,8 +4,8 @@ ${apiName}        wai
 ${apiVersion}     v2
 
 ${MEC-APP_SCHEMA}                   http
-${MEC-APP_HOST}                     127.0.0.1
-${MEC-APP_PORT}                     8082
+${MEC-APP_HOST}                     mockoon
+${MEC-APP_PORT}                     3001
 
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
  
@@ -14,5 +14,6 @@ ${SUB_TYPE}          AssocStaSubscription
 ${SUB_FILTER}          assoc_sta
 ${INVALID_SUB_FILTER}          assocStaSub
 
+${SUB_ID}        123
 ${HREF}          /wai/v2/subscriptions/1
 ${CALLBACK_URI}          http://callback.uri/1

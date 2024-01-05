@@ -90,7 +90,7 @@ TC_MEC_MEC028_SRV_WAI_010_OK
 TC_MEC_MEC028_SRV_WAI_010_NF
     [Documentation] 
     ...  Check that the IUT responds with an error when an not existing subscription cannot be deleted"
-    ...	 Reference "ETSI GS MEC 028 2.2.1, clause 7.6.3.5
+    ...	 Reference "ETSI GS MEC 028 2.3.1, clause 7.6.3.5
     
     [Setup]  Remove Subscription Info Using SubId    ${NOT_EXISTING_SUB_ID}
 
@@ -146,7 +146,6 @@ Create New Subscription Info
     ${file}=    Catenate    SEPARATOR=    jsons/    CreateAssocStaSubscription    .json
     ${body}=    Get File    ${file}
     ${json_data}=    Evaluate    json.loads('''${body}''')    json
-    Log    Original JSON: ${json_data}
     ${new_href}=    Set Variable    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}/${apiRoot}/${apiName}/${apiVersion}/subscriptions/${SUB_ID}
     Set To Dictionary    ${json_data["_links"]["self"]}    href=${new_href}
     ${modified_json_string}=    Evaluate    json.dumps(${json_data})

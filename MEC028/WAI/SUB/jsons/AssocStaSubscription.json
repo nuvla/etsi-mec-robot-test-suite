@@ -1,7 +1,19 @@
 {
-	"apId": {
-		"macId": "macId01"
+	"_links": {
+	  "self": {
+		"href": "/wai/v2/subscriptions/1"
+	  }
 	},
-	"callbackReference": "http://callback.uri/1",
+	"apId": {
+	  "ipAddress": ["192.168.1.1", "2001:db8::1"],
+	  "macId": "00:1A:2B:3C:4D:5E",
+	  "ssid": ["Network1", "Network2"]
+	},
+	"callbackReference": "http://example.com/callback",
+	"expiryDeadline": {
+	  "nanoSeconds": 500000000,
+	  "seconds": 1641234567
+	},
 	"subscriptionType": "AssocStaSubscription"
-}
+  }
+  
