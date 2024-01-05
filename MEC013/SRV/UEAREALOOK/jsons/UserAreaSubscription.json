@@ -1,0 +1,17 @@
+{
+    "subscriptionType": "UserAreaSubscription",
+    "areaDefine": {
+        "shape": 1,
+        "points": [
+            {
+                "latitide": 50,
+                "longitude": 52
+            }
+        ],
+        "radius": 100
+    },
+    "addressList": [
+        "http://someuri.com/123"
+    ],
+    "trackingAccuracy": 99
+}
