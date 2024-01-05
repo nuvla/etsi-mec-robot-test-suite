@@ -1,0 +1,168 @@
+{
+          "_links": {
+            "description": "Hyperlink related to the resource. This shall be only included in the HTTP responses and in HTTP PUT requests.",
+            "properties": {
+              "self": {
+                "properties": {
+                  "href": {
+                    "description": "URI referring to a resource.",
+                    "format": "uri",
+                    "type": "string",
+                    "x-etsi-mec-cardinality": "1",
+                    "x-etsi-mec-origin-type": "Uri"
+                  }
+                },
+                "required": [
+                  "href"
+                ],
+                "type": "object",
+                "x-etsi-ref": "6.7.2"
+              }
+            },
+            "required": [
+              "self"
+            ],
+            "type": "object",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "Structure (inlined)"
+          },
+          "callbackReference": {
+            "description": "URI exposed by the client on which to receive notifications via HTTP. See note 1.",
+            "format": "uri",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "Uri"
+          },
+          "checkImmediate": {
+            "type": "boolean"
+          },
+          "clientCorrelator": {
+            "description": "A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server. See note 2.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "criteria": {
+            "description": "An enumeration, defining the distance criteria between devices.",
+            "enum": [
+              "AllWithinDistance",
+              "AnyWithinDistance",
+              "AllBeyondDistance",
+              "AnyBeyondDistance"
+            ],
+            "type": "string"
+          },
+          "distance": {
+            "description": "Distance between users that shall be monitored. The unit is meter.",
+            "format": "float",
+            "type": "number",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "Float"
+          },
+          "expiryDeadline": {
+            "properties": {
+              "nanoSeconds": {
+                "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                "format": "uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              },
+              "seconds": {
+                "description": "The seconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                "format": "uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              }
+            },
+            "required": [
+              "seconds",
+              "nanoSeconds"
+            ],
+            "type": "object",
+            "x-etsi-ref": "6.5.2"
+          },
+          "monitoredAddress": {
+            "description": "Contains addresses of users to monitor (e.g., ‘sip’ URI, ‘tel’ URI, ‘acr’ URI). Reference to a group could be provided here if supported by implementation.\nIf the ReferenceAddress is specified, then the distance between each monitored user and reference user(s) will be monitored.\nIf the ReferenceAddress is not present, then the distance between each pair of the monitored users will be monitored. Note that in that case there shall be at least two addresses specified here.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "x-etsi-mec-cardinality": "1..N",
+            "x-etsi-mec-origin-type": "Array(Uri)"
+          },
+          "referenceAddress": {
+            "description": "If specified, indicates address of each user that will be used as reference users from which the distances towards monitored users indicated in the Addresses will be monitored (e.g., ‘sip’ URI, ‘tel’ URI, ‘acr’ URI). Reference to a group could be provided here if supported by implementation.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 0,
+            "type": "array",
+            "x-etsi-mec-cardinality": "0..N",
+            "x-etsi-mec-origin-type": "Array(Uri)"
+          },
+          "reportingCtrl": {
+            "properties": {
+              "maximumCount": {
+                "description": "Maximum number of notifications. For no maximum, either do not include this element or specify a value of zero. Default value is 0.",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "UnsignedInt"
+              },
+              "maximumFrequency": {
+                "description": "Maximum frequency (in seconds) of notifications per subscription.",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "UnsignedInt"
+              },
+              "minimumInterval": {
+                "description": "Minimum interval between reports in case frequently reporting. Unit is second.",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "UnsignedInt"
+              }
+            },
+            "type": "object",
+            "x-etsi-ref": "6.5.6"
+          },
+          "requestTestNotification": {
+            "description": "Set to TRUE by the service consumer to request a test notification via HTTP on the callbackReference URI, as specified in ETSI GS MEC 009 [4], clause 6.12a.",
+            "type": "boolean",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "Boolean"
+          },
+          "subscriptionType": {
+            "description": "Shall be set to \"UserDistanceSubscription\".",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "trackingAccuracy": {
+            "description": "Number of meters of acceptable error in tracking distance.",
+            "format": "float",
+            "type": "number",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "Float"
+          },
+          "websockNotifConfig": {
+            "properties": {
+              "requestWebsocketUri": {
+                "description": "Set to true by the service consumer to indicate that Websocket delivery is requested.",
+                "type": "boolean",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "Boolean"
+              },
+              "websocketUri": {
+                "description": "Set by location server to indicate to the service consumer the Websocket URI to be used for delivering notifications.",
+                "format": "uri",
+                "type": "string",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "Uri"
+              }
+            },
+            "type": "object",
+            "x-etsi-ref": "6.5.4"
+          }
+        }

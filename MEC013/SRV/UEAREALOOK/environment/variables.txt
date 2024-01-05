@@ -9,8 +9,6 @@ ${apiRoot}
 ${apiName}        location
 ${apiVersion}     v3
 
-# Specific variables
-${ZONE_ID}                    5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
-${NON_EXISTENT_ZONE_ID}       NON_EXISTENT_ZONE_ID
-${AP_ID}                      ap01
-${NON_EXISTENT_AP_ID}         NON_EXISTENT_AP_ID
+${SUB_TYPE_FILTER}                 event
+${SUB_TYPE_FILTER_ERROR}           dummy
+${NON_EXISTING_SUBSCRIPTION_ID}    NON_EXISTING_SUBSCRIPTION_ID

@@ -1,0 +1,12 @@
+{
+    "notificationType": "UserAreaNotification",
+    "callbackReference":"127.0.0.1:8888/callback_uri",
+    "address": "http://someuri.com/123",
+    "civicInfo": { 
+    	"country": "A1"
+    },
+    "userLocationEvent": "ENTERING_AREA_EVENT",
+    "_links": {
+        "subscription": "someuri"
+    }
+}
