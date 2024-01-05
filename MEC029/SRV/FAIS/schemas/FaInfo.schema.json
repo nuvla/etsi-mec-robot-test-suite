@@ -1,0 +1,133 @@
+{
+    "type": "array",
+    "items": {
+        "properties": {
+            "connectivityInfo": {
+                "type": "array",
+                "items": {
+                    "description": "The per connectivity domain FAI as defined below.",
+                    "properties": {
+                        "dsbw": {
+                            "description": "The bandwidth (in Mbps) from the network towards the customer site.",
+                            "type": "integer",
+                            "x-etsi-mec-cardinality": "0..1",
+                            "x-etsi-mec-origin-type": "Integer"
+                        },
+                        "interfaceType": {
+                            "description": "The physical interface used for the end customer site:1   =   100BASE-TX.2   =   1000BASE-TX.3   =   1000BASE-LX.4   =   1000BASELX10.5   =   1000BASEBX10. 6   =   1000BASE-LH.7   =   1000Base-ZX. 8   =   ADSL-RJ11.9   =   VDSL-RJ11.10 =   GPON.",
+                            "enum": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10
+                            ],
+                            "type": "integer",
+                            "x-etsi-mec-cardinality": "1",
+                            "x-etsi-mec-origin-type": "Enum"
+                        },
+                        "lastMileTech": {
+                            "description": "An informative field identifying the last mile access technology used.The valid values are:1 = ADSL.2 = VDSL.3 = GPON. 4 = XGPON.5 = NGPON2. 6 = XGSPON. 7 = GFAST.8 = P2PEthernet.",
+                            "enum": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8
+                            ],
+                            "type": "integer",
+                            "x-etsi-mec-cardinality": "1",
+                            "x-etsi-mec-origin-type": "Enum"
+                        },
+                        "latency": {
+                            "description": "Maximum baseline latency (in ms) between customer site and service edge node.",
+                            "type": "integer",
+                            "x-etsi-mec-cardinality": "0..1",
+                            "x-etsi-mec-origin-type": "Integer"
+                        },
+                        "usbw": {
+                            "description": "The bandwidth (in Mbps) from the customer site towards the network.",
+                            "type": "integer",
+                            "x-etsi-mec-cardinality": "0..1",
+                            "x-etsi-mec-origin-type": "Integer"
+                        }
+                    },
+                    "required": [
+                        "lastMileTech",
+                        "interfaceType"
+                    ]
+                }
+            },
+            "customerPremisesInfo": {
+                "description": "The physical location of a customer site.",
+                "items": {
+                    "properties": {
+                        "latitude": {
+                            "description": "Latitude (DATUM=WGS84) -90 to 90 in decimal degree format DDD.ddd",
+                            "format": "Float",
+                            "type": "number",
+                            "x-etsi-mec-cardinality": "0..1",
+                            "x-etsi-mec-origin-type": "Float"
+                        },
+                        "longitude": {
+                            "description": "Longitude (DATUM=WGS84) -180 to 180 in decimal degree format DDD.ddd",
+                            "format": "Float",
+                            "type": "number",
+                            "x-etsi-mec-cardinality": "0..1",
+                            "x-etsi-mec-origin-type": "Float"
+                        },
+                        "postalCode": {
+                            "description": "Postal code for the location",
+                            "type": "string",
+                            "x-etsi-mec-cardinality": "0..1",
+                            "x-etsi-mec-origin-type": "String"
+                        }
+                    },
+                    "type": "object",
+                    "x-etsi-ref": "6.5.3"
+                },
+                "minItems": 1,
+                "type": "array",
+                "x-etsi-mec-cardinality": "1..N",
+                "x-etsi-mec-origin-type": "CpInfo"
+            },
+            "timeStamp": {
+                "properties": {
+                    "nanoSeconds": {
+                        "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                        "format": "Uint32",
+                        "type": "integer",
+                        "x-etsi-mec-cardinality": "1",
+                        "x-etsi-mec-origin-type": "Uint32"
+                    },
+                    "seconds": {
+                        "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                        "format": "Uint32",
+                        "type": "integer",
+                        "x-etsi-mec-cardinality": "1",
+                        "x-etsi-mec-origin-type": "Uint32"
+                    }
+                },
+                "required": [
+                    "seconds",
+                    "nanoSeconds"
+                ],
+                "type": "object",
+                "x-etsi-ref": "6.5.2"
+            }
+        },
+        "type": "object",
+        "required": [
+            "customerPremisesInfo"
+        ],
+        "x-etsi-ref": "6.2.2"
+    }
+}
