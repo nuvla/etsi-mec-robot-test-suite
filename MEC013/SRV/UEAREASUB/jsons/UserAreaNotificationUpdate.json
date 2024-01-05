@@ -1,0 +1,22 @@
+{
+    "notificationType": "UserAreaNotification",
+    "callbackReference": "127.0.0.1:8888/callback_uri",
+    "addressList": ["acr:10.0.0.1"],
+    "civicInfo": {
+        "country": "A1"
+    },
+    "userLocationEvent": "ENTERING_AREA_EVENT",
+    "_links": {
+        "subscription": "someuri"
+    },
+    "areaDefine": {
+        "shape": 1,
+        "points": [
+            {
+                "latitude": -80.86302,
+                "longitude": 41.277306
+            }
+        ],
+        "radius": 500
+    }
+}

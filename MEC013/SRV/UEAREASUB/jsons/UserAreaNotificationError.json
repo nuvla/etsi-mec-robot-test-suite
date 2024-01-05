@@ -1,0 +1,11 @@
+{
+    "notificationType": "UserAreaNotification",
+    "address": "http://someuri.com/123",
+    "civicInfo": { 
+    	"country": "A1"
+    },
+    "userLocationEvent": "ENTERING_AREA_EVENT",
+    "_links": {
+        "subscription": "someuri"
+    }
+}
