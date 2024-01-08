@@ -31,6 +31,7 @@ TC_MEC_MEC028_SRV_WAI_008_OK
 
     [TearDown]  Remove Subscription Info    ${Location}  
    
+
 TC_MEC_MEC028_SRV_WAI_008_NF
     [Documentation] 
     ...  Check that the IUT responds with an error when a request for existing subscription with incorrect parameters is sent"
@@ -43,7 +44,7 @@ TC_MEC_MEC028_SRV_WAI_008_NF
     Retrieve existing subscription information  ${NOT_EXISTING_SUB_ID}
     Check HTTP Response Status Code Is    404 
 
-*** Test Cases ***
+
 TC_MEC_MEC028_SRV_WAI_009_OK
     [Documentation] 
     ...  Check that the IUT responds with a Notification Subscription when it is modified"
