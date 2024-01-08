@@ -172,9 +172,15 @@ TC_MEC_MEC029_SRV_FAIS_005_OK
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.7.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+
+    [Setup]    Create a new subscription    OnuAlarmSubscription
+    Set Suite Variable    ${subscriptionUrl}    ${response['body']['_links']['self']['href']}  
+
     Get list of subscriptions
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    SubscriptionLinkList
+
+    [Teardown]    Remove subscription using url    ${subscriptionUrl}    
 
 
 TC_MEC_MEC029_SRV_FAIS_005_BR
@@ -197,6 +203,7 @@ TC_MEC_MEC029_SRV_FAIS_005_NF
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.7.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+
     Get list of subscriptions using query parameters    subscriptionType    ${NON_EXISTENT_SUBSCRIPTION_TYPE}
     Check HTTP Response Status Code Is    404
 
@@ -235,10 +242,16 @@ TC_MEC_MEC029_SRV_FAIS_007_OK
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+
+    [Setup]    Create a new subscription    OnuAlarmSubscription
+    Set Suite Variable    ${subscriptionUrl}    ${response['body']['_links']['self']['href']} 
+
     Get an individual subscription     ${ONU_ALARM_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    OnuAlarmSubscription
     Should Be Equal As Strings  ${response['body']['subscriptionType']}    OnuAlarmSubscription
+    
+    [Teardown]    Remove subscription using url    ${subscriptionUrl} 
 
 
 TC_MEC_MEC029_SRV_FAIS_007_NF
@@ -261,10 +274,16 @@ TC_MEC_MEC029_SRV_FAIS_008_OK
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+
+    [Setup]    Create a new subscription    OnuAlarmSubscription
+    Set Suite Variable    ${subscriptionUrl}    ${response['body']['_links']['self']['href']}
+
     Update subscription    ${ONU_ALARM_SUBSCRIPTION_ID}    OnuAlarmSubscriptionUpdate
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    OnuAlarmSubscription
     Should Be Equal As Strings  ${response['body']['subscriptionType']}    OnuAlarmSubscription
+
+    [Teardown]    Remove subscription using url    ${subscriptionUrl} 
 
 
 TC_MEC_MEC029_SRV_FAIS_008_BR
@@ -287,6 +306,9 @@ TC_MEC_MEC029_SRV_FAIS_008_NF
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+
+    [Setup]    Remove subscription    ${NON_ESISTENT_SUBSCRIPTION_ID}
+
     Update subscription    ${NON_ESISTENT_SUBSCRIPTION_ID}    OnuAlarmSubscriptionUpdate
     Check HTTP Response Status Code Is    404
 
@@ -311,6 +333,10 @@ TC_MEC_MEC029_SRV_FAIS_009_OK
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.5
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    
+    [Setup]    Create a new subscription    OnuAlarmSubscription
+    Set Suite Variable    ${subscriptionUrl}    ${response['body']['_links']['self']['href']}
+
     Remove subscription    ${ONU_ALARM_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    204
 
@@ -479,5 +505,12 @@ Remove subscription
     [Arguments]    ${subscriptionId}
     Set Headers    {"Authorization":"${TOKEN}"}
     Delete    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/${subscriptionId}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Remove subscription using url
+    [Arguments]    ${url}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Delete    ${url}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}

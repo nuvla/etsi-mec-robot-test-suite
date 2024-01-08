@@ -18,7 +18,7 @@
     },
     "_links": {
       "self": {
-        "href": "https://example.com/resource/123"
+        "href": "https://example.com/resource/6cd12d29-30c7-4c8c-bf51-846daa51bab0"
       }
     },
     "callbackReference": "https://client/callback",
