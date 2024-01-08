@@ -1,0 +1,53 @@
+{
+    "V2xMsgDistributionServerInfo": {
+        "locationInfo": [
+            {
+                "ecgi": {
+                    "cellId": {
+                        "cellId": "01010101010101010101010101"
+                    },
+                    "plmn": {
+                        "mcc": "123",
+                        "mnc": "456"
+                    }
+                },
+                "geoArea": {
+                    "latitude": 37.7749,
+                    "longitude": -122.4194
+                }
+            },
+            {
+                "ecgi": {
+                    "cellId": {
+                        "cellId": "02020202020202020202020202"
+                    },
+                    "plmn": {
+                        "mcc": "789",
+                        "mnc": "012"
+                    }
+                }
+            }
+        ],
+        "v2xMsgDistributionServer": [
+            {
+                "infoProtocol": {
+                    "msgProtocol": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "protImplementation": "Java"
+                }
+            },
+            {
+                "infoProtocol": {
+                    "msgProtocol": [
+                        3,
+                        4
+                    ],
+                    "protImplementation": "Python"
+                }
+            }
+        ]
+    }
+}
