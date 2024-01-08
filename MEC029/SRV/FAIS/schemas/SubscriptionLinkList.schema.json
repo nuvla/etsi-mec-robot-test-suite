@@ -1,0 +1,63 @@
+{
+    "properties": {
+      "_links": {
+        "description": "Hyperlinks related to the resource.",
+        "type": "object",
+        "required": [
+          "self"
+        ],
+        "properties": {
+          "self": {
+            "description": "'URI referring to a resource'",
+            "type": "object",
+            "required": [
+              "href"
+            ],
+            "properties": {
+              "href": {
+                "description": "The URI referring to the subscription.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "subscriptions": {
+            "description": "The service consumer's subscriptions.",
+            "type": "array",
+            "items": {
+              "properties": {
+                "href": {
+                  "description": "The URI referring to the subscription.",
+                  "format": "uri",
+                  "type": "string",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "URI"
+                },
+                "subscriptionType": {
+                  "description": "Type of the subscription. The string shall be set according to the \"subscriptionType\" attribute of the associated subscription data type defined in clauses 6.3.2, 6.3.3, 6.3.4 and 6.3.6 \"OnuAlarmSubscription\" \"DevInfoSubscription\" \"CmConnSubscription\" \"AniAlarmSubscription\"",
+                  "enum": [
+                    "OnuAlarmSubscription",
+                    "DevInfoSubscription",
+                    "CmConnSubscription",
+                    "AniAlarmSubscription\""
+                  ],
+                  "type": "string",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Enum"
+                }
+              },
+              "required": [
+                "href",
+                "subscriptionType"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "required": [
+      "_links"
+    ],
+    "type": "object",
+    "x-etsi-ref": "6.3.5"
+  }

@@ -11,7 +11,7 @@ Library     REST    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}    ssl_v
 
 
 *** Test Cases ***
-TP_MEC_MEC016_MEO_UEAPPCTX_001_OK
+TC_MEC_MEC016_MEO_UEAPPCTX_001_OK
     [Documentation] 
     ...  Check that the IUT acknowledges the creation of the application context when requested by an UE Application
     ...  Reference ETSI GS MEC 016 v2.2.1, clause 7.4.3.4
@@ -23,21 +23,23 @@ TP_MEC_MEC016_MEO_UEAPPCTX_001_OK
     Check HTTP Response Body Json Schema Is   AppContext
     Check HTTP Response Header Contains    Location
     Should Be Equal As Strings   ${response['body']['appInfo']['appName']}    MyNewWornderfulApp
-    Set Suite Variable    ${contextId}    ${response['body']['contextId']}
+    Set Suite Variable    ${contextId_tbd}    ${response['body']['contextId']}
+    
+    [Teardown]    Delete application context    ${contextId_tbd}
 
 
-TP_MEC_MEC016_MEO_UEAPPCTX_001_BR
+TC_MEC_MEC016_MEO_UEAPPCTX_001_BR
     [Documentation]   
-    ...  Check that the IUT responds with an error when a request with incorrect URL is sent by a MEC Application
+    ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  Reference ETSI GS MEC 016 v2.2.1, clause 7.4.3.4
     ...  Reference https://forge.etsi.org/gitlab/mec/gs016-ue-app-api/blob/master/UEAppInterfaceApi.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
-    Create application context    AppContext_BR.json
+    Create application context     AppContext_BR.json
     Check HTTP Response Status Code Is    400
     
 
-TP_MEC_MEC016_MEO_UEAPPCTX_001_NF
+TC_MEC_MEC016_MEO_UEAPPCTX_001_NF
     [Documentation]   
     ...  Check that the IUT responds with an error when a request with incorrect URL is sent by a MEC Application
     ...  Reference ETSI GS MEC 016 v2.2.1, clause 7.4.3.4
@@ -48,29 +50,42 @@ TP_MEC_MEC016_MEO_UEAPPCTX_001_NF
     Check HTTP Response Status Code Is    404
     
 
-TP_MEC_MEC016_MEO_UEAPPCTX_002_OK
+TC_MEC_MEC016_MEO_UEAPPCTX_002_OK
     [Documentation]   
     ...  Check that the IUT updates the application callback reference when commanded by an UE Application
     ...  Reference ETSI GS MEC 016 v2.2.1, clause 7.5.3.2
     ...  Reference https://forge.etsi.org/gitlab/mec/gs016-ue-app-api/blob/master/UEAppInterfaceApi.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
+
+    [Setup]    Create application context    AppContext.json
+    Set Suite Variable    ${contextId_tbu}    ${response['body']['contextId']}  
+
     # Test Body
-    Update application context        ${contextId}    UpdateAppContext.json
+    Update application context    ${contextId_tbu}    UpdateAppContext.json
     Check HTTP Response Status Code Is    204
 
-TP_MEC_MEC016_MEO_UEAPPCTX_002_BR
+    [Teardown]    Delete application context    ${contextId_tbu}
+
+
+TC_MEC_MEC016_MEO_UEAPPCTX_002_BR
     [Documentation]   
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  Reference ETSI GS MEC 016 v2.2.1, clause 7.5.3.2
     ...  Reference https://forge.etsi.org/gitlab/mec/gs016-ue-app-api/blob/master/UEAppInterfaceApi.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
-    Update application context    ${contextId}    UpdateAppContext_BR.json
+
+    [Setup]    Create application context    AppContext.json
+    Set Suite Variable    ${contextId_tbu}    ${response['body']['contextId']}
+
+    Update application context    ${context-id}    UpdateAppContext_BR.json
     Check HTTP Response Status Code Is    400
 
+    [Teardown]    Delete application context    ${contextId_tbu}
+    
 
-TP_MEC_MEC016_MEO_UEAPPCTX_002_NF
+TC_MEC_MEC016_MEO_UEAPPCTX_002_NF
     [Documentation]   
     ...  Check that the IUT responds with an error when a request for an unknown URI is sent by a MEC Application
     ...  Reference ETSI GS MEC 016 2.2.1, clause 7.5.3.2
@@ -78,11 +93,12 @@ TP_MEC_MEC016_MEO_UEAPPCTX_002_NF
     # Preamble
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
-    Update application context using wrong endpoint    ${contextId}    UpdateAppContext.json
+
+    Update application context using wrong endpoint    ${context-id}    UpdateAppContext.json
     Check HTTP Response Status Code Is    404
 
 
-TP_MEC_MEC016_MEO_UEAPPCTX_003_OK
+TC_MEC_MEC016_MEO_UEAPPCTX_003_OK
     [Documentation]  
     ...  Check that the IUT deletes the application context when commanded by an UE Application
     ...  Reference ETSI GS MEC 016 2.2.1, clause 7.5.3.5
@@ -90,11 +106,11 @@ TP_MEC_MEC016_MEO_UEAPPCTX_003_OK
     # Preamble
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
-    Delete application context    ${contextId}
+    Delete application context    ${context-id}
     Check HTTP Response Status Code Is    204
 
 
-TP_MEC_MEC016_MEO_UEAPPCTX_003_NF
+TC_MEC_MEC016_MEO_UEAPPCTX_003_NF
     [Documentation]  
     ...  Check that the IUT deletes the application context when commanded by an UE Application
     ...  Reference ETSI GS MEC 016 2.2.1, clause 7.5.3.5

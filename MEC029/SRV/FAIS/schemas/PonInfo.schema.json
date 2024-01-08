@@ -1,0 +1,130 @@
+{
+    "type": "array",
+    "items": {
+      "properties": {
+        "timeStamp": {
+          "properties": {
+            "nanoSeconds": {
+              "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+              "format": "Uint32",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Uint32"
+            },
+            "seconds": {
+              "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+              "format": "Uint32",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Uint32"
+            }
+          },
+          "required": [
+            "seconds",
+            "nanoSeconds"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.5.2"
+        },
+        "customerPremisesInfo": {
+          "description": "The physical location of a customer site.",
+          "items": {
+            "properties": {
+              "latitude": {
+                "description": "Latitude (DATUM=WGS84) -90 to 90 in decimal degree format DDD.ddd",
+                "format": "Float",
+                "type": "number",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "Float"
+              },
+              "longitude": {
+                "description": "Longitude (DATUM=WGS84) -180 to 180 in decimal degree format DDD.ddd",
+                "format": "Float",
+                "type": "number",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "Float"
+              },
+              "postalCode": {
+                "description": "Postal code for the location",
+                "type": "string",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "String"
+              }
+            },
+            "type": "object",
+            "x-etsi-ref": "6.5.3"
+          },
+          "minItems": 1,
+          "type": "array",
+          "x-etsi-mec-cardinality": "1..N",
+          "x-etsi-mec-origin-type": "CpInfo"
+        },
+        "ponSYS_ID": {
+          "description": "The 20-bit identity of the optical system within a certain domain.This is a reference value set by the OSS.",
+          "type": "string",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "String"
+        },
+        "onuId": {
+          "description": "Information to identify an Optical Network Unit.",
+          "type": "string",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "String"
+        },
+        "ponTech": {
+          "description": "An informative field identifying the optical technology used. The valid values are: 1 = GPON. 2 = XGPON.3 = NGPON2. 4 = XGSPON.",
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Enum"
+        },
+        "operationalState": {
+          "description": "It reports whether the ONU is currently capable of performing its function. Valid values are: 0 = enabled 1 = disabled",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Enum"
+        },
+        "dsRate": {
+          "description": "Downstream line rate, valid values are:\n1 =\t2,48832 Gbit/s: G-PON [i.9]; or\nNG-PON2 option 2 [i.8].\n2 =\t9,95328 Gbit/s:  XG-PON [i.10]; or\n XGS-PON [i.11]; or\nNG-PON2 option 1 [i.8].",
+          "enum": [
+            1,
+            2
+          ],
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Enum"
+        },
+        "usRate": {
+          "description": "Upstream line rate, valid values are:\n1 =\t1,24416 Gbit/s: G-PON option 1 [i.9].\n2 =\t2,48832 Gbit/s: G-PON option 2 [i.9]; or\nXG-PON [i.10]; or\nNG-PON2 option 2 [i.8].\n3 =\t9,95328 Gbit/s: XGS-PON [i.11]; or\nNG-PON2 option 1 [i.8].",
+          "enum": [
+            1,
+            2,
+            3
+          ],
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Enum"
+        }
+      },
+      "required": [
+        "customerPremisesInfo",
+        "ponSYS_ID",
+        "onuId",
+        "ponTech",
+        "operationalState",
+        "dsRate",
+        "usRate"
+      ],
+      "type": "object",
+      "x-etsi-ref": "6.2.5"
+    }
+  }

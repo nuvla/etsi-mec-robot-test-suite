@@ -1,0 +1,581 @@
+{
+    "type": "array",
+    "items": {
+      "properties": {
+        "deviceId": {
+          "description": "Typically, the serial number of the device.This value shall remain fixed over the lifetime of the device, including across firmware updates.",
+          "type": "string",
+          "x-etsi-mec-cardinality": "0..1",
+          "x-etsi-mec-origin-type": "String"
+        },
+        "deviceStatus": {
+          "description": "Current operational status of the device. Enumeration of: 1 = Up. 2 = Initializing. 3 = Error. 4 = Disabled.",
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Enum"
+        },
+        "downloadDiagnostics": {
+          "properties": {
+            "bOMTime": {
+              "properties": {
+                "nanoSeconds": {
+                  "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                },
+                "seconds": {
+                  "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                }
+              },
+              "required": [
+                "seconds",
+                "nanoSeconds"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.2"
+            },
+            "diagnosticsState": {
+              "description": "The state of the HTTP and FTP download test. Enumeration of:1 = None.2 = Requested.3 = Completed.4 = Error_InitConnectionFailed.5 = Error_NoResponse.6 = Error_TransferFailed. 7 = Error_PasswordRequestFailed.8 = Error_LoginFailed.9 = Error_NoTransferMode.10 = Error_NoPASV.11 = Error_IncorrectSize.12 = Error_Timeout.",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+              ],
+              "type": "integer",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Enum"
+            },
+            "downloadURI": {
+              "description": "The URI for the device to perform the download on.",
+              "format": "uri",
+              "type": "string",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "URI"
+            },
+            "eOMTime": {
+              "properties": {
+                "nanoSeconds": {
+                  "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                },
+                "seconds": {
+                  "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                }
+              },
+              "required": [
+                "seconds",
+                "nanoSeconds"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.2"
+            },
+            "rOMTime": {
+              "properties": {
+                "nanoSeconds": {
+                  "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                },
+                "seconds": {
+                  "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                }
+              },
+              "required": [
+                "seconds",
+                "nanoSeconds"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.2"
+            },
+            "tCPOpenReponseTime": {
+              "properties": {
+                "nanoSeconds": {
+                  "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                },
+                "seconds": {
+                  "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                }
+              },
+              "required": [
+                "seconds",
+                "nanoSeconds"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.2"
+            },
+            "tCPOpenRequestTime": {
+              "properties": {
+                "nanoSeconds": {
+                  "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                },
+                "seconds": {
+                  "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                }
+              },
+              "required": [
+                "seconds",
+                "nanoSeconds"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.2"
+            },
+            "testBytesReceived": {
+              "description": "The test traffic received in bytes during the FTP/HTTP transaction including FTP/HTTP headers, between bOMTime and eOMTime.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "totalBytesReceived": {
+              "description": "The total number of bytes received on the Interface between bOMTime and eOMTime.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            }
+          },
+          "required": [
+            "diagnosticsState"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.5.6"
+        },
+        "gwId": {
+          "description": "Information (typically the serial number) to identify an Internet Gateway Device through which the customer premises device is connected. This value shall remain fixed over the lifetime of the device, including across firmware updates.",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "x-etsi-mec-cardinality": "1..N",
+          "x-etsi-mec-origin-type": "String"
+        },
+        "iPConnectionUpTime": {
+          "description": "The time in seconds that the IP interface has been connected.",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Integer"
+        },
+        "iPPingDiagnostics": {
+          "properties": {
+            "averageResponseTime": {
+              "description": "Result parameter indicating the average response time in milliseconds over all repetitions with successful responses of the most recent ping test.\n\nIf there were no successful responses, this value shall be zero.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "dataBlockSize": {
+              "description": "Size of the data block in bytes to be sent for each ping.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "diagnosticsState": {
+              "description": "The state of the IP ping test. Enumeration of: 1 = None. 2 = Requested. 3 = Complete. 4 = Error_CannotResolveHostName. 5 = Error_Internal.6 = Error_Other.",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "type": "integer",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Enum"
+            },
+            "failureCount": {
+              "description": "Result parameter indicating the number of failed pings in the most recent ping test.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "host": {
+              "description": "Host name or address of the host to ping.",
+              "type": "string",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "String"
+            },
+            "maximumResponseTime": {
+              "description": "Result parameter indicating the maximum response time in milliseconds over all repetitions with successful responses of the most recent ping test.\n\nIf there were no successful responses, this value shall be zero.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "minimumResponseTime": {
+              "description": "Result parameter indicating the minimum response time in milliseconds over all repetitions with successful responses of the most recent ping test.\n\nIf there were no successful responses, this value shall be zero.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "numberOfRepetitions": {
+              "description": "Number of repetitions of the ping test to perform before reporting the results.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "successCount": {
+              "description": "Result parameter indicating the number of successful\npings (those in which a successful response was received prior to the timeout) in the most recent ping test.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "timeout": {
+              "description": "Timeout in milliseconds for the ping test.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            }
+          },
+          "required": [
+            "diagnosticsState"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.5.4"
+        },
+        "timeStamp": {
+          "properties": {
+            "nanoSeconds": {
+              "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+              "format": "Uint32",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Uint32"
+            },
+            "seconds": {
+              "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+              "format": "Uint32",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Uint32"
+            }
+          },
+          "required": [
+            "seconds",
+            "nanoSeconds"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.5.2"
+        },
+        "totalBytesReceived": {
+          "description": "Total number of IP payload bytes received since the device was last restarted.",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Integer"
+        },
+        "totalBytesSent": {
+          "description": "Total number of IP payload bytes sent since the device was last restarted.",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Integer"
+        },
+        "totalPacketsReceived": {
+          "description": "Total number of packets received since the device was last restarted.",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Integer"
+        },
+        "totalPacketsSent": {
+          "description": "Total number of packets sent since the device was last restarted.",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Integer"
+        },
+        "traceRouteDiagnostics": {
+          "properties": {
+            "dataBlockSize": {
+              "description": "Size of the data block in bytes to be sent for each trace route.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "diagnosticsState": {
+              "description": "The state of the IP trace-route test. Enumeration of: 1 = None. 2 = Requested. 3 = Complete.  4 = Error_CannotResolveHostName. 5 = Error_MaxHopCountExceeded. 6 = Error_Internal. 7 = Error_Other.",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ],
+              "type": "integer",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Enum"
+            },
+            "host": {
+              "description": "Host name or address of the host to find a route to.",
+              "type": "string",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "String"
+            },
+            "maxHopCount": {
+              "description": "The maximum number of hop used in outgoing probe packets. The default is 30 hops.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "numberOfRouteHops": {
+              "description": "Result parameter indicating the number of hops within the discovered route.\n\nIf a route could not be determined, this value shall be zero.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "responseTime": {
+              "description": "Result parameter indicating the response time in milliseconds the most recent trace route test.\n\nIf a route could not be determined, this value shall be zero.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "timeout": {
+              "description": "Timeout in milliseconds for the trace route test.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            }
+          },
+          "required": [
+            "diagnosticsState"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.5.5"
+        },
+        "upTime": {
+          "description": "Time in seconds since the device was last restarted.",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Integer"
+        },
+        "uploadDiagnostics": {
+          "properties": {
+            "bOMTime": {
+              "properties": {
+                "nanoSeconds": {
+                  "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                },
+                "seconds": {
+                  "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                }
+              },
+              "required": [
+                "seconds",
+                "nanoSeconds"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.2"
+            },
+            "diagnosticsState": {
+              "description": "The state of the HTTP and FTP download test. Enumeration of: 1 = None. 2 = Requested. 3 = Completed. 4 = Error_InitConnectionFailed. 5 = Error_NoResponse.  6 = Error_PasswordRequestFailed. 7 = Error_LoginFailed. 8 = Error_NoTransferMode. 9 = Error_NoPASV.  10 = Error_NoCWD. 11 = Error_NoSTOR.12 = Error_NoTransferComplete.",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+              ],
+              "type": "integer",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Enum"
+            },
+            "eOMTime": {
+              "properties": {
+                "nanoSeconds": {
+                  "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                },
+                "seconds": {
+                  "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                }
+              },
+              "required": [
+                "seconds",
+                "nanoSeconds"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.2"
+            },
+            "rOMTime": {
+              "properties": {
+                "nanoSeconds": {
+                  "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                },
+                "seconds": {
+                  "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                }
+              },
+              "required": [
+                "seconds",
+                "nanoSeconds"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.2"
+            },
+            "tCPOpenReponseTime": {
+              "properties": {
+                "nanoSeconds": {
+                  "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                },
+                "seconds": {
+                  "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                }
+              },
+              "required": [
+                "seconds",
+                "nanoSeconds"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.2"
+            },
+            "tCPOpenRequestTime": {
+              "properties": {
+                "nanoSeconds": {
+                  "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                },
+                "seconds": {
+                  "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                  "format": "Uint32",
+                  "type": "integer",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uint32"
+                }
+              },
+              "required": [
+                "seconds",
+                "nanoSeconds"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.2"
+            },
+            "testBytesSent": {
+              "description": "The test traffic sent in bytes during the FTP/HTTP transaction including FTP/HTTP headers, between bOMTime and eOMTime.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "testFileLength": {
+              "description": "The size of the file (in bytes) to be uploaded to the\nserver.",
+              "type": "integer",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Integer"
+            },
+            "uploadURI": {
+              "description": "The URI for the device to perform the upload to.",
+              "format": "uri",
+              "type": "string",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "URI"
+            }
+          },
+          "required": [
+            "diagnosticsState"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.5.7"
+        }
+      },
+      "required": [
+        "gwId",
+        "deviceId",
+        "deviceStatus",
+        "upTime",
+        "iPConnectionUpTime",
+        "totalBytesSent",
+        "totalBytesReceived",
+        "totalPacketsSent",
+        "totalPacketsReceived"
+      ],
+      "type": "object",
+      "x-etsi-ref": "6.2.3"
+    }
+  }

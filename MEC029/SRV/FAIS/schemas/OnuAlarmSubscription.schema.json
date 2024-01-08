@@ -1,0 +1,672 @@
+{
+    "oneOf": [
+      {
+        "properties": {
+          "_links": {
+            "description": "Hyperlink related to the resource. This shall be only included in the HTTP responses and in HTTP PUT requests.",
+            "properties": {
+              "self": {
+                "description": "'URI referring to a resource'",
+                "type": "object",
+                "required": [
+                  "href"
+                ],
+                "properties": {
+                  "href": {
+                    "description": "The URI referring to the subscription.",
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              }
+            },
+            "required": [
+              "self"
+            ],
+            "type": "object",
+            "x-etsi-mec-cardinality": "0..1"
+          },
+          "callbackReference": {
+            "description": "URI exposed by the client on which to receive notifications via HTTP. At least one of callbackReference and websockNotifConfig shall be provided by the service consumer. If both are provided, it is up to FAIS to choose an alternative and return only that alternative in the response, as described in ETSI GS MEC 009, clause 6.12a.",
+            "format": "uri",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "URI"
+          },
+          "requestTestNotification": {
+            "description": "Shall be set to TRUE by the service consumer to request",
+            "type": "boolean"
+          },
+          "websockNotifConfig": {
+            "description": "Provides details to negotiate and signal the use of a Websocket connection between FAIS and the service consumer for notifications. At least one of callbackReference and websockNotifConfig shall be provided by the service consumer. If both are provided, it is up to FAIS to choose an alternative and return only that alternative in the response, as described in ETSI GS MEC 009, clause 6.12a.",
+            "type": "object",
+            "properties": {
+              "subscriptionType": {
+                "description": "Set by FAIS to indicate to the service consumer the Websocket URI to be used for delivering notifications.",
+                "type": "string",
+                "format": "uri"
+              },
+              "requestWebsocketUri": {
+                "description": "Set to true by the service consumer to indicate that Websocket delivery is requested.",
+                "type": "boolean"
+              }
+            }
+          },
+          "expiryDeadline": {
+            "properties": {
+              "nanoSeconds": {
+                "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                "format": "Uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              },
+              "seconds": {
+                "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                "format": "Uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              }
+            },
+            "required": [
+              "seconds",
+              "nanoSeconds"
+            ],
+            "type": "object",
+            "x-etsi-ref": "6.5.2"
+          },
+          "filterCriteriaOnuAlarm": {
+            "description": "List of filtering criteria for the subscription. Any filtering criteria from below, which is included in the request, shall also be included in the response.",
+            "properties": {
+              "alarms": {
+                "items": {
+                  "description": "In case alarms is not included in the subscription request, the default value -1 = All shall be used and included in the response:\n0  =\tEquipmentAlarm.\n\t(Functional failure on an internal interface.)\n1  =\tPoweringAlarm.\n\t(Loss of external power to battery backup unit. This alarm is typically derived through an external interface to a battery backup unit, and indicates that AC is no longer available to maintain battery charge.)\n2  =\tBatteryMissing.\n\t(Battery is provisioned but missing.)\n3  =\tBatteryFailure.\n\t(Battery is provisioned and present but cannot recharge.)\n4  =\tBatteryLow.\n\t(Battery is provisioned and present but its voltage is too low.)\n5  =\tPhysicalIntrusion.\n\t(Applies if the ONU supports detection such as door or box open.)\n6  =\tOnuSelfTestFailure.\n\t(ONU has failed autonomous self-test.)\n7  =\tDyingGasp.\n\t(ONU is powering off imminently due to loss of power to the ONU itself.)\n8  =\tTemperatureYellow.\n\t(No service shutdown at present, but the circuit pack is operating beyond its recommended range.)\n9  =\tTemperatureRed.\n\t(Some services have been shut down to avoid equipment damage.)\n10 =\tVoltageYellow.\n\t(No service shutdown at present, but the line power voltage is below its recommended minimum.)\n11 =\tVoltageRed.\n\t(Some services have been shut down to avoid power collapse.)\n12 =\tOnuManualPowerOff.\n\t(The ONU is shutting down because the subscriber has turned off its power switch.)\n13 =\tInvImage.\n\t(Software image is invalid.)\n14 =\tPseOverloadYellow.\n\t(Indicates that the ONU is nearing its maximum ability to supply the known PoE demand of the attached PDs. The thresholds for declaring and clearing this alarm are vendor-specific.)\n15 =\tPseOverloadRed.\n\t(Indicates that the ONU is unable to supply all of the PoE demand of the attached PDs and has removed or reduced power to at least one PD.)\n-1 =\tAll.",
+                  "enum": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    -1
+                  ],
+                  "type": "integer"
+                },
+                "type": "array",
+                "x-etsi-mec-cardinality": "0..N",
+                "x-etsi-mec-origin-type": "Enum"
+              },
+              "customerPremisesInfo": {
+                "description": "0 to N physical locations of the customer sites.",
+                "items": {
+                  "properties": {
+                    "latitude": {
+                      "description": "Latitude (DATUM=WGS84) -90 to 90 in decimal degree format DDD.ddd",
+                      "format": "Float",
+                      "type": "number",
+                      "x-etsi-mec-cardinality": "0..1",
+                      "x-etsi-mec-origin-type": "Float"
+                    },
+                    "longitude": {
+                      "description": "Longitude (DATUM=WGS84) -180 to 180 in decimal degree format DDD.ddd",
+                      "format": "Float",
+                      "type": "number",
+                      "x-etsi-mec-cardinality": "0..1",
+                      "x-etsi-mec-origin-type": "Float"
+                    },
+                    "postalCode": {
+                      "description": "Postal code for the location",
+                      "type": "string",
+                      "x-etsi-mec-cardinality": "0..1",
+                      "x-etsi-mec-origin-type": "String"
+                    }
+                  },
+                  "type": "object",
+                  "x-etsi-ref": "6.5.3"
+                },
+                "type": "array",
+                "x-etsi-mec-cardinality": "0..N",
+                "x-etsi-mec-origin-type": "CpInfo"
+              },
+              "onuId": {
+                "description": "1 to N unique identifiers for the optical network units. Typical it is the unique serial number for each ONU, which contains the vendor ID and version number. The first four bytes are an ASCII-encoded four-letter vendor ID. The second four bytes are a binary encoded serial number, under the control of the ONU vendor.",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array",
+                "x-etsi-mec-cardinality": "1..N",
+                "x-etsi-mec-origin-type": "String"
+              }
+            },
+            "required": [
+              "onuId"
+            ],
+            "type": "object",
+            "x-etsi-mec-cardinality": "1"
+          },
+          "subscriptionType": {
+            "description": "Shall be set to \\\"OnuAlarmSubscription\\\".",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "subscriptionType",
+          "filterCriteriaOnuAlarm"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.3.2"
+      },
+      {
+        "properties": {
+          "_links": {
+            "description": "Hyperlink related to the resource. This shall be only included in the HTTP responses and in HTTP PUT requests.",
+            "properties": {
+              "self": {
+                "description": "'URI referring to a resource'",
+                "type": "object",
+                "required": [
+                  "href"
+                ],
+                "properties": {
+                  "href": {
+                    "description": "The URI referring to the subscription.",
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              }
+            },
+            "required": [
+              "self"
+            ],
+            "type": "object",
+            "x-etsi-mec-cardinality": "0..1"
+          },
+          "callbackReference": {
+            "description": "URI exposed by the client on which to receive notifications via HTTP. At least one of callbackReference and websockNotifConfig shall be provided by the service consumer. If both are provided, it is up to FAIS to choose an alternative and return only that alternative in the response, as described in ETSI GS MEC 009, clause 6.12a.",
+            "format": "uri",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "URI"
+          },
+          "requestTestNotification": {
+            "description": "Shall be set to TRUE by the service consumer to request",
+            "type": "boolean"
+          },
+          "websockNotifConfig": {
+            "description": "Provides details to negotiate and signal the use of a Websocket connection between FAIS and the service consumer for notifications. At least one of callbackReference and websockNotifConfig shall be provided by the service consumer. If both are provided, it is up to FAIS to choose an alternative and return only that alternative in the response, as described in ETSI GS MEC 009, clause 6.12a.",
+            "type": "object",
+            "properties": {
+              "subscriptionType": {
+                "description": "Set by FAIS to indicate to the service consumer the Websocket URI to be used for delivering notifications.",
+                "type": "string",
+                "format": "uri"
+              },
+              "requestWebsocketUri": {
+                "description": "Set to true by the service consumer to indicate that Websocket delivery is requested.",
+                "type": "boolean"
+              }
+            }
+          },
+          "expiryDeadline": {
+            "properties": {
+              "nanoSeconds": {
+                "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                "format": "Uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              },
+              "seconds": {
+                "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                "format": "Uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              }
+            },
+            "required": [
+              "seconds",
+              "nanoSeconds"
+            ],
+            "type": "object",
+            "x-etsi-ref": "6.5.2"
+          },
+          "filterCriteriaDevInfo": {
+            "description": "List of filtering criteria for the subscription. Any filtering criteria from below, which is included in the request, shall also be included in the response.",
+            "properties": {
+              "deviceErrStatus": {
+                "items": {
+                  "description": "The abnormal operational status of the device. Enumeration of:  1 = Error. 2 = Disabled.",
+                  "enum": [
+                    1,
+                    2
+                  ],
+                  "type": "integer"
+                },
+                "type": "array",
+                "x-etsi-mec-cardinality": "0..N",
+                "x-etsi-mec-origin-type": "Enum"
+              },
+              "deviceId": {
+                "description": "The device identifier.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "x-etsi-mec-cardinality": "0..N",
+                "x-etsi-mec-origin-type": "String"
+              },
+              "gwId": {
+                "description": "The identifier of an Internet Gateway Device through which the customer premises device is connected.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "x-etsi-mec-cardinality": "0..N",
+                "x-etsi-mec-origin-type": "String"
+              }
+            },
+            "type": "object",
+            "x-etsi-mec-cardinality": "1"
+          },
+          "subscriptionType": {
+            "description": "Shall be set to \"DevInfoSubscription\".",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "subscriptionType",
+          "callbackReference",
+          "filterCriteriaDevInfo"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.3.3"
+      },
+      {
+        "properties": {
+          "_links": {
+            "description": "Hyperlink related to the resource. This shall be only included in the HTTP responses and in HTTP PUT requests.",
+            "properties": {
+              "self": {
+                "description": "'URI referring to a resource'",
+                "type": "object",
+                "required": [
+                  "href"
+                ],
+                "properties": {
+                  "href": {
+                    "description": "The URI referring to the subscription.",
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              }
+            },
+            "required": [
+              "self"
+            ],
+            "type": "object",
+            "x-etsi-mec-cardinality": "0..1"
+          },
+          "callbackReference": {
+            "description": "URI exposed by the client on which to receive notifications via HTTP. At least one of callbackReference and websockNotifConfig shall be provided by the service consumer. If both are provided, it is up to FAIS to choose an alternative and return only that alternative in the response, as described in ETSI GS MEC 009, clause 6.12a.",
+            "format": "uri",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "URI"
+          },
+          "requestTestNotification": {
+            "description": "Shall be set to TRUE by the service consumer to request",
+            "type": "boolean"
+          },
+          "websockNotifConfig": {
+            "description": "Provides details to negotiate and signal the use of a Websocket connection between FAIS and the service consumer for notifications. At least one of callbackReference and websockNotifConfig shall be provided by the service consumer. If both are provided, it is up to FAIS to choose an alternative and return only that alternative in the response, as described in ETSI GS MEC 009, clause 6.12a.",
+            "type": "object",
+            "properties": {
+              "subscriptionType": {
+                "description": "Set by FAIS to indicate to the service consumer the Websocket URI to be used for delivering notifications.",
+                "type": "string",
+                "format": "uri"
+              },
+              "requestWebsocketUri": {
+                "description": "Set to true by the service consumer to indicate that Websocket delivery is requested.",
+                "type": "boolean"
+              }
+            }
+          },
+          "expiryDeadline": {
+            "properties": {
+              "nanoSeconds": {
+                "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                "format": "Uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              },
+              "seconds": {
+                "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                "format": "Uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              }
+            },
+            "required": [
+              "seconds",
+              "nanoSeconds"
+            ],
+            "type": "object",
+            "x-etsi-ref": "6.5.2"
+          },
+          "filterCriteriaCmConn": {
+            "description": "List of filtering criteria for the subscription. Any filtering criteria from below, which is included in the request, shall also be included in the response.",
+            "properties": {
+              "cmIf": {
+                "type": "array",
+                "items": {
+                  "description": "",
+                  "properties": {
+                    "cmId": {
+                      "description": "The identifier of a Cable Modem at subscriber locations intended for use in conveying data communications on a cable data system.",
+                      "type": "string",
+                      "x-etsi-mec-cardinality": "1",
+                      "x-etsi-mec-origin-type": "String"
+                    },
+                    "cmRegState": {
+                      "items": {
+                        "description": "It indicates the CM connectivity state. Enumeration of:  1 = notReady. 2 = notSynchronized. 3 = phySynchronized. 4 = dsTopologyResolutionInProgress.5 = usParametersAcquired. 6 = rangingInProgress.7 = rangingComplete. 8 = eaeInProgress.9 = dhcpv4InProgress. 10 = dhcpv6InProgress.11 = dhcpV4Complete.12 = dhcpV6Complete.13 = todEstablished.14 = securityEstablished.15 = configFileDownloadComplete.16 = registrationInProgress.17 = registrationComplete. 18 = accessDenied. 19 =operational. 20 = bpiInit.21 =forwardingDisabled.",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15,
+                          16,
+                          17,
+                          18,
+                          19,
+                          20,
+                          21
+                        ],
+                        "type": "integer"
+                      },
+                      "minItems": 1,
+                      "type": "array",
+                      "x-etsi-mec-cardinality": "1..N",
+                      "x-etsi-mec-origin-type": "Enum"
+                    },
+                    "ifIndex": {
+                      "description": "The MAC Domain interface index of the CM.",
+                      "items": {
+                        "type": "string"
+                      },
+                      "minItems": 1,
+                      "type": "array",
+                      "x-etsi-mec-cardinality": "1..N",
+                      "x-etsi-mec-origin-type": "String"
+                    }
+                  },
+                  "required": [
+                    "cmId",
+                    "ifIndex",
+                    "cmRegState"
+                  ]
+                }
+              },
+              "customerPremisesInfo": {
+                "properties": {
+                  "latitude": {
+                    "description": "Latitude (DATUM=WGS84) -90 to 90 in decimal degree format DDD.ddd",
+                    "format": "Float",
+                    "type": "number",
+                    "x-etsi-mec-cardinality": "0..1",
+                    "x-etsi-mec-origin-type": "Float"
+                  },
+                  "longitude": {
+                    "description": "Longitude (DATUM=WGS84) -180 to 180 in decimal degree format DDD.ddd",
+                    "format": "Float",
+                    "type": "number",
+                    "x-etsi-mec-cardinality": "0..1",
+                    "x-etsi-mec-origin-type": "Float"
+                  },
+                  "postalCode": {
+                    "description": "Postal code for the location",
+                    "type": "string",
+                    "x-etsi-mec-cardinality": "0..1",
+                    "x-etsi-mec-origin-type": "String"
+                  }
+                },
+                "type": "object",
+                "x-etsi-ref": "6.5.3"
+              }
+            },
+            "type": "object",
+            "x-etsi-mec-cardinality": "1"
+          },
+          "subscriptionType": {
+            "description": "Shall be set to \"CmConnSubscription\".",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "subscriptionType",
+          "filterCriteriaCmConn"
+        ],
+        "type": "object",
+        "x-etsi-notes": "NOTE:\t'notReady' indicates that the CM has not started the registration process yet.\n\t'notSynchronized' indicates that the CM has not initiated or completed the synchronization of the downstream physical layer.\n\t'phySynchronized' indicates that the CM has completed the synchronization of the downstream physical layer.\n\t'dsTopologyResolutionInProgress' indicates that the CM is attempting to determine its MD-DS-SG.\n\t'usParametersAcquired' indicates that the CM has completed the upstream parameters acquisition or have completed the downstream and upstream service groups resolution.\n\t'rangingInProgress' indicates that the CM has initiated the initial ranging process.\n\t'rangingComplete' indicates that the CM has completed initial ranging and received a Ranging Status of success from the CMTS in the RNG-RSP message.\n\t'eaeInProgress' indicates that the CM has sent an Auth Info message for EAE.\n\t'dhcpv4InProgress' indicates that the CM has sent a DHCPv4 DISCOVER to gain IP connectivity.\n\t'dhcpv6InProgress' indicates that the CM has sent a DHCPv6 Solicit message.\n\t'dhcpv4Complete' indicates that the CM has received a DHCPv4 ACK message from the CMTS.\n\t'dhcpv6Complete' indicates that the CM has received a DHCPv6 Reply message from the CMTS.\n\t'todEstablished' indicates that the CM has successfully acquired time of day.\n\t'securityEstablished' indicates that the CM has successfully completed the BPI initialization process.\n\t'configFileDownloadComplete' indicates that the CM has completed the config file download process.\n\t'registrationInProgress' indicates that the CM has sent a Registration Request.\n\t'registrationComplete' indicates that the CM has successfully completed the Registration process with the CMTS.\n\t'accessDenied' indicates that the CM has received a registration aborted notification from the CMTS.\n\t'operational' indicates that the CM has completed all necessary initialization steps and is operational.\n\t'bpiInit' indicates that the CM has started the BPI initialization process as indicated in the CM config file.\n\t'forwardingDisabled' indicates that the registration process was completed, but the network access option in the received configuration file prohibits forwarding.",
+        "x-etsi-ref": "6.3.4"
+      },
+      {
+        "properties": {
+          "subscriptionType": {
+            "description": "Shall be set to \\\"AniAlarmSubscription\\\"",
+            "type": "string"
+          },
+          "_links": {
+            "properties": {
+              "self": {
+                "description": "'URI referring to a resource'",
+                "type": "object",
+                "required": [
+                  "href"
+                ],
+                "properties": {
+                  "href": {
+                    "description": "The URI referring to the subscription.",
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              }
+            },
+            "required": [
+              "self"
+            ]
+          },
+          "aniIndex": {
+            "description": "The index of an access network interface supported by the optical network unit.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "callbackReference": {
+            "description": "URI exposed by the client on which to receive notifications via HTTP. At least one of callbackReference and websockNotifConfig shall be provided by the service consumer. If both are provided, it is up to FAIS to choose an alternative and return only that alternative in the response, as described in ETSI GS MEC 009, clause 6.12a.",
+            "format": "uri",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "URI"
+          },
+          "requestTestNotification": {
+            "description": "Shall be set to TRUE by the service consumer to request",
+            "type": "boolean"
+          },
+          "websockNotifConfig": {
+            "description": "Provides details to negotiate and signal the use of a Websocket connection between FAIS and the service consumer for notifications. At least one of callbackReference and websockNotifConfig shall be provided by the service consumer. If both are provided, it is up to FAIS to choose an alternative and return only that alternative in the response, as described in ETSI GS MEC 009, clause 6.12a.",
+            "type": "object",
+            "properties": {
+              "subscriptionType": {
+                "description": "Set by FAIS to indicate to the service consumer the Websocket URI to be used for delivering notifications.",
+                "type": "string",
+                "format": "uri"
+              },
+              "requestWebsocketUri": {
+                "description": "Set to true by the service consumer to indicate that Websocket delivery is requested.",
+                "type": "boolean"
+              }
+            }
+          },
+          "expiryDeadline": {
+            "properties": {
+              "nanoSeconds": {
+                "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                "format": "Uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              },
+              "seconds": {
+                "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                "format": "Uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              }
+            },
+            "required": [
+              "seconds",
+              "nanoSeconds"
+            ],
+            "type": "object",
+            "x-etsi-ref": "6.5.2"
+          },
+          "filterCriteriaAniAlarm": {
+            "description": "List of filtering criteria for the subscription. Any filtering criteria from below, which is included in the request, shall also be included in the response.",
+            "required": [
+              "onuId",
+              "aniId"
+            ],
+            "properties": {
+              "customerPremisesInfo": {
+                "required": [
+                  "onuId",
+                  "aniId"
+                ],
+                "description": "0 to N physical locations of the customer sites.",
+                "type": "array",
+                "items": {
+                  "properties": {
+                    "latitude": {
+                      "description": "Latitude (DATUM=WGS84) -90 to 90 in decimal degree format DDD.ddd",
+                      "format": "Float",
+                      "type": "number",
+                      "x-etsi-mec-cardinality": "0..1",
+                      "x-etsi-mec-origin-type": "Float"
+                    },
+                    "longitude": {
+                      "description": "Longitude (DATUM=WGS84) -180 to 180 in decimal degree format DDD.ddd",
+                      "format": "Float",
+                      "type": "number",
+                      "x-etsi-mec-cardinality": "0..1",
+                      "x-etsi-mec-origin-type": "Float"
+                    },
+                    "postalCode": {
+                      "description": "Postal code for the location",
+                      "type": "string",
+                      "x-etsi-mec-cardinality": "0..1",
+                      "x-etsi-mec-origin-type": "String"
+                    }
+                  },
+                  "type": "object",
+                  "x-etsi-ref": "6.5.3"
+                },
+                "x-etsi-mec-cardinality": "0..N",
+                "x-etsi-mec-origin-type": "CpInfo"
+              },
+              "onuId": {
+                "description": "1 to N unique identifiers for the optical network units.  Typical it is the unique serial number for each ONU, which contains the vendor ID and version number. The first four bytes are an ASCII-encoded four-letter vendor ID. The second four bytes are a binary encoded serial number, under the control of the ONU vendor.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "x-etsi-mec-cardinality": "1..N",
+                  "x-etsi-mec-origin-type": "String"
+                }
+              },
+              "aniId": {
+                "description": "",
+                "type": "object",
+                "required": [
+                  "onuId",
+                  "aniIndex"
+                ],
+                "properties": {
+                  "onuId": {
+                    "description": "The unique identifiers for the optical network unit",
+                    "type": "string"
+                  },
+                  "aniIndex": {
+                    "description": "The index of an access network interface supported by the optical network unit",
+                    "type": "string"
+                  }
+                }
+              },
+              "alarms": {
+                "type": "array",
+                "items": {
+                  "description": "In case alarms is not included in the subscription request, the default value -1 = All shall be used and included in the response:\n0  =\tLowReceivedOpticalPower.\n(Received downstream optical power below threshold.)\n1  =\tHighReceivedOpticalPower.\n\t(Received downstream optical power above threshold.)\n2  =\tSignalFalure.\n(Bit error-based signal fail.)\n3  =\tSignalDegrade.\n(Bit error-based signal degrade.)\n4  =\tLowTransmitOpticalPower.\n(Transmit optical power below lower threshold.)\n5  =\tHighTransmitOpticalPower.\n(Transmit optical power above upper threshold.)\n6  =\tLaserBiasCurrent.\n(Laser bias current above threshold determined by vendor.)\n-1 =\tAll.",
+                  "enum": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    -1
+                  ],
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "subscriptionType",
+          "callbackReference",
+          "filterCriteriaAniAlarm",
+          "onuId",
+          "aniIndex"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.3.6"
+      }
+    ]
+  }
