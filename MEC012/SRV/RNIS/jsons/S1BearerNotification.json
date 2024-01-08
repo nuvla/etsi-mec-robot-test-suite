@@ -15,7 +15,7 @@
             {
                 "enbInfo": {
                     "ipAddress": "127.0.0.1",
-                    "tunnelIdaa": "tunnelId"
+                    "tunnelId": "tunnelId"
                 },
                 "erabId": 1234,
                 "sGwInfo": {

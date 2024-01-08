@@ -21,7 +21,7 @@ TC_MEC_MEC012_SRV_RNIS_001_OK
     ...  service has an associated subscription and the event is generated
     ...  ETSI GS MEC 012 2.2.1, clause 6.4.2
     Should Be True    ${PIC_RNIS_NOTIFICATIONS} == 1
-    [Setup]  Send a request for a subscription    CellChangeSubscriptionRequest
+    [Setup]  Send a request for a subscription    CellChangeSubscription
     Spawn Notification Server     CellChangeNotification    
     Validate Json   CellChangeNotification.schema.json    ${payload_notification}
     [TearDown]   Delete subscription   ${SUB_ID} 
@@ -157,8 +157,6 @@ Delete subscription
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
     
-
-
 Spawn Notification Server
     [Arguments]  ${payload_notification}
     ${output}   Spawn Web Server  ${NOTIFICATION_SERVER_IP}  ${NOTIFICATION_SERVER_PORT}  ${NOTIFICATION_SERVER_TIMEOUT}  ${NOTIFICATION_SERVER_HTTP_METHOD}  ${NOTIFICATION_SERVER_URI}   ${payload_notification} 
