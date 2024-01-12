@@ -1,0 +1,16 @@
+{
+                              "notificationType": "UserLocationEventNotification",
+                              "timestamp": {
+                                "seconds": 1673507343,
+                                "nanoseconds": 0
+                              },
+                              "address": "acr:10.0.0.1",
+                              "userLocationEvent": "ENTERING_AREA_EVENT",
+                              "zoneId": "zone01",
+                              "accessPointId": "001010000000000000000000000000001",
+                              "_links": {
+                                "subscription": {
+                                  "href": "http://meAppServer.example.com/location/v3/subscriptions/user/subscription123"
+                                }
+                              }
+                            }

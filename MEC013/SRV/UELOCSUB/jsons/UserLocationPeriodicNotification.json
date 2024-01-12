@@ -1,0 +1,18 @@
+{
+    "notificationType": "UserLocationPeriodicNotification",
+    "result": "SUCCESS",
+    "locationInfo": {
+        "latitude": [
+            50.5
+        ],
+        "longitude": [
+            47.5
+        ],
+        "shape": 1
+    },
+    "_links": {
+        "self": {
+            "href": "http://someip.com/subscriptions/users/subscriptionPeriodicId"
+        }
+    }
+}

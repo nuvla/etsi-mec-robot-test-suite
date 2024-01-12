@@ -1,0 +1,10 @@
+{
+    "subscriptionType": "UserLocationPeriodicSubscription",
+     "callbackReference": "http://10.3.0.0.8:8888",
+     "clientCorrelator":"clientCorrelatorInfo",
+    "address": "acr:10.0.4.3",
+    "periodicEventInfo": {
+        "reportingAmount": 10,
+        "reportingInterval": 5
+    }
+}
