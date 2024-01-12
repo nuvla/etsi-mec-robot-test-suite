@@ -1,0 +1,29 @@
+{
+    "subscriptionType": "userAreaSubscription",
+    "clientCorrelator": "0123",
+    "callbackReference": "http://my.callback.com/area_notification/some-id",
+    "_links": {
+        "self": {
+            "href": "http://meAppServer.example.com/location/v2/subscriptions/area/subscription123"
+        }
+    },
+    "areaDefine": {
+        "shape": 1,
+        "points": [
+            {
+                "latitude": -80.86302,
+                "longitude": 41.277306
+            }
+        ],
+        "radius": null
+    },
+    "addressList": [
+        "acr:10.0.0.1",
+        "acr:10.0.0.2"
+    ],
+    "trackingAccuracy": 10.99,
+    "expiryDeadline": {
+        "seconds": 1973507343,
+        "nanoSeconds\"": 0
+    }
+}
