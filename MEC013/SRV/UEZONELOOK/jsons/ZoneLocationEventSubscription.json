@@ -1,0 +1,8 @@
+{
+    "subscriptionType": "ZoneLocationEventSubscription",
+    "callbackReference": "http://my.callback.com/zone-notification/some-id",
+    "zoneId": "zone01",
+    "locationEventCriteria": [
+        "ENTERING_AREA_EVENT"
+    ]
+}

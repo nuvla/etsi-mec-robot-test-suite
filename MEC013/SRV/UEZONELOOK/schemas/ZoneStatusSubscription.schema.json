@@ -1,0 +1,176 @@
+{
+        "properties": {
+          "_links": {
+            "description": "Hyperlink related to the resource. This shall be only included in the HTTP responses and in HTTP PUT requests.",
+            "properties": {
+              "self": {
+                "properties": {
+                  "href": {
+                    "description": "URI referring to a resource.",
+                    "format": "uri",
+                    "type": "string",
+                    "x-etsi-mec-cardinality": "1",
+                    "x-etsi-mec-origin-type": "Uri"
+                  }
+                },
+                "required": [
+                  "href"
+                ],
+                "type": "object",
+                "x-etsi-ref": "6.7.2"
+              }
+            },
+            "required": [
+              "self"
+            ],
+            "type": "object",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "Structure (inlined)"
+          },
+          "callbackReference": {
+            "description": "URI exposed by the client on which to receive notifications via HTTP. See note 1.",
+            "format": "uri",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "Uri"
+          },
+          "clientCorrelator": {
+            "description": "A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server. See note 2.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "expiryDeadline": {
+            "properties": {
+              "nanoSeconds": {
+                "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                "format": "uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              },
+              "seconds": {
+                "description": "The seconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                "format": "uint32",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uint32"
+              }
+            },
+            "required": [
+              "seconds",
+              "nanoSeconds"
+            ],
+            "type": "object",
+            "x-etsi-ref": "6.5.2"
+          },
+          "lowerNumberOfUsersAPThreshold": {
+            "description": "Threshold number of users in an access point which if crossed downward shall cause a notification",
+            "type": "integer",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "UnsignedInt"
+          },
+          "lowerNumberOfUsersZoneThreshold": {
+            "description": "Threshold number of users in a zone which if crossed downward shall cause a notification",
+            "type": "integer",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "UnsignedInt"
+          },
+          "operationStatus": {
+            "description": "List of operation status values to generate notifications for (these apply to all access points within a zone). See note 3.",
+            "items": {
+              "description": "An enumeration defining the operations status of an access point.",
+              "enum": [
+                "Serviceable",
+                "Unserviceable",
+                "Unknown"
+              ],
+              "type": "string"
+            },
+            "minItems": 0,
+            "type": "array",
+            "x-etsi-mec-cardinality": "0..N",
+            "x-etsi-mec-origin-type": "OperationStatus"
+          },
+          "reportingCtrl": {
+            "properties": {
+              "maximumCount": {
+                "description": "Maximum number of notifications. For no maximum, either do not include this element or specify a value of zero. Default value is 0.",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "UnsignedInt"
+              },
+              "maximumFrequency": {
+                "description": "Maximum frequency (in seconds) of notifications per subscription.",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "UnsignedInt"
+              },
+              "minimumInterval": {
+                "description": "Minimum interval between reports in case frequently reporting. Unit is second.",
+                "type": "integer",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "UnsignedInt"
+              }
+            },
+            "type": "object",
+            "x-etsi-ref": "6.5.6"
+          },
+          "requestTestNotification": {
+            "description": "Set to TRUE by the service consumer to request a test notification via HTTP on the callbackReference URI, as specified in ETSI GS MEC 009 [4], clause 6.12a.",
+            "type": "boolean",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "Boolean"
+          },
+          "subscriptionType": {
+            "description": "Shall be set to \"ZoneStatusSubscription\".",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "upperNumberOfUsersAPThreshold": {
+            "description": "Threshold number of users in an access point which if crossed upward shall cause a notification.",
+            "type": "integer",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "UnsignedInt"
+          },
+          "upperNumberOfUsersZoneThreshold": {
+            "description": "Threshold number of users in a zone which if crossed upward shall cause a notification.",
+            "type": "integer",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "UnsignedInt"
+          },
+          "websockNotifConfig": {
+            "properties": {
+              "requestWebsocketUri": {
+                "description": "Set to true by the service consumer to indicate that Websocket delivery is requested.",
+                "type": "boolean",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "Boolean"
+              },
+              "websocketUri": {
+                "description": "Set by location server to indicate to the service consumer the Websocket URI to be used for delivering notifications.",
+                "format": "uri",
+                "type": "string",
+                "x-etsi-mec-cardinality": "0..1",
+                "x-etsi-mec-origin-type": "Uri"
+              }
+            },
+            "type": "object",
+            "x-etsi-ref": "6.5.4"
+          },
+          "zoneId": {
+            "description": "Identifier of zone (e.g. zone001) to monitor.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "subscriptionType",
+          "zoneId"
+        ],
+        "type": "object",
+        "x-etsi-notes": "NOTE 1:\tAt least one of callbackReference and websockNotifConfig shall be provided by the service consumer. If both are provided, it is up to location server to select an alternative and return only that alternative in the response, as specified in ETSI GS MEC 009 [4], clause 6.12a.\nNOTE 2:\tThis allows the client to recover from communication failures during resource creation and therefore avoids duplicate subscription creation in such situations. In case the element is present, the server shall not alter its value, and shall provide it as part of the representation of this resource. In case the element is not present, the server shall not generate it.\nNOTE 3:\tAs specified in [5], clause 5.2.3.2.",
+        "x-etsi-ref": "6.3.7"
+      }
