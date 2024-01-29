@@ -1,0 +1,7 @@
+{
+    "subscriptionType": "ZoneLocationEventSubscription",
+    "zoneId": "zone01",
+    "locationEventCriteria": [
+        "ENTERING_AREA_EVENT"
+    ]
+}

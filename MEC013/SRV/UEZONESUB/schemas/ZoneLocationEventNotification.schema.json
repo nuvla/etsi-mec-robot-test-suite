@@ -1,0 +1,91 @@
+{
+  "properties": {
+    "_links": {
+      "description": "Hyperlink related to the resource. This shall be only included in the HTTP responses and in HTTP PUT requests.",
+      "properties": {
+        "subscription": {
+          "properties": {
+            "href": {
+              "description": "URI referring to a resource.",
+              "format": "uri",
+              "type": "string",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Uri"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.7.2"
+        }
+      },
+      "required": [
+        "subscription"
+      ],
+      "type": "object",
+      "x-etsi-mec-cardinality": "0..1",
+      "x-etsi-mec-origin-type": "Structure (inlined)"
+    },
+    "address": {
+      "description": "Address of user (e.g. ‘sip’ URI, ‘tel’ URI, ‘acr’ URI).",
+      "format": "uri",
+      "type": "string",
+      "x-etsi-mec-cardinality": "1",
+      "x-etsi-mec-origin-type": "Uri"
+    },
+    "notificationType": {
+      "description": "Shall be set to \"ZoneLocationEventNotification\".",
+      "type": "string",
+      "x-etsi-mec-cardinality": "1",
+      "x-etsi-mec-origin-type": "String"
+    },
+    "timeStamp": {
+      "properties": {
+        "nanoSeconds": {
+          "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+          "format": "uint32",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Uint32"
+        },
+        "seconds": {
+          "description": "The seconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+          "format": "uint32",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Uint32"
+        }
+      },
+      "required": [
+        "seconds",
+        "nanoSeconds"
+      ],
+      "type": "object",
+      "x-etsi-ref": "6.5.2"
+    },
+    "userLocationEvent": {
+      "description": "This type represents specified event types for UE location report.",
+      "enum": [
+        "ENTERING_AREA_EVENT",
+        "LEAVING_AREA_EVENT"
+      ],
+      "type": "string"
+    },
+    "zoneId": {
+      "description": "The identity of the zone. ",
+      "type": "string",
+      "x-etsi-mec-cardinality": "1",
+      "x-etsi-mec-origin-type": "String"
+    }
+  },
+  "required": [
+    "notificationType",
+    "address",
+    "userLocationEvent",
+    "zoneId",
+    "_links"
+  ],
+  "type": "object",
+  "x-etsi-ref": "6.4.6"
+}

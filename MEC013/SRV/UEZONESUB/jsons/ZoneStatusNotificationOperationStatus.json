@@ -1,0 +1,11 @@
+{
+    "_links": {
+        "subscription": {
+            "href": "http://someurl.com/subscriptions/zones/ZoneStatusSubscriptionId"
+        }
+    },
+    "accessPointId": "accessPointId",
+    "notificationType": "ZoneStatusNotification",
+    "zoneId": "zoneId",
+    "operationStatus":"Serviceable"
+}

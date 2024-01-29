@@ -1,0 +1,10 @@
+{
+  "callbackReference": "http://someurl.com/callback_uri",
+  "clientCorrelator":"clientCorrelator",
+  "operationStatus": [
+    "Unknown"
+  ],
+  "subscriptionType": "ZoneStatusSubscription",
+  "zoneId": "zoneId",
+  "operationStatus": ["Serviceable"]
+}

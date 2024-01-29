@@ -1,0 +1,11 @@
+{
+    "notificationType": "ZoneLocationEventNotification",
+    "address": "acr:10.0.0.1",
+    "zoneId": "zone01",
+    "userLocationEvent": "ENTERING_AREA_EVENT",
+    "_links": {
+        "subscription": {
+            "href": "http://meAppServer.example.com/location/v3/subscriptions/zone/subscription123"
+        }
+    }
+}

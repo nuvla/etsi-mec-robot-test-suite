@@ -1,0 +1,102 @@
+{
+  "properties": {
+    "_links": {
+      "description": "Hyperlink related to the resource. This shall be only included in the HTTP responses and in HTTP PUT requests.",
+      "properties": {
+        "subscription": {
+          "properties": {
+            "href": {
+              "description": "URI referring to a resource.",
+              "format": "uri",
+              "type": "string",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Uri"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "type": "object",
+          "x-etsi-ref": "6.7.2"
+        }
+      },
+      "required": [
+        "subscription"
+      ],
+      "type": "object",
+      "x-etsi-mec-cardinality": "0..1",
+      "x-etsi-mec-origin-type": "Structure (inlined)"
+    },
+    "accessPointId": {
+      "description": "Identifier of an access point (e.g. ap01). Shall be included when userNumEvent related with access point or operationStatus is included.",
+      "type": "string",
+      "x-etsi-mec-cardinality": "0..1",
+      "x-etsi-mec-origin-type": "String"
+    },
+    "notificationType": {
+      "description": "Shall be set to \"ZoneStatusNotification\".",
+      "type": "string",
+      "x-etsi-mec-cardinality": "1",
+      "x-etsi-mec-origin-type": "String"
+    },
+    "operationStatus": {
+      "description": "An enumeration defining the operations status of an access point.",
+      "enum": [
+        "Serviceable",
+        "Unserviceable",
+        "Unknown"
+      ],
+      "type": "string"
+    },
+    "timeStamp": {
+      "properties": {
+        "nanoSeconds": {
+          "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+          "format": "uint32",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Uint32"
+        },
+        "seconds": {
+          "description": "The seconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+          "format": "uint32",
+          "type": "integer",
+          "x-etsi-mec-cardinality": "1",
+          "x-etsi-mec-origin-type": "Uint32"
+        }
+      },
+      "required": [
+        "seconds",
+        "nanoSeconds"
+      ],
+      "type": "object",
+      "x-etsi-ref": "6.5.2"
+    },
+    "userNumEvent": {
+      "description": "Shall be present when ZoneStatusSubscription includes upperNumberOfUsersZoneThreshold, lowerNumberOfUsersZoneThreshold, upperNumberOfUsersAPThreshold or lowerNumberOfUsersAPThreshold, and the number of users in a zone or an access point crosses the threshold defined in the subscription: 1 = OVER_ZONE_UPPER_THD. 2 = UNDER_ZONE_LOWER_THD. 3 = OVER_AP_UPPER_THD. 4 = UNDER_AP_LOWER_THD.",
+      "enum": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "type": "integer",
+      "x-etsi-mec-cardinality": "0..1",
+      "x-etsi-mec-origin-type": "Enum(inlined)"
+    },
+    "zoneId": {
+      "description": "The identity of the zone. ",
+      "type": "string",
+      "x-etsi-mec-cardinality": "1",
+      "x-etsi-mec-origin-type": "String"
+    }
+  },
+  "required": [
+    "notificationType",
+    "zoneId",
+    "_links"
+  ],
+  "type": "object",
+  "x-etsi-notes": "NOTE:\tAs specified in [5], clause 5.2.3.2.",
+  "x-etsi-ref": "6.4.7"
+}
