@@ -1,0 +1,8 @@
+{
+    "subscriptionType": "UserLocationPeriodicSubscription",
+    "address": "acr:10.0.4.3",
+    "periodicEventInfo": {
+        "reportingAmount": 10,
+        "reportingInterval": 5
+    }
+}

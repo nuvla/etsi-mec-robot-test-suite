@@ -1,0 +1,7 @@
+{
+    "subscriptionType": "UserLocationEventSubscription",
+    "clientCorrelator":"someCorrelator",
+    "address": "acr:10.0.0.1",
+    "callbackReference": "http://10.3.0.0.8:8888",
+    "requestTestNotification":"true"
+}

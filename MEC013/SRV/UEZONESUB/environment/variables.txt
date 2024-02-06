@@ -10,8 +10,11 @@ ${apiName}        location
 ${apiVersion}     v3
 
 # Specific variables
-${ACR_ADDRESS}               acr:10.0.0.3
-${ACR_ADDRESS2}               acr:10.0.0.4
-${ZONE_ID}               zone001
-${ZONE_ID2}              zone002
-${ACR_UNKNOWN_IP}            acr:192.168.5.1.1
+${NOT_EXISTING_SUB_ID}       NOT_EXISTING_SUB_ID
+
+##Notification Server variables
+${NOTIFICATION_SERVER_IP}      127.0.0.1
+${NOTIFICATION_SERVER_PORT}      8888
+${NOTIFICATION_SERVER_HTTP_METHOD}      POST
+${NOTIFICATION_SERVER_URI}      /callback_url
+${NOTIFICATION_SERVER_TIMEOUT}      5

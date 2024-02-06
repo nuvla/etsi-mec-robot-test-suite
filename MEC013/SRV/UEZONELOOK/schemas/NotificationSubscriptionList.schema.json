@@ -1,0 +1,55 @@
+{
+        "description": "This type contains a list of subscriptions.",
+        "properties": {
+          "resourceURL": {
+            "properties": {
+              "href": {
+                "description": "URI referring to a resource.",
+                "format": "uri",
+                "type": "string",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "Uri"
+              }
+            },
+            "required": [
+              "href"
+            ],
+            "type": "object",
+            "x-etsi-ref": "6.7.2"
+          },
+          "subscription": {
+            "items": {
+              "description": "",
+              "minItems": 0,
+              "properties": {
+                "href": {
+                  "description": "The URI referring to the subscription.",
+                  "format": "uri",
+                  "type": "string",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Uri"
+                },
+                "subscriptionType": {
+                  "description": "Type of the subscription. The string shall be set according to the \"subscriptionType\" attribute of the associated subscription data type defined in clauses 6.3.4, 6.3.5, 6.3.6, 6.3.7 6.3.8 and 6.3.9:\n\"UserLocationEventSubscription\"\n\"UserLocationPeriodicSubscription\"\n\"ZoneLocationEventSubscription\"\n\"ZoneStatusSubscription\"\n\"UserAreaSubscription\"\n\"UserDistanceSubscription\"",
+                  "type": "string",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "String"
+                }
+              },
+              "required": [
+                "href",
+                "subscriptionType"
+              ],
+              "type": "object",
+              "x-etsi-mec-cardinality": "0..N",
+              "x-etsi-mec-origin-type": "Structure (inlined)"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "resourceURL"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.3.3"
+      }

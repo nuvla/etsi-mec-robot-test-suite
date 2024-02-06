@@ -1,0 +1,9 @@
+{
+    "subscriptionType": "ZoneLocationEventSubscription",
+    "clientCorrelator":"clientCorrelator",
+    "callbackReference": "http://my.callback.com/zone-notification/some-id",
+    "zoneId": "zone01",
+    "addressList": [
+        "address01","address02"
+    ]
+}

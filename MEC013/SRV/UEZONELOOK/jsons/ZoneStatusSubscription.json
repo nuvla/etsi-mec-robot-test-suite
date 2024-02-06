@@ -1,0 +1,8 @@
+{
+  "callbackReference": "http://someurl.com/callback_uri",
+  "operationStatus": [
+    "Unknown"
+  ],
+  "subscriptionType": "ZoneStatusSubscription",
+  "zoneId": "zoneId"
+}
