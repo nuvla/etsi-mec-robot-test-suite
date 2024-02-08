@@ -1,4 +1,4 @@
-Y''[Documentation]   robot --outputdir ../../../outputs ./RegisteredDevices.robot
+''[Documentation]   robot --outputdir ../../../outputs ./RegisteredDevices.robot
 ...    Test Suite to validate the Registered IOT Device (IOTDEV) operations.
 
 *** Settings ***

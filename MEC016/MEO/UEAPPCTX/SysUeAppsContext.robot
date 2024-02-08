@@ -79,7 +79,7 @@ TC_MEC_MEC016_MEO_UEAPPCTX_002_BR
     [Setup]    Create application context    AppContext.json
     Set Suite Variable    ${contextId_tbu}    ${response['body']['contextId']}
 
-    Update application context    ${context-id}    UpdateAppContext_BR.json
+    Update application context    ${contextId_tbu}    UpdateAppContext_BR.json
     Check HTTP Response Status Code Is    400
 
     [Teardown]    Delete application context    ${contextId_tbu}
@@ -106,7 +106,11 @@ TC_MEC_MEC016_MEO_UEAPPCTX_003_OK
     # Preamble
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
-    Delete application context    ${context-id}
+    
+    [Setup]    Create application context    AppContext.json
+    Set Suite Variable    ${contextId_tbd}    ${response['body']['contextId']}
+
+    Delete application context    ${contextId_tbd}
     Check HTTP Response Status Code Is    204
 
 

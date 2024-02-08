@@ -1,8 +1,8 @@
 *** Variables ***
 # Generic variables
 ${AMS_SCHEMA}                   http
-${AMS_HOST}                     10.192.2.172
-${AMS_PORT}                     8081
+${AMS_HOST}                     mockoon
+${AMS_PORT}                     3006
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
