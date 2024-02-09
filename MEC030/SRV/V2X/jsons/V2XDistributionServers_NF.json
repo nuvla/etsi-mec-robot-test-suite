@@ -30,10 +30,6 @@
         ],
         "v2xMsgDistributionServer": [
             {
-                "infoConnection": {
-                    "ipAddress": "192.168.1.1",
-                    "port_number": 8080
-                },
                 "infoProtocol": {
                     "msgProtocol": [
                         0

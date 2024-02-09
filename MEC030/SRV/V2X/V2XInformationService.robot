@@ -14,7 +14,7 @@ TC_MEC_MEC030_SRV_V2X_001_OK_01
     [Documentation]
     ...  Check that the IUT responds with a configured provisioning information over Uu unicast when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.3.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over Uu unicast using ecgi filter    ${ECGI} 	
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   UuUnicastProvisioningInfo
@@ -24,7 +24,7 @@ TC_MEC_MEC030_SRV_V2X_001_OK_02
     [Documentation]
     ...  Check that the IUT responds with a configured provisioning information over Uu unicast when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.3.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over Uu unicast using geographical filter    ${LAT_VALUE}     ${LON_VALUE}	
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   UuUnicastProvisioningInfo
@@ -33,7 +33,7 @@ TC_MEC_MEC030_SRV_V2X_001_BR
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.3.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over Uu unicast using geographical filter wrong parameter    ${LAT_VALUE}     ${LON_VALUE}	
     Check HTTP Response Status Code Is    400
     
@@ -43,7 +43,7 @@ TC_MEC_MEC030_SRV_V2X_001_NF
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.3.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over Uu unicast using ecgi filter    ${UNKNOWN_ECGI} 
     Check HTTP Response Status Code Is    404
 
@@ -62,7 +62,7 @@ TC_MEC_MEC030_SRV_V2X_002_OK_02
     [Documentation]
     ...  Check that the IUT responds with a configured provisioning information over Uu MBMS when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.4.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over Uu MBM using geographical filter    ${LAT_VALUE}     ${LON_VALUE}	
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   UuMbmsProvisioningInfo
@@ -71,7 +71,7 @@ TC_MEC_MEC030_SRV_V2X_002_BR
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.4.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over Uu MBM using geographical filter wrong parameter    ${LAT_VALUE}     ${LON_VALUE}	
     Check HTTP Response Status Code Is    400
 
@@ -79,7 +79,7 @@ TC_MEC_MEC030_SRV_V2X_002_NF
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.4.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over Uu MBM using geographical filter    ${UNKNOWN_LAT_VALUE}     ${LON_VALUE}	
     Check HTTP Response Status Code Is    404
         
@@ -90,7 +90,7 @@ TC_MEC_MEC030_SRV_V2X_003_OK_01
     [Documentation]
     ...  Check that the IUT responds with a configured provisioning information over PC5 when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.5.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over PC5 using ecgi filter    ${ECGI} 	
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   Pc5ProvisioningInfo
@@ -99,7 +99,7 @@ TC_MEC_MEC030_SRV_V2X_003_OK_02
     [Documentation]
     ...  Check that the IUT responds with a configured provisioning information over Uu MBMS when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.5.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over PC5 using geographical filter    ${LAT_VALUE}     ${LON_VALUE}	
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   Pc5ProvisioningInfo
@@ -108,7 +108,7 @@ TC_MEC_MEC030_SRV_V2X_003_BR
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.5.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over PC5 using geographical filter wrong parameter    ${LAT_VALUE}     ${LON_VALUE}	
     Check HTTP Response Status Code Is    400
 
@@ -117,7 +117,7 @@ TC_MEC_MEC030_SRV_V2X_003_NF
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.5.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Retrieve configured provisioning information over PC5 using ecgi filter    ${UNKNOWN_ECGI} 
     Check HTTP Response Status Code Is    404
 
@@ -127,7 +127,7 @@ TC_MEC_MEC030_SRV_V2X_004_OK
     [Documentation]
     ...  Check that the IUT processes properly a request to information of V2X Message Distribution servers
     ...  ETSI GS MEC 030 v3.1.1, clause 7.6.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Request v2x message distribution servers    V2XDistributionServers
     Check HTTP Response Body Json Schema Is   V2XDistributionServers
     Check HTTP Response Status Code Is    200
@@ -136,7 +136,7 @@ TC_MEC_MEC030_SRV_V2X_004_BR
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.6.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Request v2x message distribution servers    V2XDistributionServers_BR
     Check HTTP Response Status Code Is    400
     
@@ -145,7 +145,7 @@ TC_MEC_MEC030_SRV_V2X_004_NF
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.6.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Request v2x message distribution servers    V2XDistributionServers_NF
     Check HTTP Response Status Code Is    404
 
@@ -155,7 +155,7 @@ TC_MEC_MEC030_SRV_V2X_005_OK
     [Documentation]
     ...  Check that the IUT sends a request about QoS information for a vehicular UE when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.6.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Request predicted QoS   PredictedQoS.json
     Check HTTP Response Body Json Schema Is   PredictedQoS
     Check HTTP Response Status Code Is    200
@@ -165,7 +165,7 @@ TC_MEC_MEC030_SRV_V2X_005_BR
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.6.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     ##Wrong parameter into JSON: locality instead of locationGranularity
     Request predicted QoS   PredictedQoS_BR.json 
     Check HTTP Response Status Code Is    400
@@ -174,7 +174,7 @@ TC_MEC_MEC030_SRV_V2X_005_NF
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.6.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Request predicted QoS   PredictedQoS_NF.json
     Check HTTP Response Status Code Is    404
         
@@ -185,7 +185,7 @@ TC_MEC_MEC030_SRV_V2X_006_OK
     [Documentation]
     ...  Check that the IUT processes properly a request to publish a V2X message
     ...  ETSI GS MEC 030 v3.1.1, clause 7.7.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Publish V2X message   V2xMsgPublication.json
     Check HTTP Response Status Code Is    204
     
@@ -193,7 +193,7 @@ TC_MEC_MEC030_SRV_V2X_006_BR
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.7.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Publish V2X message   V2xMsgPublication_BR.json
     Check HTTP Response Status Code Is    400    
 
@@ -204,7 +204,7 @@ TC_MEC_MEC030_SRV_V2X_007_OK_01
     [Documentation] 
     ...  Check that the IUT responds with the requested list of subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.8.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
         
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
@@ -221,7 +221,7 @@ TC_MEC_MEC030_SRV_V2X_007_OK_02
     [Documentation] 
     ...  Check that the IUT responds with the requested list of subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.8.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
         
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
@@ -238,7 +238,7 @@ TC_MEC_MEC030_SRV_V2X_007_OK_03
     [Documentation] 
     ...  Check that the IUT responds with the requested list of subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.8.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
         
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
@@ -255,7 +255,7 @@ TC_MEC_MEC030_SRV_V2X_008_OK_04
     [Documentation] 
     ...  Check that the IUT responds with the requested list of subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.8.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
         
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
@@ -273,7 +273,7 @@ TC_MEC_MEC030_SRV_V2X_008_BR
     [Documentation] 
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.8.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml        
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml        
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve subscription list information    ${SUB_TYPE_INVALID}
@@ -285,7 +285,7 @@ TC_MEC_MEC030_SRV_V2X_009_OK_01
     [Documentation] 
     ...  Check that the IUT responds with the requested to create a subscription
     ...  ETSI GS MEC 030 v3.1.1, clause 7.8.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     ProvChgUuUniSubscription.json
@@ -303,7 +303,7 @@ TC_MEC_MEC030_SRV_V2X_009_OK_02
     [Documentation] 
     ...  Check that the IUT responds with the requested to create a subscription
     ...  ETSI GS MEC 030 v3.1.1, clause 7.8.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml       
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml       
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     ProvChgUuMbmsSubscription.json
@@ -322,7 +322,7 @@ TC_MEC_MEC030_SRV_V2X_009_OK_03
     [Documentation] 
     ...  Check that the IUT responds with the requested to create a subscription
     ...  ETSI GS MEC 030 v3.1.1, clause 7.8.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml        
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml        
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     ProvChgPc5Subscription.json
@@ -340,7 +340,7 @@ TC_MEC_MEC030_SRV_V2X_009_OK_04
     [Documentation] 
     ...  Check that the IUT responds with the requested to create a subscription
     ...  ETSI GS MEC 030 v3.1.1, clause 7.8.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
         
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
@@ -358,15 +358,12 @@ TC_MEC_MEC030_SRV_V2X_009_OK_04
 
 TC_MEC_MEC030_SRV_V2X_009_BR
     [Documentation] 
-    ...  Check that the IUT responds with the requested to create a subscription
-    ...  ETSI GS MEC 030 v3.1.1, clause 7.8.3.4
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml        
+    ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
+    ...  ETSI GS MEC 030 V3.1.1, clause 7.10.3.1
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml        
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
-    ${path}    Catenate    SEPARATOR=      jsons/     ProvChgUuMbmsSubscription_BR.json
-    ${body}    Get File    ${path}
-    ${json_object}=	Evaluate  json.loads('''${body}''')  json
-    Send a request for creating a subscription   ${body}
+    Retrieve a subscription using wrong endpoint  ${SUB_PROV_CHG_UU_UNI_ID}
     Check HTTP Response Status Code Is    400
  
           
@@ -375,7 +372,7 @@ TC_MEC_MEC030_SRV_V2X_010_OK_01
     [Documentation] 
     ...  Check that the IUT responds with the requested of subscription information when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve a subscription  ${SUB_PROV_CHG_UU_UNI_ID}
@@ -390,7 +387,7 @@ TC_MEC_MEC030_SRV_V2X_010_OK_02
     [Documentation] 
     ...  Check that the IUT responds with the requested of subscription information when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve a subscription  ${SUB_PROV_CHG_UU_MBMS_ID}
@@ -406,7 +403,7 @@ TC_MEC_MEC030_SRV_V2X_010_OK_03
     [Documentation] 
     ...  Check that the IUT responds with the requested of subscription information when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve a subscription  ${SUB_PROV_CHG_PC5_ID}
@@ -421,7 +418,7 @@ TC_MEC_MEC030_SRV_V2X_010_OK_04
     [Documentation] 
     ...  Check that the IUT responds with the requested of subscription information when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve a subscription  ${SUB_V2X_MSG_ID}
@@ -436,7 +433,7 @@ TC_MEC_MEC030_SRV_V2X_010_BR
     [Documentation] 
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve a subscription     ${SUB_WRONG_PARAM}
@@ -447,7 +444,7 @@ TC_MEC_MEC030_SRV_V2X_010_NF
     [Documentation] 
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.1
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve a subscription     ${NOT_EXISTING_SUB_ID}
@@ -460,7 +457,7 @@ TC_MEC_MEC030_SRV_V2X_011_OK_01
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     ProvChgUuUniSubscriptionUpdate.json
@@ -478,7 +475,7 @@ TC_MEC_MEC030_SRV_V2X_011_OK_02
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     ProvChgUuMbmsSubscriptionUpdate.json
@@ -496,7 +493,7 @@ TC_MEC_MEC030_SRV_V2X_011_OK_03
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     ProvChgPc5SubscriptionUpdate.json
@@ -514,7 +511,7 @@ TC_MEC_MEC030_SRV_V2X_011_OK_04
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     V2xMsgSubscriptionUpdate.json
@@ -532,7 +529,7 @@ TC_MEC_MEC030_SRV_V2X_011_BR
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     ProvChgUuUniSubscriptionUpdate_BR.json
@@ -545,7 +542,7 @@ TC_MEC_MEC030_SRV_V2X_011_NF
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     ${path}    Catenate    SEPARATOR=      jsons/     ProvChgUuUniSubscriptionUpdate.json
@@ -560,7 +557,7 @@ TC_MEC_MEC030_SRV_V2X_012_OK_01
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Remove existing subscription    ${SUB_PROV_CHG_UU_UNI_ID}
@@ -570,7 +567,7 @@ TC_MEC_MEC030_SRV_V2X_012_OK_02
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Remove existing subscription    ${SUB_PROV_CHG_UU_MBMS_ID}
@@ -580,7 +577,7 @@ TC_MEC_MEC030_SRV_V2X_012_OK_03
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Remove existing subscription    ${SUB_PROV_CHG_PC5_ID}
@@ -590,7 +587,7 @@ TC_MEC_MEC030_SRV_V2X_012_OK_04
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Remove existing subscription    ${SUB_V2X_MSG_ID}
@@ -601,7 +598,7 @@ TC_MEC_MEC030_SRV_V2X_012_NF
     [Documentation] 
     ...  Check that the IUT responds with the requested of updating subscription when queried by a MEC Application
     ...  ETSI GS MEC 030 v3.1.1, clause 7.9.3.2
-    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/blob/master/MEC030_V2XInformationService.yaml
+    ...  https://forge.etsi.org/rep/mec/gs030-vis-api/-/blob/master/MEC030_V2XInformationServices.yaml
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Remove existing subscription       ${NOT_EXISTING_SUB_ID}
@@ -776,7 +773,7 @@ Retrieve subscription list information
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Set Headers    {"Accept":"application/json"}
-    Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Content-Type":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
     GET     ${apiRoot}/${apiName}/${apiVersion}/subscriptions?subscription_type=${subscription_type}
     ${output}=    Output    response
@@ -798,6 +795,15 @@ Retrieve a subscription
     Set Headers    {"Content-Type":"*/*"}
     Set Headers    {"Authorization":"${TOKEN}"}
     GET    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/${subscriptionId}  
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}   
+
+Retrieve a subscription using wrong endpoint    
+    [Arguments]    ${subscriptionId}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    GET    ${apiRoot}/${apiName}/${apiVersion}/subs/${subscriptionId}  
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}   
     
