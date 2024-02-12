@@ -6,11 +6,14 @@ ${AMS_PORT}                     3006
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
-${apiName}        
+${apiName}        amsi
 ${apiVersion}     v1
 
 # Specific variables
-${APP_MOBILITY_SERVICE_ID}          KtRGymNQ84dG3mQfRepa
+${APP_MOBILITY_SERVICE_ID}          APP_MOBILITY_SERVICE_ID
+${APP_MOBILITY_SERVICE_ID2}          APP_MOBILITY_SERVICE_ID2
+${MALFORMED_APP_MOBILITY_SERVICE_ID}          MALFORMED_APP_MOBILITY_SERVICE_ID
+${APP_MOBILITY_SERVICE_FILTER}        (eq,appMobilityServiceId,APP_MOBILITY_SERVICE)
 ${APP_INS_ID}                       5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 ${SUBSCRIPTION_TYPE}                MobilityProcedureSubscription
 ${SUBSCRIPTION_ID}                  e0deee2b-6e50-4f33-ab09-8bf0585025d3
