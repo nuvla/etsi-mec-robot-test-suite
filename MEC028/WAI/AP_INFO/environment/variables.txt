@@ -9,9 +9,9 @@ ${MEC-APP_PORT}                     3001
 
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
  
-${MAC_ID}          macId01
-${filter}                           macId01
-${bad_filter}                           badMacId
+${BSS_ID}          bssId01
+${filter}                           (eq,bssid,bssId01)
+${bad_filter}                           (eq,bss_id,bssId01)
 
 ${REGISTER_ACTION}        REGISTER
 ${REMOVE_ACTION}          REMOVE 

@@ -22,7 +22,7 @@ TC_MEC_MEC028_SRV_WAI_001_OK
     Check HTTP Response Body Json Schema Is   ApInfo
     ## Post condition
     FOR    ${apInfo}    IN    @{response['body']}
-        ${passed}    Run Keyword And Return Status    Should Be Equal As Strings  ${apInfo['apId']['macId']}    ${MAC_ID}    
+        ${passed}    Run Keyword And Return Status    Should Be Equal As Strings  ${apInfo['apId']['bssid']}    ${BSS_ID}    
         Exit For Loop If    ${passed}
     END
     Should Be True    ${passed}
@@ -39,7 +39,7 @@ TC_MEC_MEC028_SRV_WAI_002_OK
     Check HTTP Response Body Json Schema Is   ApInfo
     ## Post condition
     FOR    ${apInfo}    IN    @{response['body']}
-        ${passed}    Run Keyword And Return Status    Should Be Equal As Strings  ${apInfo['apId']['macId']}    ${MAC_ID}    
+        ${passed}    Run Keyword And Return Status    Should Be Equal As Strings  ${apInfo['apId']['bssid']}    ${BSS_ID}    
         Exit For Loop If    ${passed}
     END
     Should Be True    ${passed}

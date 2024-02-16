@@ -57,7 +57,7 @@ TC_MEC_MEC021_SRV_AMS_001_OK_02
 
     [Setup]    Create two new application mobility service      ${APP_MOBILITY_SERVICE_ID}    ${APP_INS_ID}    ${APP_MOBILITY_SERVICE_ID2}    ${APP_INS_ID}
 
-    Get Registered AMS information using attribute-selector    filter    ${APP_MOBILITY_SERVICE_FILTER}
+    Get Registered AMS information using attribute-selector    filter    ${APP_MOBILITY_SERVICE_FILTER_APP_MOBILITY_SERVICE_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    AppMobilityServiceInfos
 
@@ -73,40 +73,90 @@ TC_MEC_MEC021_SRV_AMS_001_OK_02
     [TearDown]    Delete two specific AMS services    ${APP_MOBILITY_SERVICE_ID}    ${APP_MOBILITY_SERVICE_ID2}
 
 
-TC_MEC_MEC021_SRV_AMS_002_OK
-    [Documentation]   Request Registered AMS information using attribute-selector
-    ...  Check that the AMS service returns information about the registered application mobility services when requested
+TC_MEC_MEC021_SRV_AMS_001_OK_03
+    [Documentation]  Request Registered AMS information 
+    ...  Check that the AMS service returns information about the a specific registered application mobility service when requested - filter
     ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
-    Get Registered AMS information using attribute-selector    appMobilityServiceId    ${APP_MOBILITY_SERVICE_ID}
+
+    [Setup]    Create two new application mobility service      ${APP_MOBILITY_SERVICE_ID}    ${APP_INS_ID}    ${APP_MOBILITY_SERVICE_ID2}    ${APP_INS_ID}
+
+    Get Registered AMS information using attribute-selector    filter    ${APP_MOBILITY_SERVICE_FILTER_SERVICE_CONSUMER_ID}
     Check HTTP Response Status Code Is    200
-    Check HTTP Response Body Json Schema Is   AppMobilityServiceInfos
+    Check HTTP Response Body Json Schema Is    AppMobilityServiceInfos
+
     FOR    ${app}    IN    @{response['body']}
-        ${passed}    Run Keyword And Return Status    Should Be Equal As Strings  ${app['appMobilityServiceId']}    ${APP_MOBILITY_SERVICE_ID}  
-        Exit For Loop If    ${passed}
+        ${passed_appMobilityServiceId}    Run Keyword And Return Status    Should Be Equal As Strings  ${app['appMobilityServiceId']}    ${APP_MOBILITY_SERVICE_ID} 
+        ${passed_appInstanceId}    Run Keyword And Return Status    Should Be Equal As Strings  ${app['serviceConsumerId']['appInstanceId']}    ${APP_INS_ID}  
+        Exit For Loop If    ${passed_appMobilityServiceId} and ${passed_appInstanceId}
     END
-    
+
+    [TearDown]    Delete two specific AMS services    ${APP_MOBILITY_SERVICE_ID}    ${APP_MOBILITY_SERVICE_ID2}
+
+
+TC_MEC_MEC021_SRV_AMS_001_OK_04
+    [Documentation]  Request Registered AMS information 
+    ...  Check that the AMS service returns information about the a specific registered application mobility service when requested - filter
+    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.1
+    ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
+    [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
+
+    [Setup]    Create two new application mobility service      ${APP_MOBILITY_SERVICE_ID}    ${APP_INS_ID}    ${APP_MOBILITY_SERVICE_ID2}    ${APP_INS_ID}
+
+    Get Registered AMS information using attribute-selector    filter    ${APP_MOBILITY_SERVICE_FILTER_EXCLUDE_FIELDS}
+    Check HTTP Response Status Code Is    200
+    #Check HTTP Response Body Json Schema Is    AppMobilityServiceInfos
+
+    FOR    ${app}    IN    @{response['body']}
+        Should Be Equal As Strings  ${app['appMobilityServiceId']}    ${APP_MOBILITY_SERVICE_ID} 
+        Should Not Contain    ${app}    serviceConsumerId
+    END
+
+    [TearDown]    Delete two specific AMS services    ${APP_MOBILITY_SERVICE_ID}    ${APP_MOBILITY_SERVICE_ID2}
+
+#TC_MEC_MEC021_SRV_AMS_001_OK_05
+#    [Documentation]  Request Registered AMS information 
+#    ...  Check that the AMS service returns information about the registered application mobility services when requested - No registered application mobility service
+#    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.1
+#    ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
+#    [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
+
+
 
 TC_MEC_MEC021_SRV_AMS_001_BR
     [Documentation]    Request Registered AMS information using bad parameters
     ...  Check that the AMS service returns an error when receives a query about a registered application mobility service with wrong parameters
     ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.1
+    ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Get Registered AMS information using bad parameters
     Check HTTP Response Status Code Is    400
 
+
 # Post    ${apiRoot}/${apiName}/${apiVersion}/app_mobility_services
-TC_MEC_MEC021_SRV_AMS_003_OK
+TC_MEC_MEC021_SRV_AMS_002_OK
     [Documentation]   Register a new application mobility services
     ...  Check that the AMS service creates a new application mobility services when requested
     ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.4
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
-    Create a new application mobility service      ${APP_MOBILITY_SERVICE_ID}    
+    Create a new application mobility service      ${APP_MOBILITY_SERVICE_ID}    ${APP_INS_ID}      
     Check HTTP Response Status Code Is    201
     Check HTTP Response Body Json Schema Is    AppMobilityServiceInfo
-    Should Be Equal As Strings  ${response['body']['appMobilityServiceId']}    ${APP_MOBILITY_SERVICE_ID}    
+    Should Be Equal As Strings  ${response['body']['appMobilityServiceId']}    ${APP_MOBILITY_SERVICE_ID}   
+    Should Be Equal As Strings  ${response['body']['serviceConsumerId']['appInstanceId']}    ${APP_INS_ID}  
+
+
+TC_MEC_MEC021_SRV_AMS_002_BR
+    [Documentation]    Request Registered AMS information using bad parameters
+    ...  Check that the AMS service returns an error when receives a query about a registered application mobility service with wrong parameters
+    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.4
+    ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
+    [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
+
+
+ 
 
 TC_MEC_MEC021_SRV_AMS_003_BR
     [Documentation]   Register an UE Identity Tag using invalid parameter

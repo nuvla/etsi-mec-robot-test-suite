@@ -13,7 +13,9 @@ ${apiVersion}     v1
 ${APP_MOBILITY_SERVICE_ID}          APP_MOBILITY_SERVICE_ID
 ${APP_MOBILITY_SERVICE_ID2}          APP_MOBILITY_SERVICE_ID2
 ${MALFORMED_APP_MOBILITY_SERVICE_ID}          MALFORMED_APP_MOBILITY_SERVICE_ID
-${APP_MOBILITY_SERVICE_FILTER}        (eq,appMobilityServiceId,APP_MOBILITY_SERVICE)
+${APP_MOBILITY_SERVICE_FILTER_APP_MOBILITY_SERVICE_ID}        (eq,appMobilityServiceId,APP_MOBILITY_SERVICE_ID)
+${APP_MOBILITY_SERVICE_FILTER_SERVICE_CONSUMER_ID}        (eq,serviceConsumerId[appInstanceId],5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f)
+${APP_MOBILITY_SERVICE_FILTER_EXCLUDE_FIELDS}        (eq,appMobilityServiceId,APP_MOBILITY_SERVICE_ID)&exclude_fields=[serviceConsumerId]
 ${APP_INS_ID}                       5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 ${SUBSCRIPTION_TYPE}                MobilityProcedureSubscription
 ${SUBSCRIPTION_ID}                  e0deee2b-6e50-4f33-ab09-8bf0585025d3
