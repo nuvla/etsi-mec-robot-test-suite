@@ -2,21 +2,14 @@
 # Generic variables
 
 ${response}                         {}
-#########Env variable for validating TCs locally with Mockoon
-${SCHEMA}                   http
-${HOST}                     127.0.0.1
-${PORT}                     8082
-${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
-${apiRoot}        
+####Env variable for the ETSI MEC Sandbox
+${SCHEMA}                   https
+${HOST}                     try-mec.etsi.org
+${PORT}                     443
+#${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}		  /<replace_with_what_provided_by_sandbox>/mep1 
 ${apiName}        mec_service_mgmt
 ${apiVersion}     v1
-
-##Notification Server variables
-${NOTIFICATION_SERVER_IP}      127.0.0.1
-${NOTIFICATION_SERVER_PORT}      8888
-${NOTIFICATION_SERVER_HTTP_METHOD}      POST
-${NOTIFICATION_SERVER_URI}      /callback_url
-${NOTIFICATION_SERVER_TIMEOUT}      5
 
 
 # Specific variables

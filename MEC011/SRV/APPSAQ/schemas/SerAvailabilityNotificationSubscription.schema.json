@@ -1,0 +1,136 @@
+{
+          "title": "SerAvailabilityNotificationSubscription",
+          "required": [
+            "subscriptionType",
+            "callbackReference",
+            "_links"
+          ],
+          "type": "object",
+          "properties": {
+            "subscriptionType": {
+              "type": "string",
+              "description": "Shall be set to SerAvailabilityNotificationSubscription.",
+              "examples": [
+                "SerAvailabilityNotificationSubscription"
+              ]
+            },
+            "callbackReference": {
+              "type": "string",
+              "description": "URI selected by the MEC application instance to receive notifications on the subscribed MEC service availability information. This shall be included in both the request and the response."
+            },
+            "_links": {
+              "title": "Self",
+              "required": [
+                "self"
+              ],
+              "type": "object",
+              "properties": {
+                "self": {
+                  "title": "LinkType",
+                  "type": "object",
+                  "properties": {
+                    "href": {
+                      "type": "string",
+                      "description": "URI referring to a resource",
+                      "examples": [
+                        "/mecSerMgmtApi/example"
+                      ]
+                    }
+                  },
+                  "description": "This type represents a type of link and may be referenced from data structures"
+                }
+              },
+              "description": "Self-referring URI."
+            },
+            "filteringCriteria": {
+              "title": "SerAvailabilityNotificationSubscription.FilteringCriteria",
+              "type": "object",
+              "properties": {
+                "serInstanceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Identifiers of service instances about which to report events."
+                },
+                "serNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Names of services about which to report events."
+                },
+                "serCategories": {
+                  "type": "array",
+                  "items": {
+                    "title": "CategoryRef",
+                    "required": [
+                      "href",
+                      "id",
+                      "name",
+                      "version"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "type": "string",
+                        "description": "Reference of the catalogue",
+                        "examples": [
+                          "/example/catalogue1"
+                        ]
+                      },
+                      "id": {
+                        "type": "string",
+                        "description": "Unique identifier of the category",
+                        "examples": [
+                          "id12345"
+                        ]
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the category, example values include RNI, Location & Bandwidth Management",
+                        "examples": [
+                          "RNI"
+                        ]
+                      },
+                      "version": {
+                        "type": "string",
+                        "description": "Category version",
+                        "examples": [
+                          "version1"
+                        ]
+                      }
+                    },
+                    "description": "This type represents the category reference"
+                  },
+                  "description": "Categories of services about which to report events."
+                },
+                "states": {
+                  "type": "array",
+                  "items": {
+                    "title": "ServiceState",
+                    "enum": [
+                      "ACTIVE",
+                      "INACTIVE",
+                      "SUSPENDED"
+                    ],
+                    "type": "string",
+                    "description": "This enumeration defines the possible states of a service.",
+                    "examples": [
+                      "ACTIVE"
+                    ]
+                  },
+                  "description": "States of the services about which to report events. If the event is  a state change, this filter represents the state after the change."
+                },
+                "isLocal": {
+                  "type": "boolean",
+                  "description": "Indicate whether the service is located in the same locality (as defined by scopeOfLocality) as the consuming MEC application.",
+                  "examples": [
+                    true
+                  ]
+                }
+              },
+              "description": "Filtering criteria to match services for which events are requested to be reported. If absent, matches all services. All child attributes are combined with the logical  \"AND\" operation."
+            }
+          }
+        }

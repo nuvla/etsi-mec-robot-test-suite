@@ -4,8 +4,10 @@ Documentation
 ...    A test suite for validating Application Service Availability Query (APPSAQ) operations.
 
 Resource    ../../../GenericKeywords.robot
-Resource    environment/variables.txt
+#Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
+Library      libraries/Server.py
 
 Default Tags    TC_MEC_SRV_APPSAQ
 
@@ -22,6 +24,7 @@ TC_MEC_MEC011_SRV_APPSAQ_001_OK
     ...                 ETSI GS MEC 011 3.2.1, clause 8.2.6.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID}
+    Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
     Get a list of mecService of an application instance    ${APP_INSTANCE_ID} 
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    ServiceInfoList
@@ -33,7 +36,7 @@ TC_MEC_MEC011_SRV_APPSAQ_001_BR
     ...   Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 3.2.1, clause 5.2.5,
+    ...    Reference    ETSI G3.2.1 011 3.2.1, clause 5.2.5,
     ...                 ETSI GS MEC 011 3.2.1, clause 8.1.2.2,
     ...                 ETSI GS MEC 011 3.2.1, clause 8.2.6.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
@@ -51,13 +54,16 @@ TC_MEC_MEC011_SRV_APPSAQ_002_OK
     ...                 ETSI GS MEC 011 3.2.1, clause 8.1.2.2,
     ...                 ETSI GS MEC 011 3.2.1, clause 8.2.6.3.4
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup] 
     Create new service    ServiceInfo    ${APP_INSTANCE_ID}
     Check HTTP Response Status Code Is    201
     Check HTTP Response Body Json Schema Is    ServiceInfo
     Check HTTP Response Header Contains    Location
     Check Response Contains    ${response['body']}    serName    ${NEW_SERVICE_NAME}
-    ##TODO add notification server
-
+    Spawn Notification Server     SerAvailabilityNotificationSubscription    
+    Validate Json   SerAvailabilityNotificationSubscription.schema.json    ${payload_notification}
+    [TearDown]  Remove individual service    ${APP_INSTANCE_ID}    ${SERVICE_ID}
+    
 
 TC_MEC_MEC011_SRV_APPSAQ_002_BR
     [Documentation]
@@ -96,6 +102,7 @@ TC_MEC_MEC011_SRV_APPSAQ_003_OK
     ...              ETSI GS MEC 011 3.2.1, clause 8.2.7.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID} 
+    Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
     Get individual service    ${APP_INSTANCE_ID}    ${SERVICE_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    ServiceInfo
@@ -127,6 +134,7 @@ TC_MEC_MEC011_SRV_APPSAQ_004_OK
     ...                 ETSI GS MEC 011 3.2.1, clause 8.2.7.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID} 
+    Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
     Update service    ${APP_INSTANCE_ID}    ${SERVICE_ID}    ServiceInfoUpdated
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    ServiceInfo
@@ -143,7 +151,8 @@ TC_MEC_MEC011_SRV_APPSAQ_004_BR
     ...                 ETSI GS MEC 011 3.2.1, clause 8.1.2.2,
     ...                 ETSI GS MEC 011 3.2.1, clause 8.2.7.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID} 
+    [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID}
+    Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
     Update service    ${APP_INSTANCE_ID}    ${SERVICE_ID}    ServiceInfoUpdatedError
     Check HTTP Response Status Code Is    400
     [TearDown]  Remove individual service    ${APP_INSTANCE_ID}    ${SERVICE_ID}
@@ -173,6 +182,7 @@ TC_MEC_MEC011_SRV_APPSAQ_004_PF
     ...                 ETSI GS MEC 011 3.2.1, clause 8.2.7.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID} 
+    Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
     Update service with etag    ${APP_INSTANCE_ID}    ${SERVICE_ID}    ServiceInfoUpdated  ${INVALID_ETAG}
     Check HTTP Response Status Code Is    412
     [TearDown]  Remove individual service    ${APP_INSTANCE_ID}    ${SERVICE_ID}
@@ -186,6 +196,7 @@ TC_MEC_MEC011_SRV_APPSAQ_005_OK
     ...    Reference ETSI GS MEC 011 3.2.1, clause 8.2.7.3.5
    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
    [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID} 
+   Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
    Remove individual service    ${APP_INSTANCE_ID}    ${SERVICE_ID}
    Check HTTP Response Status Code Is    204
 
@@ -207,7 +218,7 @@ TC_MEC_MEC011_SRV_APPSAQ_005_NF
 Get a list of mecService of an application instance with parameters
     [Arguments]    ${appInstanceId}    ${key}=None    ${value}=None
     Set Headers    {"Accept":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    #Set Headers    {"Authorization":"${TOKEN}"}
     Set Headers    {"Content-Type":"*/*"}
     Get    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/services?${key}=${value}
     ${output}=    Output    response
@@ -217,7 +228,7 @@ Get a list of mecService of an application instance
     [Arguments]    ${appInstanceId}
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    #Set Headers    {"Authorization":"${TOKEN}"}
     Get    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/services
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
@@ -228,11 +239,11 @@ Create new service
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"application/json"}
     #Set Headers    {"Content-Type":"*/*"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    #Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    Log   ${appInstanceId}
     Post    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/services    ${body}
+    Log  ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/services
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
 
@@ -240,7 +251,7 @@ Create new service
 Get individual service
     [Arguments]    ${appInstanceId}    ${serviceName} 
     Set Headers    {"Accept":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    #Set Headers    {"Authorization":"${TOKEN}"}
     Set Headers    {"Content-Type":"*/*"}
     Get    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/services/${serviceName}
     ${output}=    Output    response
@@ -250,7 +261,7 @@ Update service
     [Arguments]    ${appInstanceId}    ${serviceId}    ${content}
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    #Set Headers    {"Authorization":"${TOKEN}"}
     #Set Headers    {"Content-Type":"*/*"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
@@ -262,7 +273,7 @@ Update service with etag
     [Arguments]    ${appInstanceId}    ${serviceId}    ${content}   ${etag}
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    #Set Headers    {"Authorization":"${TOKEN}"}
     Set Headers    {"If-Match":"${etag}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
@@ -274,31 +285,29 @@ Update service with etag
 Remove individual service
     [Arguments]    ${appInstanceId}    ${serviceName} 
     Set Headers    {"Accept":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    #Set Headers    {"Authorization":"${TOKEN}"}
     Set Headers    {"Content-Type":"*/*"}
     Delete    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/services/${serviceName}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
+   
+
+Create a new subscription   
+    [Arguments]    ${appInstanceId}    ${content}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    Post    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/subscriptions    ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
     
 
-# Check Plaform IUT notifies the MEC Application instances
-    # [Documentation]
-    # ...    
-
-    # [Arguments]    ${instance_id}    ${content}
-
-    # TODO check how to send the message (isn't defined). Does it need to be tested as it's not defined?
+Spawn Notification Server
+    [Arguments]  ${payload_notification}
     
-    # // MEC 011, clause 6.4.2
-    # the IUT entity sends a notification_message containing
-    # body containing
-    # notificationType set to "SerAvailabilityNotification",
-    # services containing
-    # serName set to SERVICE_NAME
-    # _links containing
-    # subscription set to MP1_SUBSCRIPTION_A
-    # ;
-    # ;
-    # ;
-    # ;
-    # to the MEC_APP_Subscriber entity
+    ${output}   Spawn Web Server  ${NOTIFICATION_SERVER_IP}  ${NOTIFICATION_SERVER_PORT}  ${NOTIFICATION_SERVER_TIMEOUT}  ${NOTIFICATION_SERVER_HTTP_METHOD}  ${NOTIFICATION_SERVER_URI}   ${payload_notification} 
+    ${length} =  Get Length  ${output}  
+    Set Suite Variable    ${payload_notification}    ${output}
+    Run Keyword If  ${length} == 0  Skip
