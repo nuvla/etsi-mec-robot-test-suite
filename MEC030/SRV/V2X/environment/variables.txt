@@ -1,13 +1,13 @@
 *** Variables ***
 # Generic variables
 ${SCHEMA}                   http
-${HOST}                     127.0.0.1
-${PORT}                     8082
+${HOST}                     mockoon
+${PORT}                     3005
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
 ${apiName}        vis
-${apiVersion}     v1
+${apiVersion}     v2
 
 # Specific variables
 ${LOCATION_INFO_QUERY_PARAM} 		location_info 								

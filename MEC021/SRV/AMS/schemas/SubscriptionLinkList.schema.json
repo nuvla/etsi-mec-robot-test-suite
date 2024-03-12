@@ -1,0 +1,64 @@
+{
+    "title": "SubscriptionLinkList",
+    "required": [
+        "_links"
+    ],
+    "type": "object",
+    "properties": {
+        "_links": {
+            "description": "Hyperlinks related to the resource.",
+            "title": "SubscriptionLinkList.links",
+            "required": [
+                "self"
+            ],
+            "type": "object",
+            "properties": {
+                "self": {
+                    "description": "URI of this resource.",
+                    "title": "LinkType",
+                    "required": [
+                        "href"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "href": {
+                            "type": "string",
+                            "description": "The URI referring to the subscription."
+                        }
+                    }
+                },
+                "subscription": {
+                    "type": "array",
+                    "description": "The service consumer’s subscriptions.",
+                    "items": {
+                        "title": "SubscriptionLinkList.subscription",
+                        "required": [
+                            "href",
+                            "subscriptionType"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "href": {
+                                "type": "string",
+                                "description": "The URI referring to the subscription."
+                            },
+                            "subscriptionType": {
+                                "description": "The Subscription Type",
+                                "title": "subscriptionType",
+                                "enum": [
+                                    0,
+                                    1,
+                                    2
+                                ],
+                                "type": "integer",
+                                "examples": [
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

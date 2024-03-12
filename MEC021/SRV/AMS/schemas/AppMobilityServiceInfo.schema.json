@@ -1,0 +1,99 @@
+{
+    "title": "RegistrationInfo",
+    "required": [
+      "serviceConsumerId"
+    ],
+    "type": "object",
+    "properties": {
+      "appMobilityServiceId": {
+        "type": "string",
+        "description": "The identifier of registered application mobility service. Shall be absent in POST requests, and present otherwise."
+      },
+      "deviceInformation": {
+        "type": "array",
+        "items": {
+          "title": "RegistrationInfo.deviceInformation",
+          "required": [
+            "associateId"
+          ],
+          "type": "object",
+          "properties": {
+            "associateId": {
+              "title": "AssociateId",
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object",
+              "properties": {
+                "type": {
+                  "title": "Type",
+                  "enum": [
+                    "UE_IPv4_ADDRESS",
+                    "UE_IPV6_ADDRESS",
+                    "NATED_IP_ADDRESS",
+                    "GTP_TEID"
+                  ],
+                  "type": "string",
+                  "description": "Numeric value (0-255) corresponding to specified type of identifier",
+                  "examples": [
+                    "UE_IPv4_ADDRESS"
+                  ]
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Value for the identifier."
+                }
+              }
+            },
+            "appMobilityServiceLevel": {
+              "title": "AppMobilityServiceLevel",
+              "enum": [
+                "APP_MOBILITY_NOT_ALLOWED",
+                "APP_MOBILITY_WITH_CONFIRMATION",
+                "APP_MOBILITY_WITHOUT_CONFIRMATION"
+              ],
+              "type": "string",
+              "description": "This attribute provides an option for the application instance (server) to communicate with the application client before relocating this application instance to another MEC host.",
+              "examples": [
+                "APP_MOBILITY_NOT_ALLOWED"
+              ]
+            },
+            "contextTransferState": {
+              "title": "contextTransferState",
+              "enum": [
+                "NOT_TRANSFERRED",
+                "USER_CONTEXT_TRANSFER_COMPLETED"
+              ],
+              "type": "string",
+              "description": "If present, it represents the state of transferring the user context to another application instance.",
+              "examples": [
+                "NOT_TRANSFERRED"
+              ]
+            }
+          }
+        },
+        "description": "If present, it specifies the device served by the application instance which is registering is registering the Application Mobility Service."
+      },
+      "expiryTime": {
+        "type": "integer",
+        "description": "If present, it indicates the time of Application Mobility Service expiration from the time of registration accepted.The value \"0\" means infinite time, i.e. no expiration.The unit of expiry time is one second.",
+        "contentEncoding": "int32"
+      },
+      "serviceConsumerId": {
+        "title": "RegistrationInfo.serviceConsumerId",
+        "type": "object",
+        "properties": {
+          "appInstanceId": {
+            "type": "string",
+            "description": "If present, it represents the identifier of the application instance registering the Application Mobility Service."
+          },
+          "mepId": {
+            "type": "string",
+            "description": "If present, it represents the identifier of the MEC platform registering the Application Mobility Service."
+          }
+        },
+        "description": "The identifier of service consumer requesting the application mobility service, i.e. either the application instance ID or the MEC platform ID."
+      }
+    }
+  }
