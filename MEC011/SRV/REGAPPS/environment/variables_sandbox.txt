@@ -1,0 +1,17 @@
+*** Variables ***
+# Generic variables
+#### Env variable for the ETSI MEC Sandbox
+${SCHEMA}                   https
+${HOST}                     try-mec.etsi.org
+${PORT}                     443
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}		  /<id_provided_by_sandbox>/mep1 
+${apiName}        mec_app_support
+${apiVersion}     v1
+${APP_INSTANCE_ID}                      f1e4d448-e277-496b-bf63-98391cfd20fb
+
+# Specific variables
+${APP_NAME}                 		appName
+#${APP_INSTANCE_ID}          		appInstanceId
+${NOT_EXISTING_APP_INSTANCE_ID} 	notExistingAppInstanceId
+${APPD_ID}                  		appDId

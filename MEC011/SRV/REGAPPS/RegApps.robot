@@ -5,6 +5,7 @@ Documentation
 
 Resource    ../../../GenericKeywords.robot
 Resource    environment/variables.txt
+#Resource    environment/variables_sandbox.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 
 Default Tags    TC_MEC_SRV_REGAPPS
@@ -17,8 +18,9 @@ TC_MEC_MEC011_SRV_REGAPPS_001_OK_01
     ...    Check that the IUT acknowledges the registration 
     ...    by a MEC Application to the MEC platform
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4
-
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.6"
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new MEC application instance profile   AppInfo 
     Check HTTP Response Status Code Is    201
@@ -33,8 +35,9 @@ TC_MEC_MEC011_SRV_REGAPPS_001_OK_02
     ...    Check that the IUT acknowledges the registration 
     ...    by a MEC Application to the MEC platform
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4
-
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.6"
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new MEC application instance profile   AppInfo2 
     ${APP_INSTANCE_ID_REQ}    Get value entry from JSON file   AppInfo2     appInstanceId
@@ -52,8 +55,9 @@ TC_MEC_MEC011_SRV_REGAPPS_001_OK_03
     ...    Check that the IUT acknowledges the registration 
     ...    by a MEC Application to the MEC platform
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4
-
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.6"
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new MEC application instance profile   AppInfo3 
     ${APP_INSTANCE_ID_REQ}    Get value entry from JSON file   AppInfo3     appInstanceId
@@ -74,8 +78,9 @@ TC_MEC_MEC011_SRV_REGAPPS_001_BR_01
     ...    Check that the IUT responds with an error message when the IUT received a registration with
     ...    missing fields from a MEC Application instantiated by the MEC platform
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4
-
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.6"
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new MEC application instance profile   AppInfoBR1 
     Check HTTP Response Status Code Is    400
@@ -86,8 +91,9 @@ TC_MEC_MEC011_SRV_REGAPPS_001_BR_02
     ...    Check that the IUT responds with an error message 
     ...    when the IUT received by a MEC Application registration with missing endpoint
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4
-
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.6"
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new MEC application instance profile   AppInfoBR2 
     Check HTTP Response Status Code Is    400
@@ -98,8 +104,9 @@ TC_MEC_MEC011_SRV_REGAPPS_001_BR_03
     ...    Check that the IUT responds with an error message when the IUT received by a 
     ...    MEC Application registration with unexpected appServiceRequired
     ...    
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4
-
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.6"
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new MEC application instance profile   AppInfoBR3 
     Check HTTP Response Status Code Is    400
@@ -110,8 +117,9 @@ TC_MEC_MEC011_SRV_REGAPPS_001_BR_04
     ...    Check that the IUT responds with an error message when the IUT received by a 
     ...    MEC Application registration with unexpected appServiceRequired
     ...    
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4
-
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.6"
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new MEC application instance profile   AppInfoBR4
     Check HTTP Response Status Code Is    400
@@ -122,7 +130,9 @@ TC_MEC_MEC011_SRV_REGAPPS_001_BR_05
     ...    Check that the IUT responds with an error message when the IUT received by a 
     ...    MEC Application registration with unexpected appFeatureRequired
     ...    
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.6"
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new MEC application instance profile   AppInfoBR5
@@ -134,7 +144,9 @@ TC_MEC_MEC011_SRV_REGAPPS_001_BR_06
     ...    Check that the IUT responds with an error message when the IUT received by a 
     ...    MEC Application registration with unexpected appFeatureOptional
     ...    
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.6"
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.13.3.4"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new MEC application instance profile   AppInfoBR6
@@ -147,7 +159,9 @@ TC_MEC_MEC011_SRV_REGAPPS_002_OK
     ...    Check that the IUT responds with the AppInfo description
     ...     when queried by a MEC Application
     ...    
-    ...    ETSI GS MEC 011 3.2.1, clause 7.2.14.3.1
+    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...                "ETSI GS MEC 011 3.2.1, clause 7.1.2.6",
+    ...                "ETSI GS MEC 011 3.2.1, clause 7.2.14.3.1"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile   AppInfo 
@@ -163,7 +177,9 @@ TC_MEC_MEC011_SRV_REGAPPS_002_NF
     ...    Check that the IUT responds with an error 
     ...    when it receives a request for returning an AppInfo with a wrong ID
     ...    
-    ...    ETSI GS MEC 011 3.2.1, clause 7.2.14.3.1
+    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...                "ETSI GS MEC 011 3.2.1, clause 7.1.2.6",
+    ...                "ETSI GS MEC 011 3.2.1, clause 7.2.14.3.1"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Delete MEC application instance profile   ${NOT_EXISTING_APP_INSTANCE_ID}
@@ -177,7 +193,9 @@ TC_MEC_MEC011_SRV_REGAPPS_003_OK
     ...    Check that the IUT responds with 204 No Content 
     ...    when queried to update MEC Application registration
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.14.3.2
+    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...                 "ETSI GS MEC 011 3.2.1, clause 7.1.2.6",
+    ...                 "ETSI GS MEC 011 3.2.1, clause 7.2.14.3.2"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile   AppInfo 
@@ -207,7 +225,9 @@ TC_MEC_MEC011_SRV_REGAPPS_004_OK
     ...    Check that the IUT responds with 204 No Content
     ...    when queried to delete an existing MEC Application registration
     ...    
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.14.3.5
+    ...    Reference        "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...                     "ETSI GS MEC 011 3.2.1, clause 7.1.2.6",
+    ...                     "ETSI GS MEC 011 3.2.1, clause 7.2.14.3.5"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile   AppInfo 
@@ -222,7 +242,9 @@ TC_MEC_MEC011_SRV_REGAPPS_004_NF
     ...    Check that the IUT responds with an error when queried to 
     ...    delete an unknown MEC Application registration
     ...    
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 7.2.14.3.5
+    ...    Reference        "ETSI GS MEC 011 3.2.1, clause 5.2.13",
+    ...                     "ETSI GS MEC 011 3.2.1, clause 7.1.2.6",
+    ...                     "ETSI GS MEC 011 3.2.1, clause 7.2.14.3.5"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Delete MEC application instance profile   ${NOT_EXISTING_APP_INSTANCE_ID}
