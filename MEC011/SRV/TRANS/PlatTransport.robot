@@ -4,7 +4,7 @@ Documentation
 ...    A test suite for validating Transport (TRANS) operations.
 
 Resource    ../../../GenericKeywords.robot
-Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem 
 
@@ -12,7 +12,6 @@ Default Tags    TC_MEC_SRV_TRANS
 
 
 *** Test Cases ***
-
 TC_MEC_MEC011_SRV_TRANS_001_OK
     [Documentation]
     ...    Check that the IUT responds with a list of available transports
