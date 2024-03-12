@@ -4,7 +4,7 @@ Documentation
 ...    A test suite for validating Service Subscriptions (SRVSUB) operations.
 
 Resource    ../../../GenericKeywords.robot
-Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem 
 Library     String
@@ -12,7 +12,6 @@ Default Tags    TC_MEC_SRV_SRVSUB
 
 
 *** Test Cases ***
-
 TC_MEC_MEC011_SRV_SRVSUB_001_OK
     [Documentation]
     ...    Check that the IUT responds with a list of subscriptions for notifications
@@ -52,11 +51,11 @@ TC_MEC_MEC011_SRV_SRVSUB_002_OK
     ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.3",
     ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.8.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    
     [Setup]  Create a new MEC application  AppInfo
     Create a new subscription    ${APP_INSTANCE_ID}    SerAvailabilityNotificationSubscription
     ${APP_SRVSUB_NOTIF_CALLBACK_URI}    Get value entry from JSON file   SerAvailabilityNotificationSubscription   callbackReference  
     ${SUB_TYPE}    Get value entry from JSON file   SerAvailabilityNotificationSubscription   subscriptionType  
-    
     Check HTTP Response Status Code Is    201
     Check HTTP Response Body Json Schema Is    SerAvailabilityNotificationSubscription
     Check HTTP Response Header Contains    Location
@@ -90,7 +89,6 @@ TC_MEC_MEC011_SRV_SRVSUB_003_OK
     ...                "ETSI GS MEC 011 3.2.1, clause 8.2.9.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application instance profile and create subscription  AppInfo   SerAvailabilityNotificationSubscription
-    
     Get individual subscription    ${APP_INSTANCE_ID}    ${SUB_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    SerAvailabilityNotificationSubscription
@@ -112,7 +110,7 @@ TC_MEC_MEC011_SRV_SRVSUB_003_NF
     [Setup]  Create a new MEC application  AppInfo
     Get individual subscription    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404
-    [TearDown]  Remove MEC application    ${APP_INSTANCE_ID} 
+   [TearDown]  Remove MEC application    ${APP_INSTANCE_ID} 
 
 TC_MEC_MEC011_SRV_SRVSUB_004_OK
     [Documentation]
@@ -123,8 +121,8 @@ TC_MEC_MEC011_SRV_SRVSUB_004_OK
     ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.3",
     ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.9.3.5"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    [Setup]  Create a new MEC application instance profile and create subscription  AppInfo   SerAvailabilityNotificationSubscription
-    Remove subscription    ${APP_INSTANCE_ID}    ${SUBSCRIPTION_ID}
+    [Setup]  Create a new MEC application instance profile and create subscription  AppInfo   SerAvailabilityNotificationSubscription   
+    Remove subscription    ${APP_INSTANCE_ID}    ${SUB_ID}
     Check HTTP Response Status Code Is    204
 
 
@@ -143,7 +141,6 @@ TC_MEC_MEC011_SRV_SRVSUB_004_NF
 
 
 *** Keywords ***
-
 Create a new MEC application
     [Arguments]    ${reg_app_content}
     Set Headers    {"Accept":"application/json"}
@@ -152,7 +149,7 @@ Create a new MEC application
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${reg_app_content}    .json
     ${body}=    Get File    ${file}
-    POST     http://${HOST_REGAPP}:${PORT_REGAPP}${apiRoot_REGAPP}/${apiName_REGAPP}/${apiVersion_REGAPP}/registrations    ${body}
+    POST     ${SCHEMA_REGAPP}://${HOST_REGAPP}:${PORT_REGAPP}${apiRoot_REGAPP}/${apiName_REGAPP}/${apiVersion_REGAPP}/registrations    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${APP_INSTANCE_ID}    ${output['body']['appInstanceId']}    
 
@@ -162,7 +159,7 @@ Remove MEC application
     Set Headers    {"Content-Type":"application/json"}
     #Set Headers    {"Content-Type":"*/*"}
     Set Headers    {"Authorization":"${TOKEN}"}
-    DELETE     http://${HOST_REGAPP}:${PORT_REGAPP}${apiRoot_REGAPP}/${apiName_REGAPP}/${apiVersion_REGAPP}/registrations/${app_instance_id}
+    DELETE     ${SCHEMA_REGAPP}://${HOST_REGAPP}:${PORT_REGAPP}${apiRoot_REGAPP}/${apiName_REGAPP}/${apiVersion_REGAPP}/registrations/${app_instance_id}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
