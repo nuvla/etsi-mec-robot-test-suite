@@ -4,7 +4,8 @@ Documentation
 ...    A test suite for validating Timing capabilities (TIME) operations.
 
 Resource    ../../../GenericKeywords.robot
-Resource    environment/variables.txt
+#Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem 
 
@@ -46,6 +47,7 @@ Get time capabilities
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
     Get    ${apiRoot}/${apiName}/${apiVersion}/timing/timing_caps
+    Log    ${apiRoot}/${apiName}/${apiVersion}/timing/timing_caps
     Set Headers    {"Content-Type":"*/*"}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}

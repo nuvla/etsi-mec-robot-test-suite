@@ -1,0 +1,24 @@
+*** Variables ***
+#### Env variable< for the ETSI MEC Sandbox
+${SCHEMA}                   https
+${HOST}                    try-mec.etsi.org
+${PORT}                     443
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}		  /<id_provided_by_sandbox>/mep1 
+${apiName}        mec_app_support
+${apiVersion}     v1
+####
+
+
+# ${SUBSCRIPTION_TYPE}                MobilityProcedureSubscription
+# ${NON_EXISTENT_APP_MOBILITY_SERVICE_ID}     NON_EXISTENT_APP_MOBILITY_SERVICE_ID
+
+# # Notifications variables
+# ${MOCK_SERVER_JAR}    ../../../bin/mockserver-netty-5.5.0-jar-with-dependencies.jar
+
+# ${callback_port}    9091
+# ${callback_uri}    http://172.22.1.7:${callback_port}
+# ${callback_endpoint}    /amsi/subscriptions
+# ${callback_endpoint_error}    /subs_404
+# ${total_polling_time}   2 min
+# ${polling_interval}     10 sec
