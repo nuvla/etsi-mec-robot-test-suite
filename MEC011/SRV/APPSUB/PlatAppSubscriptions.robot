@@ -4,7 +4,7 @@ Documentation
 ...    A test suite for validating Application Subscriptions (APPSUB) operations.
 
 Resource    ../../../GenericKeywords.robot
-Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem    
 Library     String
@@ -23,7 +23,7 @@ TC_MEC_MEC011_SRV_APPSUB_001_OK
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create new subscription    ${APP_INSTANCE_ID}    AppTerminationNotificationSubscription
     ${elements} =  Split String    ${response['body']['_links']['self']['href']}     /
-    Set Suite Variable    ${SUB_ID}    ${elements[3]}
+    Set Suite Variable    ${SUB_ID}    ${elements[-1]}
     Get Subscriptions list    ${APP_INSTANCE_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    SubscriptionsLinkList
@@ -38,7 +38,7 @@ TC_MEC_MEC011_SRV_APPSUB_001_NF
     ...    Reference          "ETSI GS MEC 011 3.2.1, clause 5.2.6",
     ...                       "ETSI GS MEC 011 3.2.1, clause 7.2.3.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    [TearDown]   Remove subscription   ${NON_EXISTENT_APP_INSTANCE_ID}    ${SUB_ID}
+    [Setup]   Remove subscription   ${NON_EXISTENT_APP_INSTANCE_ID}    ${SUB_ID}
     Get Subscriptions list    ${NON_EXISTENT_APP_INSTANCE_ID}
     Check HTTP Response Status Code Is    404
 
@@ -51,15 +51,16 @@ TC_MEC_MEC011_SRV_APPSUB_002_OK
     ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.6",
     ...                "ETSI GS MEC 011 3.2.1, clause 7.2.3.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    
     Create new subscription    ${APP_INSTANCE_ID}    AppTerminationNotificationSubscription
+    ${CALLBACK_REF}   Get value entry from JSON file    AppTerminationNotificationSubscription  callbackReference
     ${elements} =  Split String    ${response['body']['_links']['self']['href']}     /
-    Set Suite Variable    ${SUB_ID}    ${elements[3]}
- 
+    Set Suite Variable    ${SUB_ID}    ${elements[-1]}
     Check HTTP Response Status Code Is    201
     Check HTTP Response Body Json Schema Is    AppTerminationNotificationSubscription
     Check HTTP Response Header Contains    Location
     Check Response Contains    ${response['body']}    subscriptionType    AppTerminationNotificationSubscription
-    Check Response Contains    ${response['body']}    callbackReference    ${APP_TERM_NOTIF_CALLBACK_URI}
+    Check Response Contains    ${response['body']}    callbackReference    ${CALLBACK_REF}
     [TearDown]   Remove subscription   ${APP_INSTANCE_ID}    ${SUB_ID}
 
 
@@ -85,7 +86,7 @@ TC_MEC_MEC011_SRV_APPSUB_003_OK
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create new subscription    ${APP_INSTANCE_ID}    AppTerminationNotificationSubscription
     ${elements} =  Split String    ${response['body']['_links']['self']['href']}     /
-    Set Suite Variable    ${SUB_ID}    ${elements[3]} 
+    Set Suite Variable    ${SUB_ID}    ${elements[-1]} 
     Get individual subscription    ${APP_INSTANCE_ID}    ${SUB_ID} 
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    AppTerminationNotificationSubscription
@@ -114,7 +115,9 @@ TC_MEC_MEC011_SRV_APPSUB_004_OK
     ...                 "ETSI GS MEC 011 3.2.1, clause 7.2.4.3.5"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create new subscription    ${APP_INSTANCE_ID}    AppTerminationNotificationSubscription
-    Remove subscription    ${APP_INSTANCE_ID}    ${SUBSCRIPTION_ID}
+    ${elements} =  Split String    ${response['body']['_links']['self']['href']}     /
+    Set Suite Variable    ${SUB_ID}    ${elements[-1]}
+    Remove subscription    ${APP_INSTANCE_ID}    ${SUB_ID}
     Check HTTP Response Status Code Is    204
 
 

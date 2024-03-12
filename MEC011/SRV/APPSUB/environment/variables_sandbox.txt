@@ -1,13 +1,13 @@
 *** Variables ***
-# Generic variables
-${SCHEMA}                   http
-${HOST}                     127.0.0.1
-${PORT}                     8081
-${response}                         {}
+####Env variable for the ETSI MEC Sandbox
+${SCHEMA}                   https
+${HOST}                     try-mec.etsi.org
+${PORT}                     443
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
-${apiRoot}        
+${apiRoot}		  /<identifier_provided_by_the_sandbox>/mep1 
 ${apiName}        mec_app_support
 ${apiVersion}     v1
+
 
 # Specific variables
 
