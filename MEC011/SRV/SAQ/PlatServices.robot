@@ -4,13 +4,11 @@ Documentation
 ...    A test suite for validating Service Availability Query (SAQ) operations.
 
 Resource    ../../../GenericKeywords.robot
-Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem  
 
 Default Tags    TC_MEC_SRV_SAQ
-
-
 
 *** Test Cases ***
 TC_MEC_MEC011_SRV_SAQ_001_OK
@@ -24,11 +22,10 @@ TC_MEC_MEC011_SRV_SAQ_001_OK
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create new service   ServiceInfo    ${APP_INSTANCE_ID}
-    ${SER_NAME}    Get value entry from JSON file   ServiceInfo     serName
     Get list of available MEC services
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    ServiceInfoList
-    [TearDown]   Remove individual service    ${APP_INSTANCE_ID}   ${SER_NAME}
+    [TearDown]   Remove individual service    ${APP_INSTANCE_ID}   ${SERVICE_ID}
     
 
 TC_MEC_MEC011_SRV_SAQ_001_BR
@@ -88,17 +85,17 @@ Create new service
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    POST      http://${HOST_APP_SAQ}:${PORT_APP_SAQ}/${apiRoot_APP_SAQ}${apiName_APP_SAQ}/${apiVersion_APP_SAQ}/applications/${appInstanceId}/services    ${body}
+    POST      ${SCHEMA_APP_SAQ}://${HOST_APP_SAQ}:${PORT_APP_SAQ}/${apiRoot_APP_SAQ}${apiName_APP_SAQ}/${apiVersion_APP_SAQ}/applications/${appInstanceId}/services    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
-    Set Suite Variable     ${SERVICE_NAME}     ${response['body']['serName']}   
+    Set Suite Variable     ${SERVICE_ID}     ${response['body']['serInstanceId']}   
     
 Remove individual service
     [Arguments]    ${appInstanceId}    ${serviceName} 
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
     Set Headers    {"Content-Type":"*/*"}
-    DELETE    http://${HOST_APP_SAQ}:${PORT_APP_SAQ}/${apiRoot_APP_SAQ}${apiName_APP_SAQ}/${apiVersion_APP_SAQ}/applications/${appInstanceId}/services/${serviceName}
+    DELETE    ${SCHEMA_APP_SAQ}://${HOST_APP_SAQ}:${PORT_APP_SAQ}/${apiRoot_APP_SAQ}${apiName_APP_SAQ}/${apiVersion_APP_SAQ}/applications/${appInstanceId}/services/${serviceName}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
     
@@ -116,7 +113,7 @@ Get list of available MEC services
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
     Set Headers    {"Content-Type":"*/*"}
-    Get    ${apiRoot}/${apiName}/${apiVersion}/services
+    Get  ${apiRoot}/${apiName}/${apiVersion}/services
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
