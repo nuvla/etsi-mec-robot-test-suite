@@ -4,18 +4,15 @@ Documentation
 ...    A test suite for validating DNS rules (DNS) operations.
 
 Resource    ../../../GenericKeywords.robot
-Resource    environment/variables.txt
+#Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem 
 
 Default Tags    TC_MEC_SRV_DNS
 
 
-*** Variables ***
-
-
 *** Test Cases ***
-
 TC_MEC_MEC011_SRV_DNS_001_OK
     [Documentation]
     ...    Check that the IUT responds with a list of active DNS rules
@@ -40,7 +37,7 @@ TC_MEC_MEC011_SRV_DNS_001_NF
     ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
     ...               "ETSI GS MEC 011 3.2.1, clause 7.2.9.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    [Teardown]   Delete MEC application instance profile   ${NOT_EXISTENT_APP_INSTANCE_ID}
+    [Setup]   Delete MEC application instance profile   ${NOT_EXISTENT_APP_INSTANCE_ID}
     Get list of active DNS rules    ${NOT_EXISTENT_APP_INSTANCE_ID}
     Check HTTP Response Status Code Is    404
     
@@ -57,7 +54,6 @@ TC_MEC_MEC011_SRV_DNS_002_OK
     ...               "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
-    
     Get individual DNS rule    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    DnsRule
@@ -74,7 +70,6 @@ TC_MEC_MEC011_SRV_DNS_002_NF
     ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
     ...               "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    
     Get individual DNS rule    ${APP_INSTANCE_ID}    ${NON_ESISTENT_DNS_RULE_ID}
     Check HTTP Response Status Code Is    404
 
@@ -86,7 +81,7 @@ TC_MEC_MEC011_SRV_DNS_003_OK
     ...
     ...    Reference "ETSI GS MEC 011 3.2.1, clause 5.2.8",
     ...              "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
-    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.1"
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.2"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
     Update a DNS Rule    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}    DnsRuleUpdate
@@ -104,7 +99,7 @@ TC_MEC_MEC011_SRV_DNS_003_BR
     ...
     ...    Reference "ETSI GS MEC 011 3.2.1, clause 5.2.8",
     ...              "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
-    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.1"
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.2"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
@@ -120,7 +115,7 @@ TC_MEC_MEC011_SRV_DNS_003_NF
     ...
     ...    Reference "ETSI GS MEC 011 3.2.1, clause 5.2.8",
     ...              "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
-    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.1"
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.2"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
@@ -137,7 +132,7 @@ TC_MEC_MEC011_SRV_DNS_003_PF
     ...
     ...    Reference "ETSI GS MEC 011 3.2.1, clause 5.2.8",
     ...              "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
-    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.1"
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.2"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
     Update a DNS Rule with invalid etag    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}    DnsRuleUpdate
@@ -200,7 +195,7 @@ Update a DNS Rule
     Set Headers    {"If-Match": "${VALID_ETAG}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    PUT    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/dns_rules/${dnsRuleId}    ${body}
+    Put    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/dns_rules/${dnsRuleId}    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
@@ -213,6 +208,6 @@ Update a DNS Rule with invalid etag
     Set Headers    {"If-Match": "${INVALID_ETAG}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    PUT    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/dns_rules/${dnsRuleId}    ${body}
+    Put    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/dns_rules/${dnsRuleId}    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
