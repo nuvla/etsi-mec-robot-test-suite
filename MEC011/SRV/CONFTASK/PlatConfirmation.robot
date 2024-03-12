@@ -4,18 +4,15 @@ Documentation
 ...    A test suite for validating Platform Configuration (CONF) operations.
 
 Resource    ../../../GenericKeywords.robot
-Resource    environment/variables.txt
-Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
+#Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
+Library     REST    ${SCHEMA}://${HOST}:${PORT}  
 Library     OperatingSystem 
 
 Default Tags    TC_MEC_SRV_CONF
 
 
-*** Variables ***
-
-
 *** Test Cases ***
-
 TC_MEC_MEC011_SRV_CONFTASK_001_OK
     [Documentation]
     ...    Check that the IUT responds that it has completed 
@@ -71,7 +68,7 @@ TC_MEC_MEC011_SRV_CONFTASK_002_NF
     ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
     ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    [Teardown]   Delete MEC application instance profile   ${NON_EXISTING_APP_INSTANCE_ID}
+    [Setup]   Delete MEC application instance profile   ${NON_EXISTING_APP_INSTANCE_ID}
     Request readiness status of MEC Application    ${NON_EXISTING_APP_INSTANCE_ID}   AppReadyConfirmation
     Check HTTP Response Status Code Is    404
 
@@ -85,7 +82,7 @@ Create a new MEC application instance profile
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    POST      http://${HOST_REG_APP}:${PORT_REG_APP}/${apiRoot_REG_APP}${apiName_REG_APP}/${apiVersion_REG_APP}/registrations    ${body}
+    Post      ${HOST_REG_APP}:${PORT_REG_APP}/${apiRoot_REG_APP}${apiName_REG_APP}/${apiVersion_REG_APP}/registrations    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     Set Suite Variable    ${APP_INSTANCE_ID}   ${response['body']['appInstanceId']}
@@ -98,7 +95,7 @@ Delete MEC application instance profile
     Set Headers    {"Content-Type":"application/json"}
     #Set Headers    {"Content-Type":"*/*"}
     Set Headers    {"Authorization":"${TOKEN}"}
-    Delete    http://${HOST_REG_APP}:${PORT_REG_APP}/${apiRoot_REG_APP}${apiName_REG_APP}/${apiVersion_REG_APP}/registrations/${app_instance_id}
+    Delete    ${HOST_REG_APP}:${PORT_REG_APP}/${apiRoot_REG_APP}${apiName_REG_APP}/${apiVersion_REG_APP}/registrations/${app_instance_id}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
 
@@ -109,7 +106,7 @@ Request termination of MEC Application
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    POST    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/confirm_termination    ${body}
+    Post    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/confirm_termination    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
@@ -121,6 +118,6 @@ Request readiness status of MEC Application
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    POST    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/confirm_ready    ${body}
+    Post    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/confirm_ready    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
