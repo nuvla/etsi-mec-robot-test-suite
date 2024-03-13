@@ -8,7 +8,10 @@
     },
     "filterCriteriaAssocHo": {
         "associateId": [
-            "associatedId"
+            { 
+            "type":0,
+            "value":"associatedId"
+            }
         ]
     }
 }

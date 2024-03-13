@@ -2,7 +2,7 @@
 ...    Test Suite to validate RNIS/Subscription (RNIS) operations.
 
 *** Settings ***
-Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Resource    ../../../pics.txt
 Resource    ../../../GenericKeywords.robot
 #Resource    resources/RadioNetworkInformationAPI.robot
@@ -54,7 +54,7 @@ TC_MEC_MEC012_SRV_RNIS_012_OK
     ...  Check that the RNIS service creates a new RNIS subscription
     ...  ETSI GS MEC 012 2.2.1, clause 7.6.3.4
     ...  Reference https://forge.etsi.org/rep/mec/gs012-rnis-api/blob/automatic_generation/RniAPI.yaml
-    [Setup]  Send a request for a subscription and get sub ID     CellChangeSubscription
+    Send a request for a subscription and get sub ID     CellChangeSubscription
     ${sub_type}   Get value entry from JSON file    CellChangeSubscription    subscriptionType
     ${callback_ref}   Get value entry from JSON file    CellChangeSubscription    callbackReference
     Check HTTP Response Status Code Is    201
@@ -89,7 +89,7 @@ Send a request for a subscription and get sub ID
     [Arguments]    ${content}
     Send a request for a subscription      ${content}
     ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${SUB_ID}    ${elements[4]} 
+    Set Suite Variable    ${SUB_ID}    ${elements[-1]} 
 
 
 Send a request for a subscription    
@@ -99,6 +99,7 @@ Send a request for a subscription
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
+    Log     ${apiRoot}/${apiName}/${apiVersion}/subscriptions
     Post    ${apiRoot}/${apiName}/${apiVersion}/subscriptions    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 

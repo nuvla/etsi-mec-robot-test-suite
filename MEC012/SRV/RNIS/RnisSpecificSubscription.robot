@@ -3,7 +3,7 @@
 
 *** Settings ***
 Library    OperatingSystem
-Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Resource    ../../../GenericKeywords.robot
 Resource    resources/RadioNetworkInformationAPI.robot
 Library     REST    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}    ssl_verify=false
@@ -31,7 +31,7 @@ TC_MEC_MEC012_SRV_RNIS_014_BR
     ...    Reference https://forge.etsi.org/rep/mec/gs012-rnis-api/blob/automatic_generation/RniAPI.yaml
     [Setup]   Post RNIS subscription request    CellChangeSubscription
     ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${SUB_ID}    ${elements[4]} 
+    Set Suite Variable    ${SUB_ID}    ${elements[-1]} 
     Update Individual RNIS Subscription  ${SUB_ID}    UpdateCellChangeSubscriptionRequestBr
     Check HTTP Response Status Code Is    400
     [TearDown]  Delete Individual RNIS Subscription    ${SUB_ID}
@@ -43,7 +43,7 @@ TC_MEC_MEC012_SRV_RNIS_014_NF
     ...    ETSI GS MEC 012 2.2.1, clause 7.8.3.2
     ...    Reference https://forge.etsi.org/rep/mec/gs012-rnis-api/blob/automatic_generation/RniAPI.yaml
     [Setup]   Delete Individual RNIS Subscription    ${NON_EXISTENT_SUBSCRIPTION_ID}
-    Update Individual RNIS Subscription  ${NON_EXISTENT_SUBSCRIPTION_ID}    UpdateCellChangeSubscriptionRequest
+    Update Individual RNIS Subscription  ${NON_EXISTENT_SUBSCRIPTION_ID}    UpdateCellChangeSubscriptionRequestNf
     Check HTTP Response Status Code Is    404
     
 TC_MEC_MEC012_SRV_RNIS_015_NF
@@ -63,7 +63,7 @@ TC_MEC_MEC012_SRV_RNIS_013_OK
     ...    Reference https://forge.etsi.org/rep/mec/gs012-rnis-api/blob/automatic_generation/RniAPI.yaml
     [Setup]   Post RNIS subscription request    CellChangeSubscription
     ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${SUB_ID}    ${elements[4]} 
+    Set Suite Variable    ${SUB_ID}    ${elements[-1]} 
     Get Individual RNIS Subscription    ${SUB_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   CellChangeSubscription
@@ -162,6 +162,6 @@ Delete Individual RNIS Subscription
     Set Headers    {"Content-Type":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
     Set Headers    {"Content-Length":"0"}
-    Delete    ${apiRoot}/rni/${apiVersion}/subscriptions/${SUBSCRIPTION_ID}
+    Delete    ${apiRoot}/rni/${apiVersion}/subscriptions/${subscription_id}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}

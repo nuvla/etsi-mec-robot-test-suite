@@ -2,7 +2,6 @@
 ...    Test Suite to validate RNIS/Notification (RNIS) operations.
 
 *** Settings ***
-
 Resource     environment/variables.txt
 Resource     ../../../pics.txt
 Resource     ../../../GenericKeywords.robot

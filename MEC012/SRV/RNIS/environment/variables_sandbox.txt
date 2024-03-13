@@ -1,15 +1,18 @@
 *** Variables ***
-${MEC-APP_SCHEMA}                   http
-${MEC-APP_HOST}                     127.0.0.1
-${MEC-APP_PORT}                     8085
-${apiRoot}      
-${apiName}      rni
-${apiVersion}    v2
+####Env variable for the ETSI MEC Sandbox
+${MEC-APP_SCHEMA}                   https
+${MEC-APP_HOST}                     try-mec.etsi.org
+${MEC-APP_PORT}                     443
+#${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}		  /<id_returned_by_sandbox>/mep1 
+${apiName}        rni
+${apiVersion}     v2
+
 
 
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
-${SUB_ID}
+${SUB_ID}                           15
 
 
 ##Notification Server variables
@@ -23,7 +26,7 @@ ${NOTIFICATION_SERVER_TIMEOUT}      5
 ${NON_EXISTENT_SUBSCRIPTION_ID}       123456789
 ${APP_INS_ID}                 appInsId
 ${NOT_EXISTENT_APP_INS_ID}    NOT_EXISTENT_APP_INS_ID
-${NOT_EXISTENT_CELL_ID}       0x8000099
+${NOT_EXISTENT_CELL_ID}       0xffff8000099
 ${CELL_ID}                    6060606
 ${HREF}
 ${LINKS_SELF}

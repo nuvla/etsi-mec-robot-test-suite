@@ -2,7 +2,7 @@
 ...    Test Suite to validate RNIS/Subscription (RNIS) operations.
 
 *** Settings ***
-Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Resource    ../../../pics.txt
 Resource    ../../../GenericKeywords.robot
 Resource    resources/RadioNetworkInformationAPI.robot
@@ -13,7 +13,8 @@ Library     REST    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}    ssl_v
 *** Test Cases ***
 TC_MEC_MEC012_SRV_RNIS_016_BR
     [Documentation]   Request RabInfo info using wrong parameters
-    ...  Check that the RNIS service returns an error when the RAB information is requested with a malformatted message
+    ...  Check that the RNIS service returns an error when the RAB 
+    ...  information is requested with a malformatted message
     ...  ETSI GS MEC 012 2.2.1, clause 7.3.3.1
     ...  Reference https://forge.etsi.org/gitlab/mec/gs012-rnis-api/blob/master/RniAPI.yaml#/definitions/RabInfo
     Get RabInfo info using wrong parameters
@@ -83,7 +84,7 @@ TC_MEC_MEC012_SRV_RNIS_019_NF
     ...  ETSI GS MEC 012 2.2.1, clause 7.5a.3.1
     ...  Reference https://forge.etsi.org/gitlab/mec/gs012-rnis-api/blob/master/RniAPI.yaml#/definitions/S1BearerInfo
     Get L2Meas info using non existing cell id
-    Check HTTP Response Status Code Is    200
+    Check HTTP Response Status Code Is    404
 
 
 TC_MEC_MEC012_SRV_RNIS_016_OK
