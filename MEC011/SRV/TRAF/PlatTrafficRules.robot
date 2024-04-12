@@ -62,6 +62,22 @@ TC_MEC_MEC011_SRV_TRAF_002_OK
     Check Response Contains    ${response['body']}    trafficRuleId    ${TRAFFIC_RULE_ID}
     [TearDown]  Remove MEC application  ${APP_INSTANCE_ID}
 
+
+TC_MEC_MEC011_SRV_TRAF_002_NF
+    [Documentation]
+    ...    Check that the IUT responds with an error when a request for an unknown traffic rule
+    ...     when queried by a MEC Application
+    ...
+    ...    Reference  ETSI GS MEC 011 3.2.1, clause 5.2.7,
+    ...    ETSI GS MEC 011 3.2.1, clause 7.1.2.2,
+    ...    ETSI GS MEC 011 3.2.1, clause 7.2.8.3.1
+
+    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    Get individual traffic rule    ${APP_INSTANCE_ID}    ${NON_EXISTENT_TRAFFIC_RULE_ID}
+    Check HTTP Response Status Code Is    404
+    
+
+
 TC_MEC_MEC011_SRV_TRAF_003_OK
     [Documentation]
     ...    Check that the IUT updates a specific traffic rule
