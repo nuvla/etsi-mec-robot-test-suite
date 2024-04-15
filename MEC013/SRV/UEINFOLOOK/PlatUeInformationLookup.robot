@@ -5,7 +5,7 @@ Documentation
 
 Resource    ../../../GenericKeywords.robot
 Resource    ../../../pics.txt
-Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem 
 
@@ -19,9 +19,9 @@ TC_MEC_MEC013_SRV_UEINFLOOK_001_OK_01
     ...    Check that the IUT responds with the information pertaining to one or more UEs in a particular location
     ...    when queried by a MEC Application - No Filter
     ...    Reference    ETSI GS MEC 013 3.1.1 Clause 5.3.2
-    ...        ETSI GS MEC 013 3.1.1 Clause 6.2.2
-    ...        ETSI GS MEC 013 3.1.1 Clause 6.2.5
-    ...        ETSI GS MEC 013 3.1.1 Clause 7.4.3.1
+    ...                 ETSI GS MEC 013 3.1.1 Clause 6.2.2
+    ...                 ETSI GS MEC 013 3.1.1 Clause 6.2.5
+    ...                 ETSI GS MEC 013 3.1.1 Clause 7.4.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get list of users
@@ -54,7 +54,7 @@ TC_MEC_MEC013_SRV_UEINFLOOK_001_OK_03
     ...        ETSI GS MEC 013 3.1.1 Clause 7.4.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Get list of users with filter      address     ${ACR_ADDRESS},${ACR_ADDRESS2}
+    Get list of users with multiple filters     address   ${ACR_ADDRESS}  address   ${ACR_ADDRESS2}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    UserList
     
@@ -108,6 +108,15 @@ Get list of users
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
 
+Get list of users with multiple filters   
+    [Arguments]    ${key}    ${value}    ${key2}    ${value2}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Log    ${apiRoot}/${apiName}/${apiVersion}/queries/users?${key}=${value}&${key2}=${value2}
+    Get    ${apiRoot}/${apiName}/${apiVersion}/queries/users?${key}=${value}&${key2}=${value2}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+    
 Get list of users with filter   
     [Arguments]     ${key}   ${values}
     Set Headers    {"Accept":"application/json"}
