@@ -101,7 +101,7 @@ TC_MEC_MEC013_SRV_UEZONELOOK_002_NF
     ...    ETSI GS MEC 013 3.1.1 Clause 6.3.3
     ...    ETSI GS MEC 013 3.1.1 Clause 7.11.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES  
-    Get subscriptions
+    Get the zone info location  ${NOT_EXISTING_SUB_ID}  
     Check HTTP Response Status Code Is    404
 
 

@@ -1,5 +1,6 @@
 {
     "subscriptionType": "UserAreaSubscription",
+    "callbackReference" :"somecallback",
     "areaDefine": {
         "shape": 1,
         "points": [

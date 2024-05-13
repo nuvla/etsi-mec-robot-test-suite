@@ -15,9 +15,10 @@ Default Tags    TC_MEC_SRV_UEAREASUB
 
 
 *** Test Cases ***
-TP_MEC_MEC013_SRV_UEAREALOOK_001_OK_01
+TC_MEC_MEC013_SRV_UEAREALOOK_001_OK_01
     [Documentation]
-    ...    Check that the IUT responds with a list of UE area subscriptions when queried by a MEC Application - No filter
+    ...    Check that the IUT responds with a list of UE area subscriptions 
+    ...    when queried by a MEC Application - No filter
     ...
     ...    Reference   ETSI GS MEC 013 3.1.1 Clause 5.3.2
     ...    ETSI GS MEC 013 3.1.1 Clause 6.3.3
@@ -32,9 +33,10 @@ TP_MEC_MEC013_SRV_UEAREALOOK_001_OK_01
     [TearDown]   Remove subscription    ${SUB_ID}
 
 
-TP_MEC_MEC013_SRV_UEAREALOOK_001_OK_02
+TC_MEC_MEC013_SRV_UEAREALOOK_001_OK_02
     [Documentation]
-    ...    Check that the IUT responds with a list of UE area subscriptions when queried by a MEC Application - No filter
+    ...    Check that the IUT responds with a list of UE area subscriptions 
+    ...    when queried by a MEC Application - No filter
     ...
     ...    Reference   ETSI GS MEC 013 3.1.1 Clause 5.3.2
     ...    ETSI GS MEC 013 3.1.1 Clause 6.3.8
@@ -50,7 +52,7 @@ TP_MEC_MEC013_SRV_UEAREALOOK_001_OK_02
     [TearDown]   Remove subscription    ${SUB_ID}
 
 
-TP_MEC_MEC013_SRV_UEAREALOOK_002_OK
+TC_MEC_MEC013_SRV_UEAREALOOK_002_OK
     [Documentation]
     ...    Check that the IUT acknowledges the change of UE area subscription request 
     ...    when commanded by a MEC Application
@@ -68,10 +70,10 @@ TP_MEC_MEC013_SRV_UEAREALOOK_002_OK
     [TearDown]   Remove subscription    ${SUB_ID}
 
 
-TP_MEC_MEC013_SRV_UEAREALOOK_002_NF
+TC_MEC_MEC013_SRV_UEAREALOOK_002_NF
     [Documentation]
     ...    Check that the IUT responds with an error 
-    ...     when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
+    ...    when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
     ...
     ...    Reference  ETSI GS MEC 013 3.1.1 Clause 6.3.8
     ...    ETSI GS MEC 013 3.1.1 Clause 6.4.8
@@ -127,6 +129,7 @@ Create new subscription
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
+    Log     ${apiRoot}/${apiName}/${apiVersion}/subscriptions/area
     Post    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/area    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}

@@ -87,7 +87,7 @@ TC_MEC_MEC013_SRV_UELOCLOOK_002_OK_03
 
 
     
-TP_MEC_MEC013_SRV_UELOCLOOK_002_BR
+TC_MEC_MEC013_SRV_UELOCLOOK_002_BR
         [Documentation]
     ...  Check that the IUT responds with an error when 
     ...   inconsistent request was sent by a MEC Application - Invalid filter
@@ -104,7 +104,7 @@ TP_MEC_MEC013_SRV_UELOCLOOK_002_BR
     
 
 
-TP_MEC_MEC013_SRV_UELOCLOOK_002_NF
+TC_MEC_MEC013_SRV_UELOCLOOK_002_NF
         [Documentation]
     ...  Check that the IUT responds with an error 
     ...  when inconsistent request was sent by a MEC Application
@@ -113,14 +113,14 @@ TP_MEC_MEC013_SRV_UELOCLOOK_002_NF
     ...    ETSI GS MEC 013 3.1.1, clause 7.5.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    [Setup]   Create multiple subscriptions and get sub ids    UserLocationEventSubscription    UserLocationPeriodicSubscription
+    [Setup]   Remove subscriptions    ${SUB_ID_01}   ${SUB_ID_02}
     Get subscriptions
     Check HTTP Response Status Code Is    404
     [TearDown]   Remove subscriptions    ${SUB_ID_01}   ${SUB_ID_02}
     
 
 
-TP_MEC_MEC013_SRV_UELOCLOOK_003_OK_01
+TC_MEC_MEC013_SRV_UELOCLOOK_003_OK_01
     [Documentation]
     ...    Check that the IUT responds with the subscription 
     ...    when queried by a MEC Application - UE location Event
@@ -139,7 +139,7 @@ TP_MEC_MEC013_SRV_UELOCLOOK_003_OK_01
     [TearDown]   Remove subscription    ${SUB_ID}
     
 
-TP_MEC_MEC013_SRV_UELOCLOOK_003_OK_02
+TC_MEC_MEC013_SRV_UELOCLOOK_003_OK_02
     [Documentation]
     ...    Check that the IUT responds with the subscription when queried by a MEC Application - UE location Periodic
     ...
@@ -158,7 +158,7 @@ TP_MEC_MEC013_SRV_UELOCLOOK_003_OK_02
     
 
     
-TP_MEC_MEC013_SRV_UELOCLOOK_003_NF
+TC_MEC_MEC013_SRV_UELOCLOOK_003_NF
     [Documentation]
     ...    Check that the IUT responds with an error 
     ...    when the non existing subscription is queried by a MEC Application

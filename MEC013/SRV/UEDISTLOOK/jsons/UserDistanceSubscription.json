@@ -1,18 +1,16 @@
 {
-                    "userDistanceSubscription": {
-                      "subscriptionType": "UserDistanceSubscription",
-                      "clientCorrelator": "0123",
-                      "callbackReference": "http://my.callback.com/user-distance/some-id",
-                      "referenceAddress": [
-                        "acr:10.0.0.3"
-                      ],
-                      "monitoredAddress": [
-                        "acr:10.0.0.1",
-                        "acr:10.0.0.2"
-                      ],
-                      "distance": 100,
-                      "trackingAccuracy": 10,
-                      "criteria": "AllWithinDistance",
-                      "checkImmediate": true
-                    }
-                  }
+      "subscriptionType": "UserDistanceSubscription",
+      "clientCorrelator": "0123",
+      "callbackReference": "http://my.callback.com/user-distance/some-id",
+      "referenceAddress": [
+        "acr:10.0.0.3"
+      ],
+      "monitoredAddress": [
+        "acr:10.0.0.1",
+        "acr:10.0.0.2"
+      ],
+      "distance": 100,
+      "trackingAccuracy": 10,
+      "criteria": "AllWithinDistance",
+      "checkImmediate": true
+}

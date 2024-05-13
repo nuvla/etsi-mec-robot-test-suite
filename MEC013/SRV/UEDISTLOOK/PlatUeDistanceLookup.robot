@@ -17,7 +17,6 @@ ${response}
 
 
 *** Test Cases ***
-
 TC_MEC_MEC013_SRV_UEDISTLOOK_001_OK
     [Documentation]
     ...    Check that the IUT responds with the list of UE distance subscriptions to a UE 
@@ -97,6 +96,7 @@ Create new subscription
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
+    Log   ${body}
     Post    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/distance    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
