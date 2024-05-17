@@ -1,0 +1,49 @@
+*** Variables ***
+
+# Generic variables
+${SCHEMA}                   https
+${HOST}                     try-mec.etsi.org
+${PORT}                     443
+${response}                         {}
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        /<your_token_here>/mep1 
+${apiName}        bwm
+${apiVersion}     v1
+
+# Specific variables
+
+
+
+
+${CORRECT_FILTER}						 app_instance_id
+${BAD_FILTER}							 appInsId
+${APP_INSTANCE_ID}                       81c51643-8c6f-4781-ad45-f8a457ca549b
+${NON_EXISTENT_APP_INSTANCE_ID}          NON_EXISTENT_INSTANCE_ID
+${SESSION_ID}                            5
+${APP_NAME_FILTER}                       app_name
+${APP_NAME}                              appName
+${NON_EXISTENT_APP_NAME}                 NON_EXISTENT_APP_NAME
+
+${SESSION_ID_FILTER}                    session_id
+${NON_EXISTENT_SESSION_ID}                 NON_EXISTENT_SESSION_ID
+
+
+${FIXED_ALLOCATION}						 32
+${ALLOCATION_DIRECTION}					 00
+
+${APP_SRVSUB_NOTIF_CALLBACK_URI}         http://127.0.0.1/subscribe
+${SUBSCRIPTION_ID}                       e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${NON_EXISTENT_SUBSCRIPTION_ID}          NON_EXISTENT_SUBSCRIPTION_ID
+${ALLOCATION_ID}                         6
+${NON_EXISTENT_ALLOCATION_ID}            NON_EXISTENT_ALLOCATION_ID
+${INVALID_ETAG}							 INVALID_ETAG
+${ETAG_VALUE}
+${ETAG}
+
+##Variables for App Instances management
+${APP_INST_HOST}                     127.0.0.1
+${APP_INST_PORT}                     8081
+${apiRoot_APP_INST}
+${apiName_APP_INST}                  app_lcm
+${apiVersion_APP_INST}               v1
+${elements}
