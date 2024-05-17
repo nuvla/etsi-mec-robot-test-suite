@@ -13,7 +13,6 @@ ${REGISTER_ACTION}        REGISTER
 ${REMOVE_ACTION}          REMOVE 
 ${NO_ACTION}              NO_ACTION
 
-
 ${PLATFORM_ID_PLACEHOLDER}        PLATFORM_ID_PLACEHOLDER
 ${IOT_PLATFORM_ID}                iotPlatformId
 ${NOT_EXISTING_IOT_PLATFORM_ID}   notExistingIotPlatformId

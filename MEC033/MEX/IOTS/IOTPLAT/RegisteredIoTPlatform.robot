@@ -21,7 +21,7 @@ TC_MEC_MEC033_MEX_IOTS_IOTPLAT_001_OK
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]      Test Setup   ${None}   IoTPlatformInfo      ${REGISTER_ACTION}
     ${IOT_PLATFORM_ID_VALUE}   Get value entry from JSON file    IoTPlatformInfo  iotPlatformId
-    LOG    ${IOT_PLATFORM_ID_VALUE} 
+
     Retrieve all registered IOT Platform information
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is  IotPlatformInfoList
