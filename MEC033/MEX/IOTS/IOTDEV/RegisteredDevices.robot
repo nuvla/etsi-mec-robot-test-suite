@@ -16,7 +16,8 @@ Test Teardown    Test TearDown    ${DEVICE_ID_PLACEHOLDER}   DeviceInfo      ${N
 *** Test Cases ***
 TC_MEC_MEC033_IOTS_IOTDEV_001_OK_01
     [Documentation]
-    ...  Check that the IUT responds with the list of registered IoT devices when queried by a Service Consumer
+    ...  Check that the IUT responds with the list of registered IoT devices 
+    ...  when queried by a Service Consumer
     ...  ETSI GS MEC 033 V3.1.1, clause 7.3.3.1
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     
