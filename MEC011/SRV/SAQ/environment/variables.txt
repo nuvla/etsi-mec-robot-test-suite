@@ -8,6 +8,7 @@ ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
 ${apiName}        mec_service_mgmt
 ${apiVersion}     v1
+${SCHEMA_APP_SAQ}        http
 
 # Specific variables
 ${INVALID_VALUE}                INVALID_VALUE
