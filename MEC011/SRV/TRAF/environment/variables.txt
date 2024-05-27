@@ -17,6 +17,7 @@ ${NON_EXISTENT_TRAFFIC_RULE_ID}          NON_EXISTENT_TRAFFIC_RULE_ID
 ${INVALID_ETAG}                          INVALID_ETAG
 
 ##Registration App variables
+${SCHEMA_REGAPP}                   http
 ${HOST_REGAPP}                     127.0.0.1
 ${PORT_REGAPP}                     8082
 ${apiRoot_REGAPP}

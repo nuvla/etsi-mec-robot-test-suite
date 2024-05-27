@@ -10,12 +10,13 @@ ${apiName}        mts
 ${apiVersion}     v1
 
 # Specific variables
-${APP_INSTANCE_ID}					appInstId01
+${APP_NAME}							app_name
+${APP_INSTANCE_ID}					5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 ${NOT_EXISTING_APP_INSTANCE_ID}		NOT_EXISTING_APP_INS_ID
 ${CORRECT_FILTER}					app_instance_id
 ${APP_NAME_FILTER}					APP_NAME
 ${BAD_FILTER}						appInsId
-
+${SESSION_ID_FILTER}                session_id
 ${SESSION_ID}						1
 ${WRONG_SESSION_ID}					WRONG_SESSION_ID
 ${NOT_EXISTING_SESSION_ID}			NOT_EXISTING_SESSION_ID

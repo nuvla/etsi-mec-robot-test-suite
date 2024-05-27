@@ -10,6 +10,8 @@ ${apiRoot}
 # Specific variables
 ${URL_SERVICE_MEC_LIVENESS} 	/link/to/individual/mecServiceLiveness
 ${NOT_EXISTING_URL_SERVICE_MEC_LIVENESS} 	/not_existing_link/to/individual/mecServiceLiveness
+${URL_SERVICE_MEC_LIVENESS}             link/to/individual/mecServiceLiveness
+${LIVENESS_URI}                         link/to/individual/mecServiceLiveness
 
 
 #Variables for test setups and teardowns

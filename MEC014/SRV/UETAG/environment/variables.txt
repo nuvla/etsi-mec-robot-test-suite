@@ -9,7 +9,7 @@ ${apiName}                          ui
 ${apiVersion}                       v1
 
 ${ZONE_ID}                          zone01
-${APP_INSTANCE_ID}
+${APP_INSTANCE_ID}                  app-inst-id
 ${NON_EXISTENT_APP_INSTANCE_ID}     NON_EXISTENT_APP_INSTANCE_ID
 ${UE_IDENTITY_TAG}                  UeIdentityTag
 ${UE_IDENTITY_TAG_INVALID_STATE}    UeTagC

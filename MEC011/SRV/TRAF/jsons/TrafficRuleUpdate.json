@@ -1,5 +1,5 @@
 {
-  "trafficRuleId": "traffic_rule_01",
+  "trafficRuleId": "e0deee2b-6e50-4f33-ab09-8bf0585025d3",
   "filterType": "FLOW",
   "priority": 1,
   "trafficFilter": [
