@@ -40,19 +40,17 @@ ${WRONG_CONTENT_TYPE}               application/json
 ${SUBSCRIPTION_ID}                  e0deee2b-6e50-4f33-ab09-8bf0585025d3
 ${NOT_EXISTING_APP_PKG_ID}          NOT_EXISTING_APP_PKG_ID
 
-
+${NOT_EXISTING_ON_BOARDED_APP_PKG_ID}   NOT_EXISTING_ON_BOARDED_APP_PKG_ID
+${NON_EXISTING_ON_BOARDED_APPD_ID}      NON_EXISTING_ON_BOARDED_APPD_ID
 
 ${SUBSCRIPTION_TYPE}                AppPackageOnBoardingSubscription
 ${NON_EXISTENT_SUBSCRIPTION_ID}     NON_EXISTENT_SUBSCRIPTION_ID
 ${CALLBACK_URI}                     http://some.url/somepath
 
 
-# Notifications variables
-${MOCK_SERVER_JAR}    ../../../bin/mockserver-netty-5.5.0-jar-with-dependencies.jar
-
-${callback_port}    9091
-${callback_uri}    http://172.22.1.7:${callback_port}
-${callback_endpoint}    /amsi/subscriptions
-${callback_endpoint_error}    /subs_404
-${total_polling_time}   2 min
-${polling_interval}     10 sec
+##Notification Server variables
+${NOTIFICATION_SERVER_IP}      127.0.0.1
+${NOTIFICATION_SERVER_PORT}      8888
+${NOTIFICATION_SERVER_HTTP_METHOD}      POST
+${NOTIFICATION_SERVER_URI}      /callback_url
+${NOTIFICATION_SERVER_TIMEOUT}      5
