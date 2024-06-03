@@ -5,7 +5,6 @@
 Resource    environment/variables.txt
 Resource    ../../../pics.txt
 Resource    ../../../GenericKeywords.robot
-Resource    resources/UEidentityAPI.robot
 Library     REST    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}    ssl_verify=false
 
 
@@ -97,7 +96,7 @@ TC_MEC_MEC014_SRV_UETAG_002_NF
     [Documentation]   Register an UE Identity Tag using invalid state
     ...  Check that the IUT responds with an error when an unauthorised request is sent by a MEC Application
     ...  Reference ETSI GS MEC 014 3.1.1, clause 7.3.3.2
-    [Setup]  Delete APP Instance  ${NON_EXISTENT_APP_INSTANCE_ID} 
+    #[Setup]  Delete APP Instance  ${NON_EXISTENT_APP_INSTANCE_ID} 
     Update an UE Identity Tag     ${NON_EXISTENT_APP_INSTANCE_ID}   IdentityTag  
     Check HTTP Response Status Code Is    404
     
