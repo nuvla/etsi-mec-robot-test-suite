@@ -5,7 +5,7 @@ Documentation
 
 Resource    ../../../GenericKeywords.robot
 Resource    ../../../pics.txt
-Resource    environment/variables_sandbox.txt
+Resource    environment/variables.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem 
 
@@ -13,8 +13,7 @@ Default Tags    TC_MEC_SRV_UEINFOLOOK
 
 
 *** Test Cases ***
-
-TC_MEC_MEC013_SRV_UEINFLOOK_001_OK_01
+TC_MEC_MEC013_SRV_UEINFOLOOK_001_OK_01
     [Documentation]
     ...    Check that the IUT responds with the information pertaining to one or more UEs in a particular location
     ...    when queried by a MEC Application - No Filter
@@ -28,7 +27,7 @@ TC_MEC_MEC013_SRV_UEINFLOOK_001_OK_01
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    UserList
 
-TC_MEC_MEC013_SRV_UEINFLOOK_001_OK_02
+TC_MEC_MEC013_SRV_UEINFOLOOK_001_OK_02
     [Documentation]
     ...    Check that the IUT responds with the information pertaining to one or more UEs in a particular location
     ...    when queried by a MEC Application - Filter with one address
@@ -44,7 +43,7 @@ TC_MEC_MEC013_SRV_UEINFLOOK_001_OK_02
     
 
 
-TC_MEC_MEC013_SRV_UEINFLOOK_001_OK_03
+TC_MEC_MEC013_SRV_UEINFOLOOK_001_OK_03
     [Documentation]
     ...    Check that the IUT responds with the information pertaining to one or more UEs in a particular location
     ...    when queried by a MEC Application - Filter with several addresses
@@ -59,7 +58,7 @@ TC_MEC_MEC013_SRV_UEINFLOOK_001_OK_03
     Check HTTP Response Body Json Schema Is    UserList
     
 
-TC_MEC_MEC013_SRV_UEINFLOOK_001_OK_04
+TC_MEC_MEC013_SRV_UEINFOLOOK_001_OK_04
     [Documentation]
     ...    Check that the IUT responds with the information pertaining to one or more UEs in a particular location
     ...    when queried by a MEC Application - Filter with several zoneIds
@@ -76,7 +75,7 @@ TC_MEC_MEC013_SRV_UEINFLOOK_001_OK_04
 
 
 
-TC_MEC_MEC013_SRV_UEINFLOOK_001_BR
+TC_MEC_MEC013_SRV_UEINFOLOOK_001_BR
     [Documentation]
     ...    Check that the IUT responds with the information pertaining to one or more UEs in a particular location
     ...    when queried by a MEC Application - Filter with several zoneIds
@@ -89,7 +88,7 @@ TC_MEC_MEC013_SRV_UEINFLOOK_001_BR
     Get list of users with filter      addr     ${ACR_ADDRESS}
     Check HTTP Response Status Code Is    400
 
-TC_MEC_MEC013_SRV_UEINFLOOK_001_NF
+TC_MEC_MEC013_SRV_UEINFOLOOK_001_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...   a request for an unknown URI is sent by a MEC Application
