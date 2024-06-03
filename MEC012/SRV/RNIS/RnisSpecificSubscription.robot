@@ -3,9 +3,8 @@
 
 *** Settings ***
 Library    OperatingSystem
-Resource    environment/variables_sandbox.txt
+Resource    environment/variables.txt
 Resource    ../../../GenericKeywords.robot
-Resource    resources/RadioNetworkInformationAPI.robot
 Library     REST    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}    ssl_verify=false
 Library     String
 

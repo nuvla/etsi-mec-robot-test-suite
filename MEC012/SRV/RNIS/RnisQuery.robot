@@ -2,10 +2,9 @@
 ...    Test Suite to validate RNIS/Subscription (RNIS) operations.
 
 *** Settings ***
-Resource    environment/variables_sandbox.txt
+Resource    environment/variables.txt
 Resource    ../../../pics.txt
 Resource    ../../../GenericKeywords.robot
-Resource    resources/RadioNetworkInformationAPI.robot
 Library     REST    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}    ssl_verify=false
 
 
@@ -262,3 +261,29 @@ Get Layer2Meas Info
     Get    ${apiRoot}/rni/${apiVersion}/queries/layer2_meas?cell_id=${CELL_ID}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
+    
+
+Check RabInfo
+    [Arguments]    ${received_value}
+    log    ${received_value}
+    Should Not Be Empty    ${received_value['requestId']}
+    Run Keyword If    'cellUserInfo' in ${received_value}    Should Be Equal As Strings    ${received_value['cellUserInfo'][0]['ecgi']['cellId']}    ${CELL_ID}
+
+Check PlmnInfo
+    [Arguments]    ${received_value}
+    log    ${received_value}
+    Should Be Equal As Strings   ${received_value['appInstanceId']}    ${APP_INS_ID}
+    Should Not Be Empty    ${received_value['plmn'][0]['mcc']}    
+    Should Not Be Empty    ${received_value['plmn'][0]['mnc']}    
+
+
+Check S1BearerInfo
+    [Arguments]    ${received_value}
+    log    ${received_value}
+    Should Be Equal As Strings    ${received_value['s1UeInfo'][0]['ecgi'][0]['cellId']}    ${CELL_ID}
+    
+Check L2MeasInfo
+    [Arguments]    ${received_value}
+    log    ${received_value}
+    Should Be Equal As Strings    ${received_value['cellInfo'][0]['ecgi'][0]['cellId']}    ${CELL_ID}
+    #Should Be Equal As Strings    ${received_value['cellInfo'][0]['ecgi']['cellId']}    ${CELL_ID}
