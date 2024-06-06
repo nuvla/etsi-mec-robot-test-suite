@@ -48,7 +48,6 @@ TC_MEC_MEC010p2_MEX_LCM_002_OK
     Check HTTP Response Status Code Is  200
     
     FOR    ${appInstance}    IN    @{response['body']}
-        ##TODO validate against the new schema
         Validate Json    AppInstanceInfo.schema.json    ${appInstance}
         ${passed}    Run Keyword And Return Status  Should Be Equal As Strings  ${appInstance}[id]    ${NEW_APP_INSTANCE_ID}    
         Exit For Loop If    ${passed}
@@ -68,9 +67,7 @@ TC_MEC_MEC010p2_MEX_LCM_003_OK
     Set Test Variable  ${NEW_APP_INSTANCE_ID}    ${response['body']['id']}  
     GET APP Instance   ${NEW_APP_INSTANCE_ID}  
     Check HTTP Response Status Code Is  200
-    ##TODO validate against the new schema
     Check HTTP Response Body Json Schema Is   AppInstanceInfo
-    Log   ${response['body']}
     Should Be Equal As Strings   ${response['body']['id']}    ${NEW_APP_INSTANCE_ID}
     [TearDown]  Delete APP Instance   ${NEW_APP_INSTANCE_ID}
 
@@ -141,7 +138,7 @@ TC_MEC_MEC010p2_MEX_LCM_006_OK
     ...    ETSI GS MEC 010-2 3.1.1, clause 7.4.7.3.1
     ...    ETSI GS MEC 010-2 3.1.1, table 6.2.2.9.2-1  #TerminateAppRequest
     [Setup]  Create and Instantiate App Instance    CreateAppInstanceRequest     InstantiateAppRequest 
-    ##TODO sleep for a while because the instantiation is not immediate
+    Sleep  5   ##Change it according to your need
     Terminate App Request  ${APP_ID}  TerminateAppRequest    
     Check HTTP Response Status Code Is    202
     Check HTTP Response Header Contains    Location
@@ -439,7 +436,6 @@ Create new App Instance
 
 
 GET all APP Instances 
-    Log    Get all App Instances
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
     Set Headers    {"Authorization":"${TOKEN}"}
