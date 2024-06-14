@@ -8,7 +8,7 @@ Library      REST    ${MEPM_SCHEMA}://${MEPM_HOST}:${MEPM_PORT}    ssl_verify=fa
 Library      BuiltIn
 Library      OperatingSystem
 Resource     ../../../pics.txt
-
+Library     libraries/Server.py
 
 *** Test Cases ***
 TC_MEC_MEC010p2_MEPM_PKGM_001_01_OK
@@ -28,7 +28,7 @@ TC_MEC_MEC010p2_MEPM_PKGM_001_01_OK
     [Teardown]   Delete an individual APP Package identified by ID    ${APP_PKG_ID}
 
 
-TC_MEC_MEC010p2_MEPM_PKGM_002_01_OK
+TC_MEC_MEC010p2_MEPM_PKGM_001_02_OK
     [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_002_01_OK  
     ...  Check that MEPM returns the list of on-boarded App Packages when requested - Note 3
     ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.1.3.1
@@ -187,7 +187,7 @@ TC_MEC_MEC010p2_MEPM_PKGM_006_OK
     Delete a subscription  ${SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    204   
 
-TC_MEC_MEC010p2_MEPM_PKGM_006_OK
+TC_MEC_MEC010p2_MEPM_PKGM_006_NF
     [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_006_NF
     ...  Check that MEPM service sends an error 
     ...  when it receives a deletion request for a subscription on AppPackages 
@@ -198,8 +198,177 @@ TC_MEC_MEC010p2_MEPM_PKGM_006_OK
     Delete a subscription  ${NON_EXISTENT_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404  
         
+
+TC_MEC_MEC010p2_MEPM_PKGM_007_OK
+    [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_007_OK
+    ...  Check that the MEPM service sends a application package notification 
+    ...  if the MEPM service has an associated subscription and the event is generated
+    ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.5.3.1,
+    ...  ETSI GS MEC 010-2 3.1.1, clause 6.2.3.6.2  ##AppPkgNotification
+    [Tags]    PIC_APP_PACKAGE_NOTIFICATIONS
+    [Setup]  Create a subscription     AppPkgSubscription.json
+    Set Suite Variable     ${SUBSCRIPTION_ID}  ${response['body']['id']}
+    Spawn Notification Server     AppPkgNotification
+    Validate Json   AppPkgNotification.schema.json    ${payload_notification}
+    [TearDown]   Delete a subscription   ${SUBSCRIPTION_ID}
+
+
+
+
+TC_MEC_MEC010p2_MEPM_PKGM_008_NA
+    [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_008_NA  
+    ...  Check that MEPM responds with an error when it receives 
+    ...  a POST request referring an application descriptor AppD
+    ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.6.3.1
+
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT 
+    [Setup]   Create new App Package        CreateAppPackage.json
+    Set Suite Variable    ${APP_PKG_ID}    ${response['body']['id']}
+    Set Suite Variable    ${APPD_ID}    ${response['body']['appDId']}
+    Post an AppD identified by    ${APP_PKG_ID}
+    Check HTTP Response Status Code Is    405    
+    [Teardown]   Delete an individual APP Package identified by ID     ${APP_PKG_ID}
+
+
+
+
+
+TC_MEC_MEC010p2_MEPM_PKGM_009_OK
+    [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_009_OK
+    ...  Check that MEPM returns the Application Descriptor contained on an on-boarded Application Package when requested
+    ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.6.3.2
+    ...   ETSI GS MEC 010-2 3.1.1, clause 6.2.1.2.2  ##AppD
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT
+    [Setup]   Create new App Package        CreateAppPackage.json
+    Set Suite Variable    ${APP_PKG_ID}    ${response['body']['id']}
+    Set Suite Variable    ${ON_BOARDED_APPD_ID}    ${response['body']['appDId']}
+    Get an AppD identified by   ${ON_BOARDED_APPD_ID}
+    Check HTTP Response Status Code Is    200
+    [Teardown]   Delete an individual APP Package identified by ID    ${APP_PKG_ID}
+
+
+TC_MEC_MEC010p2_MEPM_PKGM_009_NF
+    [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_009_NF
+    ...  Check that MEPM responds with an error when it receives 
+    ...  a request for returning a App Descriptor referred with a wrong App Package ID
+    ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.6.3.2
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT
+    [Setup]  Delete an AppD by ID    ${NON_EXISTENT_APP_PKG_ID}
+    Get an AppD identified by    ${NON_EXISTENT_APP_PKG_ID}
+    Check HTTP Response Status Code Is    404
+  
+
+TC_MEC_MEC010p2_MEPM_PKGM_010_FO
+    [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_010_FO
+    ...  Check that MEPM responds with an error when it receives 
+    ...  a PUT request referring an application descriptor AppD
+    ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.6.3.3
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT
+    [Setup]   Create new App Package        CreateAppPackage.json
+    Set Suite Variable    ${APP_PKG_ID}    ${response['body']['id']}
+    Set Suite Variable    ${ON_BOARDED_APPD_ID}    ${response['body']['appDId']}
+    Update an AppD identified by   ${ON_BOARDED_APPD_ID}
+    Check HTTP Response Status Code Is    403
+    [Teardown]   Delete an individual APP Package identified by ID    ${APP_PKG_ID} 
+        
+
+TC_MEC_MEC010p2_MEPM_PKGM_011_NA
+    [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_011_NA
+    ...  Check that MEPM responds with an error when it receives 
+    ...  a DELETE request referring an application descriptor AppD
+    ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.6.3.4
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT
+    [Setup]   Create new App Package        CreateAppPackage.json
+    Set Suite Variable    ${APP_PKG_ID}    ${response['body']['id']}
+    Delete an AppD by ID   ${APP_PKG_ID}
+    Check HTTP Response Status Code Is    405
+    [Teardown]   Delete an individual APP Package identified by ID    ${APP_PKG_ID} 
+        
+
+
+TC_MEC_MEC010p2_MEPM_PKGM_012_01_OK
+    [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_012_01_OK
+    ...  Check that MEPM fetches the on-boarded application package content identified by appPkgId when requested
+    ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.7.3.2
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT
+    [Setup]   Create new App Package        CreateAppPackage.json
+    Set Suite Variable    ${APP_PKG_ID}    ${response['body']['id']}
+    GET all app Packages content by appPkgId   ${APP_PKG_ID}
+    Check HTTP Response Status Code Is    200
+    [Teardown]   Delete an individual APP Package identified by ID    ${APP_PKG_ID} 
     
+TC_MEC_MEC010p2_MEPM_PKGM_012_02_OK
+    [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_012_02_OK
+    ...  heck that MEPM fetches the on-boarded application package content identified by appDId when requested
+    ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.7.3.2
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT
+    [Setup]   Create new App Package        CreateAppPackage.json
+    Set Suite Variable    ${APP_PKG_ID}    ${response['body']['id']}
+    Set Suite Variable    ${ON_BOARDED_APPD_ID}    ${response['body']['appDId']}
+    GET all app Packages content by appPkgId   ${ON_BOARDED_APPD_ID}
+    Check HTTP Response Status Code Is    200
+    [Teardown]   Delete an individual APP Package identified by ID    ${APP_PKG_ID} 
+        
+
+
+TC_MEC_MEC010p2_MEPM_PKGM_012_01_NF
+    [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_012_01_NF
+    ...  Check that MEPM fetches the on-boarded application package content identified by appPkgId when requested
+    ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.7.3.2
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT
+    [Setup]  Delete an individual APP Package identified by ID    ${NON_EXISTENT_APP_PKG_ID}
+    GET all app Packages content by appPkgId   ${NON_EXISTENT_APP_PKG_ID}
+    Check HTTP Response Status Code Is    404
+    
+
+
+TC_MEC_MEC010p2_MEPM_PKGM_012_02_NF
+    [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_012_02_NF
+    ...  Check that MEPM service sends an error when it receives a query with an application package with a wrong identifier
+    ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.7.3.2
+    [Tags]    PIC_APP_PACKAGE_MANAGEMENT
+    [Setup]  Delete an individual APP Package identified by ID    ${NON_EXISTENT_APPD_ID}
+    GET all app Packages content by appPkgId   ${NON_EXISTENT_APPD_ID}
+    Check HTTP Response Status Code Is    404
+    
+
 *** Keywords ***
+Get an AppD identified by
+    [Arguments]    ${appDId}
+    Log    Getting App descriptor for App Package
+    Set Headers    {"Accept":"${ACCEPTED_CONTENT_TYPE}"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Get   ${apiRoot}/${apiName}/${apiVersion}/app_packages/${appDId}/appd
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output} 
+
+Post an AppD identified by
+    [Arguments]    ${appDId}
+    Log    Getting App descriptor for App Package
+    Set Headers    {"Accept":"${ACCEPTED_CONTENT_TYPE}"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Post   ${apiRoot}/${apiName}/${apiVersion}/app_packages/${appDId}/appd
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output} 
+
+Update an AppD identified by
+    [Arguments]    ${appDId}
+    Log    Getting App descriptor for App Package
+    Set Headers    {"Accept":"${ACCEPTED_CONTENT_TYPE}"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Put   ${apiRoot}/${apiName}/${apiVersion}/app_packages/${appDId}/appd
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output} 
+    
+Delete an AppD by ID
+    [Arguments]    ${identifier}    
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Delete    ${apiRoot}/${apiName}/${apiVersion}/app_packages/${identifier}/appd
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output} 
+       
 Create new App Package
     [Arguments]    ${content}
     Set Headers    {"Accept":"*/*"}
@@ -211,7 +380,6 @@ Create new App Package
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}     
    
-
 GET all app Packages
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
@@ -219,7 +387,6 @@ GET all app Packages
     Get    ${apiRoot}/${apiName}/${apiVersion}/app_packages    
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
-
 
 GET all app Packages with filter
     [Arguments]    ${key}    ${value}
@@ -241,6 +408,17 @@ Get an individual APP Package identified by ID
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
 
+
+
+GET all app Packages content by appPkgId
+    [Arguments]    ${identifier}  
+    Set Headers    {"Accept":"application/zip"}
+    Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Get    ${apiRoot}/${apiName}/${apiVersion}/app_packages/${identifier}/package_content   
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output} 
+    
 
 Create a subscription    
     [Arguments]    ${content}
@@ -293,8 +471,6 @@ Delete an individual APP Package identified by ID
     
 
 Spawn Notification Server
-    [Arguments]  ${host}  ${port}  ${timeout}  ${method}  ${endpoint}  ${notification_content}    ${autosent_notification}
-    ${file}=    Catenate    SEPARATOR=    jsons/    ${notification_content}    .json
-    ${body}=    Get File    ${file}
-    #Spawn Web Server  ${host}  ${port}  ${timeout}  ${method}  ${endpoint}  ${body}     ${autosent_notification}
-
+    [Arguments]  ${payload_notification}
+    ${output}   Spawn Web Server  ${NOTIFICATION_SERVER_IP}  ${NOTIFICATION_SERVER_PORT}  ${NOTIFICATION_SERVER_TIMEOUT}  ${NOTIFICATION_SERVER_HTTP_METHOD}  ${NOTIFICATION_SERVER_URI}   ${payload_notification} 
+    Set Suite Variable    ${payload_notification}    ${output}
