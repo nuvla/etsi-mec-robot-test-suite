@@ -148,12 +148,13 @@ TC_MEC_MEC021_SRV_AMS_002_OK
     Should Be Equal As Strings  ${response['body']['serviceConsumerId']['appInstanceId']}    ${APP_INS_ID}  
 
 
-TC_MEC_MEC021_SRV_AMS_002_BR
-    [Documentation]    Request Registered AMS information using bad parameters
-    ...  Check that the AMS service returns an error when receives a query about a registered application mobility service with wrong parameters
-    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.4
-    ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
-    [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
+# This test case is incomplete
+#TC_MEC_MEC021_SRV_AMS_002_BR
+#    [Documentation]    Request Registered AMS information using bad parameters
+#    ...  Check that the AMS service returns an error when receives a query about a registered application mobility service with wrong parameters
+#    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.4
+#    ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
+#    [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
 
 
  
@@ -164,7 +165,7 @@ TC_MEC_MEC021_SRV_AMS_003_BR
     ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.4
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
-    Create a new application mobility service    ${MALFORMED_APP_MOBILITY_SERVICE_ID}    
+    Create a new application mobility service    ${MALFORMED_APP_MOBILITY_SERVICE_ID}    ${APP_INS_ID}  
     Check HTTP Response Status Code Is    400
 
 
