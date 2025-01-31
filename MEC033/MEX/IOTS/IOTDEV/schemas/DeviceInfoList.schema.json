@@ -1,0 +1,430 @@
+{
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "deviceAuthenticationInfo": {
+                "description": "Information needed for secondary authentication of the IoT device to the data network - see ETSI TS 129 561 [i.4] and ETSI TS 129 061 [i.5] for 5G and LTE procedures, respectively. This attribute is implementation dependent and should be logically linked to the identifiers of the IoT device listed hereafter.",
+                "type": "string"
+            },
+            "deviceMetadata": {
+                "description": "Additional information about the IoT device. This attribute is implementation dependent and may be expressed as an array of keyvalue pairs. ",
+                "type": "array",
+                "items": {
+                    "description": "Key-value pairs for device metadata",
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string"
+                        },
+                        "value": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "gpsi": {
+                "description": "GPSI of the IoT device if 5G-enabled (see note 1).",
+                "type": "string"
+            },
+            "pei": {
+                "description": "PEI of the IoT device if 5G-enabled (see note 1).",
+                "type": "string"
+            },
+            "supi": {
+                "description": "SUPI of the IoT device if 5G-enabled (see note 1).",
+                "type": "string"
+            },
+            "msisdn": {
+                "description": "MSISDN of the IoT device if LTE-enabled (see note 1).",
+                "type": "string"
+            },
+            "imei": {
+                "description": "IMEI of the IoT device if LTE-enabled (see note 1).",
+                "type": "string"
+            },
+            "imsi": {
+                "description": "IMSI of the IoT device if LTE-enabled (see note 1).",
+                "type": "string"
+            },
+            "iccid": {
+                "description": "ICCID of the IoT device (see note 1).",
+                "type": "string"
+            },
+            "deviceId": {
+                "description": "Human-readable identifier of the IoT device.",
+                "type": "string"
+            },
+            "requestedMecTrafficRule": {
+                "description": "MEC traffic rules the IoT device is requested to be associated to (see note 2). The data type definition is as per ETSI GS MEC 010-2 [i.6].",
+                "type": "array",
+                "items": {
+                    "title": "TrafficRuleDescriptor",
+                    "type": "object",
+                    "properties": {
+                        "trafficRuleId": {
+                            "description": "Identifies the traffic rule.",
+                            "type": "string"
+                        },
+                        "filterType": {
+                            "type": "string",
+                            "description": "Definition of filter type: per FLOW or PACKET\n\nIf it is per FLOW, the filter matches upstream (e.g. UE->EPC) packets and downstream (e.g. EPC->UE) packets are handled by the same context.\n",
+                            "enum": [
+                                "per FLOW",
+                                "per PACKET"
+                            ]
+                        },
+                        "priority": {
+                            "description": "Priority of this traffic rule within the range 0 to 255. If traffic rule conflicts, the one with higher priority take precedence. See note 1.",
+                            "type": "integer"
+                        },
+                        "trafficFilter": {
+                            "description": "The filter used to identify specific flow/packets that need to be handled by the MEC host.",
+                            "type": "array",
+                            "items": {
+                                "title": "TrafficFilter",
+                                "type": "object",
+                                "properties": {
+                                    "srcAddress": {
+                                        "description": "An IP address or a range of IP addresses.\nFor IPv4, the IP address could be an IP address plus mask, or an individual IP address, or a range of IP addresses.\nFor IPv6, the IP address could be an IP prefix, or a range of IP prefixes.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "dstAddress": {
+                                        "description": "An IP address or a range of IP addresses.\nFor IPv4, the IP address could be an IP address plus mask, or an individual IP address, or a range of IP addresses.\nFor IPv6, the IP address could be an IP prefix, or a range of IP prefixes.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "srcPort": {
+                                        "description": "A port or a range of ports.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "dstPort": {
+                                        "description": "A port or a range of ports.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "protocol": {
+                                        "description": "Specify the protocol of the traffic filter.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "tag": {
+                                        "description": "Used for tag based traffic rule.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "uri": {
+                                        "description": "An URI label, in application layer, i.e. in HTTP message, is used to filter the traffic.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "packetLabel": {
+                                        "description": "A customized packet label in network layer, as defined by the owner of the MEC platform, is used to filter the traffic.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "srcTunnelAddress": {
+                                        "description": "Used for GTP tunnel based traffic rule.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "tgtTunnelAddress": {
+                                        "description": "Used for GTP tunnel based traffic rule.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "srcTunnelPort": {
+                                        "description": "Used for GTP tunnel based traffic rule.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "dstTunnelPort": {
+                                        "description": "Used for GTP tunnel based traffic rule.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "qCI": {
+                                        "description": "Used to match all packets that have the same QCI.",
+                                        "type": "integer"
+                                    },
+                                    "dSCP": {
+                                        "description": "Used to match all IPv4 packets that have the same DSCP.",
+                                        "type": "integer"
+                                    },
+                                    "tC": {
+                                        "description": "Used to match all IPv6 packets that have the same TC.",
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        },
+                        "action": {
+                            "type": "string",
+                            "description": "Identifies the action of the MEC host data plane, when a packet matches the trafficFilter, the example actions include:\nDROP,\nFORWARD_DECAPSULATED,\nFORWARD_ENCAPSULATED,\nPASSTHROUGH,\nDUPLICATE_DECAPSULATED,\nDUPLICATE_ENCAPSULATED ",
+                            "enum": [
+                                "SEE_DESCRIPTION"
+                            ]
+                        },
+                        "dstInterface": {
+                            "description'": "Describes the destination interface information. If the action is FORWARD_DECAPSULATED, FORWARD_ENCAPSULATED or PASSTHROUGH, one value shall be provided. If the action is DUPLICATE_DECAPSULATED or DUPLICATE_ENCAPSULATED, two values shall be provided. See note 2. If the action is DROP, no value shall be provided.",
+                            "title": "InterfaceDescriptor",
+                            "type": "object",
+                            "properties": {
+                                "interfaceType": {
+                                    "type": "string",
+                                    "description": "Type of interface: TUNNEL, MAC, IP, etc.",
+                                    "enum": [
+                                        "TUNNEL",
+                                        "MAC",
+                                        "IP"
+                                    ]
+                                },
+                                "tunnelInfo": {
+                                    "description'": "Included only if the destination address type is tunnel.",
+                                    "title": "TunnelInfo",
+                                    "type": "object",
+                                    "properties": {
+                                        "tunnelType": {
+                                            "type": "string",
+                                            "description": "Type of tunnel: GTP-U, GRE, etc.",
+                                            "enum": [
+                                                "GTP-U",
+                                                "GRE"
+                                            ]
+                                        },
+                                        "tunnelDstAddress": {
+                                            "description": "Destination address of the tunnel.",
+                                            "type": "string"
+                                        },
+                                        "tunnelSrcAddress": {
+                                            "description": "Source address of the tunnel.",
+                                            "type": "string"
+                                        },
+                                        "tunnelSpecificData": {
+                                            "description": "Parameters specific to the tunnel.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "tunnelType",
+                                        "tunnelDstAddress",
+                                        "tunnelSrcAddress"
+                                    ]
+                                },
+                                "srcMACAddress": {
+                                    "description": "If the interface type is MAC, the source address identifies the MAC address of the interface.",
+                                    "type": "string"
+                                },
+                                "dstMACAddress": {
+                                    "description": "If the interface type is MAC, the destination address identifies the MAC address of the destination. Only used for dstInterface.",
+                                    "type": "string"
+                                },
+                                "dstIPAddress": {
+                                    "description": "If the interface type is IP, the destination address identifies the IP address of the destination. Only used for dstInterface.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "interfaceType"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "trafficRuleId",
+                        "filterType",
+                        "priority",
+                        "trafficFilter",
+                        "action"
+                    ],
+                    "description": "NOTE 1: Value indicates the priority in descending order, i.e. with 0 as the highest priority and 255 as the lowest\n        priority.\nNOTE 2: Some applications (like inline/tap) require two interfaces. The first interface in the case of inline/tap is on the\n        client (e.g. UE) side and the second on the core network (e.g. EPC) side. \n"
+                }
+            },
+            "requestedIotPlatformId": {
+                "description": "IoT platform to which the IoT device is requested to be associated to (see note 2).",
+                "type": "string"
+            },
+            "requestedUserTransportId": {
+                "description": "User transport to which the IoT device is requested to be associated to (see note 2).",
+                "type": "string"
+            },
+            "deviceSpecificMessageFormats": {
+                "description": "Format of the messages to be published by the MEC IoTS on the user transport provided by the associated IoT platform in case the MEC IoTS acts on behalf of the IoT device.",
+                "type": "object",
+                "properties": {
+                    "eventMsgFormat": {
+                        "description'": "Event message format configuration.",
+                        "title": "EventMsg",
+                        "type": "object",
+                        "properties": {
+                            "eventTopic": {
+                                "description": "Topic where the message containing application-specific information should be published. ",
+                                "type": "string"
+                            },
+                            "selectedSerializer": {
+                                "description'": "Type of serializer to be used for the topic as per ETSI GS MEC 011 [i.2].",
+                                "type": "string",
+                                "description": "The enumeration SerializerType represents types of serializers.",
+                                "enum": [
+                                    "JSON",
+                                    "XML",
+                                    "PROTOBUF3"
+                                ]
+                            },
+                            "includeDeviceAddr": {
+                                "description": "Indication whether to include the IP address of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeDeviceMetadata": {
+                                "description": "Indication whether to include the metadata about the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includePei": {
+                                "description": "Indication whether to include the PEI of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeSupi": {
+                                "description": "Indication whether to include the SUPI of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeImei": {
+                                "description": "Indication whether to include the IMEI of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeImsi": {
+                                "description": "Indication whether to include the IMSI of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeIccid": {
+                                "description": "Indication whether to include the ICCID of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeDeviceId": {
+                                "description": "Indication whether to include the human-readable identified of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            }
+                        },
+                        "required": [
+                            "eventTopic",
+                            "selectedSerializer"
+                        ]
+                    },
+                    "uplinkMsgFormat": {
+                        "description'": "Uplink message format configuration.",
+                        "title": "UplinkMsg",
+                        "type": "object",
+                        "properties": {
+                            "uplinkTopic": {
+                                "description": "Topic where the message containing the data generated by the IoT device(s) should be published, in order to be consumed by the end IoT application(s).",
+                                "type": "string"
+                            },
+                            "selectedSerializer": {
+                                "description'": "Type of serializer to be used for the topic as per ETSI GS MEC 011 [i.2].",
+                                "type": "string",
+                                "description": "The enumeration SerializerType represents types of serializers.",
+                                "enum": [
+                                    "JSON",
+                                    "XML",
+                                    "PROTOBUF3"
+                                ]
+                            },
+                            "includeDevicePort": {
+                                "description": "Indication whether to include the UDP port of the remote IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeDeviceAddr": {
+                                "description": "Indication whether to include the IP address of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeDeviceMetadata": {
+                                "description": "Indication whether to include the metadata about the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includePei": {
+                                "description": "Indication whether to include the PEI of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeSupi": {
+                                "description": "Indication whether to include the SUPI of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeImei": {
+                                "description": "Indication whether to include the IMEI of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeImsi": {
+                                "description": "Indication whether to include the IMSI of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeIccid": {
+                                "description": "Indication whether to include the ICCID of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            },
+                            "includeDeviceId": {
+                                "description": "Indication whether to include the human-readable identified of the IoT device (TRUE) or not (FALSE).",
+                                "type": "boolean"
+                            }
+                        },
+                        "required": [
+                            "uplinkTopic",
+                            "selectedSerializer"
+                        ]
+                    }
+                }
+            },
+            "downlinkInfo": {
+                "description": "Downlink communication configuration of the user transport provided by the associated IoT platform in case the MEC IoTS acts on behalf of the IoT device.",
+                "type": "object",
+                "properties": {
+                    "downlinkTopic": {
+                        "description": "Topic associated to the IoT device. This topic should be used by an end IoT application to send downlink data to the IoT device.",
+                        "type": "string"
+                    },
+                    "devicePort": {
+                        "description": "UDP port to be used by the MEC IoTS for the outgoing downlink packets towards the IoT device. In case a default value is used, this attribute is optional.",
+                        "type": "integer"
+                    }
+                }
+            },
+            "clientCertificate": {
+                "description": "Client-side SSL/TLS certificate to be used by the MEC IoTS to interact with the user transport provided by the associated IoT platform in case the MEC IoTS acts on behalf of the IoT device.",
+                "type": "string"
+            },
+            "enabled": {
+                "description": "Indication whether the IoT device has a valid associated traffic rule (TRUE) or not (FALSE). See note 3.",
+                "type": "boolean"
+            }
+        },
+        "required": [
+            "deviceAuthenticationInfo",
+            "deviceId",
+            "enabled"
+        ],
+        "description": "NOTE 1: At least one attribute among gpsi, pei, supi, msisdn, imei, imsi, and iccid should be provided. Sufficient security\n        measures shall be put in place when any attribute among PEI, SUPI, IMEI, and IMSI is disclosed over the API.\nNOTE 2: Until a valid traffic rule is not provided, the device will not be able to use the IoTS. A valid traffic rule is provided\n        by one of the following options:\n        • the requestedMecTrafficRule attribute;\n        • the requestedIotPlatformId attribute when the IoT platform offers only one user transport;\n        • the combination of requestedIotPlatformId and requestedUserTransportId.\nNOTE 3: Enabled is a pseudo-attribute which needs to be maintained by the IoTS based on the presence or not of a valid\n        traffic rule associated to the device. It cannot be set directly by the service consumer. \n"
+    }
+}

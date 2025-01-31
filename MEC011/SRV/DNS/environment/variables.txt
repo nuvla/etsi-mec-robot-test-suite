@@ -7,13 +7,21 @@ ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
 ${apiName}        mec_app_support
-${apiVersion}     v1
+${apiVersion}     v2
 
 # Specific variables
+${HOST_REG_APP}             127.0.0.1
+${PORT_REG_APP}             8082
+${apiRoot_REG_APP}          
+${apiName_REG_APP}          mec_app_support         
+${apiVersion_REG_APP}       v2
+
 ${APP_INSTANCE_ID}                       5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
+${NOT_EXISTENT_APP_INSTANCE_ID}          NOT_EXISTENT_APP_INSTANCE_ID
 ${DNS_RULE_ID}                           e0deee2b-6e50-4f33-ab09-8bf0585025d3
 ${NON_ESISTENT_DNS_RULE_ID}              NON_ESISTENT_DNS_RULE_ID
-${INVALID_ETAG}                     INVALID_ETAG
+${INVALID_ETAG}                          INVALID_ETAG
+${VALID_ETAG}                            abcdef
 
 ${SOME_IP_ADDRESS}                   146.241.7.3
 

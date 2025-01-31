@@ -1,0 +1,172 @@
+{
+    "properties": {
+      "locationInfo": {
+        "description": "Location information to identify a particular geographical area of interest to the service consumer for receiving V2X messages.",
+        "items": {
+          "properties": {
+            "ecgi": {
+              "properties": {
+                "cellId": {
+                  "properties": {
+                    "cellId": {
+                      "description": "E-UTRAN Cell Identity as a bit string (size (28)).",
+                      "type": "string",
+                      "x-etsi-mec-cardinality": "1",
+                      "x-etsi-mec-origin-type": "String"
+                    }
+                  },
+                  "required": [
+                    "cellId"
+                  ],
+                  "type": "object",
+                  "x-etsi-ref": "6.6.2"
+                },
+                "plmn": {
+                  "properties": {
+                    "mcc": {
+                      "description": "The Mobile Country Code part of PLMN Identity.",
+                      "type": "string",
+                      "x-etsi-mec-cardinality": "1",
+                      "x-etsi-mec-origin-type": "String"
+                    },
+                    "mnc": {
+                      "description": "The Mobile Network Code part of PLMN Identity.",
+                      "type": "string",
+                      "x-etsi-mec-cardinality": "1",
+                      "x-etsi-mec-origin-type": "String"
+                    }
+                  },
+                  "required": [
+                    "mcc",
+                    "mnc"
+                  ],
+                  "type": "object",
+                  "x-etsi-ref": "6.5.4"
+                }
+              },
+              "required": [
+                "plmn",
+                "cellId"
+              ],
+              "type": "object",
+              "x-etsi-ref": "6.5.5"
+            },
+            "geoArea": {
+              "description": "Information of a geographical area.",
+              "properties": {
+                "latitude": {
+                  "description": "Latitude (DATUM = WGS84) -90 to 90 in decimal degree format DDD.ddd",
+                  "format": "float",
+                  "type": "number",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Float"
+                },
+                "longitude": {
+                  "description": "Longitude (DATUM = WGS84) -180 to 180 in decimal degree format DDD.ddd",
+                  "format": "float",
+                  "type": "number",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "Float"
+                }
+              },
+              "required": [
+                "latitude",
+                "longitude"
+              ],
+              "type": "object",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Structure (inlined)"
+            }
+          },
+          "type": "object",
+          "x-etsi-notes": "NOTE:\tEither ecgi or geoArea shall be present, but not both.",
+          "x-etsi-ref": "6.5.3"
+        },
+        "minItems": 0,
+        "type": "array",
+        "x-etsi-mec-cardinality": "0..N",
+        "x-etsi-mec-origin-type": "LocationInfo"
+      },
+      "v2xMsgDistributionServer": {
+        "description": "Describes the information of the V2X Message Distribution Servers supported by the service consumer for direct communication.",
+        "items": {
+          "properties": {
+            "infoConnection": {
+              "description": "Connection information of the V2X Message Distribution Server the service consumer can use for direct connection. Shall only be included in the response.",
+              "properties": {
+                "ipAddress": {
+                  "description": "IP address of the V2X Message Distribution Server.",
+                  "type": "string",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "String"
+                },
+                "port_number": {
+                  "description": "Port number of the V2X Message Distribution Server.",
+                  "x-etsi-mec-cardinality'": "1",
+                  "x-etsi-mec-origin-type'": "Integer (0..65535)",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "ipAddress",
+                "port_number"
+              ],
+              "type": "object",
+              "x-etsi-mec-cardinality": "0..1",
+              "x-etsi-mec-origin-type": "Structure (inlined)"
+            },
+            "infoProtocol": {
+              "description": "Specifics of the application layer protocol of V2X Message Distribution Server.",
+              "properties": {
+                "msgProtocol": {
+                  "description": "Numerical value corresponding to the application layer protocol supported by the service consumer. For the msgProtocol, the following values are currently defined (see note): 0 = MQTT v3.1.0 1 = MQTT v3.1.1 2 = MQTT v5 3 = MQTT-SN 4 = AMQP 1.0",
+                  "items": {
+                    "enum": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4
+                    ],
+                    "type": "integer"
+                  },
+                  "minItems": 1,
+                  "type": "array",
+                  "x-etsi-mec-cardinality": "1..N",
+                  "x-etsi-mec-origin-type": "Enum"
+                },
+                "protImplementation": {
+                  "description": "Implementation specifics of application layer protocol, e.g. programming language.",
+                  "type": "string",
+                  "x-etsi-mec-cardinality": "1",
+                  "x-etsi-mec-origin-type": "String"
+                }
+              },
+              "required": [
+                "msgProtocol",
+                "protImplementation"
+              ],
+              "type": "object",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "Structure (inlined)"
+            }
+          },
+          "required": [
+            "infoProtocol"
+          ],
+          "type": "object",
+          "x-etsi-notes": "NOTE:\tOther application layer protocols (and versions thereof) may be added as needed.",
+          "x-etsi-ref": "6.5.16"
+        },
+        "minItems": 1,
+        "type": "array",
+        "x-etsi-mec-cardinality": "1..N",
+        "x-etsi-mec-origin-type": "V2xMsgDistributionServer"
+      }
+    },
+    "required": [
+      "v2xMsgDistributionServer"
+    ],
+    "type": "object",
+    "x-etsi-ref": "6.2.5"
+  }

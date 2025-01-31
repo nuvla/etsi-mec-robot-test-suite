@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "notificationType": {
+      "type": "string"
+    },
+    "subscriptionId": {
+      "type": "string"
+    },
+    "timeStamp": {
+      "type": "object",
+      "properties": {
+        "seconds": {
+          "type": "integer"
+        },
+        "nanoSeconds": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "seconds",
+        "nanoSeconds"
+      ]
+    },
+    "appPkgId": {
+      "type": "string"
+    },
+    "appDId": {
+      "type": "string"
+    },
+    "operationalState": {
+      "type": "string"
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "subscription": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "href"
+          ]
+        }
+      },
+      "required": [
+        "subscription"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "notificationType",
+    "subscriptionId",
+    "timeStamp",
+    "appPkgId",
+    "appDId",
+    "operationalState",
+    "_links"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "subscriptionType": "CellChangeSubscription",
+  "callbackRefer": "http://10.30.8.189:8888/new_callback_url",
+  "_links": {
+    "self": {
+      "href": "${LINKS_SELF}"
+    }
+  },
+  "filterCriteriaAssocHo": {}
+}

@@ -1,0 +1,5 @@
+{
+    "subscriptionType": "UserLocationEventSubscription",
+    "clientCorrelator":"someCorrelator",
+    "address": "acr:10.0.0.1"
+}

@@ -1,0 +1,7 @@
+{
+    "subscriptionType": "CaReconfSubscription",
+    "callbackReference": "http://10.30.8.189:8080/callback_url",
+    "filterCriteriaAssoc": {
+        "appInstanceId": "appInstanceId"
+    }
+}

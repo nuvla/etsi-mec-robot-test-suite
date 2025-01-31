@@ -20,7 +20,7 @@
         "subscriptions": {
           "type": "array",
           "items": {
-            "description": "The service consumer’s subscriptions.",
+            "description": "The service consumers subscriptions.",
             "properties": {
               "href": {
                 "description": "The URI referring to the subscription.",

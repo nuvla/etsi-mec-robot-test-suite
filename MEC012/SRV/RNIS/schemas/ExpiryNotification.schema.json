@@ -1,0 +1,107 @@
+{
+        "title": "ExpiryNotification",
+        "allOf": [
+          {
+            "title": "InlineNotification",
+            "required": [
+              "notificationType"
+            ],
+            "type": "object",
+            "properties": {
+              "notificationType": {
+                "type": "string"
+              }
+            },
+            "discriminator": {
+              "propertyName": "notificationType",
+              "mapping": {
+                "CaReconfNotification": "#/components/schemas/CaReconfNotification",
+                "CellChangeNotification": "#/components/schemas/CellChangeNotification",
+                "MeasRepUeNotification": "#/components/schemas/MeasRepUeNotification",
+                "MeasTaNotification": "#/components/schemas/MeasTaNotification",
+                "NrMeasRepUeNotification": "#/components/schemas/NrMeasRepUeNotification",
+                "RabEstNotification": "#/components/schemas/RabEstNotification",
+                "RabModNotification": "#/components/schemas/RabModNotification",
+                "RabRelNotification": "#/components/schemas/RabRelNotification",
+                "S1BearerNotification": "#/components/schemas/S1BearerNotification",
+                "ExpiryNotification": "#/components/schemas/ExpiryNotification",
+                "TestNotification": "#/components/schemas/TestNotification"
+              }
+            }
+          },
+          {
+            "required": [
+              "_links",
+              "expiryDeadline"
+            ],
+            "type": "object",
+            "properties": {
+              "_links": {
+                "title": "Links2",
+                "required": [
+                  "subscription"
+                ],
+                "type": "object",
+                "properties": {
+                  "subscription": {
+                    "description": "URI identifying the subscription which has expired.",
+                    "title": "LinkType",
+                    "required": [
+                      "href"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "type": "string",
+                        "description": "URI referring to a resource"
+                      }
+                    }
+                  }
+                },
+                "description": "List of hyperlinks related to the resource."
+              },
+              "expiryDeadline": {
+                "title": "TimeStamp",
+                "required": [
+                  "nanoSeconds",
+                  "seconds"
+                ],
+                "type": "object",
+                "properties": {
+                  "nanoSeconds": {
+                    "type": "integer",
+                    "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                  },
+                  "seconds": {
+                    "type": "integer",
+                    "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                  }
+                }
+              },
+              "timeStamp": {
+                "description": "Time stamp of the notification.",
+                "title": "TimeStamp",
+                "required": [
+                  "nanoSeconds",
+                  "seconds"
+                ],
+                "type": "object",
+                "properties": {
+                  "nanoSeconds": {
+                    "type": "integer",
+                    "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                  },
+                  "seconds": {
+                    "type": "integer",
+                    "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }

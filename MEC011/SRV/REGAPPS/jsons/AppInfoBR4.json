@@ -1,0 +1,9 @@
+{
+	"appName": "appNameWithoutAppDId",
+	"appIappServiceRequirednstanceID": "appInstanceIdWithoutAppDId",
+	"appServiceOptional": [{
+		"serName": "notExpectedAppServiceOptional",
+		"version": "0.1"
+	}]
+
+}

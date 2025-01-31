@@ -1,0 +1,16 @@
+{
+    "deviceAuthenticationInfo": "Some custom info",
+    "deviceId": "deviceId",
+    "imsi": "310170845466094",
+    "supi": "310170845466094",
+    "enabled":true,
+    "requestedIotPlatformId": "iotPlatform",
+    "TrafficRuleDescriptor": {
+        "trafficRuleId": "trafficRule123",
+        "filterType": "FLOW",
+        "action": "FORWARD_AS_IS",
+        "trafficFilter": {
+            "qCI": 5
+        }
+    }
+}

@@ -1,25 +1,35 @@
 *** Variables ***
 # Generic variables
+
+${response}                         {}
+#########Env variable for validating TCs locally with Mockoon
 ${SCHEMA}                   http
 ${HOST}                     127.0.0.1
-${PORT}                     8081
-${response}                         {}
+${PORT}                     8082
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
 ${apiName}        mec_service_mgmt
 ${apiVersion}     v1
 
+##Notification Server variables
+${NOTIFICATION_SERVER_IP}      127.0.0.1
+${NOTIFICATION_SERVER_PORT}      8888
+${NOTIFICATION_SERVER_HTTP_METHOD}      POST
+${NOTIFICATION_SERVER_URI}      /callback_url
+${NOTIFICATION_SERVER_TIMEOUT}      5
+
+
 # Specific variables
-${APP_INSTANCE_ID}                  5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
+${APP_INSTANCE_ID}                  f1e4d448-e277-496b-bf63-98391cfd20fb
 ${INSTANCE_ID}                      instance_id
 ${FAKE_INSTANCE_ID_VALUE}           5
-${NON_EXISTENT_APP_INSTANCE_ID}     NON_ESISTENT_APP_INSTANCE_ID
+${NON_EXISTENT_APP_INSTANCE_ID}     NON_EXISTENT_APP_INSTANCE_ID
 ${SERVICE_ID}                       e0deee2b-6e50-4f33-ab09-8bf0585025d3
 ${NON_EXISTENT_SERVICE_ID}          NON_EXISTENT_SERVICE_ID
-${INVALID_ETAG}                     INVALID_ETAG
 
 ## this parameter should be the same as in jsons/ServiceInfo.json on param serName
 ${NEW_SERVICE_NAME}                NEW_SERVICE_NAME
 
 ## this parameter should be the same as in jsons/ServiceInfoUpdated.json on param sversion
 ${SVC_NEW_VERSION}                 v2.0
+${INVALID_ETAG}                    INVALID_ETAG

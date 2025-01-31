@@ -1,0 +1,20 @@
+*** Variables ***
+# Generic variables
+${SCHEMA}                   http
+${HOST}                     127.0.0.1
+${PORT}                     8081
+${response}                         {}
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        
+${apiName}        location
+${apiVersion}     v3
+
+# Specific variables
+${NOT_EXISTING_SUB_ID}       NOT_EXISTING_SUB_ID
+
+##Notification Server variables
+${NOTIFICATION_SERVER_IP}      127.0.0.1
+${NOTIFICATION_SERVER_PORT}      8888
+${NOTIFICATION_SERVER_HTTP_METHOD}      POST
+${NOTIFICATION_SERVER_URI}      /callback_url
+${NOTIFICATION_SERVER_TIMEOUT}      5

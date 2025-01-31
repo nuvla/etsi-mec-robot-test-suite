@@ -24,9 +24,10 @@ Check HTTP Response Body Json Schema Is
 Should Be Present In Json List
     [Arguments]     ${expr}   ${json_field}   ${json_value}
     Log    Check if ${json_field} is present in ${expr} with the value ${json_value}
-    :FOR  ${item}  IN  @{expr}
-    \  ${are_equal}=    Should Be Equal As Strings    ${item["${json_field}"]}    ${json_value}
-    \  Exit For Loop If    ${are_equal}
+    FOR  ${item}  IN  @{expr}
+      ${are_equal}=    Should Be Equal As Strings    ${item["${json_field}"]}    ${json_value}
+      Exit For Loop If    ${are_equal}
+    END
     Log    Item found ${item}
     [return]    ${item}
     
@@ -63,4 +64,12 @@ Check HTTP Response Contain Header with value
     Check HTTP Response Header Contains    ${HEADER_TOCHECK}
     Should Be Equal As Strings    ${value}    ${response['headers']['Content-Type']}    
 
+Get value entry from JSON file 
+    [Arguments]       ${filename}   ${key}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${filename}    .json
+    ${body}=    Get File    ${file}
+    ${data}=   Evaluate    ${body}
+    ${value_key}    Set Variable   ${data}[${key}]
+    [return]   ${value_key}
 
+        

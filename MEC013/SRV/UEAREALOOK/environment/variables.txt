@@ -1,0 +1,14 @@
+*** Variables ***
+# Generic variables
+${SCHEMA}                   http
+${HOST}                     127.0.0.1
+${PORT}                     8081
+${response}                         {}
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        
+${apiName}        location
+${apiVersion}     v3
+
+${SUB_TYPE_FILTER}                 event
+${SUB_TYPE_FILTER_ERROR}           dummy
+${NON_EXISTING_SUBSCRIPTION_ID}    NON_EXISTING_SUBSCRIPTION_ID

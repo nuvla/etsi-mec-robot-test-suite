@@ -1,0 +1,277 @@
+{
+        "title": "CaReconfNotification",
+        "allOf": [
+          {
+            "title": "InlineNotification",
+            "required": [
+              "notificationType"
+            ],
+            "type": "object",
+            "properties": {
+              "notificationType": {
+                "type": "string"
+              }
+            },
+            "discriminator": {
+              "propertyName": "notificationType",
+              "mapping": {
+                "CaReconfNotification": "#/components/schemas/CaReconfNotification",
+                "CellChangeNotification": "#/components/schemas/CellChangeNotification",
+                "MeasRepUeNotification": "#/components/schemas/MeasRepUeNotification",
+                "MeasTaNotification": "#/components/schemas/MeasTaNotification",
+                "NrMeasRepUeNotification": "#/components/schemas/NrMeasRepUeNotification",
+                "RabEstNotification": "#/components/schemas/RabEstNotification",
+                "RabModNotification": "#/components/schemas/RabModNotification",
+                "RabRelNotification": "#/components/schemas/RabRelNotification",
+                "S1BearerNotification": "#/components/schemas/S1BearerNotification",
+                "ExpiryNotification": "#/components/schemas/ExpiryNotification",
+                "TestNotification": "#/components/schemas/TestNotification"
+              }
+            }
+          },
+          {
+            "required": [
+              "ecgi",
+              "_links"
+            ],
+            "type": "object",
+            "properties": {
+              "associateId": {
+                "type": "array",
+                "items": {
+                  "title": "AssociateId",
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "title": "Type",
+                      "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4
+                      ],
+                      "type": "integer",
+                      "description": "Numeric value (0-255) corresponding to specified type of identifier as following: 0 = reserved. 1 = UE_IPv4_ADDRESS. 2 = UE_IPV6_ADDRESS. 3 = NATED_IP_ADDRESS. 4 = GTP_TEID.",
+                      "examples": [
+                        0
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Value for the identifier."
+                    }
+                  }
+                },
+                "description": "0 to N identifiers to associate the event for a specific UE or flow."
+              },
+              "carrierAggregationMeasInfo": {
+                "type": "array",
+                "items": {
+                  "title": "CarrierAggregationMeasInfo",
+                  "type": "object",
+                  "required": [
+                    "cellIdSrv",
+                    "cellIdNei"
+                  ],
+                  "properties": {
+                    "cellIdNei": {
+                      "type": "string",
+                      "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3]."
+                    },
+                    "cellIdSrv": {
+                      "type": "string",
+                      "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3]."
+                    },
+                    "rsrpNei": {
+                      "type": "integer",
+                      "description": "Reference Signal Received Power as defined in ETSI TS 136 214 [i.5].",
+                      "contentEncoding": "int32"
+                    },
+                    "rsrpSrv": {
+                      "type": "integer",
+                      "description": "Reference Signal Received Power as defined in ETSI TS 136 214 [i.5].",
+                      "contentEncoding": "int32"
+                    },
+                    "rsrqNei": {
+                      "type": "integer",
+                      "description": "Reference Signal Received Quality as defined in ETSI TS 136 214 [i.5].",
+                      "contentEncoding": "int32"
+                    },
+                    "rsrqSrv": {
+                      "type": "integer",
+                      "description": "Reference Signal Received Quality as defined in ETSI TS 136 214 [i.5].",
+                      "contentEncoding": "int32"
+                    }
+                  }
+                },
+                "description": "This parameter can be repeated to contain information of all the carriers assign for Carrier Aggregation up to N."
+              },
+              "ecgi": {
+                "title": "Ecgi",
+                "required": [
+                  "cellId",
+                  "plmn"
+                ],
+                "type": "object",
+                "properties": {
+                  "cellId": {
+                    "type": "string",
+                    "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3]."
+                  },
+                  "plmn": {
+                    "title": "Plmn",
+                    "required": [
+                      "mcc",
+                      "mnc"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "mcc": {
+                        "type": "string",
+                        "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                      },
+                      "mnc": {
+                        "type": "string",
+                        "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                      }
+                    }
+                  }
+                }
+              },
+              "secondaryCellAdd": {
+                "type": "array",
+                "items": {
+                  "title": "SecondaryCellAdd",
+                  "type": "object",
+                  "required": [
+                    "ecgi"
+                  ],
+                  "properties": {
+                    "ecgi": {
+                      "title": "Ecgi",
+                      "required": [
+                        "cellId",
+                        "plmn"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "cellId": {
+                          "type": "string",
+                          "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3]."
+                        },
+                        "plmn": {
+                          "title": "Plmn",
+                          "required": [
+                            "mcc",
+                            "mnc"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "mcc": {
+                              "type": "string",
+                              "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                            },
+                            "mnc": {
+                              "type": "string",
+                              "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "description": ""
+              },
+              "secondaryCellRemove": {
+                "type": "array",
+                "items": {
+                  "title": "SecondaryCellRemove",
+                  "type": "object",
+                  "required": [
+                    "ecgi"
+                  ],
+                  "properties": {
+                    "ecgi": {
+                      "title": "Ecgi",
+                      "required": [
+                        "cellId",
+                        "plmn"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "cellId": {
+                          "type": "string",
+                          "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3]."
+                        },
+                        "plmn": {
+                          "title": "Plmn",
+                          "required": [
+                            "mcc",
+                            "mnc"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "mcc": {
+                              "type": "string",
+                              "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                            },
+                            "mnc": {
+                              "type": "string",
+                              "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "description": ""
+              },
+              "timeStamp": {
+                "title": "TimeStamp",
+                "required": [
+                  "nanoSeconds",
+                  "seconds"
+                ],
+                "type": "object",
+                "properties": {
+                  "nanoSeconds": {
+                    "type": "integer",
+                    "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                  },
+                  "seconds": {
+                    "type": "integer",
+                    "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                  }
+                }
+              },
+              "_links": {
+                "description": "Links to resources related to this notification.",
+                "required": [
+                  "subscription"
+                ],
+                "properties": {
+                  "subscription": {
+                    "description": "A link to the related subscription.",
+                    "title": "LinkType",
+                    "required": [
+                      "href"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "type": "string",
+                        "description": "URI referring to a resource"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }

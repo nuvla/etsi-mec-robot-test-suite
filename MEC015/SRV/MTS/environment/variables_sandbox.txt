@@ -1,0 +1,38 @@
+*** Variables ***
+# Generic variables
+${SCHEMA}                   https
+${HOST}                     try-mec.etsi.org
+${PORT}                     443
+${response}                         {}
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        /<your_token_here>/mep1 
+${apiName}        mts
+${apiVersion}     v1
+
+
+# Specific variables
+${APP_INSTANCE_ID}					81c51643-8c6f-4781-ad45-f8a457ca549b
+${NOT_EXISTING_APP_INSTANCE_ID}		NOT_EXISTING_APP_INS_ID
+${CORRECT_FILTER}					app_instance_id
+${APP_NAME_FILTER}					app_name
+${SESSION_ID_FILTER}                session_id
+${BAD_FILTER}						appInsId
+${APP_NAME}							app_name
+          
+${SESSION_ID}						5
+${WRONG_SESSION_ID}					WRONG_SESSION_ID
+${NOT_EXISTING_SESSION_ID}			NOT_EXISTING_SESSION_ID
+
+${REQUEST_TYPE_APPLICATION}			1
+${MTS_LOW_MODE_COST}				0
+${TRAFFIC_DIRECTION_DL}				00
+
+
+##Variables for App Instances management
+${APP_INST_SCHEMA}                    https
+${APP_INST_HOST}                     try-mec.etsi.org
+${APP_INST_PORT}                     443
+${apiRoot_APP_INST}
+${apiName_APP_INST}                  app_lcm
+${apiVersion_APP_INST}               v1
+${elements}

@@ -1,0 +1,16 @@
+{
+    "callbackReference": "http://example.com/callback",
+    "requestTestNotification": true,
+    "websockNotifConfig": {
+        "websocketUri": "ws://example.com/websocket",
+        "requestWebsocketUri": true
+    },
+    "expiryDeadline": {
+        "seconds": 1644691200,
+        "nanoSeconds": 0
+    },
+    "filterCriteria": {
+        "appInstanceId": "app-123"
+    },
+    "subscriptionType": "INVALID_SUBSCRIPTION_TYPE"
+}

@@ -1,0 +1,17 @@
+{
+    "id": "1234",
+    "notificationType": "AppPackageOnBoarded",
+    "subscriptionId": "1234",
+    "timeStamp": {
+        "seconds": 1234,
+        "nanoSeconds": 1234
+    },
+    "appPkgId": "appPkgId",
+    "appDId": "appDId",
+    "operationalState": "ENABLED",
+    "_links": {
+        "subscription": {
+            "href": "someuri/url"
+        }
+    }
+}

@@ -4,116 +4,170 @@ Documentation
 ...    A test suite for validating DNS rules (DNS) operations.
 
 Resource    ../../../GenericKeywords.robot
-Resource    environment/variables.txt
+#Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem 
 
 Default Tags    TC_MEC_SRV_DNS
 
 
-*** Variables ***
-
-
 *** Test Cases ***
-
-TP_MEC_MEC011_SRV_DNS_001_OK
+TC_MEC_MEC011_SRV_DNS_001_OK
     [Documentation]
     ...    Check that the IUT responds with a list of active DNS rules
     ...    when queried by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.9.3.1
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/DnsRule
-
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.8",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.9.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Create a new MEC application instance profile  AppInfo       
     Get list of active DNS rules    ${APP_INSTANCE_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    DnsRuleList
+    [Teardown]   Delete MEC application instance profile   ${APP_INSTANCE_ID}
+   
+TC_MEC_MEC011_SRV_DNS_001_NF
+    [Documentation]
+    ...    Check that the IUT responds with a list of active DNS rules
+    ...    when queried by a MEC Application
+    ...
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.8",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.9.3.1"
+    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Delete MEC application instance profile   ${NOT_EXISTENT_APP_INSTANCE_ID}
+    Get list of active DNS rules    ${NOT_EXISTENT_APP_INSTANCE_ID}
+    Check HTTP Response Status Code Is    404
+    
 
 
-TP_MEC_MEC011_SRV_DNS_002_OK
+
+TC_MEC_MEC011_SRV_DNS_002_OK
     [Documentation]
     ...    Check that the IUT responds with the information on a specific DNS rule
     ...    when queried by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.10.3.1
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/DnsRule
-
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.8",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Create a new MEC application instance profile  AppInfo       
     Get individual DNS rule    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    DnsRule
     Check Response Contains    ${response['body']}    dnsRuleId    ${DNS_RULE_ID}
 
 
-TP_MEC_MEC011_SRV_DNS_002_NF
+
+TC_MEC_MEC011_SRV_DNS_002_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.10.3.1
-
+    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.8",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
+    ...               "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get individual DNS rule    ${APP_INSTANCE_ID}    ${NON_ESISTENT_DNS_RULE_ID}
     Check HTTP Response Status Code Is    404
 
 
-TP_MEC_MEC011_SRV_DNS_003_OK
+TC_MEC_MEC011_SRV_DNS_003_OK
     [Documentation]
-    ...    Check that the IUT updates a specific DNS rule
-    ...    when commanded by a MEC Application
+    ...    Check that the IUT responds with the information on a specific DNS rule 
+    ...    when queried by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.10.3.2
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/DnsRule
-
+    ...    Reference "ETSI GS MEC 011 3.2.1, clause 5.2.8",
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.2"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Create a new MEC application instance profile  AppInfo       
     Update a DNS Rule    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}    DnsRuleUpdate
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    DnsRule
+    Check Response Contains    ${response['body']}    dnsRuleId    ${DNS_RULE_ID}
     Check Response Contains    ${response['body']}    ipAddress    ${SOME_IP_ADDRESS}
+    [Teardown]   Delete MEC application instance profile   ${APP_INSTANCE_ID}
+   
 
-
-TP_MEC_MEC011_SRV_DNS_003_BR
+TC_MEC_MEC011_SRV_DNS_003_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.10.3.2
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/DnsRule
+    ...    Reference "ETSI GS MEC 011 3.2.1, clause 5.2.8",
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.2"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Create a new MEC application instance profile  AppInfo       
     Update a DNS Rule    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}    DnsRuleUpdateError
     Check HTTP Response Status Code Is    400
+    [Teardown]   Delete MEC application instance profile   ${APP_INSTANCE_ID}
+   
 
-
-TP_MEC_MEC011_SRV_DNS_003_NF
+TC_MEC_MEC011_SRV_DNS_003_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.10.3.2
-    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/DnsRule
+    ...    Reference "ETSI GS MEC 011 3.2.1, clause 5.2.8",
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.2"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Create a new MEC application instance profile  AppInfo       
     Update a DNS Rule    ${APP_INSTANCE_ID}    ${NON_ESISTENT_DNS_RULE_ID}    DnsRuleUpdate
     Check HTTP Response Status Code Is    404
+    [Teardown]   Delete MEC application instance profile   ${APP_INSTANCE_ID}
+   
 
 
-
-#TP_MEC_MEC011_SRV_DNS_003_PF
-#    [Documentation]
-#    ...    Check that the IUT responds with an error when
-#    ...    a request sent by a MEC Application doesn't comply with a required condition
-#    ...
-#    ...    Reference    ETSI GS MEC 011 V2.2.1, clause 7.2.10.3.2
-#    ...    OpenAPI    https://forge.etsi.org/rep/mec/gs011-app-enablement-api/blob/master/MecAppSupportApi.yaml#/definitions/DnsRule
-#
-#    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-#    Update a DNS Rule with invalid etag    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}    DnsRuleUpdate
-#    Check HTTP Response Status Code Is    412
+TC_MEC_MEC011_SRV_DNS_003_PF
+    [Documentation]
+    ...    Check that the IUT responds with an error when
+    ...    a request sent by a MEC Application doesn't comply with a required condition
+    ...
+    ...    Reference "ETSI GS MEC 011 3.2.1, clause 5.2.8",
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.1.2.3",
+    ...              "ETSI GS MEC 011 3.2.1, clause 7.2.10.3.2"
+    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]   Create a new MEC application instance profile  AppInfo       
+    Update a DNS Rule with invalid etag    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}    DnsRuleUpdate
+    Check HTTP Response Status Code Is    412
+    [Teardown]   Delete MEC application instance profile   ${APP_INSTANCE_ID}
+   
 
 
 
 *** Keywords ***
+Create a new MEC application instance profile
+    [Arguments]    ${content}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    #Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    POST      http://${HOST_REG_APP}:${PORT_REG_APP}/${apiRoot_REG_APP}${apiName_REG_APP}/${apiVersion_REG_APP}/registrations    ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+    Set Suite Variable    ${APP_INSTANCE_ID}   ${response['body']['appInstanceId']}
+
+
+
+Delete MEC application instance profile
+    [Arguments]    ${app_instance_id}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    #Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Delete    http://${HOST_REG_APP}:${PORT_REG_APP}/${apiRoot_REG_APP}${apiName_REG_APP}/${apiVersion_REG_APP}/registrations/${app_instance_id}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+    
 Get list of active DNS rules    
     [Arguments]    ${appInstanceId}
     Set Headers    {"Accept":"application/json"}
@@ -138,13 +192,22 @@ Update a DNS Rule
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
+    Set Headers    {"If-Match": "${VALID_ETAG}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    PUT    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/dns_rules/${dnsRuleId}    ${body}
+    Put    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/dns_rules/${dnsRuleId}    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
 Update a DNS Rule with invalid etag
     [Arguments]    ${appInstanceId}    ${dnsRuleId}    ${content}
     Set Headers    {"If-Match": "${INVALID_ETAG}"}
-    Update a DNS Rule    ${appInstanceId}    ${dnsRuleId}    ${content}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Headers    {"If-Match": "${INVALID_ETAG}"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    Put    ${apiRoot}/${apiName}/${apiVersion}/applications/${appInstanceId}/dns_rules/${dnsRuleId}    ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}

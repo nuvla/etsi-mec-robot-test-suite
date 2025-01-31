@@ -1,0 +1,23 @@
+{
+  "subscriptionType": "AssocStaSubscription",
+  "callbackReference": "http://meAppClient.example.com/wai/v2/notifications/1",
+  "_links": {
+    "self": {
+      "href": "/wai/v2/subscriptions/sub123"
+    }
+  },
+  "expiryDeadline": {
+    "seconds": 1977836800,
+    "nanoSeconds": 0
+  },
+  "apId": {
+    "bssid": "005C0A0A0A0A",
+    "ssid": [
+      "myNetworkSsid"
+    ],
+    "macId": "macId01",
+    "ipAddress": [
+      "10.10.100.1"
+    ]
+  }
+}

@@ -1,8 +1,8 @@
 {
-	"id": "123",
-	"appInstanceId": "456",
+	"appInstanceId": "123",
 	"appLcmOpOccId": "789",
 	"operation": "OPERATE",
+	"appDId":"appDId",
 	"addResources": [
     {
       "resourceDefinitionId": "resourceDefinitionId",

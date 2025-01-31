@@ -5,16 +5,21 @@
 Resource    environment/variables.txt
 Resource    ../../../pics.txt
 Resource    ../../../GenericKeywords.robot
+Library     Collections
 Library     String
 Library     OperatingSystem
 Library     REST    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}    ssl_verify=false
 
 *** Test Cases ***
-TP_MEC_MEC028_SRV_WAI_008_OK
+TC_MEC_MEC028_SRV_WAI_008_OK
     [Documentation] 
     ...  Check that the IUT responds with the list of Subscription"
-    ...	 Reference "ETSI GS MEC 028 2.2.1, clause 7.6.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription ##Outdated
+    ...	 Reference "ETSI GS MEC 028 2.3.1, clause 7.6.3.1
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.3.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription 
+    
+    [Setup]  Create New Subscription Info    ${SUB_ID}
+    Set Suite Variable    ${Location}    ${response['headers']['Location']}  
+
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve existing subscription information  ${SUB_ID}
@@ -22,25 +27,32 @@ TP_MEC_MEC028_SRV_WAI_008_OK
     Check HTTP Response Body Json Schema Is   AssocStaSubscription
     Should Be Equal As Strings  ${response['body']['subscriptionType']}    ${SUB_TYPE}
     Should Be Equal As Strings  ${response['body']['callbackReference']}    ${CALLBACK_URI}
-    Should Be Equal As Strings  ${response['body']['apId']['macId']}    ${MAC_ID}
+    Should Be Equal As Strings  ${response['body']['apId']['bssid']}    ${BSSID}
+
+    [TearDown]  Remove Subscription Info    ${Location}  
    
-TP_MEC_MEC028_SRV_WAI_008_NF
+
+TC_MEC_MEC028_SRV_WAI_008_NF
     [Documentation] 
     ...  Check that the IUT responds with an error when a request for existing subscription with incorrect parameters is sent"
-    ...	 Reference "ETSI GS MEC 028 2.2.1, clause 7.6.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription ##Outdated
+    ...	 Reference "ETSI GS MEC 028 2.3.1, clause 7.6.3.1
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.3.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription 
+    [Setup]  Remove Subscription Info Using SubId    ${SUB_ID}
+
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve existing subscription information  ${NOT_EXISTING_SUB_ID}
-    Check HTTP Response Status Code Is    404
- 
+    Check HTTP Response Status Code Is    404 
 
-*** Test Cases ***
-TP_MEC_MEC028_SRV_WAI_009_OK
+
+TC_MEC_MEC028_SRV_WAI_009_OK
     [Documentation] 
     ...  Check that the IUT responds with a Notification Subscription when it is modified"
-    ...	 Reference "ETSI GS MEC 028 2.2.1, clause 7.6.3.2
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription ##Outdated
+    ...	 Reference "ETSI GS MEC 028 2.3.1, clause 7.6.3.2
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.3.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription
+    [Setup]  Create New Subscription Info    ${SUB_ID}
+    Set Suite Variable    ${Location}    ${response['headers']['Location']} 
+
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Modify existing subscription information  ${SUB_ID}   UpdateAssocStaSubscription.json
@@ -49,31 +61,40 @@ TP_MEC_MEC028_SRV_WAI_009_OK
     Should Be Equal As Strings  ${response['body']['subscriptionType']}    ${SUB_TYPE}
     Should Be Equal As Strings  ${response['body']['callbackReference']}    ${NEW_CALLBACK_URI}
     Should Be Equal As Strings  ${response['body']['apId']['macId']}    ${MAC_ID}
+
+    [TearDown]  Remove Subscription Info    ${Location}  
    
-TP_MEC_MEC028_SRV_WAI_009_BR
+TC_MEC_MEC028_SRV_WAI_009_BR
     [Documentation] 
     ...  Check that the IUT responds with an error when an invalid field is set in the subscription modification request"
-    ...	 Reference "ETSI GS MEC 028 2.2.1, clause 7.6.3.2
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription ##Outdated
+    ...	 Reference "ETSI GS MEC 028 2.3.1, clause 7.6.3.2
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.3.1/WlanInformationApi.yaml#/schemas/AssocStaSubscription
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
-    Modify existing subscription information  ${SUB_ID}   UpdateAssocStaSubscription_BR.json
+    Modify existing subscription information  ${BAD_REQUEST_SUB_ID}   UpdateAssocStaSubscription_BR.json
     Check HTTP Response Status Code Is    400
 
 
-TP_MEC_MEC028_SRV_WAI_010_OK
+TC_MEC_MEC028_SRV_WAI_010_OK
     [Documentation] 
     ...  Check that the IUT responds with 204 when an existing subscription is correctly deleted"
-    ...	 Reference "ETSI GS MEC 028 2.2.1, clause 7.6.3.5
+    ...	 Reference "ETSI GS MEC 028 2.3.1, clause 7.6.3.5
+    
+    [Setup]  Create New Subscription Info    ${SUB_ID}
+    Set Suite Variable    ${Location}    ${response['headers']['Location']} 
+
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Remove existing subscription information  ${SUB_ID}
     Check HTTP Response Status Code Is    204  
 
-TP_MEC_MEC028_SRV_WAI_010_NF
+TC_MEC_MEC028_SRV_WAI_010_NF
     [Documentation] 
     ...  Check that the IUT responds with an error when an not existing subscription cannot be deleted"
-    ...	 Reference "ETSI GS MEC 028 2.2.1, clause 7.6.3.5
+    ...	 Reference "ETSI GS MEC 028 2.3.1, clause 7.6.3.5
+    
+    [Setup]  Remove Subscription Info Using SubId    ${NOT_EXISTING_SUB_ID}
+
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Remove existing subscription information  ${NOT_EXISTING_SUB_ID}
@@ -116,3 +137,36 @@ Remove existing subscription information
     DELETE     ${apiRoot}/${apiName}/${apiVersion}/subscriptions/${SUB_ID}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
+
+Create New Subscription Info
+    [Arguments]     ${content}   
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+     
+    ${file}=    Catenate    SEPARATOR=    jsons/    CreateAssocStaSubscription    .json
+    ${body}=    Get File    ${file}
+    ${json_data}=    Evaluate    json.loads('''${body}''')    json
+    ${new_href}=    Set Variable    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}/${apiRoot}/${apiName}/${apiVersion}/subscriptions/${SUB_ID}
+    Set To Dictionary    ${json_data["_links"]["self"]}    href=${new_href}
+    ${modified_json_string}=    Evaluate    json.dumps(${json_data})
+    
+    POST   ${apiRoot}/${apiName}/${apiVersion}/subscriptions   ${modified_json_string}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Remove Subscription Info 
+    [Arguments]     ${delete_url}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+     
+    DELETE    ${delete_url}
+
+Remove Subscription Info Using SubId
+    [Arguments]     ${SUB_ID}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+
+    DELETE     ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}/${apiRoot}/${apiName}/${apiVersion}/subscriptions/${SUB_ID}

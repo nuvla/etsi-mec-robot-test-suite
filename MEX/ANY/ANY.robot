@@ -17,9 +17,10 @@ Request access to all resources using no token
     ...    receives a request without token
     ...    ETSI GS MEC 009 1.1.1, clause 6.16.1
     [Tags]    GENERIC_TESTS    INCLUDE_UNDEFINED_SCHEMAS
-    : FOR    ${INDEX}    IN RANGE    0    3
-    \    @{list}    Split String    ${data[${INDEX}]}    separator=|    max_split=-1
-    \    Perform a generic request using no token    @{list}
+    FOR    ${INDEX}    IN RANGE    0    3
+        @{list}    Split String    ${data[${INDEX}]}    separator=|    max_split=-1
+        Perform a generic request using no token    @{list}
+    END
     
 Request access to all resources using invalid token
     [Documentation]    TP_MEC_MEX_ANY_001_WT
@@ -27,11 +28,13 @@ Request access to all resources using invalid token
     ...    receives a request with an invalid token
     ...    ETSI GS MEC 009 1.1.1, clause 6.16.1
     [Tags]    GENERIC_TESTS    INCLUDE_UNDEFINED_SCHEMAS
-    : FOR    ${INDEX}    IN RANGE    0    3
-    \    @{list}    Split String    ${data[${INDEX}]}    separator=|    max_split=-1
-    \    Perform a generic request using invalid token    @{list}
-    
+    FOR    ${INDEX}    IN RANGE    0    3
+       @{list}    Split String    ${data[${INDEX}]}    separator=|    max_split=-1
+       Perform a generic request using invalid token    @{list}
+    END
 
+
+    
 *** Keywords ***
 Perform a generic request using no token
     [Arguments]   @{params}

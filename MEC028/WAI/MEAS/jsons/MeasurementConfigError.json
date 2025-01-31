@@ -1,10 +1,10 @@
 {
-  "StaIdentities": [
+  "statId": [
     {
       "macId": "123"
     }
   ],
-  "measurementId": "123",
+  "measurementId": "321",
   "measurementInfo": {
     "measurementDuration": 10
   },

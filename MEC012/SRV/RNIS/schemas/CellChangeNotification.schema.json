@@ -1,158 +1,218 @@
 {
-        "properties": {
-          "associateId": {
-            "description": "0 to N identifiers to associate the event for a specific UE or flow.",
-            "items": {
-              "properties": {
-                "type": {
-                  "description": "Numeric value (0-255) corresponding to specified type of identifier as following:\n0 = reserved.\n1= UE_IPv4_ADDRESS.\n2 = UE_IPV6_ADDRESS.\n3 = NATED_IP_ADDRESS.\n4 = GTP_TEID.",
-                  "enum": [
-                    "SEE_DESCRIPTION"
-                  ],
-                  "type": "string",
-                  "x-etsi-mec-cardinality": "1",
-                  "x-etsi-mec-origin-type": "Enum"
-                },
-                "value": {
-                  "description": "Value for the identifier.",
-                  "type": "string",
-                  "x-etsi-mec-cardinality": "1",
-                  "x-etsi-mec-origin-type": "String"
-                }
+  "title": "CellChangeNotification",
+  "description": "This type represents a notification from RNIS with regards to cell change procedure\nNOTE:\tCardinality N is valid only in case of statuses IN_PREPARATION, REJECTED and CANCELLED.\n",
+  "allOf": [
+    {
+      "title": "InlineNotification",
+      "required": [
+        "notificationType"
+      ],
+      "type": "object",
+      "properties": {
+        "notificationType": {
+          "type": "string"
+        }
+      },
+      "discriminator": {
+        "propertyName": "notificationType",
+        "mapping": {
+          "CaReconfNotification": "#/components/schemas/CaReconfNotification",
+          "CellChangeNotification": "#/components/schemas/CellChangeNotification",
+          "MeasRepUeNotification": "#/components/schemas/MeasRepUeNotification",
+          "MeasTaNotification": "#/components/schemas/MeasTaNotification",
+          "NrMeasRepUeNotification": "#/components/schemas/NrMeasRepUeNotification",
+          "RabEstNotification": "#/components/schemas/RabEstNotification",
+          "RabModNotification": "#/components/schemas/RabModNotification",
+          "RabRelNotification": "#/components/schemas/RabRelNotification",
+          "S1BearerNotification": "#/components/schemas/S1BearerNotification",
+          "ExpiryNotification": "#/components/schemas/ExpiryNotification",
+          "TestNotification": "#/components/schemas/TestNotification"
+        }
+      }
+    },
+    {
+      "required": [
+        "hoStatus",
+        "srcEcgi",
+        "trgEcgi",
+        "_links"
+      ],
+      "type": "object",
+      "properties": {
+        "associateId": {
+          "type": "array",
+          "items": {
+            "title": "AssociateId",
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Type",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4
+                ],
+                "type": "integer",
+                "description": "Numeric value (0-255) corresponding to specified type of identifier as following: <p>0 = reserved. <p>1 = UE_IPv4_ADDRESS. <p>2 = UE_IPV6_ADDRESS. <p>3 = NATED_IP_ADDRESS. <p>4 = GTP_TEID.",
+                "examples": [
+                  0
+                ]
               },
+              "value": {
+                "type": "string",
+                "description": "Value for the identifier."
+              }
+            }
+          },
+          "description": "0 to N identifiers to associate the event for a specific UE or flow."
+        },
+        "hoStatus": {
+          "title": "HoStatus",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "type": "integer",
+          "description": "Indicate the status of the UE handover procedure. Values are defined as following: <p>1 = IN_PREPARATION. <p>2 = IN_EXECUTION. <p>3 = COMPLETED. <p>4 = REJECTED. <p>5 = CANCELLED.",
+          "examples": [
+            1
+          ]
+        },
+        "srcEcgi": {
+          "title": "Ecgi",
+          "required": [
+            "cellId",
+            "plmn"
+          ],
+          "type": "object",
+          "properties": {
+            "cellId": {
+              "type": "string",
+              "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3]."
+            },
+            "plmn": {
+              "title": "Plmn",
               "required": [
-                "type",
-                "value"
+                "mcc",
+                "mnc"
               ],
               "type": "object",
-              "x-etsi-ref": "6.5.4"
+              "properties": {
+                "mcc": {
+                  "type": "string",
+                  "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                },
+                "mnc": {
+                  "type": "string",
+                  "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                }
+              }
+            }
+          }
+        },
+        "tempUeId": {
+          "title": "TempUeId",
+          "required": [
+            "mmec",
+            "mtmsi"
+          ],
+          "type": "object",
+          "properties": {
+            "mmec": {
+              "type": "string",
+              "description": "MMEC as defined in ETSI TS 136 413 [i.3]."
             },
-            "type": "array",
-            "x-etsi-mec-cardinality": "0..N",
-            "x-etsi-mec-origin-type": "AssociateId"
+            "mtmsi": {
+              "type": "string",
+              "description": "M-TMSI as defined in ETSI TS 136 413 [i.3]."
+            }
           },
-          "hoStatus": {
-            "description": "Indicate the status of the UE handover procedure. Values are defined as following:\n1 = IN_PREPARATION.\n2 = IN_EXECUTION.\n3 = COMPLETED.\n4 = REJECTED.\n5 = CANCELLED.",
-            "enum": [
-              "SEE_DESCRIPTION"
+          "description": "The temporary identifier allocated for the specific UE as defined below."
+        },
+        "timeStamp": {
+          "title": "TimeStamp",
+          "required": [
+            "nanoSeconds",
+            "seconds"
+          ],
+          "type": "object",
+          "properties": {
+            "nanoSeconds": {
+              "type": "integer",
+              "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+              "contentEncoding": "int32"
+            },
+            "seconds": {
+              "type": "integer",
+              "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+              "contentEncoding": "int32"
+            }
+          }
+        },
+        "trgEcgi": {
+          "type": "array",
+          "items": {
+            "title": "Ecgi",
+            "required": [
+              "cellId",
+              "plmn"
             ],
-            "type": "string",
-            "x-etsi-mec-cardinality": "1",
-            "x-etsi-mec-origin-type": "Enum"
-          },
-          "notificationType": {
-            "description": "Shall be set to \"CellChangeNotification\".",
-            "type": "string",
-            "x-etsi-mec-cardinality": "1",
-            "x-etsi-mec-origin-type": "String"
-          },
-          "srcEcgi": {
+            "type": "object",
             "properties": {
               "cellId": {
-                "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3].",
-                "type": "string"
+                "type": "string",
+                "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3]."
               },
               "plmn": {
-                "properties": {
-                  "mcc": {
-                    "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3].",
-                    "type": "string",
-                    "x-etsi-mec-cardinality": "1",
-                    "x-etsi-mec-origin-type": "String"
-                  },
-                  "mnc": {
-                    "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3].",
-                    "type": "string",
-                    "x-etsi-mec-cardinality": "1",
-                    "x-etsi-mec-origin-type": "String"
-                  }
-                },
+                "title": "Plmn",
                 "required": [
                   "mcc",
                   "mnc"
                 ],
                 "type": "object",
-                "x-etsi-ref": "6.5.5"
-              }
-            },
-            "required": [
-              "plmn",
-              "cellId"
-            ],
-            "type": "object",
-            "x-etsi-ref": "6.5.6"
-          },
-          "tempUeId": {
-            "description": "The temporary identifier allocated for the specific UE as defined below.",
-            "type": "object",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "Structure (inlined)"
-          },
-          "timeStamp": {
-            "properties": {
-              "nanoSeconds": {
-                "type": "number"
-              },
-              "seconds": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "seconds",
-              "nanoSeconds"
-            ],
-            "type": "object",
-            "x-etsi-ref": "6.5.3"
-          },
-          "trgEcgi": {
-            "description": "E-UTRAN CelI Global Identifier of the target cell.\nNOTE: Cardinality N is valid only in case of statuses IN_PREPARATION, REJECTED and CANCELLED.",
-            "items": {
-              "properties": {
-                "cellId": {
-                  "description": "String representing the E-UTRAN Cell Identity. Encoded as a bit string (size (28)) as defined in ETSI TS 136 413 [i.3].",
-                  "type": "string"
-                },
-                "plmn": {
-                  "properties": {
-                    "mcc": {
-                      "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3].",
-                      "type": "string",
-                      "x-etsi-mec-cardinality": "1",
-                      "x-etsi-mec-origin-type": "String"
-                    },
-                    "mnc": {
-                      "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3].",
-                      "type": "string",
-                      "x-etsi-mec-cardinality": "1",
-                      "x-etsi-mec-origin-type": "String"
-                    }
+                "properties": {
+                  "mcc": {
+                    "type": "string",
+                    "description": "The Mobile Country Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
                   },
-                  "required": [
-                    "mcc",
-                    "mnc"
-                  ],
-                  "type": "object",
-                  "x-etsi-ref": "6.5.5"
+                  "mnc": {
+                    "type": "string",
+                    "description": "The Mobile Network Code part of PLMN Identity as defined in ETSI TS 136 413 [i.3]."
+                  }
                 }
-              },
+              }
+            }
+          },
+          "description": "E-UTRAN Cell Global Identifier of the target cell. See note.\n"
+        },
+        "_links": {
+          "description": "Links to resources related to this notification.",
+          "required": [
+            "subscription"
+          ],
+          "properties": {
+            "subscription": {
+              "description": "A link to the related subscription.",
+              "title": "LinkType",
               "required": [
-                "plmn",
-                "cellId"
+                "href"
               ],
               "type": "object",
-              "x-etsi-ref": "6.5.6"
-            },
-            "type": "array",
-            "x-etsi-mec-cardinality": "1..N",
-            "x-etsi-mec-origin-type": "Ecgi"
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "description": "URI referring to a resource"
+                }
+              }
+            }
           }
-        },
-        "required": [
-          "notificationType",
-          "srcEcgi",
-          "trgEcgi",
-          "hoStatus"
-        ],
-        "type": "object",
-        "x-etsi-ref": "6.4.2"
+        }
       }
+    }
+  ]
+}

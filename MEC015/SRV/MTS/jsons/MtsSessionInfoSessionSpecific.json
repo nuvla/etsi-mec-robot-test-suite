@@ -1,20 +1,17 @@
 {
-		"appInsId": "myAppInstId",
+		"appInsId": "81c51643-8c6f-4781-ad45-f8a457ca549b",
 		"requestType": 1,
 		"mtsMode":4,
         "trafficDirection":"00",
 		"qosD": {
-			"minTpt": 10
+			"minTpt": 15
 		},
-		"mtsMode": 0,
 		"trafficDirection": "00",
   		"flowFilter": [{
-			"dstPort": [8081],
 			"protocol": 41,
-			"sourcePort": [8081],
-			"dstIp": "10.10.0.10",
+			"dstIp": "10.10.0.1",
 			"dscp": 40,
-			"sourceIp": "10.10.0.30"
+			"sourceIp": "10.10.0.2"
 		}   
           ],
         "qosD":{

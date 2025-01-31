@@ -1,0 +1,17 @@
+*** Variables ***
+#### Env variable for the ETSI MEC Sandbox
+${SCHEMA}                   https
+${HOST}                    try-mec.etsi.org
+${PORT}                     443
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}		  /<id_provided_by_sandbox>/mep1 
+${apiName}        mec_service_mgmt
+${apiVersion}     v1
+${APP_INSTANCE_ID}                      f1e4d448-e277-496b-bf63-98391cfd20fb
+####
+
+# Specific variables
+${NON_EXISTENT_APP_INSTANCE_ID}          NON_ESISTENT_APP_INSTANCE_ID
+${TRAFFIC_RULE_ID}                       e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${NON_EXISTENT_TRAFFIC_RULE_ID}          NON_EXISTENT_TRAFFIC_RULE_ID
+

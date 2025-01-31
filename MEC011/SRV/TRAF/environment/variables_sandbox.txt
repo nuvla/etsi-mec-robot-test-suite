@@ -1,0 +1,27 @@
+*** Variables ***
+# Generic variables
+#### Env variable for the ETSI MEC Sandbox
+${SCHEMA}                   https
+${HOST}                    try-mec.etsi.org
+${PORT}                     443
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}		  /<id_provided_by_sandbox>/mep1 
+${apiName}        mec_app_support
+${apiVersion}     v1
+${APP_INSTANCE_ID}       298b2c0c-7efa-45d3-8b47-8ab3c009b845
+####
+
+##Registration App variables
+${SCHEMA_REGAPP}                   https
+${HOST_REGAPP}                     try-mec.etsi.org
+${PORT_REGAPP}                     443
+${apiRoot_REGAPP}                  /sbxjbxjt4s/mep1 
+${apiName_REGAPP}                  mec_app_support
+${apiVersion_REGAPP}               v1
+
+# Specific variables
+${NON_EXISTENT_APP_INSTANCE_ID}          NON_EXISTENT_APP_INSTANCE_ID
+${TRAFFIC_RULE_ID}                       e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${NON_EXISTENT_TRAFFIC_RULE_ID}          NON_EXISTENT_TRAFFIC_RULE_ID
+${INVALID_ETAG}                          INVALID_ETAG
+

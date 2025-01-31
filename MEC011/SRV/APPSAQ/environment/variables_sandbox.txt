@@ -1,0 +1,28 @@
+*** Variables ***
+# Generic variables
+
+${response}                         {}
+####Env variable for the ETSI MEC Sandbox
+${SCHEMA}                   https
+${HOST}                     try-mec.etsi.org
+${PORT}                     443
+#${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}		  /<replace_with_what_provided_by_sandbox>/mep1 
+${apiName}        mec_service_mgmt
+${apiVersion}     v1
+
+
+# Specific variables
+${APP_INSTANCE_ID}                  f1e4d448-e277-496b-bf63-98391cfd20fb
+${INSTANCE_ID}                      instance_id
+${FAKE_INSTANCE_ID_VALUE}           5
+${NON_EXISTENT_APP_INSTANCE_ID}     NON_EXISTENT_APP_INSTANCE_ID
+${SERVICE_ID}                       e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${NON_EXISTENT_SERVICE_ID}          NON_EXISTENT_SERVICE_ID
+
+## this parameter should be the same as in jsons/ServiceInfo.json on param serName
+${NEW_SERVICE_NAME}                NEW_SERVICE_NAME
+
+## this parameter should be the same as in jsons/ServiceInfoUpdated.json on param sversion
+${SVC_NEW_VERSION}                 v2.0
+${INVALID_ETAG}                    INVALID_ETAG

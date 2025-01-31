@@ -1,14 +1,16 @@
 *** Variables ***
 # Generic variables
 ${SCHEMA}                   http
-${HOST}                     10.192.2.172
+${HOST}                     127.0.0.1
 ${PORT}                     8081
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
 ${apiName}        location
-${apiVersion}     v2
+${apiVersion}     v3
 
 # Specific variables
 ${ZONE_ID}                    5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 ${NON_EXISTENT_ZONE_ID}       NON_EXISTENT_ZONE_ID
+${AP_ID}                      ap01
+${NON_EXISTENT_AP_ID}         NON_EXISTENT_AP_ID

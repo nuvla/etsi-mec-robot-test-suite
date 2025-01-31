@@ -1,0 +1,8 @@
+{
+    "subscriptionType": "NrMeasRepUeSubscription",
+    "callbackReference": "http://10.30.8.189:8888/callback_url",
+    "filterCriteriaNrMrs": {
+        "appInstanceId": "appInstanceId",
+        "associateId":["assoicateId01"]
+    }
+}

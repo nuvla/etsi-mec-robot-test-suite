@@ -1,6 +1,5 @@
 {
-	"id": "123",
-	"appInstanceId": "456",
+	"appInstanceId": "123",
 	"appLcmOpOccId": "789",
 	"appDId":"appDId",
 	"operation":"INSTANTIATE",

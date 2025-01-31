@@ -23,8 +23,8 @@
 		}
 	},
 	"_links": {
-    "self": {
-      "href": "https://127.0.0.1/vis/v1/subscription/1"
-    }
-  }
+		"self": {
+			"href": "https://127.0.0.1/vis/v1/subscription/1"
+		}
+	}
 }

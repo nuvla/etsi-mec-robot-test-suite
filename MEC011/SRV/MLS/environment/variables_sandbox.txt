@@ -1,0 +1,35 @@
+*** Variables ***
+#### Env variable for the ETSI MEC Sandbox
+${SCHEMA}                   https
+${HOST}                     try-mec.etsi.org
+${PORT}                     443
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}		  /<id_provided_by_sandbox>/mep1 
+${apiName}        mec_app_support
+${apiVersion}     v1
+${APP_INSTANCE_ID}                      b8ae165a-a1e3-4d6c-86d9-52c59ad314b6
+
+${SCHEMA_APP_SAQ}        https
+${HOST_APP_SAQ}          try-mec.etsi.org
+${PORT_APP_SAQ}          443
+${apiRoot_APP_SAQ}   	sbxjbxjt4s/mep1/
+${apiName_APP_SAQ}      mec_service_mgmt
+${apiVersion_APP_SAQ}    v1
+${APP_INSTANCE_ID}       appInstanceId
+${SERVICE_NAME}
+
+####
+
+# Specific variables
+${URL_SERVICE_MEC_LIVENESS} 	/link/to/individual/mecServiceLiveness
+${NOT_EXISTING_URL_SERVICE_MEC_LIVENESS} 	/not_existing_link/to/individual/mecServiceLiveness
+
+
+#Variables for test setups and teardowns
+#${HOST_APP_SAQ}          127.0.0.1
+#${PORT_APP_SAQ}          8082
+#${apiRoot_APP_SAQ}   
+#${apiName_APP_SAQ}       mec_service_mgmt
+#${apiVersion_APP_SAQ}    v1
+#${APP_INSTANCE_ID}       appInstanceId
+#${SERVICE_NAME}

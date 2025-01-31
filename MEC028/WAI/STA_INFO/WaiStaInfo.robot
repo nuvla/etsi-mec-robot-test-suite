@@ -14,8 +14,8 @@ Library     REST    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}    ssl_v
 TP_MEC_MEC028_SRV_WAI_003_OK
     [Documentation] 
     ...  Check that the IUT responds with the list of Station Point
-    ...  Reference "ETSI GS MEC 028 2.2.1, clause 7.4.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schema/StaInfo #Outdated
+    ...  Reference "ETSI GS MEC 028 2.3.1, clause 7.4.3.1
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.3.1/WlanInformationApi.yaml#/schema/StaInfo 
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve the station information
@@ -31,8 +31,8 @@ TP_MEC_MEC028_SRV_WAI_003_OK
 TP_MEC_MEC028_SRV_WAI_004_OK
     [Documentation] 
     ...  Check that the IUT responds with the list of Station Point filtered by the macId provided as query parameter 
-    ...  Reference "ETSI GS MEC 028 2.2.1, clause 7.4.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schema/StaInfo #Outdated
+    ...  Reference "ETSI GS MEC 028 2.3.1, clause 7.4.3.1
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.3.1/WlanInformationApi.yaml#/schema/StaInfo 
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve the station information using filters    ${filter} 
@@ -49,8 +49,8 @@ TP_MEC_MEC028_SRV_WAI_004_OK
 TP_MEC_MEC028_SRV_WAI_004_BR
     [Documentation] 
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
-    ...  ETSI GS MEC 028 2.2.1, clause 7.4.3.1
-    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.1.1/WlanInformationApi.yaml#/schema/StaInfo  #Outdated
+    ...  ETSI GS MEC 028 2.3.1, clause 7.4.3.1
+    ...  https://forge.etsi.org/rep/mec/gs028-wai-api/blob/v2.3.1/WlanInformationApi.yaml#/schema/StaInfo
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Retrieve the station information using filters    ${bad_filter} 

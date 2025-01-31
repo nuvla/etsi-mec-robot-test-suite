@@ -1,0 +1,9 @@
+{
+    "notificationType": "NrMeasRepUeNotification",
+    "triggerNr": 1,
+    "_links": {
+        "subscription": {
+            "href": "somesuburl/subscriptions/subscriptionId"
+        }
+    }
+}

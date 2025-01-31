@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+	  "appName": {
+		"type": "string"
+	  },
+	  "appInstanceId": {
+		"type": "string"
+	  },
+	  "appDId": {
+		"type": "string"
+	  }
+	},
+	"required": [
+	  "appName"
+	]
+  }

@@ -1,35 +1,30 @@
 *** Variables ***
 ${MEC-APP_SCHEMA}                   http
-${MEC-APP_HOST}                     my-rnis-example.com
-${MEC-APP_PORT}                     8080
-${SUBSCRIPTION_ID}                  7777
-${NON_EXISTENT_SUBSCRIPTION_ID}     6666
-${LINKS_SELF}                       http://example.com/exampleAPI/rni/v2/subscriptions
-${SUBSCRIPTION_HREF_VALUE}          cell_changed
-${SUBSCRIPTION_TYPE}                CELL_CHANGE
-${HREF}                             http://notify-me.com:80/notify
-${SUBSCRIPTION_VALUE}               {'href': 'http://notify-me.com:80/notify', 'subscriptionType': 'CELL_CHANGE'}
-${CELL_ID}                          6060606
-${C_ID}                             6060606
-${NOT_EXISTENT_CELL_ID}             0x8000099
-${APP_INS_ID}                       
-${APP_ID}                           10
-${NOT_EXISTENT_APP_INS_ID}          99
-${response}                         {}
-${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
-
-
-${apiRoot}      /example
+${MEC-APP_HOST}                     127.0.0.1
+${MEC-APP_PORT}                     8085
+${apiRoot}      
+${apiName}      rni
 ${apiVersion}    v2
 
-${PIC_PROBLEM_DETAILS_ON_4xx}    0
 
-# Notifications variables
-${MOCK_SERVER_JAR}    ../../../bin/mockserver-netty-5.5.0-jar-with-dependencies.jar
+${response}                         {}
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${SUB_ID}
 
-${callback_port}                    80
-${callback_uri}                     http://notify-me.com
-${callback_endpoint}                /notify
-${callback_endpoint_error}          /subs_404
-${total_polling_time}               2 min
-${polling_interval}                 10 sec
+
+##Notification Server variables
+${NOTIFICATION_SERVER_IP}      127.0.0.1
+${NOTIFICATION_SERVER_PORT}      8888
+${NOTIFICATION_SERVER_HTTP_METHOD}      POST
+${NOTIFICATION_SERVER_URI}      /callback_url
+${NOTIFICATION_SERVER_TIMEOUT}      5
+
+${PIC_RNIS_SPECIFIC_SUBSCRIPTION}    1
+${NON_EXISTENT_SUBSCRIPTION_ID}       123456789
+${APP_INS_ID}                 appInsId
+${NOT_EXISTENT_APP_INS_ID}    NOT_EXISTENT_APP_INS_ID
+${NOT_EXISTENT_CELL_ID}       0x8000099
+${CELL_ID}                    6060606
+${HREF}
+${LINKS_SELF}
+${PIC_PROBLEM_DETAILS_ON_4xx}     0

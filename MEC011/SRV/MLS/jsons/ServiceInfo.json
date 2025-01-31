@@ -1,0 +1,8 @@
+{
+	"serName": "serviceName",
+	"version": "0.1",
+	"state": "INACTIVE",
+	"serializer": "XML",
+	"transportId": "transportId",
+	"livenessInterval":10
+}
