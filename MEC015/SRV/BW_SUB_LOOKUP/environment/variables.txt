@@ -1,0 +1,25 @@
+*** Variables ***
+####Env variable for the ETSI MEC Sandbox
+${apiRoot}        
+${apiName}        bwm
+${apiVersion}     v1
+
+${MEC-APP_SCHEMA}                   http
+${MEC-APP_HOST}                     mockoon
+${MEC-APP_PORT}                     3001
+
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+ 
+
+# Specific variables
+${appInsId}                      5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
+${NON_EXISTENT_APP_INSTANCE_ID}         NON_ESISTENT_APP_INSTANCE_ID
+
+${SUB_TYPE}          BwChgEventSubscription
+
+${SUB_FILTER}          bw_chg
+${INVALID_SUB_FILTER}          bw_chg_invalid
+
+${SUB_ID}        123
+${HREF}          /bwm/v1/subscriptions/1
+${CALLBACK_URI}          http://callback.uri/1

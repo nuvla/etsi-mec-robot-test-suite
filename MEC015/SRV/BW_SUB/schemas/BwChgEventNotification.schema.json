@@ -1,0 +1,92 @@
+{
+    "properties": {
+        "notificationType": {
+            "description": "Shall be set to 'BwChgEventNotification'.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+        },
+        "timeStamp": {
+            "description": "Time stamp to indicate when the corresponding information elements are sent.",
+            "properties": {
+                "seconds": {
+                    "description": "The seconds part of the Time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                    "format": "uint32",
+                    "type": "integer",
+                    "x-etsi-mec-cardinality": "1",
+                    "x-etsi-mec-origin-type": "Uint32"
+                },
+                "nanoSeconds": {
+                    "description": "The nanoseconds part of the Time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                    "format": "uint32",
+                    "type": "integer",
+                    "x-etsi-mec-cardinality": "1",
+                    "x-etsi-mec-origin-type": "Uint32"
+                }
+            },
+            "type": "object",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "Structure (inlined)"
+        },
+        "dataVolDispersion": {
+            "items": {
+                "properties": {
+                    "dataVol": {
+                        "description": "Sum of data volume (UL/DL) exchanged per UE per applications, ETSI TS 123 288 [i.4].",
+                        "format": "uint32",
+                        "type": "integer",
+                        "x-etsi-mec-cardinality": "1",
+                        "x-etsi-mec-origin-type": "Uint32"
+                    },
+                    "appInsId": {
+                        "description": "Application instance identifier.",
+                        "type": "string",
+                        "x-etsi-mec-cardinality": "1",
+                        "x-etsi-mec-origin-type": "String"
+                    },
+                    "ueIp": {
+                        "description": "Source address identity of session.",
+                        "type": "string",
+                        "x-etsi-mec-cardinality": "0..1",
+                        "x-etsi-mec-origin-type": "String"
+                    }
+                },
+                "required": [
+                    "dataVol",
+                    "appInsId"
+                ],
+                "type": "object"
+            },
+            "type": "array",
+            "x-etsi-mec-cardinality": "1..N",
+            "x-etsi-mec-origin-type": "Structure (inlined)"
+        },
+        "_links": {
+            "description": "Link to resource related to this notification.",
+            "properties": {
+                "subscription": {
+                    "properties": {
+                        "href": {
+                            "description": "A link to related subscription.",
+                            "type": "string",
+                            "x-etsi-mec-cardinality": "1",
+                            "x-etsi-mec-origin-type": "LinkType"
+                        }
+                    },
+                    "required": [
+                        "href"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "Structure (inlined)"
+        }
+    },
+    "required": [
+        "notificationType",
+        "dataVolDispersion"
+    ],
+    "type": "object"
+}
