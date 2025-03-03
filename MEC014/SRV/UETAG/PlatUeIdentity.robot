@@ -15,8 +15,8 @@ TC_MEC_MEC014_SRV_UETAG_001_OK
     ...  Check that the IUT responds with the information on a UE Identity tag
     ...  when queried by a MEC Application
 	...
-	...  Reference ETSI GS MEC 014 3.1.1, clause 6.2.2,
-    ...            ETSI GS MEC 014 3.1.1, clause 7.3.3.1
+	...  Reference ETSI GS MEC 014 3.2.1, clause 6.2.2,
+    ...            ETSI GS MEC 014 3.2.1, clause 7.3.3.1
     ...    
     [Setup]  Create new App Instance  CreateAppInstanceRequest
     Get UE Identity Tag information    ${APP_INSTANCE_ID}      ${UE_IDENTITY_TAG} 
@@ -38,10 +38,10 @@ TC_MEC_MEC014_SRV_UETAG_001_BR
     ...  Check that the IUT responds with an error 
     ...  when a request with incorrect parameters is sent by a MEC Application
     
-    ...  Reference  ETSI GS MEC 013 3.1.1 Clause 5.3.4,
-    ...             ETSI GS MEC 013 3.1.1 Clause 6.3.9,
-    ...             ETSI GS MEC 013 3.1.1 Clause 6.4.9,
-    ...             ETSI GS MEC 013 3.1.1 Clause 7.14.3.4
+    ...  Reference  ETSI GS MEC 013 3.2.1 Clause 5.3.4,
+    ...             ETSI GS MEC 013 3.2.1 Clause 6.3.9,
+    ...             ETSI GS MEC 013 3.2.1 Clause 6.4.9,
+    ...             ETSI GS MEC 013 3.2.1 Clause 7.14.3.4
     
     [Setup]  Create new App Instance  CreateAppInstanceRequest
     Get UE Identity Tag information using bad parameters    ${APP_INSTANCE_ID}      ${UE_IDENTITY_TAG} 
@@ -53,7 +53,7 @@ TC_MEC_MEC014_SRV_UETAG_001_BR
 TC_MEC_MEC014_SRV_UETAG_001_NF
     [Documentation]   Request UE Identity Tag information using non-existent application instance
     ...  Check that the IUT responds with an error when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
-    ...  Reference ETSI GS MEC 014 V3.1.1, clause 7.3.3.1
+    ...  Reference ETSI GS MEC 014 V3.2.1, clause 7.3.3.1
     [Setup]    Delete APP Instance  ${NON_EXISTENT_APP_INSTANCE_ID}
     Get UE Identity Tag information    ${NON_EXISTENT_APP_INSTANCE_ID}      ${UE_IDENTITY_TAG}
     Check HTTP Response Status Code Is    404
@@ -63,8 +63,8 @@ TC_MEC_MEC014_SRV_UETAG_002_OK
     [Documentation]   Register an UE Identity Tag
     ...  Check that the IUT registers a tag (representing a UE) or a list of tags when commanded by a MEC Application
     
-    ...  Reference ETSI GS MEC 014 3.1.1, clause 6.2.2
-    ...            ETSI GS MEC 014 V3.1.1, clause 7.3.3.2
+    ...  Reference ETSI GS MEC 014 3.2.1, clause 6.2.2
+    ...            ETSI GS MEC 014 V3.2.1, clause 7.3.3.2
    
     [Setup]  Create new App Instance and Check User Identity Tag unregistered state   CreateAppInstanceRequest    ${APP_INSTANCE_ID}    UeIdentityTag 
     Update an UE Identity Tag     ${APP_INSTANCE_ID}   IdentityTag
@@ -84,8 +84,8 @@ TC_MEC_MEC014_SRV_UETAG_002_OK
 TC_MEC_MEC014_SRV_UETAG_002_BR
     [Documentation]   Register an UE Identity Tag using invalid state
     ...  Check that the IUT responds with an error when an unauthorised request is sent by a MEC Application
-    ...  Reference ETSI GS MEC 014 3.1.1, clause 6.2.2,
-    ...            ETSI GS MEC 014 3.1.1, clause 7.3.3.2
+    ...  Reference ETSI GS MEC 014 3.2.1, clause 6.2.2,
+    ...            ETSI GS MEC 014 3.2.1, clause 7.3.3.2
     [Setup]  Create new App Instance  CreateAppInstanceRequest
     Update an UE Identity Tag     ${APP_INSTANCE_ID}   IdentityTagBR  
     Check HTTP Response Status Code Is    400
@@ -95,7 +95,7 @@ TC_MEC_MEC014_SRV_UETAG_002_BR
 TC_MEC_MEC014_SRV_UETAG_002_NF
     [Documentation]   Register an UE Identity Tag using invalid state
     ...  Check that the IUT responds with an error when an unauthorised request is sent by a MEC Application
-    ...  Reference ETSI GS MEC 014 3.1.1, clause 7.3.3.2
+    ...  Reference ETSI GS MEC 014 3.2.1, clause 7.3.3.2
     #[Setup]  Delete APP Instance  ${NON_EXISTENT_APP_INSTANCE_ID} 
     Update an UE Identity Tag     ${NON_EXISTENT_APP_INSTANCE_ID}   IdentityTag  
     Check HTTP Response Status Code Is    404
@@ -105,7 +105,7 @@ TC_MEC_MEC014_SRV_UETAG_002_PF
     [Documentation]   Unregister an UE Identity Tag already in unregistered state
     ...  Check that the IUT responds with an error when
     ...  a request sent by a MEC Application doesn't comply with a required condition
-    ...  Reference ETSI GS MEC 014 V3.1.1, clause 7.3.3.2
+    ...  Reference ETSI GS MEC 014 V3.2.1, clause 7.3.3.2
     [Setup]  Create new App Instance  CreateAppInstanceRequest
     Update an UE Identity Tag     ${APP_INSTANCE_ID}   IdentityTagPF  
     Check HTTP Response Status Code Is    412
