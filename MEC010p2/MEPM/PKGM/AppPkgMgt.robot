@@ -388,6 +388,15 @@ GET all app Packages
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
 
+GET all onboarded app Packages
+    Log    Getting all App Packages
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Get    ${apiRoot}/${apiName}/${apiVersion}/onboarded_app_packages    
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
 GET all app Packages with filter
     [Arguments]    ${key}    ${value}
     Log    Getting all App Packages using filtering parameters
