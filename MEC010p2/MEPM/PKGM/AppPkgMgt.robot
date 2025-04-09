@@ -38,14 +38,14 @@ TC_MEC_MEC010p2_MEPM_PKGM_001_02_OK
     
     Set Suite Variable    ${APP_PKG_ID}    ${response['body']['id']}
     Set Suite Variable    ${APPD_ID}    ${response['body']['appDId']}
-    GET all app Packages
+    GET all onboarded app Packages
     Check HTTP Response Status Code Is    200
     FOR    ${onBoardedAppPkgInfo}    IN    @{response['body']}
-        Validate Json    AppPkgInfo.schema.json    ${onBoardedAppPkgInfo}
+        Validate Json    OnboardedAppPkgInfo.schema.json    ${onBoardedAppPkgInfo}
         Should Contain  ${onBoardedAppPkgInfo['_links']['self']['href']}    ${APP_PKG_ID}       
         Should Contain  ${onBoardedAppPkgInfo['_links']['appD']['href']}    ${APPD_ID}       
         Should Contain  ${onBoardedAppPkgInfo['_links']['appPkgContent']['href']}   ${APPD_ID}       
-        Should Be Equal As Strings  ${onBoardedAppPkgInfo['onboardingState']}    ${ONBOARDING_STATE}
+        Should Be Equal As Strings  ${onBoardedAppPkgInfo['onboardingState']}    ${ONBOARDING_STATE_ONBOARDED}
     END
     [Teardown]   Delete an individual APP Package identified by ID    ${APP_PKG_ID}
     
@@ -86,7 +86,7 @@ TC_MEC_MEC010p2_MEPM_PKGM_002_01_OK
 
 TC_MEC_MEC010p2_MEPM_PKGM_002_02_OK
     [Documentation]  TP_MEC_MEC010p2_MEPM_PKGM_002_02_OK  
-    ...  Check that MEPM returns the an App Package when requested - Note 3
+    ...  Check that MEPM returns the an on-boarded App Package when requested - Note 3
     ...  ETSI GS MEC 010-2 3.1.1, clause 7.3.2.3.2
     ...  ETSI GS MEC 010-2 3.1.1, clause 6.2.3.3.2   ##AppPkgInfo
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
@@ -95,11 +95,11 @@ TC_MEC_MEC010p2_MEPM_PKGM_002_02_OK
     Set Suite Variable    ${APPD_ID}    ${response['body']['appDId']}
     Get an individual APP Package identified by ID    ${APPD_ID}
     Check HTTP Response Status Code Is    200    
-    Validate Json    AppPkgInfo.schema.json    ${response['body']}
+    Validate Json    OnboardedAppPkgInfo.schema.json    ${response['body']}
     Should Contain  ${response['body']['_links']['self']['href']}    ${APP_PKG_ID}       
     Should Contain  ${response['body']['_links']['appD']['href']}    ${APPD_ID}       
     Should Contain  ${response['body']['_links']['appPkgContent']['href']}   ${APPD_ID}       
-    Should Be Equal As Strings  ${response['body']['onboardingState']}    ${ONBOARDING_STATE}
+    Should Be Equal As Strings  ${response['body']['onboardingState']}    ${ONBOARDING_STATE_ONBOARDED}
     [Teardown]   Delete an individual APP Package identified by ID     ${APP_PKG_ID}
 
 

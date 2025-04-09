@@ -58,7 +58,7 @@ TC_MEC_MEC010p2_MEO_PKGM_002_01_OK
 
 TC_MEC_MEC010p2_MEO_PKGM_002_02_OK
     [Documentation]    TP_MEC_MEC010p2_MEO_PKGM_002_02_OK
-    ...    Check that MEO returns the list of App Packages when requested - Note 3
+    ...    Check that MEO returns the list of on-boarded App Packages when requested - Note 3
     ...    ETSI GS MEC 010-2 3.1.1, clause 7.3.1.3.2
     ...    ETSI GS MEC 010-2 3.1.1, Table 6.2.3.3.2 Note 3
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
@@ -66,8 +66,8 @@ TC_MEC_MEC010p2_MEO_PKGM_002_02_OK
     GET all onboarded app Packages
     Check HTTP Response Status Code Is    200
     FOR    ${onBoardedAppPkgInfo}    IN    @{response['body']}
-        Validate Json    AppPkgInfo.schema.json    ${onBoardedAppPkgInfo}
-        Should Be Equal As Strings  ${onBoardedAppPkgInfo['onboardingState']}   ${ONBOARDING_STATE}
+        Validate Json    OnboardedAppPkgInfo.schema.json    ${onBoardedAppPkgInfo}
+        Should Be Equal As Strings  ${onBoardedAppPkgInfo['onboardingState']}   ${ONBOARDING_STATE_ONBOARDED}
     END
     [Teardown]    Test TearDown     ${setup_response['body']['id']}   ${None}      ${REMOVE_ACTION}
        
@@ -106,7 +106,7 @@ TC_MEC_MEC010p2_MEO_PKGM_003_02_OK
     [Setup]    Test Setup    ${None}   CreateAppPackage      ${REGISTER_ACTION}
     GET an onboarded app Package identified by    ${ON_BOARDED_APP_PKG_ID}
     Check HTTP Response Status Code Is    200
-    Check HTTP Response Body Json Schema Is   AppPkgInfo
+    Check HTTP Response Body Json Schema Is   OnboardedAppPkgInfo
     Should Be Equal As Strings  ${response['body']['id']}  ${ON_BOARDED_APP_PKG_ID}
     [Teardown]    Test TearDown     ${setup_response['body']['id']}   ${None}      ${REMOVE_ACTION}
 
