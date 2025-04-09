@@ -16,10 +16,10 @@ Test Teardown    Test TearDown    ${GRANT_ID_PLACEHOLDER}   grantRequest      ${
 TC_MEC_MEC010p2_MEO_GRANT_001_OK
     [Documentation]   TP_MEC_MEC010p2_MEO_GRANT_001_OK
     ...  Check that MEO sends a synchronous grant response when a grant request is requested
-    ...  ETSI GS MEC 010-2 3.1.1, clause 7.5.1.3.1
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.2.2-1 (GrantRequest)
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.2.2-1 Note 2 (GrantRequest)
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.4.2-1 (Grant)
+    ...  ETSI GS MEC 010-2 3.2.1, clause 7.5.1.3.1
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.2.2-1 (GrantRequest)
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.2.2-1 Note 2 (GrantRequest)
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.4.2-1 (Grant)
     [Tags]    PIC_GRANTS_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     Create a GRANT request    grantRequest
     Check HTTP Response Status Code Is    201
@@ -29,8 +29,8 @@ TC_MEC_MEC010p2_MEO_GRANT_001_OK
 TC_MEC_MEC010p2_MEO_GRANT_001_BR
     [Documentation]   TP_MEC_MEC010p2_MEO_GRANT_001_BR
     ...  Check that MEO responds with an error when it receives a malformed request when a new grant request is performed
-    ...  ETSI GS MEC 010-2 3.1.1, clause 7.6.1.3.2
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.4.2-1 (Grant)
+    ...  ETSI GS MEC 010-2 3.2.1, clause 7.6.1.3.2
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.4.2-1 (Grant)
     [Tags]    PIC_GRANTS_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     Create a GRANT request    grantBadRequest
     Check HTTP Response Status Code Is    400
@@ -38,9 +38,9 @@ TC_MEC_MEC010p2_MEO_GRANT_001_BR
 TC_MEC_MEC010p2_MEO_GRANT_002_OK
     [Documentation]  TP_MEC_MEC010p2_MEO_GRANT_002_OK  
     ...  Check that MEO sends a synchronous grant response when a grant request is requested
-    ...  ETSI GS MEC 010-2 3.1.1, clause 7.5.1.3.1
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.2.2-1        //GrantRequest
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.4.2-1
+    ...  ETSI GS MEC 010-2 3.2.1, clause 7.5.1.3.1
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.2.2-1        //GrantRequest
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.4.2-1
     [Tags]    PIC_GRANTS_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     Create a GRANT request    grantRequest2
     Check HTTP Response Status Code Is    201
@@ -51,10 +51,10 @@ TC_MEC_MEC010p2_MEO_GRANT_002_OK
 TC_MEC_MEC010p2_MEO_GRANT_003_OK
     [Documentation]   TP_MEC_MEC010p2_MEO_GRANT_003_OK
     ...  Check that MEO sends an asynchronous grant response when a grant request is requested
-    ...  ETSI GS MEC 010-2 3.1.1, clause 7.5.1.3.1
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.2.2-1 (GrantRequest)
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.2.2-1 Note 2 (GrantRequest)
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.4.2-1 (Grant)
+    ...  ETSI GS MEC 010-2 3.2.1, clause 7.5.1.3.1
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.2.2-1 (GrantRequest)
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.2.2-1 Note 2 (GrantRequest)
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.4.2-1 (Grant)
     [Tags]    PIC_GRANTS_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     ${GRANT_ID_VALUE}   Get value entry from JSON file    grantRequestAsynchronous  id
     Create a GRANT request    grantRequestAsynchronous
@@ -65,9 +65,9 @@ TC_MEC_MEC010p2_MEO_GRANT_003_OK
 TC_MEC_MEC010p2_MEO_GRANT_004_OK
     [Documentation]  TP_MEC_MEC010p2_MEO_GRANT_004_OK 
     ...  Check that MEO sends an asynchronous grant response when a grant request is requested
-    ...  ETSI GS MEC 010-2 3.1.1, clause 7.5.1.3.1
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.2.2-1 (GrantRequest)
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.4.2-1 (Grant)
+    ...  ETSI GS MEC 010-2 3.2.1, clause 7.5.1.3.1
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.2.2-1 (GrantRequest)
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.4.2-1 (Grant)
     [Tags]    PIC_GRANTS_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     ${GRANT_ID_VALUE}   Get value entry from JSON file    grantRequestAsynchronous2  id
     Create a GRANT request    grantRequestAsynchronous2
@@ -79,8 +79,8 @@ TC_MEC_MEC010p2_MEO_GRANT_005_OK
     [Documentation]    TP_MEC_MEC010p2_MEO_GRANT_005_OK
     ...  Check that MEO sends the status of a grant request when a query on a granting ID is performed.
     ...  The process of creating the grant is ongoing, no grant is available yet 
-    ...  ETSI GS MEC 010-2 3.1.1, clause 7.5.2.3.2
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.4.2-1  
+    ...  ETSI GS MEC 010-2 3.2.1, clause 7.5.2.3.2
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.4.2-1  
     [Tags]    PIC_GRANTS_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     [Setup]      Test Setup   ${None}   grantRequestAsynchronous    ${REGISTER_ACTION}
     ${GRANT_ID_VALUE}   Get value entry from JSON file    grantRequestAsynchronous  id
@@ -95,8 +95,8 @@ TC_MEC_MEC010p2_MEO_GRANT_006_OK
     [Documentation]    TP_MEC_MEC010p2_MEO_GRANT_006_OK
     ...  Check that MEO sends the status of a grant request when a query on a granting ID is performed.
     ...  The process of creating the grant is ongoing, no grant is available yet 
-    ...  ETSI GS MEC 010-2 3.1.1, clause 7.5.2.3.2
-    ...  ETSI GS MEC 010-2 3.1.1, Table 6.2.4.4.2-1  
+    ...  ETSI GS MEC 010-2 3.2.1, clause 7.5.2.3.2
+    ...  ETSI GS MEC 010-2 3.2.1, Table 6.2.4.4.2-1  
     [Tags]    PIC_GRANTS_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     [Setup]      Test Setup   ${None}   grantRequest    ${REGISTER_ACTION}
     Get an individual grant     ${setup_response['body']['id']}
