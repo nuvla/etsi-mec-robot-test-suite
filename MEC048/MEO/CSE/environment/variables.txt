@@ -1,0 +1,18 @@
+*** Variables ***
+# Generic variables
+${SCHEMA}                           http
+${HOST}                             127.0.0.1
+#${HOST}                            10.192.2.172
+${PORT}                             8081
+${response}                         {}
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        
+${apiName}                          cse
+${apiVersion}                       v1
+
+
+${REGISTER_ACTION}                  REGISTER
+${REMOVE_ACTION}                    REMOVE 
+${NO_ACTION}                        NO_ACTION
+${TENANT_ID_PLACEHOLDER}            TENANT_ID_PLACEHOLDER
+${NOT_EXISTING_TENANT_ID}           NOT_EXISTING_TENANT_ID
