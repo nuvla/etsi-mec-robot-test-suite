@@ -1,0 +1,6 @@
+{
+    "siteId": "SITE_ID",
+    "cpuQuota": "CPU_QUOTA",
+    "memoryQuota": "MEMORY_QUOTA",
+    "diskQuota": "DISK_QUOTA"
+}

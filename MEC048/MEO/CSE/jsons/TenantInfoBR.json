@@ -1,0 +1,16 @@
+{
+    "customerId": "customerId",
+    "customerName": "customerName",
+    "tenantName": "tenantName",
+    "resourceUseInfo": {
+        "cpuQuota": 100
+    },
+    "siteList": [
+        {
+            "siteId": "siteId",
+            "resourceInfo": {
+                "cpuQuota": 50
+            }
+        }
+    ]
+}

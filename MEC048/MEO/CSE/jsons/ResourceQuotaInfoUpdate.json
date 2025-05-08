@@ -1,0 +1,5 @@
+{
+    "cpuQuota": "NUMBER_OF_CPUS",
+    "memoryQuota": "MEMORY_IN_MB",
+    "diskQuota": "AMOUNT_OF_DISK_IN_GB"
+}
