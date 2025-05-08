@@ -1,0 +1,24 @@
+{
+    "type": "array",
+    "items": {
+        "title": "SiteResourceQuotaInfo",
+        "type": "object",
+        "properties": {
+            "siteId": {
+                "type": "string"
+            },
+            "cpuQuota": {
+                "type": "integer"
+            },
+            "memoryQuota": {
+                "type": "integer"
+            },
+            "diskQuota": {
+                "type": "integer"
+            }
+        },
+        "required": [
+            "siteId"
+        ]
+    }
+}
