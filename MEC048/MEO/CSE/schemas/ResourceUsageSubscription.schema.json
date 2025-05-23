@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "subscriptionType": {
+        "type": "string",
+        "enum": ["ResourceUsageSubscription"]
+      },
+      "callbackReference": {
+        "type": "string",
+        "format": "uri"
+      },
+      "requestTestNotification": {
+        "type": "boolean"
+      },
+      "websockNotifConfig": {
+        "type": "object"
+      },
+      "_links": {
+        "type": "object",
+        "properties": {
+          "self": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "customerId": {
+        "type": "string"
+      },
+      "tenantId": {
+        "type": "string"
+      },
+      "notificationTrigger": {
+        "type": "object",
+        "properties": {
+          "triggerType": {
+            "type": "integer",
+            "enum": [10, 11, 20, 21, 30, 31]
+          },
+          "threshold": {
+            "type": "integer"
+          },
+          "greaterOrLess": {
+            "type": "boolean"
+          }
+        },
+        "required": ["triggerType", "threshold", "greaterOrLess"]
+      },
+      "expiryDeadline": {
+        "type": "string",
+        "format": "date-time"
+      }
+    },
+    "required": ["subscriptionType", "customerId", "tenantId", "notificationTrigger"]
+  }

@@ -1,0 +1,12 @@
+{
+    "subscriptionType": "ResourceUsageSubscription",
+    "callbackReference": "some/uri",
+    "customerId": "customer-123",
+    "tenantId": "tenant-123",
+    "expiryDeadline": "2099-12-31T23:59:59Z",
+    "notificationTrigger": {
+      "triggerType": 10,
+      "threshold": 4,
+      "greaterOrLess": false
+    }
+  }

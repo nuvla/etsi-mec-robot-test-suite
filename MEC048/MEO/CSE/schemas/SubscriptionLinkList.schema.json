@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "_links": {
+        "type": "object",
+        "properties": {
+          "self": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string"
+              }
+            },
+            "required": ["href"]
+          }
+        },
+        "required": ["self"]
+      },
+      "subscription": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            },
+            "subscriptionType": {
+              "type": "string",
+              "enum": ["ResourceUsageSubscription", "SiteResourceUsageSubscription"]
+            }
+          },
+          "required": ["href", "subscriptionType"]
+        }
+      }
+    },
+    "required": ["_links", "subscription"]
+  }

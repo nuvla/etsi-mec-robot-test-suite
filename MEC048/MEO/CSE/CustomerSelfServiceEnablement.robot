@@ -1,5 +1,5 @@
-Y''[Documentation]   robot --outputdir ../../../outputs ./V2XInformationService.robot
-...    Test Suite to validate V2X Information Service API (VIS) operations.
+Y''[Documentation]   robot --outputdir ../../../outputs ./CustomerSelfServiceEnablement.robot
+...    Test Suite to validate CustomerSelfServiceEnablement Service API operations.
 
 *** Settings ***
 Resource    environment/variables.txt
@@ -7,7 +7,12 @@ Resource    ../../../pics.txt
 Resource    ../../../GenericKeywords.robot
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem
-Library    JSONLibrary
+Library     libraries/Server.py
+Library     libraries/StressGenerator.py
+Library     JSONLibrary
+Library     String    
+Library     Collections
+Library     DateTime 
 
 *** Test Cases ***
 TC_MEC_MEC048_MEO_CSE_001_OK
@@ -275,7 +280,842 @@ TC_MEC_MEC048_MEO_CSE_010_OK
     Remove specific site resource quota info resource    ${TENANT_ID_1}    ${response}[body][siteId]
     [Teardown]  Remove specific tenant info resource    ${TENANT_ID_1}
 
+TC_MEC_MEC048_MEO_CSE_010_BR
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_010_BR
+    ...    Check that the IUT returns an error on creating a site resource quota with wrong parameters
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.6.3.4, clause 6.2.4
+    [Tags]    PIC_SERVICES
+    [Setup]    Register tenant Info    TenantInfo
+    Register site resource quota Info    ${TENANT_ID_1}    SiteResourceQuotaInfoBR
+    Check HTTP Response Status Code Is    400
+    [Teardown]    Remove specific tenant info resource    ${TENANT_ID_1}
+
+TC_MEC_MEC048_MEO_CSE_011_OK
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_011_OK
+    ...    Check that the IUT returns the site resource quota for a specific tenant and site identifier when requested to a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.7.3.1, clause 6.2.4
+    [Tags]    PIC_SERVICES
+    [Setup]    Register multiple site resource quotas for tenant
+    Retrieve specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_1}
+    Check HTTP Response Status Code Is    200
+    Check HTTP Response Body Json Schema Is    SiteResourceQuotaInfo
+    Should Be Equal As Strings    ${response['body']['siteId']}    ${SITE_ID_1}
+    Should Be Equal As Integers    ${response['body']['cpuQuota']}    ${CPU_QUOTA_1}
+    Should Be Equal As Integers    ${response['body']['memoryQuota']}    ${MEMORY_QUOTA_1}
+    Should Be Equal As Integers    ${response['body']['diskQuota']}    ${DISK_QUOTA_1}
+    [Teardown]    Remove tenant and site resources
+
+TC_MEC_MEC048_MEO_CSE_011_NF
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_011_NF
+    ...    Check that the IUT returns an error on requesting the site resource quota for a specific tenant and a not existing site identifier when requested to a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.7.3.1, clause 6.2.4
+    [Tags]    PIC_SERVICES
+    [Setup]    Register tenant Info    TenantInfo
+    Retrieve specific site resource quota info resource    ${TENANT_ID_1}    ${NOT_EXISTING_TENANT_ID}
+    Check HTTP Response Status Code Is    404
+    [Teardown]    Remove specific tenant info resource    ${TENANT_ID_1}
+
+TC_MEC_MEC048_MEO_CSE_012_OK
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_012_OK
+    ...    Check that the IUT updates a site resource quota info for an existing tenant when requested to a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.7.3.2, clause 6.2.4
+    [Tags]    PIC_SERVICES
+    [Setup]    Register site resource quota for tenant
+    # Update the site resource quota with new values
+    Update site resource quota Info    ${TENANT_ID_1}    ${SITE_ID_1}    SiteResourceQuotaInfoUpdate
+    Check HTTP Response Status Code Is    200
+    Check HTTP Response Body Json Schema Is    SiteResourceQuotaInfo
+    
+    # Verify the updated values match what we sent
+    ${CPU_QUOTA_VALUE}    Get value entry from JSON file    SiteResourceQuotaInfoUpdate    cpuQuota
+    ${MEMORY_QUOTA_VALUE}    Get value entry from JSON file    SiteResourceQuotaInfoUpdate    memoryQuota
+    ${DISK_QUOTA_VALUE}    Get value entry from JSON file    SiteResourceQuotaInfoUpdate    diskQuota
+    
+    Should Be Equal As Strings    ${response['body']['siteId']}    ${SITE_ID_1}
+    Should Be Equal As Integers    ${response['body']['cpuQuota']}    ${CPU_QUOTA_VALUE}
+    Should Be Equal As Integers    ${response['body']['memoryQuota']}    ${MEMORY_QUOTA_VALUE}
+    Should Be Equal As Integers    ${response['body']['diskQuota']}    ${DISK_QUOTA_VALUE}
+    
+    [Teardown]    Remove tenant and site resources
+
+TC_MEC_MEC048_MEO_CSE_012_BR
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_012_BR
+    ...    Check that the IUT returns an error updating a site resource quota info for an existing tenant when requested to a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.7.3.2, clause 6.2.4
+    [Tags]    PIC_SERVICES
+    [Setup]    Register site resource quota for tenant
+    # Attempt to update the site resource quota with invalid data
+    Update site resource quota Info    ${TENANT_ID_1}    ${SITE_ID_1}    SiteResourceQuotaInfoBR
+    Check HTTP Response Status Code Is    400
+    [Teardown]    Remove tenant and site resources
+
+TC_MEC_MEC048_MEO_CSE_012_NF
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_012_NF
+    ...    Check that the IUT returns an error updating a site resource quota info for a not existing tenant when requested to a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.7.3.2, clause 6.2.4
+    [Tags]    PIC_SERVICES
+    # No setup needed as we're testing with a non-existing tenant
+    Update site resource quota Info    ${NOT_EXISTING_TENANT_ID}    ${NOT_EXISTING_SITE_ID}     SiteResourceQuotaInfoUpdate
+    Check HTTP Response Status Code Is    404
+    # No teardown needed as no resources were created
+
+TC_MEC_MEC048_MEO_CSE_013_OK
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_013_OK
+    ...    Check that the IUT returns the list of subscriptions when requested to a CSE - no filter
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.8.3.1, clause 6.3.4
+    [Tags]    PIC_SERVICES
+    [Setup]    Create test subscriptions
+    Retrieve all subscriptions
+    Check HTTP Response Status Code Is    200
+    Check HTTP Response Body Json Schema Is    SubscriptionLinkList
+    # Verify _links.self is present and correct
+    Should Be Equal As Strings    ${response['body']['_links']['self']['href']}    ${apiRoot}/${apiName}/${apiVersion}/subscriptions
+    # Verify subscription items exist
+    ${subscriptions}=    Get From Dictionary    ${response['body']}    subscription
+    ${subscription_count}=    Get Length    ${subscriptions}
+    Should Be True    ${subscription_count} >= 3
+    # Verify the subscription types are as expected - at least one of each type
+    ${resource_type_count}=    Count Subscriptions Of Type    ${subscriptions}    ResourceUsageSubscription
+    ${site_resource_type_count}=    Count Subscriptions Of Type    ${subscriptions}    SiteResourceUsageSubscription
+    Should Be True    ${resource_type_count} >= 2    Found only ${resource_type_count} ResourceUsageSubscription, expected at least 2
+    Should Be True    ${site_resource_type_count} >= 1    Found only ${site_resource_type_count} SiteResourceUsageSubscription, expected at least 1
+    [Teardown]    Remove test subscriptions
+
+TC_MEC_MEC048_MEO_CSE_013_OK_02
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_013_OK_02
+    ...    Check that the IUT returns the list of subscriptions when requested to a CSE - subscription_type filter
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.8.3.1, clause 6.3.4
+    [Tags]    PIC_SERVICES
+    [Setup]    Create test subscriptions
+    # Retrieve subscriptions with subscription_type filter
+    Retrieve subscriptions with filter    subscription_type=ResourceUsageSubscription
+    Check HTTP Response Status Code Is    200
+    Check HTTP Response Body Json Schema Is    SubscriptionLinkList
+    # Verify _links.self is present and includes the query parameter
+    Should Be Equal As Strings    ${response['body']['_links']['self']['href']}    ${apiRoot}/${apiName}/${apiVersion}/subscriptions?subscription_type=ResourceUsageSubscription
+    # Verify subscription items exist
+    ${subscriptions}=    Get From Dictionary    ${response['body']}    subscription
+    ${subscription_count}=    Get Length    ${subscriptions}
+    # Should have at least the ResourceUsageSubscription types we created
+    Should Be True    ${subscription_count} >= 2
+    # Verify ONLY ResourceUsageSubscription types are returned (no SiteResourceUsageSubscription)
+    FOR    ${subscription}    IN    @{subscriptions}
+        Should Be Equal As Strings    ${subscription['subscriptionType']}    ResourceUsageSubscription
+    END
+    [Teardown]    Remove test subscriptions
+
+TC_MEC_MEC048_MEO_CSE_014_OK
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_014_OK
+    ...    Check that the IUT creates a new subscription when requested to a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.8.3.4, clause 6.3.2, clause 6.3.3
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant to use for the subscription
+    [Setup]    Register tenant Info    TenantInfo
+    Set Suite Variable    ${TENANT_ID_1}    ${response['body']['tenantId']}
+    Set Suite Variable    ${CUSTOMER_ID_1}    ${response['body']['customerId']}
+    
+    # Create a new ResourceUsageSubscription
+    Create ResourceUsageSubscription    ResourceUsageSubscription
+    
+    # Verify response status code
+    Check HTTP Response Status Code Is    201
+    
+    # Verify response body schema
+    Check HTTP Response Body Json Schema Is    ResourceUsageSubscription
+    
+    # Verify Location header (should contain the URI of the created subscription)
+    ${location_header}=    Get From Dictionary    ${response['headers']}    Location
+    Should Not Be Empty    ${location_header}
+    Should Match Regexp    ${location_header}    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/\\w+
+    
+    # Store subscription ID for cleanup
+    ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    
+    # Verify response body content
+    Should Be Equal As Strings    ${response['body']['subscriptionType']}    ResourceUsageSubscription
+    Should Be Equal As Strings    ${response['body']['customerId']}    ${CUSTOMER_ID_1}
+    Should Be Equal As Strings    ${response['body']['tenantId']}    ${TENANT_ID_1}
+    Should Be Equal As Strings    ${response['body']['callbackReference']}    some/uri
+    
+    # Verify notification trigger details
+    Should Be Equal As Integers    ${response['body']['notificationTrigger']['triggerType']}    10
+    Should Be Equal As Integers    ${response['body']['notificationTrigger']['threshold']}    4
+    # In the schema, greaterOrLess is a boolean, but in the specification it's 0/1
+    # This could be handled either way depending on your implementation
+    Should Be Equal    ${response['body']['notificationTrigger']['greaterOrLess']}    ${FALSE}
+    
+    # Verify self-link in response
+    Should Not Be Empty    ${response['body']['_links']['self']['href']}
+    
+    # Teardown - clean up the created resources
+    [Teardown]    Run Keywords
+    ...    Delete Created Subscription    AND
+    ...    Remove specific tenant info resource    ${TENANT_ID_1}
+
+TC_MEC_MEC048_MEO_CSE_014_OK_02
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_014_OK_02
+    ...    Check that the IUT creates a new subscription when requested to a CSE - SiteResourceUsageSubscription
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.8.3.4, clause 6.3.2, clause 6.3.3
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant and site resources to use for the subscription
+    [Setup]    Register site resource quota for tenant
+    
+    # Create a new SiteResourceUsageSubscription
+    Register subscription    SiteResourceUsageSubscription1
+    
+    # Verify response status code
+    Check HTTP Response Status Code Is    201
+    
+    # Verify response body schema
+    Check HTTP Response Body Json Schema Is    SiteResourceUsageSubscription
+    
+    # Verify Location header (should contain the URI of the created subscription)
+    ${location_header}=    Get From Dictionary    ${response['headers']}    Location
+    Should Not Be Empty    ${location_header}
+    Should Match Regexp    ${location_header}    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/\\w+
+    
+    # Store subscription ID for cleanup
+    ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    
+    # Verify response body content
+    Should Be Equal As Strings    ${response['body']['subscriptionType']}    SiteResourceUsageSubscription
+    Should Be Equal As Strings    ${response['body']['customerId']}    ${CUSTOMER_ID_1}
+    Should Be Equal As Strings    ${response['body']['tenantId']}    ${TENANT_ID_1}
+    Should Be Equal As Strings    ${response['body']['callbackReference']}    some/uri
+    
+    # Verify siteList contains our test site
+    ${siteList}=    Get From Dictionary    ${response['body']}    siteList
+    List Should Contain Value    ${siteList}    ${SITE_ID_1}
+    
+    # Verify notification trigger details
+    Should Be Equal As Integers    ${response['body']['notificationTrigger']['triggerType']}    10
+    Should Be Equal As Integers    ${response['body']['notificationTrigger']['threshold']}    4
+    Should Be Equal    ${response['body']['notificationTrigger']['greaterOrLess']}    ${FALSE}
+    
+    # Verify self-link in response
+    Should Not Be Empty    ${response['body']['_links']['self']['href']}
+    
+    # Teardown - clean up the created resources
+    [Teardown]    Run Keywords
+    ...    Delete Created Subscription    AND
+    ...    Remove tenant and site resources
+
+TC_MEC_MEC048_MEO_CSE_014_BR
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_014_BR
+    ...    Check that the IUT returns an error on creating a new subscription when requested to a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.8.3.4, clause 6.3.2, clause 6.3.3
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant to use for the subscription
+    [Setup]    Register tenant Info    TenantInfo
+    Set Suite Variable    ${TENANT_ID_1}    ${response['body']['tenantId']}
+    Set Suite Variable    ${CUSTOMER_ID_1}    ${response['body']['customerId']}
+    
+    # Attempt to create a subscription with missing required parameters
+    Register subscription    ResourceUsageSubscriptionBR
+    
+    # Verify that a 400 Bad Request error is returned
+    Check HTTP Response Status Code Is    400
+    
+    # Teardown - clean up the created tenant
+    [Teardown]    Remove specific tenant info resource    ${TENANT_ID_1}
+
+TC_MEC_MEC048_MEO_CSE_015_OK
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_015_OK
+    ...    Check that the IUT returns a subscription when requested by a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.9.3.1, clause 6.3.2, clause 6.3.3
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant, site resources, and subscription
+    [Setup]    Register site resource quota for tenant
+    
+    # Create a SiteResourceUsageSubscription
+    Register subscription    SiteResourceUsageSubscription
+    
+    # Save the subscription ID for later retrieval and cleanup
+    ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
+    ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    
+    # Retrieve the specific subscription
+    Retrieve specific subscription    ${subscription_id}
+    
+    # Verify response status code
+    Check HTTP Response Status Code Is    200
+    
+    # Verify response body schema
+    Check HTTP Response Body Json Schema Is    SiteResourceUsageSubscription
+    
+    # Verify response body content
+    Should Be Equal As Strings    ${response['body']['subscriptionType']}    SiteResourceUsageSubscription
+    Should Be Equal As Strings    ${response['body']['customerId']}    ${CUSTOMER_ID_1}
+    Should Be Equal As Strings    ${response['body']['tenantId']}    ${TENANT_ID_1}
+    Should Be Equal As Strings    ${response['body']['callbackReference']}    some/uri
+    
+    # Verify siteList contains our test site
+    ${siteList}=    Get From Dictionary    ${response['body']}    siteList
+    List Should Contain Value    ${siteList}    ${SITE_ID_1}
+    
+    # Verify notification trigger details
+    Should Be Equal As Integers    ${response['body']['notificationTrigger']['triggerType']}    10
+    Should Be Equal As Integers    ${response['body']['notificationTrigger']['threshold']}    4
+    Should Be Equal    ${response['body']['notificationTrigger']['greaterOrLess']}    ${FALSE}
+    
+    # Verify self-link in response
+    Should Not Be Empty    ${response['body']['_links']['self']['href']}
+    Should Be Equal As Strings    ${response['body']['_links']['self']['href']}    ${subscription_uri}
+    
+    # Teardown - clean up the created resources
+    [Teardown]    Run Keywords
+    ...    Delete Created Subscription    AND
+    ...    Remove tenant and site resources
+
+TC_MEC_MEC048_MEO_CSE_015_NF
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_015_NF
+    ...    Check that the IUT returns an error on requesting a not existing subscription when requested by a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.9.3.1, clause 6.3.2, clause 6.3.3
+    [Tags]    PIC_SERVICES
+    
+    # Attempt to retrieve a non-existent subscription
+    Retrieve specific subscription    ${NOT_EXISTING_SUBSCRIPTION_ID}
+    
+    # Verify response status code is 404 Not Found
+    Check HTTP Response Status Code Is    404
+
+TC_MEC_MEC048_MEO_CSE_016_OK
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_016_OK
+    ...    Check that the IUT updates an existing subscription when requested by a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.9.3.2, clause 6.3.2, clause 6.3.3
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant, site resources, and subscription
+    [Setup]    Register site resource quota for tenant
+    
+    # Create a SiteResourceUsageSubscription to be updated later
+    Register subscription    SiteResourceUsageSubscription
+    
+    # Save the subscription ID for update and cleanup
+    ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
+    ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    Set Suite Variable    ${OLD_CUSTOMER_ID}    ${response['body']['customerId']}
+    
+    # Create another tenant to get a new customer ID
+    Register tenant Info    TenantInfo2
+    Set Suite Variable    ${NEW_CUSTOMER_ID}    ${response['body']['customerId']}
+    Set Suite Variable    ${TENANT_ID_2}    ${response['body']['tenantId']}
+    
+    # Update the subscription with the new customer ID
+    Update subscription    ${subscription_id}    SiteResourceUsageSubscriptionUpdate
+    
+    # Verify response status code
+    Check HTTP Response Status Code Is    200
+    
+    # Verify response body schema
+    Check HTTP Response Body Json Schema Is    SiteResourceUsageSubscription
+    
+    # Verify response body content - specifically that the customerId has been updated
+    Should Be Equal As Strings    ${response['body']['subscriptionType']}    SiteResourceUsageSubscription
+    Should Be Equal As Strings    ${response['body']['customerId']}    ${NEW_CUSTOMER_ID}
+    Should Not Be Equal As Strings    ${response['body']['customerId']}    ${OLD_CUSTOMER_ID}
+    Should Be Equal As Strings    ${response['body']['tenantId']}    ${TENANT_ID_1}
+    Should Be Equal As Strings    ${response['body']['callbackReference']}    some/uri/updated
+    
+    # Verify siteList contains our test site
+    ${siteList}=    Get From Dictionary    ${response['body']}    siteList
+    List Should Contain Value    ${siteList}    ${SITE_ID_1}
+    
+    # Verify notification trigger details
+    Should Be Equal As Integers    ${response['body']['notificationTrigger']['triggerType']}    10
+    Should Be Equal As Integers    ${response['body']['notificationTrigger']['threshold']}    4
+    Should Be Equal    ${response['body']['notificationTrigger']['greaterOrLess']}    ${FALSE}
+    
+    # Verify self-link in response
+    Should Not Be Empty    ${response['body']['_links']['self']['href']}
+    Should Be Equal As Strings    ${response['body']['_links']['self']['href']}    ${subscription_uri}
+    
+    # Teardown - clean up the created resources
+    [Teardown]    Run Keywords
+    ...    Delete Created Subscription    AND
+    ...    Remove tenant and site resources    AND
+    ...    Remove specific tenant info resource    ${TENANT_ID_2}
+
+TC_MEC_MEC048_MEO_CSE_016_NF
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_016_NF
+    ...    Check that the IUT returns an error updating an not existing subscription when requested by a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.9.3.2, clause 6.3.2, clause 6.3.3
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant and site resources for the update request
+    [Setup]    Register site resource quota for tenant
+    
+    # Create a JSON template for another tenant to get a customer ID
+    Register tenant Info    TenantInfo2
+    Set Suite Variable    ${NEW_CUSTOMER_ID}    ${response['body']['customerId']}
+    Set Suite Variable    ${TENANT_ID_2}    ${response['body']['tenantId']}
+    
+    # Attempt to update a non-existent subscription
+    Update subscription    ${NOT_EXISTING_SUBSCRIPTION_ID}    SiteResourceUsageSubscriptionUpdate
+    
+    # Verify response status code is 404 Not Found
+    Check HTTP Response Status Code Is    404
+    
+    # Teardown - clean up the created resources
+    [Teardown]    Run Keywords
+    ...    Remove tenant and site resources    AND
+    ...    Remove specific tenant info resource    ${TENANT_ID_2}
+
+TC_MEC_MEC048_MEO_CSE_016_BR
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_016_BR
+    ...    Check that the IUT returns an error updating an existing subscription with wrong parameters when requested by a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.9.3.2, clause 6.3.2, clause 6.3.3
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant, site resources, and a valid subscription
+    [Setup]    Register site resource quota for tenant
+    
+    # Create a SiteResourceUsageSubscription to be updated later
+    Register subscription    SiteResourceUsageSubscription
+    
+    # Save the subscription ID for update and cleanup
+    ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
+    ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    
+    # Create another tenant to get a new customer ID for the update
+    Register tenant Info    TenantInfo2
+    Set Suite Variable    ${NEW_CUSTOMER_ID}    ${response['body']['customerId']}
+    Set Suite Variable    ${TENANT_ID_2}    ${response['body']['tenantId']}
+    
+    # Attempt to update the subscription with invalid parameters (missing both callbackReference and websockNotifConfig)
+    Update subscription    ${subscription_id}    SiteResourceUsageSubscriptionBR
+    
+    # Verify response status code is 400 Bad Request
+    Check HTTP Response Status Code Is    400
+    
+    # Teardown - clean up the created resources
+    [Teardown]    Run Keywords
+    ...    Delete Created Subscription    AND
+    ...    Remove tenant and site resources    AND
+    ...    Remove specific tenant info resource    ${TENANT_ID_2}
+
+TC_MEC_MEC048_MEO_CSE_017_OK
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_017_OK
+    ...    Check that the IUT deletes an existing subscription when requested by a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.9.3.2
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant, site resources, and subscription
+    [Setup]    Register site resource quota for tenant
+    
+    # Create a SiteResourceUsageSubscription to be deleted
+    Register subscription    SiteResourceUsageSubscription
+    
+    # Save the subscription ID for deletion
+    ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
+    ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
+    
+    # Delete the subscription
+    Delete subscription    ${subscription_id}
+    
+    # Verify response status code is 204 No Content
+    Check HTTP Response Status Code Is    204
+    
+    # Verify the subscription no longer exists (optional)
+    Retrieve specific subscription    ${subscription_id}
+    Check HTTP Response Status Code Is    404
+    
+    # Teardown - clean up the created resources (only tenant and site as subscription is deleted)
+    [Teardown]    Remove tenant and site resources
+
+TC_MEC_MEC048_MEO_CSE_017_NF
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_017_NF
+    ...    Check that the IUT returns an error on a deletion of a not existing subscription when requested by a CSE
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.9.3.2
+    [Tags]    PIC_SERVICES
+    
+    # Attempt to delete a non-existent subscription
+    Delete subscription    ${NOT_EXISTING_SUBSCRIPTION_ID}
+    
+    # Verify response status code is 404 Not Found
+    Check HTTP Response Status Code Is    404
+
+TC_MEC_MEC048_MEO_CSE_018_OK
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_018_OK
+    ...    Check that the CSE sends a site resource usage notification if the CSE has an associated subscription and the event is generated
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.8.3.4, clause 6.4.3
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant and site resources
+    [Setup]    Register site resource quota for tenant
+    
+    # Create a SiteResourceUsageSubscription with callback to our notification server
+    ${subscription_json}=    Get File    jsons/SiteResourceUsageSubscription.json
+    ${callback_url}=    Set Variable    http://${NOTIFICATION_SERVER_IP}:${NOTIFICATION_SERVER_PORT}${NOTIFICATION_SERVER_URI}
+    ${subscription_json}=    Replace String    ${subscription_json}    "some/uri"    "${callback_url}"
+    ${subscription_json}=    Replace String    ${subscription_json}    "placeholder-tenant"    "${TENANT_ID_1}"
+    ${subscription_json}=    Replace String    ${subscription_json}    "placeholder-customer"    "${CUSTOMER_ID_1}"
+    ${subscription_json}=    Replace String    ${subscription_json}    ["placeholder-site"]    ["${SITE_ID_1}"]
+    
+    # Register the subscription with our callback URL
+    Post Raw Subscription    ${subscription_json}
+    Check HTTP Response Status Code Is    201
+    
+    # Save the subscription ID for cleanup
+    ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
+    ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    
+    # Generate load to trigger the notification
+    Log    Generating CPU load to trigger notification
+    ${result}=    Generate CPU Load    60    4
+    Log    ${result}
+    
+    # Start the notification server to wait for and capture the notification
+    ${notification}=    Spawn Notification Server
+    # Verify notification exists
+    Should Not Be Empty    ${notification}
+    
+    # Verify notification content
+    Should Be Equal As Strings    ${notification['notificationType']}    SiteResourceUsageNotification
+    Should Be Equal As Strings    ${notification['customerId']}    ${CUSTOMER_ID_1}
+    Should Be Equal As Strings    ${notification['tenantId']}    ${TENANT_ID_1}
+    
+    # Verify resource usage information
+    ${site_info}=    Get From List    ${notification['resourceUseInfo']}    0
+    Should Be Equal As Strings    ${site_info['siteId']}    ${SITE_ID_1}
+    Should Be Equal As Integers    ${site_info['cpuUsed']}    5
+    
+    # Teardown - clean up resources
+    [Teardown]    Run Keywords
+    ...    Delete Created Subscription    AND
+    ...    Remove tenant and site resources
+
+TC_MEC_MEC048_MEO_CSE_019_OK
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_019_OK
+    ...    Check that the CSE sends a resource usage notification if the CSE has an associated subscription and the event is generated
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.8.3.4, clause 6.4.2
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant for the subscription
+    [Setup]    Register tenant Info    TenantInfo
+    
+    # Create a ResourceUsageSubscription with callback to our notification server
+    ${subscription_json}=    Get File    jsons/ResourceUsageSubscription.json
+    ${callback_url}=    Set Variable    http://${NOTIFICATION_SERVER_IP}:${NOTIFICATION_SERVER_PORT}${NOTIFICATION_SERVER_URI}
+    ${subscription_json}=    Replace String    ${subscription_json}    "some/uri"    "${callback_url}"
+    ${subscription_json}=    Replace String    ${subscription_json}    "tenant-123"    "${TENANT_ID_1}" 
+    ${subscription_json}=    Replace String    ${subscription_json}    "customer-123"    "${CUSTOMER_ID_1}"
+    
+    # Register the subscription with our callback URL
+    Post Raw Subscription    ${subscription_json}
+    Check HTTP Response Status Code Is    201
+    
+    # Save the subscription ID for cleanup
+    ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
+    ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    
+    # Generate load to trigger the notification
+    Log    Generating CPU load to trigger notification
+    ${result}=    Generate CPU Load    60    4
+    Log    ${result}
+    
+    # Start the notification server to wait for and capture the notification
+    ${notification}=    Spawn Resource Notification Server
+    
+    # Verify notification exists
+    Should Not Be Empty    ${notification}
+    
+    # Verify notification content
+    Should Be Equal As Strings    ${notification['notificationType']}    ResourceUsageNotification
+    Should Be Equal As Strings    ${notification['customerId']}    ${CUSTOMER_ID_1}
+    Should Be Equal As Strings    ${notification['tenantId']}    ${TENANT_ID_1}
+    
+    # Verify resource usage information
+    Should Be Equal As Integers    ${notification['resourceUseInfo']['cpuUsed']}    5
+    
+    # Teardown - clean up resources
+    [Teardown]    Run Keywords
+    ...    Delete Created Subscription    AND
+    ...    Remove specific tenant info resource    ${TENANT_ID_1}
+
+TC_MEC_MEC048_MEO_CSE_020_OK
+    [Documentation]    TP_MEC_MEC048_MEO_CSE_020_OK
+    ...    Check that the CSE sends a notification on subscription expiration if the CSE has an associated subscription and the event is generated
+    ...    ETSI GS MEC 048 v3.1.1, clause 7.8.3.4, clause 6.4.4
+    [Tags]    PIC_SERVICES
+    
+    # Setup - Create a tenant for the subscription
+    [Setup]    Register tenant Info    TenantInfo
+    
+    # Get the current time and add a short time for expiry deadline (10 seconds in the future)
+    ${current_time}=    Get Current Date
+    ${expiry_time}=    Add Time To Date    ${current_time}    10 seconds
+    ${expiry_time_iso}=    Convert Date    ${expiry_time}    result_format=%Y-%m-%dT%H:%M:%SZ
+    Set Suite Variable    ${EXPIRY_DEADLINE}    ${expiry_time_iso}
+    
+    # Create a ResourceUsageSubscription with a short expiry time and callback to our notification server
+    ${subscription_json}=    Get File    jsons/ResourceUsageSubscriptionWithExpiry.json
+    ${callback_url}=    Set Variable    http://${NOTIFICATION_SERVER_IP}:${NOTIFICATION_SERVER_PORT}${NOTIFICATION_SERVER_URI}
+    ${subscription_json}=    Replace String    ${subscription_json}    "some/uri"    "${callback_url}"
+    ${subscription_json}=    Replace String    ${subscription_json}    "tenant-123"    "${TENANT_ID_1}" 
+    ${subscription_json}=    Replace String    ${subscription_json}    "customer-123"    "${CUSTOMER_ID_1}"
+    ${subscription_json}=    Replace String    ${subscription_json}    "2099-12-31T23:59:59Z"    "${EXPIRY_DEADLINE}"
+    
+    # Register the subscription with our callback URL
+    Post Raw Subscription    ${subscription_json}
+    Check HTTP Response Status Code Is    201
+    
+    # Save the subscription ID and HREF for verification
+    ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
+    ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_id}
+    Set Suite Variable    ${SUBSCRIPTION_HREF}    ${subscription_uri}
+    
+    # Start the notification server to wait for and capture the expiry notification
+    # Need to wait for the subscription to expire (a bit longer than our expiry time)
+    ${notification}=    Spawn Expiry Notification Server
+    
+    # Verify notification exists
+    Should Not Be Empty    ${notification}
+    
+    # Verify notification content
+    Should Be Equal As Strings    ${notification['notificationType']}    ExpiryNotification
+    
+    # Verify subscription link in the notification
+    Should Be Equal As Strings    ${notification['_links']['subscription']['href']}    ${SUBSCRIPTION_HREF}
+    
+    # Verify expiry deadline matches what we set
+    Should Be Equal As Strings    ${notification['expiryDeadline']}    ${EXPIRY_DEADLINE}
+    
+    # Verify the subscription no longer exists/is expired
+    Retrieve specific subscription    ${SUBSCRIPTION_ID}
+    Check HTTP Response Status Code Is    404
+    
+    # Teardown - clean up tenant (subscription should be auto-removed after expiry)
+    [Teardown]    Remove specific tenant info resource    ${TENANT_ID_1}
+
 *** Keywords ***
+
+Spawn Expiry Notification Server
+    Log    Starting notification server on ${NOTIFICATION_SERVER_IP}:${NOTIFICATION_SERVER_PORT} for expiry notification
+    ${notification}=    Spawn Web Server  ${NOTIFICATION_SERVER_IP}  ${NOTIFICATION_SERVER_PORT}  ${NOTIFICATION_SERVER_TIMEOUT}  ${NOTIFICATION_SERVER_HTTP_METHOD}  ${NOTIFICATION_SERVER_URI}  ResourceUsageSubscription
+    [Return]    ${notification}
+
+Spawn Resource Notification Server
+    Log    Starting notification server on ${NOTIFICATION_SERVER_IP}:${NOTIFICATION_SERVER_PORT}
+    ${notification}=    Spawn Web Server  ${NOTIFICATION_SERVER_IP}  ${NOTIFICATION_SERVER_PORT}  ${NOTIFICATION_SERVER_TIMEOUT}  ${NOTIFICATION_SERVER_HTTP_METHOD}  ${NOTIFICATION_SERVER_URI}  ResourceUsageSubscription
+    [Return]    ${notification}
+
+Spawn Notification Server
+    Log    Starting notification server on ${NOTIFICATION_SERVER_IP}:${NOTIFICATION_SERVER_PORT}
+    ${notification}=    Spawn Web Server  ${NOTIFICATION_SERVER_IP}  ${NOTIFICATION_SERVER_PORT}  ${NOTIFICATION_SERVER_TIMEOUT}  ${NOTIFICATION_SERVER_HTTP_METHOD}  ${NOTIFICATION_SERVER_URI}  SiteResourceUsageSubscription
+    [Return]    ${notification}
+
+Post Raw Subscription
+    [Arguments]    ${subscription_json}
+    Should Be True    ${PIC_MEC_PLAT} == 1
+    Should Be True    ${PIC_SERVICES} == 1
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    POST    ${apiRoot}/${apiName}/${apiVersion}/subscriptions    ${subscription_json}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Update subscription
+    [Arguments]    ${subscription_id}    ${content}
+    Should Be True    ${PIC_MEC_PLAT} == 1
+    Should Be True    ${PIC_SERVICES} == 1
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    # Replace placeholder values in the JSON with actual test values
+    ${body}=    Replace String    ${body}    "tenant-123"    "${TENANT_ID_1}"
+    ${body}=    Replace String    ${body}    "customer-new"    "${NEW_CUSTOMER_ID}"
+    ${body}=    Replace String    ${body}    "site-placeholder"    "${SITE_ID_1}"
+    PUT    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/${subscription_id}    ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Retrieve specific subscription
+    [Arguments]    ${subscription_id}
+    Log    Getting specific subscription: ${subscription_id}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    GET    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/${subscription_id}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Create ResourceUsageSubscription
+    [Arguments]    ${content}
+    Should Be True    ${PIC_MEC_PLAT} == 1
+    Should Be True    ${PIC_SERVICES} == 1
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    # Replace placeholder values in the JSON with actual test values
+    ${body}=    Replace String    ${body}    "placeholder"    "${TENANT_ID_1}"    count=1
+    ${body}=    Replace String    ${body}    "placeholder"    "${CUSTOMER_ID_1}"    count=1
+    POST    ${apiRoot}/${apiName}/${apiVersion}/subscriptions    ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Delete Created Subscription
+    ${sub_id}=    Fetch From Right    ${SUBSCRIPTION_ID}    /subscriptions/
+    Delete subscription    ${sub_id}
+Retrieve subscriptions with filter
+    [Arguments]    ${query_params}
+    Log    Getting subscriptions with filter: ${query_params}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    GET    ${apiRoot}/${apiName}/${apiVersion}/subscriptions?${query_params}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Register subscription
+    [Arguments]    ${content}
+    Should Be True    ${PIC_MEC_PLAT} == 1
+    Should Be True    ${PIC_SERVICES} == 1
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    # Replace placeholder values in the JSON with actual test values
+    ${body}=    Replace String    ${body}    "tenant-123"    "${TENANT_ID_1}"
+    ${body}=    Replace String    ${body}    "customer-123"    "${CUSTOMER_ID_1}"
+    POST    ${apiRoot}/${apiName}/${apiVersion}/subscriptions    ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Retrieve all subscriptions
+    Log    Getting all subscriptions
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    GET    ${apiRoot}/${apiName}/${apiVersion}/subscriptions
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Remove test subscriptions
+    # Extract subscription IDs from the hrefs
+    ${sub_id_1}=    Fetch From Right    ${SUBSCRIPTION_ID_1}    /subscriptions/
+    ${sub_id_2}=    Fetch From Right    ${SUBSCRIPTION_ID_2}    /subscriptions/
+    ${sub_id_3}=    Fetch From Right    ${SUBSCRIPTION_ID_3}    /subscriptions/
+    
+    # Delete the created subscriptions
+    Delete subscription    ${sub_id_1}
+    Delete subscription    ${sub_id_2}
+    Delete subscription    ${sub_id_3}
+    
+    # Remove the tenant
+    Remove specific tenant info resource    ${TENANT_ID_1}
+
+Delete subscription
+    [Arguments]    ${subscription_id}
+    Should Be True    ${PIC_MEC_PLAT} == 1
+    Should Be True    ${PIC_SERVICES} == 1
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    DELETE    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/${subscription_id}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Count Subscriptions Of Type
+    [Arguments]    ${subscriptions}    ${subscription_type}
+    ${count}=    Set Variable    ${0}
+    FOR    ${subscription}    IN    @{subscriptions}
+        ${type}=    Get From Dictionary    ${subscription}    subscriptionType
+        ${count}=    Run Keyword If    '${type}' == '${subscription_type}'    Evaluate    ${count} + 1    ELSE    Set Variable    ${count}
+    END
+    [Return]    ${count}
+
+Create test subscriptions
+    # First create a tenant for the subscriptions
+    Register tenant Info    TenantInfo
+    Set Suite Variable    ${TENANT_ID_1}    ${response['body']['tenantId']}
+    Set Suite Variable    ${CUSTOMER_ID_1}    ${response['body']['customerId']}
+    
+    # Create ResourceUsageSubscription subscriptions
+    Register subscription    ResourceUsageSubscription1
+    Set Suite Variable    ${SUBSCRIPTION_ID_1}    ${response['body']['_links']['self']['href']}
+    Register subscription    ResourceUsageSubscription2
+    Set Suite Variable    ${SUBSCRIPTION_ID_2}    ${response['body']['_links']['self']['href']}
+    
+    # Create SiteResourceUsageSubscription subscription
+    Register subscription    SiteResourceUsageSubscription
+    Set Suite Variable    ${SUBSCRIPTION_ID_3}    ${response['body']['_links']['self']['href']}
+
+
+Register site resource quota for tenant
+    # Create tenant
+    Register tenant Info    TenantInfo
+    Set Suite Variable    ${TENANT_ID_1}    ${response['body']['tenantId']}
+    # Create site resource quota
+    Register site resource quota Info    ${TENANT_ID_1}    SiteResourceQuotaInfo
+    Set Suite Variable    ${SITE_ID_1}    ${response['body']['siteId']}
+
+Update site resource quota Info
+    [Arguments]    ${tenantId}    ${siteId}    ${content}
+    Should Be True    ${PIC_MEC_PLAT} == 1
+    Should Be True    ${PIC_SERVICES} == 1
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    PUT    ${apiRoot}/${apiName}/${apiVersion}/tenants/${tenantId}/resources/quota_in_sites/${siteId}    ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Register multiple site resource quotas for tenant
+    # Create tenant
+    Register tenant Info    TenantInfo
+    Set Suite Variable    ${TENANT_ID_1}    ${response['body']['tenantId']}
+    # Create three site resource quotas
+    Register site resource quota Info    ${TENANT_ID_1}    SiteResourceQuotaInfo
+    Set Suite Variable    ${SITE_ID_1}    ${response['body']['siteId']}
+    ${CPU_QUOTA}=    Convert To Integer    ${response['body']['cpuQuota']}
+    ${MEMORY_QUOTA}=    Convert To Integer    ${response['body']['memoryQuota']}
+    ${DISK_QUOTA}=    Convert To Integer    ${response['body']['diskQuota']}
+    Set Suite Variable    ${CPU_QUOTA_1}    ${CPU_QUOTA}
+    Set Suite Variable    ${MEMORY_QUOTA_1}    ${MEMORY_QUOTA}
+    Set Suite Variable    ${DISK_QUOTA_1}    ${DISK_QUOTA}
+    Register site resource quota Info    ${TENANT_ID_1}    SiteResourceQuotaInfo2
+    Set Suite Variable    ${SITE_ID_2}    ${response['body']['siteId']}
+    Register site resource quota Info    ${TENANT_ID_1}    SiteResourceQuotaInfo3
+    Set Suite Variable    ${SITE_ID_3}    ${response['body']['siteId']}
+
+Retrieve specific site resource quota info resource
+    [Arguments]    ${tenantId}    ${siteId}
+    Log    Getting specific site resource quota for tenant ${tenantId} and site ${siteId}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    GET    ${apiRoot}/${apiName}/${apiVersion}/tenants/${tenantId}/resources/quota_in_sites/${siteId}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+
+Remove tenant and site resources
+    # Remove site resource quotas
+    Remove specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_1}
+    Remove specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_2}
+    Remove specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_3}
+    # Remove tenant
+    Remove specific tenant info resource    ${TENANT_ID_1}
 
 Retrieve all tenant info resources
     Log    Getting all Tenant Info

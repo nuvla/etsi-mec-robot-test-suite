@@ -1,6 +1,6 @@
 {
-    "siteId": "SITE_ID_2",
-    "cpuQuota": "CPU_QUOTA_2",
-    "memoryQuota": "MEMORY_QUOTA_2",
-    "diskQuota": "DISK_QUOTA_2"
-}
+    "siteId": "site-1234",
+    "cpuQuota": 3,
+    "memoryQuota": 7192,
+    "diskQuota": 90
+  }
