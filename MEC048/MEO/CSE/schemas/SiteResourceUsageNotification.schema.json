@@ -1,0 +1,56 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "required": [
+      "notificationType",
+      "customerId",
+      "tenantId",
+      "resourceUseInfo"
+    ],
+    "properties": {
+      "notificationType": {
+        "type": "string",
+        "enum": ["SiteResourceUsageNotification"]
+      },
+      "timeStamp": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "customerId": {
+        "type": "string"
+      },
+      "tenantId": {
+        "type": "string"
+      },
+      "resourceUseInfo": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["siteId"],
+          "properties": {
+            "siteId": {
+              "type": "string"
+            },
+            "cpuUsed": {
+              "type": "integer"
+            },
+            "cpuRemain": {
+              "type": "integer"
+            },
+            "memoryUsed": {
+              "type": "integer"
+            },
+            "memoryRemain": {
+              "type": "integer"
+            },
+            "diskUsed": {
+              "type": "integer"
+            },
+            "diskRemain": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  }

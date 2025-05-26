@@ -1,0 +1,9 @@
+{
+    "notificationType": "ExpiryNotification",
+    "_links": {
+      "subscription": {
+        "href": "http://example.com/cse/v1/subscriptions/subscription-123"
+      }
+    },
+    "expiryDeadline": "2099-12-31T23:59:59Z"
+  }

@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "customerId": {
+            "type": "string"
+        },
+        "customerName": {
+            "type": "string"
+        },
+        "customerCategory": {
+            "type": "string"
+        },
+        "tenantId": {
+            "type": "string"
+        },
+        "tenantName": {
+            "type": "string"
+        },
+        "resourceUseInfo": {
+            "type": "object",
+            "properties": {
+                "cpuQuota": {
+                    "type": "integer"
+                },
+                "cpuUsed": {
+                    "type": "integer"
+                },
+                "cpuRemain": {
+                    "type": "integer"
+                },
+                "memoryQuota": {
+                    "type": "integer"
+                },
+                "memoryUsed": {
+                    "type": "integer"
+                },
+                "memoryRemain": {
+                    "type": "integer"
+                },
+                "diskQuota": {
+                    "type": "integer"
+                },
+                "diskUsed": {
+                    "type": "integer"
+                },
+                "diskRemain": {
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "required": [
+        "customerId",
+        "customerName",
+        "tenantName"
+    ]
+  }

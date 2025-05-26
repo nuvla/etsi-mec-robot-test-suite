@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+      "cpuQuota": {
+          "type": "integer"
+      },
+      "memoryQuota": {
+          "type": "integer"
+      },
+      "diskQuota": {
+          "type": "integer"
+      }
+  }
+}

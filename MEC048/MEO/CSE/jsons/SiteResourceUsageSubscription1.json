@@ -1,0 +1,12 @@
+{
+    "subscriptionType": "SiteResourceUsageSubscription",
+    "callbackReference": "some/uri",
+    "customerId": "placeholder-customer",
+    "tenantId": "placeholder-tenant",
+    "siteList": ["placeholder-site"],
+    "notificationTrigger": {
+      "triggerType": 10,
+      "threshold": 4,
+      "greaterOrLess": false
+    }
+  }

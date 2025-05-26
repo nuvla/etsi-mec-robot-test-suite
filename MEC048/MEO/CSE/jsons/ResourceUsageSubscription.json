@@ -1,0 +1,11 @@
+{
+    "subscriptionType": "ResourceUsageSubscription",
+    "callbackReference": "some/uri",
+    "customerId": "placeholder",
+    "tenantId": "placeholder",
+    "notificationTrigger": {
+      "triggerType": 10,
+      "threshold": 4,
+      "greaterOrLess": false
+    }
+  }
