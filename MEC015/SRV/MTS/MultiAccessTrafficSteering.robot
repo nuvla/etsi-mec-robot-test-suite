@@ -15,9 +15,9 @@ TC_MEC_MEC015_SRV_MTS_001_OK
     ...  Check that the IUT responds with the Multi-access Traffic Steering information
     ...  when queried by a MEC Application
     ...  
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.6,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.4,
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.3.3.1
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.6,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.4,
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.3.3.1
     Retrieve MTS capability information
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   MtsCapabilityInfo
@@ -28,9 +28,9 @@ TC_MEC_MEC015_SRV_MTS_002_OK_01
     ...  Check that the IUT responds with the list of configured Multi-access Traffic Steering
     ...  when queried by a MEC Application - none
     ...  
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.6,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5,
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.3.3.1
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.6,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5,
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.3.3.1
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
     Set Suite Variable    ${SESSION_ID}    ${elements}[3]
@@ -45,9 +45,9 @@ TC_MEC_MEC015_SRV_MTS_002_OK_02
     ...  Check that the IUT responds with the list of configured Multi-access Traffic Steering
     ...  when queried by a MEC Application - app_instance_id
     ...    
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.6,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5,
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.5.3.1
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.6,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5,
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.1
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
     Set Suite Variable    ${SESSION_ID}    ${elements}[3]
@@ -66,9 +66,9 @@ TC_MEC_MEC015_SRV_MTS_002_OK_03
      ...  Check that the IUT responds with the list of configured Multi-access Traffic Steering
      ...  when queried by a MEC Application - app_name
      ...  
-     ...  ETSI GS MEC 015 V2.2.1, clause 6.2.6,
-     ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5,
-     ...  ETSI GS MEC 015 V2.2.1, clause 9.5.3.1
+     ...  ETSI GS MEC 015 v3.1.1, clause 6.2.6,
+     ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5,
+     ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.1
      [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
 
      Retrieve MTS session list information using filter  ${APP_NAME_FILTER}   ${APP_NAME}   
@@ -81,9 +81,9 @@ TC_MEC_MEC015_SRV_MTS_002_OK_03
      ...  Check that the IUT responds with the list of configured Multi-access Traffic Steering
      ...  when queried by a MEC Application - session_id
      ...  
-     ...  ETSI GS MEC 015 V2.2.1, clause 6.2.6,
-     ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5,
-     ...  ETSI GS MEC 015 V2.2.1, clause 9.5.3.1
+     ...  ETSI GS MEC 015 v3.1.1, clause 6.2.6,
+     ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5,
+     ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.1
      [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
      Retrieve MTS session list information using filter  ${SESSION_ID_FILTER}   ${SESSION_ID}
      Check HTTP Response Status Code Is    200
@@ -97,9 +97,9 @@ TC_MEC_MEC015_SRV_MTS_002_BR
     ...  Check that the IUT responds with an error
     ...  when a request with incorrect parameters is sent by a MEC Application
     
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.6,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5,
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.5.3.1 
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.6,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5,
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.1 
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
     Set Suite Variable    ${SESSION_ID}    ${elements}[3]
@@ -113,7 +113,7 @@ TC_MEC_MEC015_SRV_MTS_002_NF
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when a request with an unknown resource URI is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.5.3.1
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.1
     ...  https://forge.etsi.org/rep/mec/gs015-bandwith-mgmt-api/blob/master/BwManagementApi.yaml
     [Setup]   Delete APP Instance   ${NOT_EXISTING_APP_INSTANCE_ID} 
     Retrieve MTS session list information using filter  ${CORRECT_FILTER}   ${NOT_EXISTING_APP_INSTANCE_ID}   
@@ -125,9 +125,9 @@ TC_MEC_MEC015_SRV_MTS_003_OK_01
     [Documentation]
     ...  Check that the IUT creates a MTS session when queried by a MEC Application
     
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.6,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5,
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.5.3.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.6,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5,
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.2
     [Setup]  Create new App Instance   CreateAppInstanceRequest
     Register MTS session    MtsSessionInfoApplicationSpecific
     
@@ -150,9 +150,9 @@ TC_MEC_MEC015_SRV_MTS_003_OK_02
     [Documentation]
     ...  Check that the IUT creates a MTS session when queried by a MEC Application
     
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.7
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.5.3.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.7
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.2
     #[Setup]  Create new App Instance   CreateAppInstanceRequest
     Register MTS session     MtsSessionInfoSessionSpecific
     Check HTTP Response Status Code Is    201
@@ -177,9 +177,9 @@ TC_MEC_MEC015_SRV_MTS_003_BR
     ...  Check that the IUT responds with an error
     ...  when a request with incorrect parameters is sent by a MEC Application
     
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.7
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.5.3.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.7
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.2
     [Setup]  Create new App Instance   CreateAppInstanceRequest
     Register MTS session     MtsSessionInfoApplicationSpecific_BR
     Check HTTP Response Status Code Is    400
@@ -190,9 +190,9 @@ TC_MEC_MEC015_SRV_MTS_004_OK
     ...  Check that the IUT responds with a configured Multi-access Traffic Steering session
     ...  when queried by a MEC Application
     ...
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.10
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.4.3.1
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.10
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.1
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
     Set Suite Variable    ${SESSION_ID}    ${elements}[3]
@@ -215,9 +215,9 @@ TC_MEC_MEC015_SRV_MTS_004_BR
      ...  Check that the IUT responds with an error
      ...  when a request with incorrect parameters is sent by a MEC Application
      ...
-     ...  ETSI GS MEC 015 V2.2.1, clause 6.2.10
-     ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5
-     ...  ETSI GS MEC 015 V2.2.1, clause 9.4.3.1
+     ...  ETSI GS MEC 015 v3.1.1, clause 6.2.10
+     ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
+     ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.1
      ...  https://forge.etsi.org/rep/mec/gs015-bandwith-mgmt-api/blob/master/BwManagementApi.yaml
      Retrieve single MTS session   ${WRONG_SESSION_ID}	
      Check HTTP Response Status Code Is    404
@@ -226,7 +226,7 @@ TC_MEC_MEC015_SRV_MTS_004_NF
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when a request with an unknown resource URI is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.4.3.1
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.1
     ...  https://forge.etsi.org/rep/mec/gs015-bandwith-mgmt-api/blob/master/BwManagementApi.yaml
     [Setup]   Unregister from the MTS Service   ${NOT_EXISTING_SESSION_ID} 
     Retrieve single MTS session   ${NOT_EXISTING_SESSION_ID}
@@ -237,9 +237,9 @@ TC_MEC_MEC015_SRV_MTS_005_OK
     [Documentation]
     ...  Check that the IUT updates the information about an individual MTS session
     ...  when commanded by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.9
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.4.3.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.9
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.2
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
     Set Suite Variable    ${SESSION_ID}    ${elements}[3]
@@ -260,9 +260,9 @@ TC_MEC_MEC015_SRV_MTS_005_OK
 TC_MEC_MEC015_SRV_MTS_005_BR
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.9
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.4.3.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.9
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.2
     ...  https://forge.etsi.org/rep/mec/gs015-bandwith-mgmt-api/blob/master/BwManagementApi.yaml
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
@@ -275,9 +275,9 @@ TC_MEC_MEC015_SRV_MTS_005_BR
 TC_MEC_MEC015_SRV_MTS_005_NF
     [Documentation]
     ...  Check that the IUT responds with an error when a request with an unknown resource URI is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.9
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.4.3.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.9
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.2
     ...  https://forge.etsi.org/rep/mec/gs015-bandwith-mgmt-api/blob/master/BwManagementApi.yaml
     #[Setup]  Unregister from the MTS Service  ${NOT_EXISTING_SESSION_ID}
     Update requested requirements on the MTS Service    ${NOT_EXISTING_SESSION_ID}     MtsSessionInfoApplicationSpecificUpdate
@@ -289,9 +289,9 @@ TC_MEC_MEC015_SRV_MTS_006_OK
     ...  Check that the IUT deregisters a MTS session 
     ...  when commanded by a MEC Application
     ...
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.8
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.4.3.3
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.8
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.3
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
     Set Suite Variable    ${SESSION_ID}    ${elements}[3]
@@ -303,9 +303,9 @@ TC_MEC_MEC015_SRV_MTS_006_NF
     ...  Check that the IUT deregisters a MTS session
     ...  when commanded by a MEC Application
     ...
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.8
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.5
-    ...  ETSI GS MEC 015 V2.2.1, clause 9.4.3.3
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.8
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.3
     [Setup]   Unregister from the MTS Service   ${NOT_EXISTING_SESSION_ID}
     Unregister from the MTS Service   ${NOT_EXISTING_SESSION_ID}
     Check HTTP Response Status Code Is    404

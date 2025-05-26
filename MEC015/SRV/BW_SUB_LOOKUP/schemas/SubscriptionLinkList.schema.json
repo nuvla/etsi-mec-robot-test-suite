@@ -1,0 +1,57 @@
+{
+  "properties": {
+    "_links": {
+      "description": "Hyperlink related to the resource. This shall be only included in the HTTP responses and in HTTP PUT requests.",
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "description": "URI referring to a resource",
+              "type": "string",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "String"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "x-etsi-ref": "7.5.2"
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "description": "The URI referring to the subscription.",
+                "type": "string",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "String"
+              },
+              "subscriptionType": {
+                "description": "Type of the subscription. The string shall be set according to the 'subscriptionType' attribute of the associated subscription data type event defined in clause 7.3.",
+                "type": "string",
+                "x-etsi-mec-cardinality": "1",
+                "x-etsi-mec-origin-type": "String"
+              }
+            },
+            "required": [
+              "href",
+              "subscriptionType"
+            ]
+          },
+          "x-etsi-mec-cardinality": "0..N",
+          "x-etsi-mec-origin-type": "Structure (inlined)"
+        }
+      },
+      "x-etsi-mec-cardinality": "0..1",
+      "x-etsi-mec-origin-type": "Structure (inlined)"
+    }
+  },
+  "required": [
+    "_links"
+  ],
+  "type": "object"
+}
