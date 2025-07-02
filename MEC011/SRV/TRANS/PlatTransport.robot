@@ -17,9 +17,9 @@ TC_MEC_MEC011_SRV_TRANS_001_OK
     ...    Check that the IUT responds with a list of available transports
     ...    when queried by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.2.1, clause 5.2.9,
-    ...   ETSI GS MEC 011 3.2.1, clause 8.1.2.3,
-    ...   ETSI GS MEC 011 3.2.1, clause 8.2.5.3.1
+    ...   Reference ETSI GS MEC 011 3.3.1, clause 5.2.9,
+    ...   ETSI GS MEC 011 3.3.1, clause 8.1.2.3,
+    ...   ETSI GS MEC 011 3.3.1, clause 8.2.5.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get list of available transports
