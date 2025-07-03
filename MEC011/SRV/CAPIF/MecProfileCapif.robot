@@ -319,6 +319,7 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_NF
     Check HTTP Response Status Code Is    404
 
 
+##TODO:  MEC 011 clause 9.2.6.3.2 does not have such operation. To delete ?
 TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_011_OK
     [Documentation]
     ...    Check that the IUT acknowledges the update of a CAPIF subscription request 
@@ -333,7 +334,7 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_011_OK
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    EventSubscription
 
-
+##TODO:  MEC 011 clause 9.2.6.3.2 does not have such operation. To delete ?
 TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_011_NF
     [Documentation]
     ...    Check that the IUT acknowledges the update of a CAPIF subscription request 
@@ -341,13 +342,13 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_011_NF
     ...
     ...   Reference ETSI GS MEC 011 clause 9.0
     ...   ETSI GS MEC 011 clause 9.1.3.1
-    ...   ETSI GS MEC 011 clause 9.2.6.3.4
+    ...   ETSI GS MEC 011 clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}  eventSubscriptionUpdate
     Check HTTP Response Status Code Is    404
 
-
+##TODO:  MEC 011 clause 9.2.6.3.2 does not have such operation. To delete ?
 TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_012_OK
     [Documentation]
     ...    Check that the IUT acknowledges the changes of a CAPIF subscription request 
@@ -362,7 +363,7 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_012_OK
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    EventSubscription
 
-    
+##TODO:  MEC 011 clause 9.2.6.3.2 does not have such operation. To delete ?    
 TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_012_NF
     [Documentation]
     ...    Check that the IUT acknowledges the changes of a CAPIF subscription request 
@@ -499,7 +500,7 @@ Create CAPIF subscription
     Set Headers    {"Content-Type":"*/*"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    Post    ${apiRoot}/${capifSubApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/subscription   ${body}
+    Post    ${apiRoot}/${capifSubApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/subscriptions   ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
@@ -511,7 +512,7 @@ Replace existing CAPIF subscription
     Set Headers    {"Content-Type":"*/*"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    Put    ${apiRoot}/${capifSubApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/subscription/${SUBSCRIPTION_ID}   ${body}
+    Put    ${apiRoot}/${capifSubApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/subscriptions/${SUBSCRIPTION_ID}   ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
@@ -523,7 +524,7 @@ Modify existing CAPIF subscription
     Set Headers    {"Content-Type":"*/*"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    Patch    ${apiRoot}/${capifSubApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/subscription/${SUBSCRIPTION_ID}   ${body}
+    Patch    ${apiRoot}/${capifSubApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/subscriptions/${SUBSCRIPTION_ID}   ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
@@ -534,6 +535,6 @@ Delete existing CAPIF subscription
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
     Set Headers    {"Content-Type":"*/*"}
-    Delete    ${apiRoot}/${capifSubApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/subscription/${SUBSCRIPTION_ID} 
+    Delete    ${apiRoot}/${capifSubApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/subscriptions/${SUBSCRIPTION_ID} 
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}

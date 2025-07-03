@@ -1,0 +1,9 @@
+{
+    "events": [
+        "CAPIFEvent",
+        "CAPIFEvent",
+        "CAPIFEvent"
+    ],
+    "notificationDestination": "http://someurl.com/someuri",
+    "requestTestNotification": false,
+}

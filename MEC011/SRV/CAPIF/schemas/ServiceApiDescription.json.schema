@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ServiceInfo",
+  "type": "object",
+  "properties": {
+    "apiName": {
+      "type": "string",
+      "description": "Shall be set to the value of the 'serName' attribute as defined in clause 8.1.2.2."
+    },
+    "apiId": {
+      "type": "string",
+      "description": "If present, shall be set to the value of the 'serInstanceId' attribute as defined in clause 8.1.2.2."
+    },
+    "shareableInfo": {
+      "type": "object",
+      "description": "See note."
+    },
+    "serviceAPICategory": {
+      "type": "string",
+      "description": "Shall be set to the same value as the attribute 'id' in 'CategoryRef'."
+    },
+    "ccfId": {
+      "type": "string",
+      "description": "See note."
+    },
+    "apiSuppFeats": {
+      "type": "string",
+      "description": "See note."
+    },
+    "pubApiPath": {
+      "type": "string",
+      "description": "See note."
+    },
+    "apiStatus": {
+      "type": "string",
+      "description": "See note."
+    },
+    "vendorSpecific-urn:etsi:mec:capifext:service-info": {
+      "type": "object",
+      "description": "MecServiceInfoCapifExt used to carry MEC-specific extensions. Requires CAPIF feature 'VendorExt' as defined in clause 8.2.6 of ETSI TS 129 222 [21]."
+    }
+  },
+  "required": ["apiName", "serviceAPICategory"]
+}
