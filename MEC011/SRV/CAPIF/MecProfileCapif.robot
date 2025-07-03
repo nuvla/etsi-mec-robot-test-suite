@@ -17,9 +17,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_001_OK_01
     ...    Check that the IUT responds with all service APIs when 
     ...    queried by a MEC Application - No filter
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.3.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.1,
+    ...   ETSI GS MEC 011, clause 9.2.3.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get all services APIs
@@ -32,9 +32,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_001_OK_02
     ...    Check that the IUT responds with all service APIs when 
     ...    queried by a MEC Application - Filter on apiName
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.3.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.1,
+    ...   ETSI GS MEC 011, clause 9.2.3.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get services APIs with query params     apiName=${API_NAME_QUERY_PARAM}
@@ -50,9 +50,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_001_OK_03
     ...    Check that the IUT responds with all service APIs when 
     ...    queried by a MEC Application - Filter on apiId
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.3.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.1,
+    ...   ETSI GS MEC 011, clause 9.2.3.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get services APIs with query params     apiId=${API_ID_QUERY_PARAM}
@@ -68,9 +68,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_001_OK_04
     ...    Check that the IUT responds with all service APIs when 
     ...    queried by a MEC Application - Filter on apiId and apiName
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.3.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.1,
+    ...   ETSI GS MEC 011, clause 9.2.3.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get services APIs with query params     apiId=${API_ID_QUERY_PARAM}&apiName=${API_NAME_QUERY_PARAM}
@@ -86,9 +86,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_001_BR
     ...    Check that the IUT responds with an error 
     ...    when applying a malformed filter
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.3.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.1,
+    ...   ETSI GS MEC 011, clause 9.2.3.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get services APIs with query params     badQueryParam=${API_ID_QUERY_PARAM}
@@ -100,9 +100,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_001_NF
     ...    Check that the IUT responds with an error 
     ...    when applying a filter on an unknown apiName
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.3.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.1,
+    ...   ETSI GS MEC 011, clause 9.2.3.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get services APIs with query params     apiName=${UNKNOWN_MEC_SRV_SER_NAME}
@@ -114,9 +114,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_002_OK
     ...    Check that the IUT responds with all service APIs 
     ...    for a specific apfId when queried by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.4.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.1,
+    ...   ETSI GS MEC 011, clause 9.2.4.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get published services APIs   ${MEC_SRV_INSTANCE_ID}
@@ -131,9 +131,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_002_NF
     ...    Check that the IUT responds with an error when 
     ...    applying a filter on an unknown apfId
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.4.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.1,
+    ...   ETSI GS MEC 011, clause 9.2.4.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get published services APIs   ${NOT_EXISTING_MEC_SRV_INSTANCE_ID}
@@ -146,9 +146,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_003_OK
     ...    Check that the IUT acknowledges the publishing of a new API when 
     ...    queried by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.2,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.4.3.4
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.2,
+    ...   ETSI GS MEC 011, clause 9.2.4.3.4
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Publish new APIs   ${MEC_SRV_INSTANCE_ID}   serviceApiDescription
@@ -164,9 +164,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_003_BR
     ...    Check that the IUT responds with an error when incorrect parameters were sent by a MEC 
     ...    Application - supportedFeatures shall be present
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0",
-    ...  "ETSI GS MEC 011 3.3.1, clause 9.1.2.2",
-    ...  "ETSI GS MEC 011 3.3.1, clause 9.2.4.3.4",
+    ...   Reference ETSI GS MEC 011, clause 9.0",
+    ...  "ETSI GS MEC 011, clause 9.1.2.2",
+    ...  "ETSI GS MEC 011, clause 9.2.4.3.4",
     ...   "ETSI TS 129 222 V18.6.0 (2024-07), Table 8.2.4.2.2-1: Definition of type ServiceAPIDescription
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
@@ -179,9 +179,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_004_OK
     ...    Check that the IUT responds with a serviceAPIDescription 
     ...    when queried by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.2,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.5.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.2,
+    ...   ETSI GS MEC 011, clause 9.2.5.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get published APIs   ${MEC_SRV_INSTANCE_ID}   ${SERVICE_API_ID}
@@ -195,9 +195,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_004_NF_01
     ...    Check that the IUT responds with an error when 
     ...    applying a filter on an unknown apfId
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.2,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.5.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.2,
+    ...   ETSI GS MEC 011, clause 9.2.5.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get published APIs   ${NOT_EXISTING_MEC_SRV_INSTANCE_ID}   ${SERVICE_API_ID}
@@ -208,9 +208,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_004_NF_02
     ...    Check that the IUT responds with an error
     ...    when applying a filter on an unknown serviceApiId
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.2,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.5.3.1
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.2,
+    ...   ETSI GS MEC 011, clause 9.2.5.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get published APIs   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SERVICE_API_ID}
@@ -222,9 +222,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_004_NF
     ...    Check that the IUT responds with an error 
     ...    when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.2,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.5.3.2
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.2,
+    ...   ETSI GS MEC 011, clause 9.2.5.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Update published APIs wrong HTTP method   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SERVICE_API_ID}
@@ -236,9 +236,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_005_OK
     ...   Check that the IUT changes the publishing of a new API 
     ...   when queried by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.3,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.5.3.3
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.3,
+    ...   ETSI GS MEC 011, clause 9.2.5.3.3
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Update published APIs  ${MEC_SRV_INSTANCE_ID}   ${SERVICE_API_ID}   serviceApiDescriptionUpdate
@@ -253,9 +253,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_005_NF
     ...   Check that the IUT responds with an error 
     ...    when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.3,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.5.3.3
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.3,
+    ...   ETSI GS MEC 011, clause 9.2.5.3.3
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Update published APIs  ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SERVICE_API_ID}   serviceApiDescriptionUpdate
@@ -268,9 +268,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_007_OK
     ...  Check that the IUT acknowledges the removing of a published API 
     ...    when queried by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.2,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.5.3.5
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.2,
+    ...   ETSI GS MEC 011, clause 9.2.5.3.5
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Remove published APIs  ${MEC_SRV_INSTANCE_ID}   ${SERVICE_API_ID}
@@ -281,9 +281,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_007_NF
     ...  Check that the IUT responds with an error 
     ...  when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.2.2,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.5.3.5
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.2.2,
+    ...   ETSI GS MEC 011, clause 9.2.5.3.5
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Remove published APIs  ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SERVICE_API_ID}
@@ -295,9 +295,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_OK
     ...    Check that the IUT acknowledges the publishing of a new API when 
     ...    queried by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.3.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.6.3.4
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.3.1,
+    ...   ETSI GS MEC 011, clause 9.2.6.3.4
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   eventSubscription
@@ -310,9 +310,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_NF
     ...    Check that the IUT responds with an error 
     ...    when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.3.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.6.3.4
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.3.1,
+    ...   ETSI GS MEC 011, clause 9.2.6.3.4
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create CAPIF subscription   ${UNKNOWN_MEC_SRV_INSTANCE_ID}   eventSubscription
@@ -324,9 +324,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_011_OK
     ...    Check that the IUT acknowledges the update of a CAPIF subscription request 
     ...    when requested by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.3.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.6.3.2
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.3.1,
+    ...   ETSI GS MEC 011, clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${SUBSCRIPTION_ID}  eventSubscriptionUpdate
@@ -339,9 +339,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_011_NF
     ...    Check that the IUT acknowledges the update of a CAPIF subscription request 
     ...    when requested by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.3.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.6.3.4
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.3.1,
+    ...   ETSI GS MEC 011, clause 9.2.6.3.4
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}  eventSubscriptionUpdate
@@ -353,9 +353,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_012_OK
     ...    Check that the IUT acknowledges the changes of a CAPIF subscription request 
     ...    when requested by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.3.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.6.3.2
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.3.1,
+    ...   ETSI GS MEC 011, clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Modify existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${SUBSCRIPTION_ID}  eventSubscriptionPatch
@@ -368,9 +368,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_012_NF
     ...    Check that the IUT acknowledges the changes of a CAPIF subscription request 
     ...    when requested by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.3.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.6.3.2
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.3.1,
+    ...   ETSI GS MEC 011, clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Modify existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}  eventSubscriptionPatch
@@ -383,12 +383,12 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_013_OK
     ...    Check that the IUT acknowledges the cancellation of a CAPIF subscription 
     ...    when requested by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.3.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.6.3.4
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.3.1,
+    ...   ETSI GS MEC 011, clause 9.2.6.3.4
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Delete existing CAPIF subscription   ${SUBSCRIPTION_ID} 
+    Delete existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${SUBSCRIPTION_ID} 
     Check HTTP Response Status Code Is    204
 
 
@@ -397,12 +397,12 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_013_NF
     ...    Check that the IUT responds with an error 
     ...    when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
     ...
-    ...   Reference ETSI GS MEC 011 3.3.1, clause 9.0,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.1.3.1,
-    ...   ETSI GS MEC 011 3.3.1, clause 9.2.6.3.4
+    ...   Reference ETSI GS MEC 011, clause 9.0,
+    ...   ETSI GS MEC 011, clause 9.1.3.1,
+    ...   ETSI GS MEC 011, clause 9.2.6.3.4
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Delete existing CAPIF subscription   ${UNKNOWN_SUBSCRIPTION_ID} 
+    Delete existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}    ${UNKNOWN_SUBSCRIPTION_ID} 
     Check HTTP Response Status Code Is    404
  
  
