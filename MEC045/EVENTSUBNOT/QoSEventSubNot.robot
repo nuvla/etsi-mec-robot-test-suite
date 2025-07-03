@@ -3,8 +3,8 @@ Y''[Documentation]   robot --outputdir ../../../outputs ./QoSEventSubNot.robot
 
 *** Settings ***
 Resource    environment/variables.txt
-Resource    ../../../../pics.txt
-Resource    ../../../../GenericKeywords.robot
+Resource    ../../pics.txt
+Resource    ../../GenericKeywords.robot
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem
 Library     libraries/Server.py
@@ -109,17 +109,6 @@ TC_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_001_BR_05
     Create QoS Event Subscription    QoSEventSubscriptionBR5
     Check HTTP Response Status Code Is    400
 
-TC_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_001_BR_05
-    [Documentation]    TP_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_001_BR_05
-    ...    Check that the IUT responds with an error when a request with incorrect parameters is sent 
-    ...    by a MEC Application - flowFilter not present (Note 2)
-    ...    ETSI GS MEC 045 Clause 5.2.2,
-    ...    ETSI GS MEC 045 Clause 6.3.3,
-    ...    ETSI GS MEC 045 Clause 6.4.3,
-    ...    ETSI GS MEC 045 Clause 7.3.3.4
-    [Tags]    PIC_MEC_PLAT     PIC_SERVICES
-    Create QoS Event Subscription    QoSEventSubscriptionBR5
-    Check HTTP Response Status Code Is    400
     
 TC_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_001_BR_06
     [Documentation]    TP_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_001_BR_06
@@ -166,7 +155,7 @@ TC_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_003_OK
     ...    ETSI GS MEC 045 Clause 6.3.3,
     ...    ETSI GS MEC 045 Clause 7.4.3.5
     [Tags]    PIC_MEC_PLAT     PIC_SERVICES
-    Update QoS Event Subscription    ${SUBSCRIPTION_ID}
+    Delete QoS Event Subscription    ${SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    204
  
    
@@ -177,7 +166,7 @@ TC_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_003_NF
     ...    ETSI GS MEC 045 Clause 6.3.3,
     ...    ETSI GS MEC 045 Clause 7.4.3.5
     [Tags]    PIC_MEC_PLAT     PIC_SERVICES
-    Update QoS Event Subscription    ${UNKNOWN_SUBSCRIPTION_ID}
+    Delete QoS Event Subscription    ${UNKNOWN_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404
     
 
