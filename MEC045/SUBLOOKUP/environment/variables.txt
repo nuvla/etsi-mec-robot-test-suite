@@ -1,0 +1,21 @@
+*** Variables ***
+# Generic variables
+${SCHEMA}                           http
+${HOST}                             127.0.0.1
+#${HOST}                            10.192.2.172
+${PORT}                             8081
+${response}                         {}
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}        
+${apiName}                          qms
+${apiVersion}                       v1
+
+
+##Specific
+${SUBSCRIPTION_ID}             subscription_id
+${UNKNOWN_SUBSCRIPTION_ID}     unknown_sub_id
+${WRONG_QUERY_PARAM}           subscriptionIdentity=any_value
+${SUB_ID_QUERY_PARAM}          subscriptionId=HREF_VALUE_1&subscriptionId=HREF_VALUE_3
+${NF_SUB_ID_QUERY_PARAM}       subscriptionId=UKNOWN_SUB_ID
+${SUB_TYPE_QUERY_PARAM}        subscriptionType=SUB_TYPE
+${NF_SUB_TYPE_QUERY_PARAM}     subscriptionType=QoSEventSubscription
