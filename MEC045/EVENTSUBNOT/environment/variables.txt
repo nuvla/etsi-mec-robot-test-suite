@@ -13,3 +13,4 @@ ${apiVersion}                       v1
 
 ##Specific
 ${SUBSCRIPTION_ID}             subscription_id
+${UNKNOWN_SUBSCRIPTION_ID}     unknown_sub_id
