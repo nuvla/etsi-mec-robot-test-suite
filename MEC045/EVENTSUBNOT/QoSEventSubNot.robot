@@ -1,5 +1,5 @@
 Y''[Documentation]   robot --outputdir ../../../outputs ./QoSEventSubNot.robot
-...    Test Suite to validate QoSEventSubNot Service API operations.
+...    Test Suite to validate QoSEventSubNot API operations.
 
 *** Settings ***
 Resource    environment/variables.txt
@@ -122,6 +122,20 @@ TC_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_001_BR_06
     Create QoS Event Subscription    QoSEventSubscriptionBR6
     Check HTTP Response Status Code Is    400
     
+
+    
+TC_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_001_BR_07
+    [Documentation]    TP_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_001_BR_07
+    ...    Check that the IUT responds with an error when a request with incorrect parameters is sent 
+    ...    by a MEC Application - Invalid condition on monitoringArea
+    ...    by a MEC Application - Invalid flowFilter
+    ...    ETSI GS MEC 045 Clause 5.2.2,
+    ...    ETSI GS MEC 045 Clause 6.3.3,
+    ...    ETSI GS MEC 045 Clause 7.3.3.4
+    [Tags]    PIC_MEC_PLAT     PIC_SERVICES
+    Create QoS Event Subscription    QoSEventSubscriptionBR7
+    Check HTTP Response Status Code Is    400
+
 
     
 TC_MEC_MEC045_SRV_QOS_EVENT_SUB_NOT_002_OK
