@@ -19,9 +19,9 @@ TC_MEC_MEC011_SRV_TIME_001_OK
     [Documentation]
     ...    Check that the IUT responds with timing capabilities
     ...    when queried by a MEC Application
-    ...     ETSI GS MEC 011 3.3.1, clause 5.2.10.3,
-    ...     ETSI GS MEC 011 3.3.1, clause 7.1.2.4,
-    ...     ETSI GS MEC 011 3.3.1, clause 7.2.5.3.1
+    ...     ETSI GS MEC 011 clause 5.2.10.3,
+    ...     ETSI GS MEC 011 clause 7.1.2.4,
+    ...     ETSI GS MEC 011 clause 7.2.5.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get time capabilities
     Check HTTP Response Status Code Is    200
@@ -32,9 +32,9 @@ TC_MEC_MEC011_SRV_TIME_002_OK
     [Documentation]
     ...    Check that the IUT responds with current time
     ...    when queried by a MEC Application
-    ...    ETSI GS MEC 011 3.3.1, clause 5.2.10.2,
-    ...    ETSI GS MEC 011 3.3.1, clause 7.1.2.5,
-    ...    ETSI GS MEC 011 3.3.1, clause 7.2.5.3.1
+    ...    ETSI GS MEC 011 clause 5.2.10.2,
+    ...    ETSI GS MEC 011 clause 7.1.2.5,
+    ...    ETSI GS MEC 011 clause 7.2.5.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get current time

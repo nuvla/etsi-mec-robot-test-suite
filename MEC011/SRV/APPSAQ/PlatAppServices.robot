@@ -19,9 +19,9 @@ TC_MEC_MEC011_SRV_APPSAQ_001_OK
     ...    Check that the IUT responds with a list of available MEC services
     ...    for a given application instance when queried by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 3.3.1, clause 5.2.5,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.2.6.3.1
+    ...    Reference    ETSI GS MEC 011 clause 5.2.5,
+    ...                 ETSI GS MEC 011 clause 8.1.2.2,
+    ...                 ETSI GS MEC 011 clause 8.2.6.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID}
     Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
@@ -36,9 +36,9 @@ TC_MEC_MEC011_SRV_APPSAQ_001_BR
     ...   Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference    ETSI G3.3.1 011 3.3.1, clause 5.2.5,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.2.6.3.1
+    ...    Reference    ETSI G3.3.1 011 clause 5.2.5,
+    ...                 ETSI GS MEC 011 clause 8.1.2.2,
+    ...                 ETSI GS MEC 011 clause 8.2.6.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     # Wrong query parameter name should trigger an error response.
     Get a list of mecService of an application instance with parameters    ${APP_INSTANCE_ID}    ${INSTANCE_ID}    ${FAKE_INSTANCE_ID_VALUE}
@@ -50,9 +50,9 @@ TC_MEC_MEC011_SRV_APPSAQ_002_OK
     ...    Check that the IUT notifies the authorised relevant (subscribed) application
     ...    instances when a new service for a given application instance is registered
     ...
-    ...    Reference    ETSI GS MEC 011 3.3.1, clause 5.2.5,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.2.6.3.4
+    ...    Reference    ETSI GS MEC 011 clause 5.2.5,
+    ...                 ETSI GS MEC 011 clause 8.1.2.2,
+    ...                 ETSI GS MEC 011 clause 8.2.6.3.4
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup] 
     Create new service    ServiceInfo    ${APP_INSTANCE_ID}
@@ -70,9 +70,9 @@ TC_MEC_MEC011_SRV_APPSAQ_002_BR
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 3.3.1, clause 5.2.5,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.2.6.3.4
+    ...    Reference    ETSI GS MEC 011 clause 5.2.5,
+    ...                 ETSI GS MEC 011 clause 8.1.2.2,
+    ...                 ETSI GS MEC 011 clause 8.2.6.3.4
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create new service    ServiceInfoError    ${APP_INSTANCE_ID}
     Check HTTP Response Status Code Is    400
@@ -83,9 +83,9 @@ TC_MEC_MEC011_SRV_APPSAQ_002_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 3.3.1, clause 5.2.5,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.2.6.3.4
+    ...    Reference    ETSI GS MEC 011 clause 5.2.5,
+    ...                 ETSI GS MEC 011 clause 8.1.2.2,
+    ...                 ETSI GS MEC 011 clause 8.2.6.3.4
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Remove individual service    ${NON_EXISTENT_APP_INSTANCE_ID}    ${SERVICE_ID}
     Create new service    ServiceInfo    ${NON_EXISTENT_APP_INSTANCE_ID}
@@ -97,9 +97,9 @@ TC_MEC_MEC011_SRV_APPSAQ_003_OK
     ...    Check that the IUT responds with the information on a specific service
     ...    for a given application instance when queried by a MEC Application
     ...
-    ...    Reference ETSI GS MEC 011 3.3.1, clause 5.2.5,
-    ...              ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...              ETSI GS MEC 011 3.3.1, clause 8.2.7.3.1
+    ...    Reference ETSI GS MEC 011 clause 5.2.5,
+    ...              ETSI GS MEC 011 clause 8.1.2.2,
+    ...              ETSI GS MEC 011 clause 8.2.7.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID} 
     Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
@@ -115,9 +115,9 @@ TC_MEC_MEC011_SRV_APPSAQ_003_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference ETSI GS MEC 011 3.3.1, clause 5.2.5,
-    ...              ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...              ETSI GS MEC 011 3.3.1, clause 8.2.7.3.1
+    ...    Reference ETSI GS MEC 011 clause 5.2.5,
+    ...              ETSI GS MEC 011 clause 8.1.2.2,
+    ...              ETSI GS MEC 011 clause 8.2.7.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Remove individual service    ${NON_EXISTENT_APP_INSTANCE_ID}    ${SERVICE_ID}
     Get individual service    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SERVICE_ID}
@@ -129,9 +129,9 @@ TC_MEC_MEC011_SRV_APPSAQ_004_OK
     ...    Check that the IUT updates a service information for a given
     ...    application instance when commanded by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 3.3.1, clause 5.2.4,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.2.7.3.2
+    ...    Reference    ETSI GS MEC 011 clause 5.2.4,
+    ...                 ETSI GS MEC 011 clause 8.1.2.2,
+    ...                 ETSI GS MEC 011 clause 8.2.7.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID} 
     Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
@@ -147,9 +147,9 @@ TC_MEC_MEC011_SRV_APPSAQ_004_BR
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 3.3.1, clause 5.2.4,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.2.7.3.2
+    ...    Reference    ETSI GS MEC 011 clause 5.2.4,
+    ...                 ETSI GS MEC 011 clause 8.1.2.2,
+    ...                 ETSI GS MEC 011 clause 8.2.7.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID}
     Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
@@ -163,9 +163,9 @@ TC_MEC_MEC011_SRV_APPSAQ_004_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference    ETSI GS MEC 011 3.3.1, clause 5.2.4,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.2.7.3.2
+    ...    Reference    ETSI GS MEC 011 clause 5.2.4,
+    ...                 ETSI GS MEC 011 clause 8.1.2.2,
+    ...                 ETSI GS MEC 011 clause 8.2.7.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Remove individual service    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SERVICE_ID}
     Update service    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SERVICE_ID}    ServiceInfoUpdated
@@ -177,9 +177,9 @@ TC_MEC_MEC011_SRV_APPSAQ_004_PF
     ...    Check that the IUT responds with an error when
     ...    a request sent by a MEC Application doesn't comply with a required condition
     ...
-    ...    Reference    ETSI GS MEC 011 3.3.1, clause 5.2.4,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.1.2.2,
-    ...                 ETSI GS MEC 011 3.3.1, clause 8.2.7.3.2
+    ...    Reference    ETSI GS MEC 011 clause 5.2.4,
+    ...                 ETSI GS MEC 011 clause 8.1.2.2,
+    ...                 ETSI GS MEC 011 clause 8.2.7.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID} 
     Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
@@ -193,7 +193,7 @@ TC_MEC_MEC011_SRV_APPSAQ_005_OK
     ...    Check that the IUT executes the deletion of a service 
     ...    for a given application instance when requested by a MEC Application
     ...
-    ...    Reference ETSI GS MEC 011 3.3.1, clause 8.2.7.3.5
+    ...    Reference ETSI GS MEC 011 clause 8.2.7.3.5
    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
    [Setup]  Create new service    ServiceInfo    ${APP_INSTANCE_ID} 
    Set Suite Variable    ${SERVICE_ID}    ${response['body']['serInstanceId']}
@@ -206,7 +206,7 @@ TC_MEC_MEC011_SRV_APPSAQ_005_NF
     ...    Check that the IUT responds with an error when
     ...    a request for deletion of a unknown service is sent by a MEC Application
     ...
-    ...    Reference ETSI GS MEC 011 3.3.1, clause 8.2.7.3.5
+    ...    Reference ETSI GS MEC 011 clause 8.2.7.3.5
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Remove individual service    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SERVICE_ID}   
     Remove individual service    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SERVICE_ID}

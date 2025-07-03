@@ -18,9 +18,9 @@ TC_MEC_MEC011_SRV_DNS_001_OK
     ...    Check that the IUT responds with a list of active DNS rules
     ...    when queried by a MEC Application
     ...
-    ...    Reference  "ETSI GS MEC 011 3.3.1, clause 5.2.8",
-    ...               "ETSI GS MEC 011 3.3.1, clause 7.1.2.3",
-    ...               "ETSI GS MEC 011 3.3.1, clause 7.2.9.3.1"
+    ...    Reference  "ETSI GS MEC 011 clause 5.2.8",
+    ...               "ETSI GS MEC 011 clause 7.1.2.3",
+    ...               "ETSI GS MEC 011 clause 7.2.9.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
     Get list of active DNS rules    ${APP_INSTANCE_ID}
@@ -33,9 +33,9 @@ TC_MEC_MEC011_SRV_DNS_001_NF
     ...    Check that the IUT responds with a list of active DNS rules
     ...    when queried by a MEC Application
     ...
-    ...    Reference  "ETSI GS MEC 011 3.3.1, clause 5.2.8",
-    ...               "ETSI GS MEC 011 3.3.1, clause 7.1.2.3",
-    ...               "ETSI GS MEC 011 3.3.1, clause 7.2.9.3.1"
+    ...    Reference  "ETSI GS MEC 011 clause 5.2.8",
+    ...               "ETSI GS MEC 011 clause 7.1.2.3",
+    ...               "ETSI GS MEC 011 clause 7.2.9.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Delete MEC application instance profile   ${NOT_EXISTENT_APP_INSTANCE_ID}
     Get list of active DNS rules    ${NOT_EXISTENT_APP_INSTANCE_ID}
@@ -49,9 +49,9 @@ TC_MEC_MEC011_SRV_DNS_002_OK
     ...    Check that the IUT responds with the information on a specific DNS rule
     ...    when queried by a MEC Application
     ...
-    ...    Reference  "ETSI GS MEC 011 3.3.1, clause 5.2.8",
-    ...               "ETSI GS MEC 011 3.3.1, clause 7.1.2.3",
-    ...               "ETSI GS MEC 011 3.3.1, clause 7.2.10.3.1"
+    ...    Reference  "ETSI GS MEC 011 clause 5.2.8",
+    ...               "ETSI GS MEC 011 clause 7.1.2.3",
+    ...               "ETSI GS MEC 011 clause 7.2.10.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
     Get individual DNS rule    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}
@@ -66,9 +66,9 @@ TC_MEC_MEC011_SRV_DNS_002_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference  "ETSI GS MEC 011 3.3.1, clause 5.2.8",
-    ...               "ETSI GS MEC 011 3.3.1, clause 7.1.2.3",
-    ...               "ETSI GS MEC 011 3.3.1, clause 7.2.10.3.1"
+    ...    Reference  "ETSI GS MEC 011 clause 5.2.8",
+    ...               "ETSI GS MEC 011 clause 7.1.2.3",
+    ...               "ETSI GS MEC 011 clause 7.2.10.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get individual DNS rule    ${APP_INSTANCE_ID}    ${NON_ESISTENT_DNS_RULE_ID}
     Check HTTP Response Status Code Is    404
@@ -79,9 +79,9 @@ TC_MEC_MEC011_SRV_DNS_003_OK
     ...    Check that the IUT responds with the information on a specific DNS rule 
     ...    when queried by a MEC Application
     ...
-    ...    Reference "ETSI GS MEC 011 3.3.1, clause 5.2.8",
-    ...              "ETSI GS MEC 011 3.3.1, clause 7.1.2.3",
-    ...              "ETSI GS MEC 011 3.3.1, clause 7.2.10.3.2"
+    ...    Reference "ETSI GS MEC 011 clause 5.2.8",
+    ...              "ETSI GS MEC 011 clause 7.1.2.3",
+    ...              "ETSI GS MEC 011 clause 7.2.10.3.2"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
     Update a DNS Rule    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}    DnsRuleUpdate
@@ -97,9 +97,9 @@ TC_MEC_MEC011_SRV_DNS_003_BR
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference "ETSI GS MEC 011 3.3.1, clause 5.2.8",
-    ...              "ETSI GS MEC 011 3.3.1, clause 7.1.2.3",
-    ...              "ETSI GS MEC 011 3.3.1, clause 7.2.10.3.2"
+    ...    Reference "ETSI GS MEC 011 clause 5.2.8",
+    ...              "ETSI GS MEC 011 clause 7.1.2.3",
+    ...              "ETSI GS MEC 011 clause 7.2.10.3.2"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
@@ -113,9 +113,9 @@ TC_MEC_MEC011_SRV_DNS_003_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference "ETSI GS MEC 011 3.3.1, clause 5.2.8",
-    ...              "ETSI GS MEC 011 3.3.1, clause 7.1.2.3",
-    ...              "ETSI GS MEC 011 3.3.1, clause 7.2.10.3.2"
+    ...    Reference "ETSI GS MEC 011 clause 5.2.8",
+    ...              "ETSI GS MEC 011 clause 7.1.2.3",
+    ...              "ETSI GS MEC 011 clause 7.2.10.3.2"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
@@ -130,9 +130,9 @@ TC_MEC_MEC011_SRV_DNS_003_PF
     ...    Check that the IUT responds with an error when
     ...    a request sent by a MEC Application doesn't comply with a required condition
     ...
-    ...    Reference "ETSI GS MEC 011 3.3.1, clause 5.2.8",
-    ...              "ETSI GS MEC 011 3.3.1, clause 7.1.2.3",
-    ...              "ETSI GS MEC 011 3.3.1, clause 7.2.10.3.2"
+    ...    Reference "ETSI GS MEC 011 clause 5.2.8",
+    ...              "ETSI GS MEC 011 clause 7.1.2.3",
+    ...              "ETSI GS MEC 011 clause 7.2.10.3.2"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
     Update a DNS Rule with invalid etag    ${APP_INSTANCE_ID}    ${DNS_RULE_ID}    DnsRuleUpdate
