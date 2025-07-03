@@ -17,8 +17,8 @@ Test Teardown    Test TearDown    ${DEVICE_ID_PLACEHOLDER}   DeviceInfo      ${N
 TC_MEC_MEC033_IOTS_IOTDEV_001_OK_01
     [Documentation]
     ...  Check that the IUT responds with the list of registered IoT devices 
-    ...  when queried by a Service Consumer
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.3.3.1
+    ...  when queried by a Service Consumer - No Filter
+    ...  ETSI GS MEC 033 clause 7.3.3.1
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     
     [Setup]   Test Setup    ${None}    DeviceInfo      ${REGISTER_ACTION}
@@ -35,7 +35,7 @@ TC_MEC_MEC033_IOTS_IOTDEV_001_OK_01
 TC_MEC_MEC033_IOTS_IOTDEV_001_OK_02
     [Documentation]
     ...  "Check that the IUT responds with the list of registered IoT devices when queried using a filter by a Service Consumer
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.3.3.1
+    ...  ETSI GS MEC 033 clause 7.3.3.1
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup    ${None}    DeviceInfo      ${REGISTER_ACTION}
     ${DEVICE_ID_VALUE}   Get value entry from JSON file    DeviceInfo  deviceId
@@ -51,8 +51,8 @@ TC_MEC_MEC033_IOTS_IOTDEV_001_OK_02
 
 TC_MEC_MEC033_IOTS_IOTDEV_001_OK_03
     [Documentation]
-    ...  "Check that the IUT responds with the list of registered IoT devices when queried by a Service Consumer filtering one field
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.3.3.1
+    ...  "Check that the IUT responds with the list of registered IoT devices when queried by a Service Consumer, filtering one field
+    ...  ETSI GS MEC 033 clause 7.3.3.1
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup   ${None}    DeviceInfo      ${REGISTER_ACTION}
     ${DEVICE_ID_VALUE}   Get value entry from JSON file    DeviceInfo  deviceId
@@ -63,8 +63,8 @@ TC_MEC_MEC033_IOTS_IOTDEV_001_OK_03
 
 TC_MEC_MEC033_IOTS_IOTDEV_001_OK_04
     [Documentation]
-    ...  "Check that the IUT responds with the list of registered IoT devices when queried by a Service Consumer filtering one field
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.3.3.1
+    ...  "Check that the IUT responds with the list of registered IoT devices when queried by a Service Consumer, filtering one field
+    ...  ETSI GS MEC 033 clause 7.3.3.1
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup   ${None}    DeviceInfo      ${REGISTER_ACTION}
     ${DEVICE_ID_VALUE}   Get value entry from JSON file    DeviceInfo  deviceId
@@ -80,7 +80,7 @@ TC_MEC_MEC033_IOTS_IOTDEV_001_OK_04
 TC_MEC_MEC033_IOTS_IOTDEV_002_OK
     [Documentation]
     ...  Check that the IUT registers the information of an IoT device when requested by a Service Consumer
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.3.3.4
+    ...  ETSI GS MEC 033 clause 7.3.3.4
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup   ${DEVICE_ID}   ${None}       ${REMOVE_ACTION}
       
@@ -103,7 +103,7 @@ TC_MEC_MEC033_IOTS_IOTDEV_002_OK
 TC_MEC_MEC033_IOTS_IOTDEV_002_BR
     [Documentation]
     ...  Check that the IUT returns an error when Service Consumer request to register an IoT device with incorrect parameters
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.3.3.4
+    ...  ETSI GS MEC 033 clause 7.3.3.4
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     ## No setup needed
     Register IOT Device information     DeviceInfoBR
@@ -113,7 +113,7 @@ TC_MEC_MEC033_IOTS_IOTDEV_002_BR
 TC_MEC_MEC033_IOTS_IOTDEV_003_OK
     [Documentation]
     ...  Check that the IUT returns the IoT device information when requested by Service Consumer specifying the device identifier
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.4.3.1
+    ...  ETSI GS MEC 033 clause 7.4.3.1
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup   ${None}    DeviceInfo      ${REGISTER_ACTION}
     ${DEVICE_ID_VALUE}   Get value entry from JSON file    DeviceInfo  deviceId
@@ -127,7 +127,7 @@ TC_MEC_MEC033_IOTS_IOTDEV_003_OK
 TC_MEC_MEC033_IOTS_IOTDEV_003_NF
     [Documentation]
     ...  Check that the IUT returns error when Service Consumer request to retrieve a not registered IoT device
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.4.3.1
+    ...  ETSI GS MEC 033 clause 7.4.3.1
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup   ${NOT_EXISTING_DEVICE_ID}    ${None}      ${REMOVE_ACTION}
     Retrieve specific registered IOT Device information  ${NOT_EXISTING_DEVICE_ID}
@@ -138,7 +138,7 @@ TC_MEC_MEC033_IOTS_IOTDEV_003_NF
 TC_MEC_MEC033_IOTS_IOTDEV_004_OK
     [Documentation]
     ...  Check that the IUT returns an error when Service Consumer request to register an IoT device with incorrect parameters
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.4.3.2
+    ...  ETSI GS MEC 033 clause 7.4.3.2
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup   ${None}    DeviceInfo      ${REGISTER_ACTION}
     ${DEVICE_ID_VALUE}   Get value entry from JSON file    DeviceInfo  deviceId
@@ -159,7 +159,7 @@ TC_MEC_MEC033_IOTS_IOTDEV_004_OK
 TC_MEC_MEC033_IOTS_IOTDEV_004_NF
     [Documentation]
     ...  Check that the IUT returns an error when a Service Consumer requests to update a not registered IoT device
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.4.3.2
+    ...  ETSI GS MEC 033 clause 7.4.3.2
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup   ${NOT_EXISTING_DEVICE_ID}    ${None}      ${REMOVE_ACTION}   
     Update IOT Device information     ${NOT_EXISTING_DEVICE_ID}   DeviceInfoUpdate
@@ -169,7 +169,7 @@ TC_MEC_MEC033_IOTS_IOTDEV_004_NF
 TC_MEC_MEC033_IOTS_IOTDEV_004_BR
     [Documentation]
     ...  Check that the IUT returns an error when a Service Consumer requests to update an existing IoT device with incorrect parameters
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.4.3.2
+    ...  ETSI GS MEC 033 clause 7.4.3.2
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup   ${NOT_EXISTING_DEVICE_ID}    ${None}      ${REMOVE_ACTION} 
     Update IOT Device information     ${NOT_EXISTING_DEVICE_ID}   DeviceInfoUpdateBR
@@ -178,23 +178,23 @@ TC_MEC_MEC033_IOTS_IOTDEV_004_BR
 
 TC_MEC_MEC033_IOTS_IOTDEV_005_OK
     [Documentation]
-    ...  Check that the IUT deregisters an IoT device information when requested by a Service Consumer specifying the IoT registered device identifier
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.4.3.5
+    ...  Check that the IUT unregisters an IoT device information when requested by a Service Consumer specifying the IoT registered device identifier
+    ...  ETSI GS MEC 033 clause 7.4.3.5
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup   ${None}    DeviceInfo      ${REGISTER_ACTION}
     ${DEVICE_ID_VALUE}   Get value entry from JSON file    DeviceInfo  deviceId
-    Deregister IOT Device information   ${DEVICE_ID_VALUE}
+    Unregister IOT Device information   ${DEVICE_ID_VALUE}
     Check HTTP Response Status Code Is    204
     ## No Teardown needed 
 
 
 TC_MEC_MEC033_IOTS_IOTDEV_005_NF
     [Documentation]
-    ...  "Check that the IUT returns an error when a Service Consumer requests to deregisters an IoT device using incorrect parameters
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.4.3.5
+    ...  "Check that the IUT returns an error when a Service Consumer requests to unregisters an IoT device using incorrect parameters
+    ...  ETSI GS MEC 033 clause 7.4.3.5
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]   Test Setup   ${NOT_EXISTING_DEVICE_ID}    ${None}      ${REMOVE_ACTION}
-    Deregister IOT Device information   ${NOT_EXISTING_DEVICE_ID}
+    Unregister IOT Device information   ${NOT_EXISTING_DEVICE_ID}
     Check HTTP Response Status Code Is    404
     ##No tearDown needed
                 
@@ -294,7 +294,7 @@ Update IOT Device information
     Set Suite Variable    ${response}    ${output}   
     
 
-Deregister IOT Device information  
+Unregister IOT Device information  
     [Arguments]     ${deviceId}  
     Should Be True    ${PIC_MEC_PLAT} == 1
     Should Be True    ${PIC_SERVICES} == 1
