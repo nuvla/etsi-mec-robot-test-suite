@@ -3,8 +3,8 @@ Y''[Documentation]   robot --outputdir ../../../outputs ./QoSEventSubNot.robot
 
 *** Settings ***
 Resource    environment/variables.txt
-Resource    ../../../../pics.txt
-Resource    ../../../../GenericKeywords.robot
+Resource    ../../pics.txt
+Resource    ../../GenericKeywords.robot
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem
 Library     libraries/Server.py
