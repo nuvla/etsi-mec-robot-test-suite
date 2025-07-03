@@ -1,5 +1,5 @@
-Y''[Documentation]   robot --outputdir ../../../outputs ./QoSMeasurementSubNot.robot
-...    Test Suite to validate QoSMeasurementSubNot Service API operations.
+Y''[Documentation]   robot --outputdir ../../../outputs ./QoSLookup.robot
+...    Test Suite to validate QoSLookup API operations.
 
 *** Settings ***
 Resource    environment/variables.txt
@@ -117,7 +117,7 @@ TC_MEC_MEC045_SRV_QOSLOOKUP_003_NF
     ...    ETSI GS MEC 045 Clause 7.4.3.1
     [Tags]    PIC_MEC_PLAT     PIC_SERVICES
     Retrieve Subscription    ${UNKNOWN_SUBSCRIPTION_ID}
-    Check HTTP Response Status Code Is    404ì
+    Check HTTP Response Status Code Is    404
     
     
 *** Keywords ***
