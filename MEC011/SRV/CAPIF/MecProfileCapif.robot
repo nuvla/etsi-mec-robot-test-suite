@@ -81,6 +81,9 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_001_OK_04
       Should Be Equal As Strings    ${element}[apiName]      ${API_NAME_QUERY_PARAM}
     END
 
+
+
+
 TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_001_BR
     [Documentation]
     ...    Check that the IUT responds with an error 
@@ -217,52 +220,69 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_004_NF_02
     Check HTTP Response Status Code Is    404
 
 
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_004_NF
+
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_005_OK
     [Documentation]
-    ...    Check that the IUT responds with an error 
-    ...    when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
+    ...    Check that the IUT acknowledges the update of a CAPIF subscription request 
+    ...    when requested by a MEC Application
     ...
     ...   Reference ETSI GS MEC 011 clause 9.0
-    ...   ETSI GS MEC 011 clause 9.1.2.2
-    ...   ETSI GS MEC 011 clause 9.2.5.3.2
+    ...   ETSI GS MEC 011 clause 9.1.3.1
+    ...   ETSI GS MEC 011 clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Update published APIs wrong HTTP method   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SERVICE_API_ID}
+    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${SUBSCRIPTION_ID}  eventSubscriptionUpdate
+    Check HTTP Response Status Code Is    200
+    Check HTTP Response Body Json Schema Is    EventSubscription
+
+
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_005_NF
+    [Documentation]
+    ...    Check that the IUT acknowledges the update of a CAPIF subscription request 
+    ...    when requested by a MEC Application
+    ...
+    ...   Reference ETSI GS MEC 011 clause 9.0
+    ...   ETSI GS MEC 011 clause 9.1.3.1
+    ...   ETSI GS MEC 011 clause 9.2.6.3.2
+
+    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}  eventSubscriptionUpdate
     Check HTTP Response Status Code Is    404
 
 
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_005_OK
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_006_OK
     [Documentation]
     ...   Check that the IUT changes the publishing of a new API 
     ...   when queried by a MEC Application
     ...
     ...   Reference ETSI GS MEC 011 clause 9.0
     ...   ETSI GS MEC 011 clause 9.1.2.3
-    ...   ETSI GS MEC 011 clause 9.2.5.3.3
+    ...   ETSI GS MEC 011 clause 9.2.5.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Update published APIs  ${MEC_SRV_INSTANCE_ID}   ${SERVICE_API_ID}   serviceApiDescriptionUpdate
+    Replace published APIs  ${MEC_SRV_INSTANCE_ID}   ${SERVICE_API_ID}   serviceApiDescriptionUpdate
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    ServiceApiDescription
     ${MEC_SRV_SER_NAME}    Get value entry from JSON file   ServiceApiDescription     apiName  
     Check Response Contains    ${response['body']}    apiId    ${MEC_SRV_SER_INSTANCE_ID}
     
 
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_005_NF
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_006_NF
     [Documentation]
     ...   Check that the IUT responds with an error 
     ...    when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
     ...
     ...   Reference ETSI GS MEC 011 clause 9.0
     ...   ETSI GS MEC 011 clause 9.1.2.3
-    ...   ETSI GS MEC 011 clause 9.2.5.3.3
+    ...   ETSI GS MEC 011 clause 9.2.5.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Update published APIs  ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SERVICE_API_ID}   serviceApiDescriptionUpdate
+    Replace published APIs  ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SERVICE_API_ID}   serviceApiDescriptionUpdate
     Check HTTP Response Status Code Is    404
     
 
 
+    
 TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_007_OK
         [Documentation]
     ...  Check that the IUT acknowledges the removing of a published API 
@@ -275,6 +295,8 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_007_OK
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Remove published APIs  ${MEC_SRV_INSTANCE_ID}   ${SERVICE_API_ID}
     Check HTTP Response Status Code Is    204
+
+
        
 TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_007_NF
         [Documentation]
@@ -290,7 +312,7 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_007_NF
     Check HTTP Response Status Code Is    404
 
 
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_OK
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_008_OK
     [Documentation]
     ...    Check that the IUT acknowledges the publishing of a new API when 
     ...    queried by a MEC Application
@@ -305,7 +327,7 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_OK
     Check HTTP Response Body Json Schema Is    EventSubscription
 
   
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_NF
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_008_NF
     [Documentation]
     ...    Check that the IUT responds with an error 
     ...    when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
@@ -319,94 +341,91 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_NF
     Check HTTP Response Status Code Is    404
 
 
-##TODO:  MEC 011 clause 9.2.6.3.2 does not have such operation. To delete ?
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_011_OK
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_009_OK
     [Documentation]
-    ...    Check that the IUT acknowledges the update of a CAPIF subscription request 
-    ...    when requested by a MEC Application
+    ...   Check that the IUT acknowledges the update of a CAPIF subscription request 
+    ...   when requested by a MEC Application
     ...
     ...   Reference ETSI GS MEC 011 clause 9.0
     ...   ETSI GS MEC 011 clause 9.1.3.1
     ...   ETSI GS MEC 011 clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${SUBSCRIPTION_ID}  eventSubscriptionUpdate
+    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}  ${SUBSCRIPTION_ID} eventSubscription
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    EventSubscription
 
-##TODO:  MEC 011 clause 9.2.6.3.2 does not have such operation. To delete ?
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_011_NF
+
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_009_NF
     [Documentation]
-    ...    Check that the IUT acknowledges the update of a CAPIF subscription request 
-    ...    when requested by a MEC Application
+    ...   Check that the IUT acknowledges the changes of a CAPIF subscription request 
+    ...   when requested by a MEC Application
     ...
     ...   Reference ETSI GS MEC 011 clause 9.0
     ...   ETSI GS MEC 011 clause 9.1.3.1
     ...   ETSI GS MEC 011 clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}  eventSubscriptionUpdate
+    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}  eventSubscription
     Check HTTP Response Status Code Is    404
-
-##TODO:  MEC 011 clause 9.2.6.3.2 does not have such operation. To delete ?
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_012_OK
+ 
+ 
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_OK
     [Documentation]
-    ...    Check that the IUT acknowledges the changes of a CAPIF subscription request 
-    ...    when requested by a MEC Application
+    ...   Check that the IUT acknowledges the changes of a CAPIF subscription request 
+    ...   when requested by a MEC Application
     ...
     ...   Reference ETSI GS MEC 011 clause 9.0
     ...   ETSI GS MEC 011 clause 9.1.3.1
     ...   ETSI GS MEC 011 clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Modify existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${SUBSCRIPTION_ID}  eventSubscriptionPatch
+    Update existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}  ${SUBSCRIPTION_ID} eventSubscription
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    EventSubscription
 
-##TODO:  MEC 011 clause 9.2.6.3.2 does not have such operation. To delete ?    
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_012_NF
+
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_NF
     [Documentation]
-    ...    Check that the IUT acknowledges the changes of a CAPIF subscription request 
-    ...    when requested by a MEC Application
-    ...
-    ...   Reference ETSI GS MEC 011 clause 9.0
-    ...   ETSI GS MEC 011 clause 9.1.3.1
-    ...   ETSI GS MEC 011 clause 9.2.6.3.2
-
-    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Modify existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}  eventSubscriptionPatch
-    Check HTTP Response Status Code Is    404
-    Check HTTP Response Body Json Schema Is    EventSubscription
-    
-
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_013_OK
-    [Documentation]
-    ...    Check that the IUT acknowledges the cancellation of a CAPIF subscription 
-    ...    when requested by a MEC Application
-    ...
-    ...   Reference ETSI GS MEC 011 clause 9.0
-    ...   ETSI GS MEC 011 clause 9.1.3.1
-    ...   ETSI GS MEC 011 clause 9.2.6.3.4
-
-    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Delete existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${SUBSCRIPTION_ID} 
-    Check HTTP Response Status Code Is    204
-
-
-TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_013_NF
-    [Documentation]
-    ...    Check that the IUT responds with an error 
+    ...   Check that the IUT responds with an error 
     ...    when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
     ...
     ...   Reference ETSI GS MEC 011 clause 9.0
     ...   ETSI GS MEC 011 clause 9.1.3.1
+    ...   ETSI GS MEC 011 clause 9.2.6.3.2
+
+    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    Update existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}  ${UNKNOWN_SUBSCRIPTION_ID} eventSubscription
+    Check HTTP Response Status Code Is    404
+    
+
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_011_OK
+    [Documentation]
+    ...   Check that the IUT acknowledges the cancellation of a CAPIF subscription 
+    ...   when requested by a MEC Application
+    ...
+    ...   Reference ETSI GS MEC 011 clause 9.0
+    ...   ETSI GS MEC 011 clause 9.1.3.1
     ...   ETSI GS MEC 011 clause 9.2.6.3.4
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Delete existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}    ${UNKNOWN_SUBSCRIPTION_ID} 
+    Delete existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}  ${SUBSCRIPTION_ID}
+    Check HTTP Response Status Code Is    204
+
+
+TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_011_NF
+    [Documentation]
+    ...   Check that the IUT responds with an error 
+    ...   when a request for an URI that cannot be mapped to a valid resource URI is sent by a MEC Application
+    ...
+    ...   Reference ETSI GS MEC 011 clause 9.0
+    ...   ETSI GS MEC 011 clause 9.1.3.1
+    ...   ETSI GS MEC 011 clause 9.2.6.3.4
+
+    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    Delete existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}  ${UNKNOWN_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404
- 
- 
+    
 *** Keywords ***
 Get all services APIs
     Set Headers    {"Accept":"application/json"}
@@ -427,6 +446,7 @@ Get services APIs with query params
     Set Suite Variable    ${response}    ${output}
 
 
+##Published APIs management Keywords
 Get published services APIs
     [Arguments]     ${MEC_SRV_SER_INSTANCE_ID}
     Set Headers    {"Accept":"application/json"}
@@ -460,7 +480,7 @@ Get published APIs
     Set Suite Variable    ${response}    ${output}
     
 
-Update published APIs wrong HTTP method
+Replace published APIs wrong HTTP method
     [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}     ${SERVICE_API_ID}
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
@@ -470,6 +490,30 @@ Update published APIs wrong HTTP method
     Set Suite Variable    ${response}    ${output}
 
 
+Replace published APIs
+    [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}     ${SERVICE_API_ID}    ${content}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Headers    {"Content-Type":"*/*"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    
+    Put    ${apiRoot}/${publApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/service-apis/${SERVICE_API_ID}     ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+    
+Replace published APIs
+    [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}     ${SERVICE_API_ID}    ${content}
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Headers    {"Content-Type":"*/*"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    ${body}=    Get File    ${file}
+    
+    Put    ${apiRoot}/${publApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/service-apis/${SERVICE_API_ID}     ${body}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output}
+    
 Update published APIs
     [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}     ${SERVICE_API_ID}    ${content}
     Set Headers    {"Accept":"application/json"}
@@ -482,7 +526,7 @@ Update published APIs
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
-
+   
 Remove published APIs
     [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}     ${SERVICE_API_ID}
     Set Headers    {"Accept":"application/json"}
@@ -492,7 +536,9 @@ Remove published APIs
     Delete    ${apiRoot}/${publApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/service-apis/${SERVICE_API_ID}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
-    
+
+
+##CAPIF Subscription management Keywords
 Create CAPIF subscription
     [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}   ${content}
     Set Headers    {"Accept":"application/json"}
@@ -503,7 +549,7 @@ Create CAPIF subscription
     Post    ${apiRoot}/${capifSubApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/subscriptions   ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
-    
+   
 
 Replace existing CAPIF subscription
     [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}  ${SUBSCRIPTION_ID}  ${content}

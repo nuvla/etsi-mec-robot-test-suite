@@ -5,5 +5,5 @@
         "CAPIFEvent"
     ],
     "notificationDestination": "http://someurl.com/someuri",
-    "requestTestNotification": false,
+    "requestTestNotification": false
 }
