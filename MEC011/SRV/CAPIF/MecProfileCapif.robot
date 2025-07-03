@@ -502,18 +502,6 @@ Replace published APIs
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
     
-Replace published APIs
-    [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}     ${SERVICE_API_ID}    ${content}
-    Set Headers    {"Accept":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
-    Set Headers    {"Content-Type":"*/*"}
-    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
-    ${body}=    Get File    ${file}
-    
-    Put    ${apiRoot}/${publApiName}/${apiVersion}/${MEC_SRV_SER_INSTANCE_ID}/service-apis/${SERVICE_API_ID}     ${body}
-    ${output}=    Output    response
-    Set Suite Variable    ${response}    ${output}
-    
 Update published APIs
     [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}     ${SERVICE_API_ID}    ${content}
     Set Headers    {"Accept":"application/json"}
@@ -563,7 +551,7 @@ Replace existing CAPIF subscription
     Set Suite Variable    ${response}    ${output}
     
 
-Modify existing CAPIF subscription
+Update existing CAPIF subscription
     [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}  ${SUBSCRIPTION_ID}  ${content}
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
