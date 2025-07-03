@@ -4,7 +4,7 @@ Documentation
 ...    A test suite for validating Common API Framework (CAPIF) operations.
 
 Resource    ../../../GenericKeywords.robot
-Resource    environment/variables_sandbox.txt
+Resource    environment/variables.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem 
 
@@ -529,7 +529,7 @@ Modify existing CAPIF subscription
     
 
 
-Modify existing CAPIF subscription
+Delete existing CAPIF subscription
     [Arguments]    ${MEC_SRV_SER_INSTANCE_ID}  ${SUBSCRIPTION_ID}
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
