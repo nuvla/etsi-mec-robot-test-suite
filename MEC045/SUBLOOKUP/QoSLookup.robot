@@ -24,7 +24,7 @@ TC_MEC_MEC045_SRV_QOSLOOKUP_001_OK
     [Tags]    PIC_MEC_PLAT     PIC_SERVICES
     Retrieve all subscriptions
     Check HTTP Response Status Code Is    201
-    Check HTTP Response Body Json Schema Is  SubscriptionList
+    Check HTTP Response Body Json Schema Is   NotificationSubscriptionList
 
 
 TC_MEC_MEC045_SRV_QOSLOOKUP_001_BR
@@ -58,7 +58,7 @@ TC_MEC_MEC045_SRV_QOSLOOKUP_002_OK_01
     [Tags]    PIC_MEC_PLAT     PIC_SERVICES
     Retrieve Subscriptions with query params    ${SUBSCRIPTION_ID}    ${SUB_ID_QUERY_PARAM}
     Check HTTP Response Status Code Is    200
-    Check HTTP Response Body Json Schema Is  SubscriptionList
+    Check HTTP Response Body Json Schema Is  NotificationSubscriptionList
 
 
 TC_MEC_MEC045_SRV_QOSLOOKUP_002_OK_02
@@ -70,7 +70,7 @@ TC_MEC_MEC045_SRV_QOSLOOKUP_002_OK_02
     [Tags]    PIC_MEC_PLAT     PIC_SERVICES
     Retrieve Subscriptions with query params    ${SUBSCRIPTION_ID}   ${SUB_TYPE_QUERY_PARAM}
     Check HTTP Response Status Code Is    200
-    Check HTTP Response Body Json Schema Is  SubscriptionList
+    Check HTTP Response Body Json Schema Is  NotificationSubscriptionList
 
 TC_MEC_MEC045_SRV_QOSLOOKUP_002_NF_01
     [Documentation]    TP_MEC_MEC045_SRV_QOSLOOKUP_002_NF_01
@@ -81,7 +81,7 @@ TC_MEC_MEC045_SRV_QOSLOOKUP_002_NF_01
     [Tags]    PIC_MEC_PLAT     PIC_SERVICES
     Retrieve Subscriptions with query params    ${SUBSCRIPTION_ID}   ${NF_SUB_TYPE_QUERY_PARAM}
     Check HTTP Response Status Code Is    404
-    Check HTTP Response Body Json Schema Is  SubscriptionList
+    Check HTTP Response Body Json Schema Is  NotificationSubscriptionList
     
 
 TC_MEC_MEC045_SRV_QOSLOOKUP_002_NF_02
@@ -93,7 +93,7 @@ TC_MEC_MEC045_SRV_QOSLOOKUP_002_NF_02
     [Tags]    PIC_MEC_PLAT     PIC_SERVICES
     Retrieve Subscriptions with query params    ${SUBSCRIPTION_ID}   ${NF_SUB_TYPE_QUERY_PARAM}
     Check HTTP Response Status Code Is    404
-    Check HTTP Response Body Json Schema Is  SubscriptionList
+    Check HTTP Response Body Json Schema Is  NotificationSubscriptionList
 
 
 TC_MEC_MEC045_SRV_QOSLOOKUP_003_OK
