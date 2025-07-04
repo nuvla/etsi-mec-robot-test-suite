@@ -231,7 +231,7 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_005_OK
     ...   ETSI GS MEC 011 clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${SUBSCRIPTION_ID}  eventSubscriptionUpdate
+    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${SUBSCRIPTION_ID}      eventSubscriptionUpdate
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    EventSubscription
 
@@ -246,7 +246,7 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_005_NF
     ...   ETSI GS MEC 011 clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}  eventSubscriptionUpdate
+    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}     eventSubscriptionUpdate
     Check HTTP Response Status Code Is    404
 
 
@@ -366,7 +366,7 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_009_NF
     ...   ETSI GS MEC 011 clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Replace existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}  eventSubscription
+    Replace existing CAPIF subscription    ${MEC_SRV_INSTANCE_ID}   ${UNKNOWN_SUBSCRIPTION_ID}    eventSubscription
     Check HTTP Response Status Code Is    404
  
  
@@ -380,7 +380,7 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_OK
     ...   ETSI GS MEC 011 clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Update existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}  ${SUBSCRIPTION_ID} eventSubscription
+    Update existing CAPIF subscription     ${MEC_SRV_INSTANCE_ID}    ${SUBSCRIPTION_ID}     eventSubscription
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    EventSubscription
 
@@ -395,7 +395,7 @@ TC_MEC_MEC011_SRV_MEC_PROFILE_FOR_CAPIF_010_NF
     ...   ETSI GS MEC 011 clause 9.2.6.3.2
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    Update existing CAPIF subscription   ${MEC_SRV_INSTANCE_ID}  ${UNKNOWN_SUBSCRIPTION_ID} eventSubscription
+    Update existing CAPIF subscription     ${MEC_SRV_INSTANCE_ID}    ${UNKNOWN_SUBSCRIPTION_ID}    eventSubscription
     Check HTTP Response Status Code Is    404
     
 
