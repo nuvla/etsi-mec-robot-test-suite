@@ -164,7 +164,7 @@ TC_MEC_MEC045_SRV_QOS_MEAS_SUB_NOT_002_OK
     ...    ETSI GS MEC 045 Clause 6.3.2,
     ...    ETSI GS MEC 045 Clause 7.4.3.2
     [Tags]    PIC_MEC_PLAT     PIC_SERVICES
-    Update QoS Event Subscription    QoSEventSubscriptionUpdate   ${SUBSCRIPTION_ID}
+    Update QoS Event Subscription    QoSMeasureSubscriptionUpdate   ${SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is  QoSEventSubscription
 
@@ -176,7 +176,7 @@ TC_MEC_MEC045_SRV_QOS_MEAS_SUB_NOT_002_NF
     ...    ETSI GS MEC 045 Clause 6.3.2,
     ...    ETSI GS MEC 045 Clause 7.4.3.2
     [Tags]    PIC_MEC_PLAT     PIC_SERVICES
-    Update QoS Event Subscription    QoSEventSubscriptionUpdate   ${UNKNOWN_SUBSCRIPTION_ID}
+    Update QoS Event Subscription    QoSMeasureSubscriptionUpdate   ${UNKNOWN_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is  QoSEventSubscription
 
