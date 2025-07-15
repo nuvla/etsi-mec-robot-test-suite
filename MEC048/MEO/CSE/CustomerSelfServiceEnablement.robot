@@ -1180,10 +1180,9 @@ Update resource quota Info
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    PUT   ${apiRoot}/${apiName}/${apiVersion}/tenants/${tenantId}/resources/quota_in_system
+    PUT   ${apiRoot}/${apiName}/${apiVersion}/tenants/${tenantId}/resources/quota_in_system   ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
-    Set Suite Variable      ${TENANT_ID}    ${response}[body][tenantId]
 
 Register mutiple tenant Info and get tenant Ids
     [Arguments]     ${content_01}     ${content_02}    ${content_03}
