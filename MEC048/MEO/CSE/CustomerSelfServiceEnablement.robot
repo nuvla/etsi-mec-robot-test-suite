@@ -1166,10 +1166,10 @@ Update tenant Info
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    PUT   ${apiRoot}/${apiName}/${apiVersion}/tenants/${tenantId}
+    PUT   ${apiRoot}/${apiName}/${apiVersion}/tenants/${tenantId}   ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
-    Set Suite Variable      ${TENANT_ID}    ${response}[body][tenantId]
+    Run Keyword If    ${response['status']} != 400 and ${response['status']} != 404    Set Suite Variable    ${TENANT_ID_1}    ${response['body']['tenantId']}
 
 Update resource quota Info
     [Arguments]     ${tenantId}    ${content}
