@@ -1144,7 +1144,7 @@ Retrieve all tenant info resources with query parameters
     Set Suite Variable    ${response}    ${output}
 
 Register tenant Info
-    [Arguments]     ${content}
+    [Arguments]     ${content}    ${is_individual_call}=${True}
     Should Be True    ${PIC_MEC_PLAT} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Set Headers    {"Accept":"application/json"}
@@ -1155,7 +1155,7 @@ Register tenant Info
     POST   ${apiRoot}/${apiName}/${apiVersion}/tenants   ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
-    Set Suite Variable      ${TENANT_ID_1}    ${response}[body][tenantId]
+    Run Keyword If    ${is_individual_call} and ${response}[status] != 400    Set Suite Variable    ${TENANT_ID_1}    ${response}[body][tenantId]
 
 Update tenant Info
     [Arguments]     ${tenantId}    ${content}
