@@ -1186,15 +1186,15 @@ Update resource quota Info
 
 Register mutiple tenant Info and get tenant Ids
     [Arguments]     ${content_01}     ${content_02}    ${content_03}
-    Register tenant Info    ${content_01}
+    Register tenant Info    ${content_01}    ${False}
     Set Suite Variable      ${TENANT_ID_1}    ${response}[body][tenantId]
     Set Suite Variable      ${CUSTOMER_ID_1}    ${response}[body][customerId]
     Set Suite Variable      ${CUSTOMER_NAME_1}    ${response}[body][customerName]
-    Register tenant Info    ${content_02}
+    Register tenant Info    ${content_02}    ${False}
     Set Suite Variable      ${TENANT_ID_2}    ${response}[body][tenantId]
     Set Suite Variable      ${CUSTOMER_ID_2}    ${response}[body][customerId]
     Set Suite Variable      ${CUSTOMER_NAME_2}    ${response}[body][customerName]
-    Register tenant Info    ${content_03}
+    Register tenant Info    ${content_03}    ${False}
     Set Suite Variable      ${TENANT_ID_3}    ${response}[body][tenantId]
     Set Suite Variable      ${CUSTOMER_ID_3}    ${response}[body][customerId]
     Set Suite Variable      ${CUSTOMER_NAME_3}    ${response}[body][customerName]
