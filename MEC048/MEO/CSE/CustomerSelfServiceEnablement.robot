@@ -235,12 +235,9 @@ TC_MEC_MEC048_MEO_CSE_009_OK
     [Tags]    PIC_SERVICES
     [Setup]   Register tenant Info    TenantInfo
     Register mutiple site resource quota Info and get site Ids    ${TENANT_ID_1}    SiteResourceQuotaInfo    SiteResourceQuotaInfo2    SiteResourceQuotaInfo3
-    Retrieve all resource quota info resource   ${TENANT_ID_1} 
+    Retrieve all site resource quota info resource   ${TENANT_ID_1} 
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is  SiteResourceQuotaInfoList
-    FOR  ${element}  IN  @{response['body']}
-      Should Be Equal As Strings    ${element}[siteId]      ${SITE_ID_1}
-    END
     Remove mutiple site resource quota Info    ${TENANT_ID_1}    ${SITE_ID_1}    ${SITE_ID_2}    ${SITE_ID_3}
     [Teardown]  Remove specific tenant info resource    ${TENANT_ID_1}
 
