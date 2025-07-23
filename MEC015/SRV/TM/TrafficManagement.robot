@@ -8,6 +8,7 @@ Resource    ../../../GenericKeywords.robot
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem    
 Library     String
+Library     Collections
 
 *** Test Cases ***
 
@@ -121,8 +122,10 @@ TC_MEC_MEC015_SRV_TM_002_OK
     ...  ETSI GS MEC 015 v3.1.1, clause 6.2.2,
     ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2,
     ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.4 
-     [Setup]    Create new App Instance   CreateAppInstanceRequest 
+     [Setup]   Create new App Instance   CreateAppInstanceRequest 
      Registration for bandwidth services  ${APP_INSTANCE_ID}   BwInfoApplicationSpecific
+     ${elements} =  Split String    ${response['headers']['Location']}       /
+     Set Suite Variable    ${ALLOCATION_ID}    ${elements}[-1]
      Check HTTP Response Status Code Is    201 
      Check HTTP Response Body Json Schema Is   BwInfo
      ${appInsId}    Get value entry from JSON file    BwInfoApplicationSpecific   appInsId
@@ -133,7 +136,7 @@ TC_MEC_MEC015_SRV_TM_002_OK
      Should Be Equal As Strings  ${response['body']['requestType']}    ${requestType}  
      Should Be Equal As Strings  ${response['body']['fixedAllocation']}    ${fixedAllocation}  
      Should Be Equal As Strings  ${response['body']['allocationDirection']}    ${allocationDirection}  
-     [TearDown]    Delete App Instance   ${APP_INSTANCE_ID}    
+     [TearDown]    Unregister bw Service And Delete APP Instance    ${ALLOCATION_ID}    ${APP_INSTANCE_ID}    
     
 
 TC_MEC_MEC015_SRV_TM_002_BR_01
@@ -145,7 +148,7 @@ TC_MEC_MEC015_SRV_TM_002_BR_01
     [Setup]    Create new App Instance   CreateAppInstanceRequest
     Registration for bandwidth services  ${APP_INSTANCE_ID}   BwInfo_BR
     Check HTTP Response Status Code Is    400
-    [TearDown]    Delete App Instance   ${APP_INSTANCE_ID}    
+    [TearDown]   Delete App Instance   ${APP_INSTANCE_ID}    
     
 TC_MEC_MEC015_SRV_TM_002_BR_02
     [Documentation]
@@ -195,7 +198,7 @@ TC_MEC_MEC015_SRV_TM_004_OK
     ...  ETSI GS MEC 015 v3.1.1, clause 6.2.4
     ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
     ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.2
-    #[Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
+    [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Update a bandwidth allocation   ${ALLOCATION_ID}   BwInfoUpdate
     ${appInsId}    Get value entry from JSON file    BwInfoUpdate   appInsId
     ${fixedAllocation}    Get value entry from JSON file    BwInfoUpdate   fixedAllocation
@@ -205,7 +208,7 @@ TC_MEC_MEC015_SRV_TM_004_OK
     Should Be Equal As Strings  ${response['body']['appInsId']}    ${appInsId} 
     Should Be Equal As Strings  ${response['body']['fixedAllocation']}    ${fixedAllocation}
     Should Be Equal As Strings  ${response['body']['allocationDirection']}   ${allocationDirection}
-    #[TearDown]   Unregister bw Service And Delete APP Instance    ${ALLOCATION_ID}    ${APP_INSTANCE_ID}
+    [TearDown]   Unregister bw Service And Delete APP Instance    ${ALLOCATION_ID}    ${APP_INSTANCE_ID}
 
 
 TC_MEC_MEC015_SRV_TM_004_BR_01
@@ -326,7 +329,7 @@ Create new App Instance and Register for bw service
      Create new App Instance     ${appInstancePayload}
      Registration for bandwidth services   ${APP_INSTANCE_ID}    ${bwServicePayload}
      ${elements} =  Split String    ${response['headers']['Location']}       /
-     Set Suite Variable    ${ALLOCATION_ID}    ${elements}[3]
+     Set Suite Variable    ${ALLOCATION_ID}    ${elements}[-1]
      
        
      
@@ -446,7 +449,10 @@ Request a deltas changes
     Set Headers    {"Authorization":"${TOKEN}"}
     ${path}    Catenate    SEPARATOR=      jsons/     ${content}.json
     ${body}    Get File    ${path}
-    ${json_object}=	Evaluate  json.loads('''${body}''')  json
+    ${json_object}=    Evaluate    json.loads('''${body}''')    json
+    # Inject allocation_id into the JSON object
+    Set To Dictionary    ${json_object}    allocationId=${allocation_id}
+    ${body}=    Evaluate    json.dumps(${json_object})    json
     Patch    ${apiRoot}/${apiName}/${apiVersion}/bw_allocations/${allocation_id}    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}

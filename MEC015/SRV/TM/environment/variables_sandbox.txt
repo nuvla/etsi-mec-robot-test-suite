@@ -6,7 +6,7 @@ ${HOST}                     try-mec.etsi.org
 ${PORT}                     443
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
-${apiRoot}        /<your_token_here>/mep1 
+${apiRoot}        sbxme1qzq4/mep1 
 ${apiName}        bwm
 ${apiVersion}     v1
 
@@ -17,7 +17,7 @@ ${apiVersion}     v1
 
 ${CORRECT_FILTER}						 app_instance_id
 ${BAD_FILTER}							 appInsId
-${APP_INSTANCE_ID}                       81c51643-8c6f-4781-ad45-f8a457ca549b
+${APP_INSTANCE_ID}                       f1e4d448-e277-496b-bf63-98391cfd20fb
 ${NON_EXISTENT_APP_INSTANCE_ID}          NON_EXISTENT_INSTANCE_ID
 ${SESSION_ID}                            5
 ${APP_NAME_FILTER}                       app_name
