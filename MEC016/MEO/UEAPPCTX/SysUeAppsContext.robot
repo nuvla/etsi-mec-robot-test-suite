@@ -155,11 +155,11 @@ Update application context
     Set Headers    {"Content-Type":"application/json"}
     Set Headers    {"Authorization":"${TOKEN}"}
     ${path}    Catenate    SEPARATOR=      jsons/     ${content}
-    ${body}    Get File    ${path}
+    ${body_template}    Get File    ${path}
+    ${body}    Replace String    ${body_template}    __CONTEXT_ID__    ${context_id}
     Put    ${apiRoot}/${apiName}/${apiVersion}/app_contexts/${context_id}    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
-
 
 Update application context using wrong endpoint
     [Arguments]    ${context_id}    ${content}

@@ -20,7 +20,7 @@ TP_MEC_MEC016_MEO_UEAPPLOC_001_OK
     Obtain Application Location Availability Task     AppLocationAvailability.json
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   ApplicationLocationAvailability
-    Should Be Equal As Strings   ${response['body']['appInfo']['appName']}    MyNewWornderfulApp
+    Should Be Equal As Strings   ${response['body']['appInfo']['appName']}    onboarded-demo4
 
 
 TP_MEC_MEC016_MEO_UEAPPLOC_001_BR
