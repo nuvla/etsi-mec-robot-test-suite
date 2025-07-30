@@ -1,12 +1,17 @@
 {
     "subscriptionType": "SiteResourceUsageSubscription",
     "callbackReference": "some/uri",
+    "_links": {
+        "self": {
+            "href": "LINK_TO_THE_RESOURCE"
+        }
+    },
     "customerId": "placeholder-customer",
     "tenantId": "placeholder-tenant",
     "siteList": ["placeholder-site"],
     "notificationTrigger": {
-      "triggerType": 10,
-      "threshold": 4,
-      "greaterOrLess": false
+        "triggerType": 10,
+        "threshold": 4,
+        "greaterOrLess": false
     }
-  }
+}
