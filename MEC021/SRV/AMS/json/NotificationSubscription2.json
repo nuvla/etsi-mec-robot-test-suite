@@ -12,5 +12,5 @@
     "filterCriteria": {
         "appInstanceId": "app-123"
     },
-    "subscriptionType": "MobilityProcedureSubscription"
+    "subscriptionType": "AdjacentAppInfoSubscription"
 }

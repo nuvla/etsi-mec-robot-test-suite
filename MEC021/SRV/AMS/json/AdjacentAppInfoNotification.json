@@ -1,0 +1,11 @@
+{
+  "notificationType": "AdjacentAppInfoNotification",
+  "timeStamp": "sample string",
+  "adjacentAppInfo": [
+    "sample string",
+    "sample string"
+  ],
+  "_links": {
+    "subscription": null
+  }
+}

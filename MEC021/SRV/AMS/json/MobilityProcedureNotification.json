@@ -1,0 +1,16 @@
+{
+  "notificationType": "MobilityProcedureNotification",
+  "timeStamp": "s",
+  "associateId": [
+    {},
+    {}
+  ],
+  "mobilityStatus": 11,
+  "targetAppInfo": {
+    "appInstanceId": "sample string",
+    "commInterface": null
+  },
+  "_links": {
+    "subscription": null
+  }
+}

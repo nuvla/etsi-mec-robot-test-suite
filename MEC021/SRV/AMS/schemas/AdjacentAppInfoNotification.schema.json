@@ -1,0 +1,95 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema#",
+    "title": "AdjacentAppInfoNotification",
+    "type": "object",
+    "properties": {
+        "notificationType": {
+            "type": "string",
+            "const": "AdjacentAppInfoNotification",
+            "description": "Shall be set to 'MobilityProcedureNotification'."
+        },
+        "timeStamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time of the generation of the notification."
+        },
+        "adjacentAppInfo": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Identifier of the adjacent application instance"
+        },
+        "_links": {
+            "type": "object",
+            "properties": {
+                "subscription": {
+                    "$ref": "#/$defs/LinkType"
+                }
+            },
+            "required": [
+                "subscription"
+            ],
+            "additionalProperties": false,
+            "description": "Object containing hyperlinks related to the resource."
+        }
+    },
+    "required": [
+        "notificationType",
+        "_links"
+    ],
+    "$defs": {
+        "AdjacentAppInfo": {
+            "type": "object",
+            "properties": {
+                "appInstanceId": {
+                    "type": "string",
+                    "description": "Identifier of the adjacent application instance. "
+                },
+                "communicationInterface": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/$defs/CommunicationInterface"
+                    }
+                }
+            },
+            "required": [
+                "appInstanceId"
+            ]
+        },
+        "CommunicationInterface": {
+            "type": "object",
+            "description": "Communication interface of the application instance.",
+            "properties": {
+                "interfaceType": {
+                    "type": "string"
+                },
+                "endpoint": {
+                    "type": "string",
+                    "format": "uri"
+                }
+            },
+            "required": [
+                "interfaceType",
+                "endpoint"
+            ],
+            "additionalProperties": true
+        },
+        "LinkType": {
+            "type": "object",
+            "description": "Represents a type of link.",
+            "properties": {
+                "href": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URI referring to a resource."
+                }
+            },
+            "required": [
+                "href"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

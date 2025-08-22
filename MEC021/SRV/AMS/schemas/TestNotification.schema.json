@@ -1,0 +1,43 @@
+{
+        "properties": {
+          "_links": {
+            "description": "Hyperlink related to the resource. This shall be only included in the HTTP responses and in HTTP PUT requests.",
+            "properties": {
+              "self": {
+                "properties": {
+                  "href": {
+                    "description": "URI referring to a resource.",
+                    "format": "uri",
+                    "type": "string",
+                    "x-etsi-mec-cardinality": "1",
+                    "x-etsi-mec-origin-type": "Uri"
+                  }
+                },
+                "required": [
+                  "href"
+                ],
+                "type": "object",
+                "x-etsi-ref": "6.7.2"
+              }
+            },
+            "required": [
+              "self"
+            ],
+            "type": "object",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "Structure (inlined)"
+          },
+          "notificationType": {
+            "description": "Shall be set to \"TestNotification\".",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "notificationType",
+          "_links"
+        ],
+        "type": "object",
+        "x-etsi-ref": "6.4.3"
+      }

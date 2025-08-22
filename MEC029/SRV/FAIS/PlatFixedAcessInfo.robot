@@ -20,9 +20,7 @@ TC_MEC_MEC029_SRV_FAIS_001_OK
     [Documentation]
     ...    Check that the IUT responds with the current status of the fixed access information
     ...    when queried by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.3.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get fixed access information details
     Check HTTP Response Status Code Is    200
@@ -33,9 +31,7 @@ TC_MEC_MEC029_SRV_FAIS_001_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
-    ...
-    ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.3.3.1
-
+    ...    Reference  ETSI GS MEC 029 V2.2.1, clause 7.3.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get fixed access information details using query prameters    interface    ${INTERFACE_ID}
     Check HTTP Response Status Code Is    400
@@ -45,9 +41,7 @@ TC_MEC_MEC029_SRV_FAIS_001_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for non-existing data is sent by a MEC Application
-    ...
-    ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.3.3.1
-
+    ...    Reference  ETSI GS MEC 029 V2.2.1, clause 7.3.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get fixed access information details using query prameters    interfaceType    ${NON_EXISTENT_INTERFACE_ID}
     Check HTTP Response Status Code Is    404
@@ -57,9 +51,7 @@ TC_MEC_MEC029_SRV_FAIS_002_OK
     [Documentation]
     ...    Check that the IUT responds with the current status of the device information
     ...    when queried by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.4.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get status of device information
     Check HTTP Response Status Code Is    200
@@ -70,9 +62,7 @@ TC_MEC_MEC029_SRV_FAIS_002_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.4.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get status of device information using query prameters    device    ${DEVICE_ID}
     Check HTTP Response Status Code Is    400
@@ -82,9 +72,7 @@ TC_MEC_MEC029_SRV_FAIS_002_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for non-existing data is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.4.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get status of device information using query prameters    deviceId    ${NON_EXISTENT_DEVICE_ID}
     Check HTTP Response Status Code Is    404
@@ -94,9 +82,7 @@ TC_MEC_MEC029_SRV_FAIS_003_OK
     [Documentation]
     ...    Check that the IUT responds with the current status of the cable line information
     ...    when queried by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.5.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get status of the cable line information
     Check HTTP Response Status Code Is    200
@@ -107,9 +93,7 @@ TC_MEC_MEC029_SRV_FAIS_003_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.5.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get status of the cable line information using query parameters    cm    ${CABLE_MODEM_ID}
     Check HTTP Response Status Code Is    400
@@ -119,9 +103,7 @@ TC_MEC_MEC029_SRV_FAIS_003_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for non-existing data is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.5.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get status of the cable line information using query parameters    cmId    ${NON_EXISTING_FAI_CM_ID}
     Check HTTP Response Status Code Is    404
@@ -131,9 +113,7 @@ TC_MEC_MEC029_SRV_FAIS_004_OK
     [Documentation]
     ...    Check that the IUT responds with the current status of the optical network information
     ...    when queried by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.6.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get status of the opentical network information
     Check HTTP Response Status Code Is    200
@@ -144,9 +124,7 @@ TC_MEC_MEC029_SRV_FAIS_004_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.6.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get status of the opentical network information using query parameters    onu    ${ONU_ID}
     Check HTTP Response Status Code Is    400
@@ -156,9 +134,7 @@ TC_MEC_MEC029_SRV_FAIS_004_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for non-existing data is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.6.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get status of the opentical network information using query parameters    onuId    ${NON_EXISTING_FAI_ONU_ID}
     Check HTTP Response Status Code Is    404
@@ -168,9 +144,7 @@ TC_MEC_MEC029_SRV_FAIS_005_OK
     [Documentation]
     ...    Check that the IUT responds with the subscriptions for fixed access information notifications
     ...    when queried by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.7.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
 
     [Setup]    Create a new subscription    OnuAlarmSubscription
@@ -187,9 +161,7 @@ TC_MEC_MEC029_SRV_FAIS_005_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.7.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get list of subscriptions using query parameters    subscription    ${SUBSCRIPTION_TYPE}
     Check HTTP Response Status Code Is    400
