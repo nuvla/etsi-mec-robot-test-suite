@@ -258,7 +258,9 @@ TC_MEC_MEC021_SRV_AMS_006_NF
     ...  ETSI GS MEC 021 3.1.1, clause 6.7
     ...  ETSI GS MEC 021 3.1.1, clause 7.3.2
     ...  ETSI GS MEC 021 3.1.1, clause 7.3.3
-    ...  ETSI GS MEC 021 3.1.1, clause 8.7.3.5     
+    ...  ETSI GS MEC 021 3.1.1, clause 8.7.3.5 
+
+
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Delete individual subscription for AMS services    ${NON_EXISTENT_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404
@@ -448,7 +450,6 @@ TC_MEC_MEC021_SRV_AMS_014_NF
     Deregister specific AMS service     ${NON_EXISTENT_APP_MOBILITY_SERVICE_ID}
     Check HTTP Response Status Code Is    404
 
-
 TC_MEC_MEC021_SRV_AMS_015_OK_01
     [Documentation]  
     ...  Check that the AMS service returns information about the registered application mobility services when requested
@@ -518,8 +519,6 @@ TC_MEC_MEC021_SRV_UETESTNOT_001_OK
     Spawn Notification Server    TestNotification
     Validate Json   TestNotification.schema.json    ${payload_notification}
     [TearDown]  Delete individual subscription for AMS services    ${SUBSCRIPTION_ID}
-        
-
 *** Keywords ***
 Get Registered AMS information
     Set Headers    {"Accept":"application/json"}
