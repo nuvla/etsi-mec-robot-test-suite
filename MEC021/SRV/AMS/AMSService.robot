@@ -18,7 +18,7 @@ Library     Collections
 TC_MEC_MEC021_SRV_AMS_001_OK_01
     [Documentation]  Request Registered AMS information 
     ...  Check that the AMS service returns information about the registered application mobility services when requested
-    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.1
+    ...  ETSI GS MEC 021 3.1.1, clause 8.3.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
 
@@ -51,7 +51,7 @@ TC_MEC_MEC021_SRV_AMS_001_OK_01
 TC_MEC_MEC021_SRV_AMS_001_OK_02
     [Documentation]  Request Registered AMS information 
     ...  Check that the AMS service returns information about the registered application mobility services when requested
-    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.1
+    ...  ETSI GS MEC 021 3.1.1, clause 8.3.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
 
@@ -76,7 +76,7 @@ TC_MEC_MEC021_SRV_AMS_001_OK_02
 TC_MEC_MEC021_SRV_AMS_001_OK_03
     [Documentation]  Request Registered AMS information 
     ...  Check that the AMS service returns information about the a specific registered application mobility service when requested - filter
-    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.1
+    ...  ETSI GS MEC 021 3.1.1, clause 8.3.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
 
@@ -98,7 +98,7 @@ TC_MEC_MEC021_SRV_AMS_001_OK_03
 TC_MEC_MEC021_SRV_AMS_001_OK_04
     [Documentation]  Request Registered AMS information 
     ...  Check that the AMS service returns information about the a specific registered application mobility service when requested - filter
-    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.1
+    ...  ETSI GS MEC 021 3.1.1, clause 8.3.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
 
@@ -118,7 +118,7 @@ TC_MEC_MEC021_SRV_AMS_001_OK_04
 #TC_MEC_MEC021_SRV_AMS_001_OK_05
 #    [Documentation]  Request Registered AMS information 
 #    ...  Check that the AMS service returns information about the registered application mobility services when requested - No registered application mobility service
-#    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.1
+#    ...  ETSI GS MEC 021 3.1.1, clause 8.3.3.1
 #    ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
 #    [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
 
@@ -127,7 +127,7 @@ TC_MEC_MEC021_SRV_AMS_001_OK_04
 TC_MEC_MEC021_SRV_AMS_001_BR
     [Documentation]    Request Registered AMS information using bad parameters
     ...  Check that the AMS service returns an error when receives a query about a registered application mobility service with wrong parameters
-    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.1
+    ...  ETSI GS MEC 021 3.1.1, clause 8.3.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Get Registered AMS information using bad parameters
@@ -138,7 +138,7 @@ TC_MEC_MEC021_SRV_AMS_001_BR
 TC_MEC_MEC021_SRV_AMS_002_OK
     [Documentation]   Register a new application mobility services
     ...  Check that the AMS service creates a new application mobility services when requested
-    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.4
+    ...  ETSI GS MEC 021 3.1.1, clause 8.3.3.4
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Create a new application mobility service      ${APP_MOBILITY_SERVICE_ID}    ${APP_INS_ID}      
@@ -152,7 +152,7 @@ TC_MEC_MEC021_SRV_AMS_002_OK
 #TC_MEC_MEC021_SRV_AMS_002_BR
 #    [Documentation]    Request Registered AMS information using bad parameters
 #    ...  Check that the AMS service returns an error when receives a query about a registered application mobility service with wrong parameters
-#    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.4
+#    ...  ETSI GS MEC 021 3.1.1, clause 8.3.3.4
 #    ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
 #    [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
 
@@ -162,7 +162,7 @@ TC_MEC_MEC021_SRV_AMS_002_OK
 TC_MEC_MEC021_SRV_AMS_003_BR
     [Documentation]   Register an UE Identity Tag using invalid parameter
     ...  Check that the AMS service sends an error when it receives a malformed request to create a new application mobility service
-    ...  ETSI GS MEC 021 3.3.1, clause 8.3.3.4
+    ...  ETSI GS MEC 021 3.1.1, clause 8.3.3.4
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Create a new application mobility service    ${MALFORMED_APP_MOBILITY_SERVICE_ID}    ${APP_INS_ID}  
@@ -176,7 +176,7 @@ TC_MEC_MEC021_SRV_AMS_004_OK
     ...     Permitted SUBSCRIPTION_TYPE are:
     ...     - MobilityProcedureSubscription
     ...     - AdjacentAppInfoSubscription"
-    ...  ETSI GS MEC 021 3.3.1, clause 8.6.3.1
+    ...  ETSI GS MEC 021 3.1.1, clause 8.6.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Get Subscriptions for registered AMS
@@ -188,7 +188,7 @@ TC_MEC_MEC021_SRV_AMS_004_OK
 TC_MEC_MEC021_SRV_AMS_004_BR
     [Documentation]   Request Subscription List for registered AMS Services using wrong attribute parameters
     ...  Check that the AMS service sends an error when it receives a malformed query about the available subscriptions
-    ...  ETSI GS MEC 021 3.3.1, clause 8.6.3.1
+    ...  ETSI GS MEC 021 3.1.1, clause 8.6.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Get Subscriptions for registered AMS with wrong attbirube parameter
@@ -202,7 +202,7 @@ TC_MEC_MEC021_SRV_AMS_005_OK
     ...     Permitted SUBSCRIPTION_TYPE are:
     ...     - MobilityProcedureSubscription
     ...     - AdjacentAppInfoSubscription"
-    ...  ETSI GS MEC 021 3.3.1, clause 8.6.3.4
+    ...  ETSI GS MEC 021 3.1.1, clause 8.6.3.4
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Post a new notification subscription    NotificationSubscription
@@ -216,7 +216,7 @@ TC_MEC_MEC021_SRV_AMS_005_BR
     ...     Permitted SUBSCRIPTION_TYPE are:
     ...     - MobilityProcedureSubscription
     ...     - AdjacentAppInfoSubscription"
-    ...  ETSI GS MEC 021 3.3.1, clause 8.6.3.4
+    ...  ETSI GS MEC 021 3.1.1, clause 8.6.3.4
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Post a new notification subscription    NotificationSubscriptionError
@@ -230,7 +230,7 @@ TC_MEC_MEC021_SRV_AMS_006_OK
     ...     Permitted SUBSCRIPTION_TYPE are:
     ...     - MobilityProcedureSubscription
     ...     - AdjacentAppInfoSubscription"
-    ...  ETSI GS MEC 021 3.3.1, clause 8.7.3.1
+    ...  ETSI GS MEC 021 3.1.1, clause 8.7.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Get individual subscription for AMS services    ${SUBSCRIPTION_ID}
@@ -242,7 +242,7 @@ TC_MEC_MEC021_SRV_AMS_006_OK
 TC_MEC_MEC021_SRV_AMS_006_NF
     [Documentation]   Request a specific subscription using wrong identifier
     ...  Check that the AMS service returns an error when receives a query about a not existing subscription
-    ...     ETSI GS MEC 021 3.3.1, clause 8.7.3.1
+    ...     ETSI GS MEC 021 3.1.1, clause 8.7.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Get individual subscription for AMS services    ${NON_EXISTENT_SUBSCRIPTION_ID}
@@ -256,7 +256,7 @@ TC_MEC_MEC021_SRV_AMS_007_OK
     ...  Permitted SUBSCRIPTION_TYPE are:
     ...    - MobilityProcedureSubscription
     ...    - AdjacentAppInfoSubscription
-    ...  ETSI GS MEC 021 3.3.1, clause 8.7.3.2
+    ...  ETSI GS MEC 021 3.1.1, clause 8.7.3.2
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Update individual subscription for AMS services    ${SUBSCRIPTION_ID}    NotificationSubscription
@@ -271,7 +271,7 @@ TC_MEC_MEC021_SRV_AMS_007_BR
     ...  Permitted SUBSCRIPTION_TYPE are:
     ...    - MobilityProcedureSubscription
     ...    - AdjacentAppInfoSubscription
-    ...  ETSI GS MEC 021 3.3.1, clause 8.7.3.2
+    ...  ETSI GS MEC 021 3.1.1, clause 8.7.3.2
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Update individual subscription for AMS services    ${SUBSCRIPTION_ID}    NotificationSubscriptionError
@@ -281,7 +281,7 @@ TC_MEC_MEC021_SRV_AMS_007_BR
 TP_MEC_MEC021_SRV_AMS_007_NF
     [Documentation]   Modify a specific subscription using wrong identifier
     ...  Check that the AMS service sends an error when it receives a modify request for a not existing subscription.
-    ...  ETSI GS MEC 021 3.3.1, clause 8.7.3.2
+    ...  ETSI GS MEC 021 3.1.1, clause 8.7.3.2
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Update individual subscription for AMS services    ${NON_EXISTENT_SUBSCRIPTION_ID}    NotificationSubscription
@@ -292,7 +292,7 @@ TP_MEC_MEC021_SRV_AMS_007_NF
 TC_MEC_MEC021_SRV_AMS_008_OK
     [Documentation]   Remove a specific subscription
     ...  Check that the AMS service deletes a given subscription when requested
-    ...  ETSI GS MEC 021 3.3.1, clause 8.7.3.5
+    ...  ETSI GS MEC 021 3.1.1, clause 8.7.3.5
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Delete individual subscription for AMS services    ${SUBSCRIPTION_ID}
@@ -302,7 +302,7 @@ TC_MEC_MEC021_SRV_AMS_008_OK
 TC_MEC_MEC021_SRV_AMS_008_NF
     [Documentation]   Remove a specific subscription using wrong identifier
     ...  Check that the AMS service sends an error when it receives a delete request for a not existing subscription
-    ...  ETSI GS MEC 021 3.3.1, clause 8.7.3.5
+    ...  ETSI GS MEC 021 3.1.1, clause 8.7.3.5
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Delete individual subscription for AMS services    ${NON_EXISTENT_SUBSCRIPTION_ID}
@@ -314,7 +314,7 @@ TC_MEC_MEC021_SRV_AMS_009_OK
     [Documentation]   Post Mobility Procedure Notification
     ...  Check that the AMS service sends an AMS notification  about a mobility procedure 
     ...    if the AMS service has an associated subscription and the event is generated
-    ...  ETSI GS MEC 021 3.3.1, clause 7.4.2
+    ...  ETSI GS MEC 021 3.1.1, clause 7.4.2
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Log    TBD
@@ -335,7 +335,7 @@ TC_MEC_MEC021_SRV_AMS_010_OK
     [Documentation]   Post Adjacent Application Info Notification
     ...  Check that the AMS service sends an AMS notification about adjacent application instances 
     ...    if the AMS service has an associated subscription and the event is generated
-    ...  ETSI GS MEC 021 3.3.1, clause 7.4.3
+    ...  ETSI GS MEC 021 3.1.1, clause 7.4.3
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Log    TBD
@@ -356,7 +356,7 @@ TC_MEC_MEC021_SRV_AMS_011_OK
     [Documentation]   Post Expire Notification
     ...  Check that the AMS service sends an AMS notification on subscription expiration
     ...    if the AMS service has an associated subscription and the event is generated
-    ...  ETSI GS MEC 021 3.3.1, clause 7.4.4
+    ...  ETSI GS MEC 021 3.1.1, clause 7.4.4
     ...  Reference https://forge.etsi.org/rep/mec/gs021-amsi-api/-/blob/master/MEC021_AppMobilityService.yaml
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
     Log    TBD
