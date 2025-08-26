@@ -9,8 +9,6 @@ Resource    environment/variables.txt
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem
 Library     MockServerLibrary    
-
-
 Default Tags    TC_MEC_SRV_FAIS
 
 
@@ -171,11 +169,8 @@ TC_MEC_MEC029_SRV_FAIS_005_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for non-existing data is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.7.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-
     Get list of subscriptions using query parameters    subscriptionType    ${NON_EXISTENT_SUBSCRIPTION_TYPE}
     Check HTTP Response Status Code Is    404
 
@@ -184,9 +179,7 @@ TC_MEC_MEC029_SRV_FAIS_006_OK
     [Documentation]
     ...    Check that the IUT acknowledges the subscription by a MEC Application
     ...    to notifications on Optical Network Unit alarm events
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.7.3.4
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new subscription    OnuAlarmSubscription
     Check HTTP Response Status Code Is    201
@@ -198,9 +191,7 @@ TC_MEC_MEC029_SRV_FAIS_006_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.7.3.4
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Create a new subscription    OnuAlarmSubscriptionError
     Check HTTP Response Status Code Is    400
@@ -210,9 +201,7 @@ TC_MEC_MEC029_SRV_FAIS_007_OK
     [Documentation]
     ...    Check that the IUT responds with the information on a given subscription
     ...    when queried by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
 
     [Setup]    Create a new subscription    OnuAlarmSubscription
@@ -230,9 +219,7 @@ TC_MEC_MEC029_SRV_FAIS_007_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.1
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get an individual subscription     ${NON_ESISTENT_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404
@@ -242,9 +229,7 @@ TC_MEC_MEC029_SRV_FAIS_008_OK
     [Documentation]
     ...    Check that the IUT updates an existing subscription
     ...    when commanded by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.2
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
 
     [Setup]    Create a new subscription    OnuAlarmSubscription
@@ -262,9 +247,7 @@ TC_MEC_MEC029_SRV_FAIS_008_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.2
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Update subscription    ${ONU_ALARM_SUBSCRIPTION_ID}    OnuAlarmSubscriptionUpdateError
     Check HTTP Response Status Code Is    400
@@ -274,13 +257,9 @@ TC_MEC_MEC029_SRV_FAIS_008_NF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.2
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-
     [Setup]    Remove subscription    ${NON_ESISTENT_SUBSCRIPTION_ID}
-
     Update subscription    ${NON_ESISTENT_SUBSCRIPTION_ID}    OnuAlarmSubscriptionUpdate
     Check HTTP Response Status Code Is    404
 
@@ -289,9 +268,7 @@ TC_MEC_MEC029_SRV_FAIS_008_PF
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    a request sent by a MEC Application doesn't comply with a required condition
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.2
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Update subscription using invalid etag    ${ONU_ALARM_SUBSCRIPTION_ID}    OnuAlarmSubscriptionUpdate
     Check HTTP Response Status Code Is    412
@@ -301,25 +278,31 @@ TC_MEC_MEC029_SRV_FAIS_009_OK
     [Documentation]
     ...    Check that the IUT cancels an existing subscription
     ...    when commanded by a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.5
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
-    
     [Setup]    Create a new subscription    OnuAlarmSubscription
     Set Suite Variable    ${subscriptionUrl}    ${response['body']['_links']['self']['href']}
-
     Remove subscription    ${ONU_ALARM_SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    204
 
+
+TC_MEC_MEC029_SRV_FAIS_009_NF
+    [Documentation]
+    ...    Check that the IUT cancels an existing subscription
+    ...    when commanded by a MEC Application
+    ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.8.3.5
+    [Tags]    PIC_MEC_PLAT    PIC_SERVICES
+    [Setup]    Create a new subscription    OnuAlarmSubscription
+    Set Suite Variable    ${subscriptionUrl}    ${response['body']['_links']['self']['href']}
+    Remove subscription    ${NOT_EXISTING_ONU_ALARM_SUBSCRIPTION_ID}
+    Check HTTP Response Status Code Is    404
+    
 
 TC_MEC_MEC029_SRV_FAIS_010_OK
     [Documentation]
     ...    Check that the IUT sends notification on expiry of Fixed Access Information event subscription
     ...    to a MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 7.7.3.4
-
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     ${json}=	Get File	schemas/DevInfoSubscription.schema.json
     Log  Creating mock request and response to handle  Device Information Notifications
@@ -337,7 +320,6 @@ TC_MEC_MEC029_SRV_FAIS_011_OK
     [Documentation]
     ...    Check that the IUT sends notifications on Fixed Access Information events
     ...    to a subscribed MEC Application
-    ...
     ...    Reference    ETSI GS MEC 029 V2.2.1, clause 5.2.7
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
