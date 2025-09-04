@@ -1,11 +1,11 @@
 {
     "subscriptionType": "SiteResourceUsageSubscription",
     "customerId": "customer-new",
-    "tenantId": "tenant-123",
+    "tenantId": "placeholder-tenant",
     "siteList": ["site-placeholder"],
     "notificationTrigger": {
-      "triggerType": 10,
-      "threshold": 4,
-      "greaterOrLess": false
+        "triggerType": 10,
+        "threshold": 4,
+        "greaterOrLess": false
     }
-  }
+}

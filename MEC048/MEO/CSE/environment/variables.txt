@@ -3,10 +3,10 @@
 ${SCHEMA}                           http
 ${HOST}                             127.0.0.1
 #${HOST}                            10.192.2.172
-${PORT}                             8081
+${PORT}                             5000
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
-${apiRoot}        
+${apiRoot}                          
 ${apiName}                          cse
 ${apiVersion}                       v1
 

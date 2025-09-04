@@ -235,12 +235,9 @@ TC_MEC_MEC048_MEO_CSE_009_OK
     [Tags]    PIC_SERVICES
     [Setup]   Register tenant Info    TenantInfo
     Register mutiple site resource quota Info and get site Ids    ${TENANT_ID_1}    SiteResourceQuotaInfo    SiteResourceQuotaInfo2    SiteResourceQuotaInfo3
-    Retrieve all resource quota info resource   ${TENANT_ID_1} 
+    Retrieve all site resource quota info resource   ${TENANT_ID_1} 
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is  SiteResourceQuotaInfoList
-    FOR  ${element}  IN  @{response['body']}
-      Should Be Equal As Strings    ${element}[siteId]      ${SITE_ID_1}
-    END
     Remove mutiple site resource quota Info    ${TENANT_ID_1}    ${SITE_ID_1}    ${SITE_ID_2}    ${SITE_ID_3}
     [Teardown]  Remove specific tenant info resource    ${TENANT_ID_1}
 
@@ -336,7 +333,7 @@ TC_MEC_MEC048_MEO_CSE_012_OK
     Should Be Equal As Integers    ${response['body']['memoryQuota']}    ${MEMORY_QUOTA_VALUE}
     Should Be Equal As Integers    ${response['body']['diskQuota']}    ${DISK_QUOTA_VALUE}
     
-    [Teardown]    Remove tenant and site resources
+    [Teardown]    Remove specific tenant info resource    ${TENANT_ID_1}
 
 TC_MEC_MEC048_MEO_CSE_012_BR
     [Documentation]    TP_MEC_MEC048_MEO_CSE_012_BR
@@ -347,7 +344,7 @@ TC_MEC_MEC048_MEO_CSE_012_BR
     # Attempt to update the site resource quota with invalid data
     Update site resource quota Info    ${TENANT_ID_1}    ${SITE_ID_1}    SiteResourceQuotaInfoBR
     Check HTTP Response Status Code Is    400
-    [Teardown]    Remove tenant and site resources
+    [Teardown]    Remove specific tenant info resource    ${TENANT_ID_1}
 
 TC_MEC_MEC048_MEO_CSE_012_NF
     [Documentation]    TP_MEC_MEC048_MEO_CSE_012_NF
@@ -464,7 +461,7 @@ TC_MEC_MEC048_MEO_CSE_014_OK_02
     [Setup]    Register site resource quota for tenant
     
     # Create a new SiteResourceUsageSubscription
-    Register subscription    SiteResourceUsageSubscription1
+    Register site Resource subscription   SiteResourceUsageSubscription1
     
     # Verify response status code
     Check HTTP Response Status Code Is    201
@@ -502,8 +499,8 @@ TC_MEC_MEC048_MEO_CSE_014_OK_02
     # Teardown - clean up the created resources
     [Teardown]    Run Keywords
     ...    Delete Created Subscription    AND
-    ...    Remove tenant and site resources
-
+    ...    Remove specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_1}    AND
+    ...    Remove specific tenant info resource    ${TENANT_ID_1}
 TC_MEC_MEC048_MEO_CSE_014_BR
     [Documentation]    TP_MEC_MEC048_MEO_CSE_014_BR
     ...    Check that the IUT returns an error on creating a new subscription when requested to a CSE
@@ -530,16 +527,21 @@ TC_MEC_MEC048_MEO_CSE_015_OK
     ...    ETSI GS MEC 048 v3.1.1, clause 7.9.3.1, clause 6.3.2, clause 6.3.3
     [Tags]    PIC_SERVICES
     
-    # Setup - Create a tenant, site resources, and subscription
-    [Setup]    Register site resource quota for tenant
+    # Setup - Create a tenant and site resources
+    [Setup]    Run Keywords
+    ...    Register site resource quota for tenant
     
-    # Create a SiteResourceUsageSubscription
-    Register subscription    SiteResourceUsageSubscription
+    Register site Resource subscription    SiteResourceUsageSubscription
     
-    # Save the subscription ID for later retrieval and cleanup
+    # Verify subscription creation
+    Check HTTP Response Status Code Is    201
+    Check HTTP Response Body Json Schema Is    SiteResourceUsageSubscription
+    
+    # Save the subscription ID for retrieval and cleanup
     ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
-    ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
-    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    ${subscription_id}=    Evaluate    "${subscription_uri}".split("/")[-1]
+    Run Keyword If    '${subscription_id}' == ''    Fail    Failed to extract subscription ID from ${subscription_uri}
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_id}
     
     # Retrieve the specific subscription
     Retrieve specific subscription    ${subscription_id}
@@ -571,8 +573,9 @@ TC_MEC_MEC048_MEO_CSE_015_OK
     
     # Teardown - clean up the created resources
     [Teardown]    Run Keywords
-    ...    Delete Created Subscription    AND
-    ...    Remove tenant and site resources
+    ...    Run Keyword If    '${SUBSCRIPTION_ID}' != '' and '${SUBSCRIPTION_ID}' != 'None'    Delete Created Subscription
+    ...    AND    Remove specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_1}
+    ...    AND    Remove specific tenant info resource    ${TENANT_ID_1}
 
 TC_MEC_MEC048_MEO_CSE_015_NF
     [Documentation]    TP_MEC_MEC048_MEO_CSE_015_NF
@@ -591,57 +594,35 @@ TC_MEC_MEC048_MEO_CSE_016_OK
     ...    Check that the IUT updates an existing subscription when requested by a CSE
     ...    ETSI GS MEC 048 v3.1.1, clause 7.9.3.2, clause 6.3.2, clause 6.3.3
     [Tags]    PIC_SERVICES
-    
-    # Setup - Create a tenant, site resources, and subscription
     [Setup]    Register site resource quota for tenant
-    
-    # Create a SiteResourceUsageSubscription to be updated later
-    Register subscription    SiteResourceUsageSubscription
-    
-    # Save the subscription ID for update and cleanup
+    Register site Resource subscription    SiteResourceUsageSubscription
     ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
-    ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
-    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    ${subscription_id}=    Evaluate    "${subscription_uri}".split("/")[-1]
+    Run Keyword If    '${subscription_id}' == ''    Fail    Failed to extract subscription ID from ${subscription_uri}
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_id}
     Set Suite Variable    ${OLD_CUSTOMER_ID}    ${response['body']['customerId']}
-    
-    # Create another tenant to get a new customer ID
-    Register tenant Info    TenantInfo2
+    Register tenant Info    TenantInfo2    ${True}    TENANT_ID_2
     Set Suite Variable    ${NEW_CUSTOMER_ID}    ${response['body']['customerId']}
     Set Suite Variable    ${TENANT_ID_2}    ${response['body']['tenantId']}
-    
-    # Update the subscription with the new customer ID
     Update subscription    ${subscription_id}    SiteResourceUsageSubscriptionUpdate
-    
-    # Verify response status code
     Check HTTP Response Status Code Is    200
-    
-    # Verify response body schema
     Check HTTP Response Body Json Schema Is    SiteResourceUsageSubscription
-    
-    # Verify response body content - specifically that the customerId has been updated
     Should Be Equal As Strings    ${response['body']['subscriptionType']}    SiteResourceUsageSubscription
     Should Be Equal As Strings    ${response['body']['customerId']}    ${NEW_CUSTOMER_ID}
     Should Not Be Equal As Strings    ${response['body']['customerId']}    ${OLD_CUSTOMER_ID}
     Should Be Equal As Strings    ${response['body']['tenantId']}    ${TENANT_ID_1}
     Should Be Equal As Strings    ${response['body']['callbackReference']}    some/uri/updated
-    
-    # Verify siteList contains our test site
     ${siteList}=    Get From Dictionary    ${response['body']}    siteList
     List Should Contain Value    ${siteList}    ${SITE_ID_1}
-    
-    # Verify notification trigger details
     Should Be Equal As Integers    ${response['body']['notificationTrigger']['triggerType']}    10
     Should Be Equal As Integers    ${response['body']['notificationTrigger']['threshold']}    4
     Should Be Equal    ${response['body']['notificationTrigger']['greaterOrLess']}    ${FALSE}
-    
-    # Verify self-link in response
     Should Not Be Empty    ${response['body']['_links']['self']['href']}
     Should Be Equal As Strings    ${response['body']['_links']['self']['href']}    ${subscription_uri}
-    
-    # Teardown - clean up the created resources
     [Teardown]    Run Keywords
     ...    Delete Created Subscription    AND
-    ...    Remove tenant and site resources    AND
+    ...    Run Keyword If    '${SITE_ID_1}' != '' and '${SITE_ID_1}' != 'None'    Remove specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_1}    AND
+    ...    Remove specific tenant info resource    ${TENANT_ID_1}    AND
     ...    Remove specific tenant info resource    ${TENANT_ID_2}
 
 TC_MEC_MEC048_MEO_CSE_016_NF
@@ -666,7 +647,8 @@ TC_MEC_MEC048_MEO_CSE_016_NF
     
     # Teardown - clean up the created resources
     [Teardown]    Run Keywords
-    ...    Remove tenant and site resources    AND
+    ...    Run Keyword If    '${SITE_ID_1}' != '' and '${SITE_ID_1}' != 'None'    Remove specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_1}    AND
+    ...    Remove specific tenant info resource    ${TENANT_ID_1}    AND
     ...    Remove specific tenant info resource    ${TENANT_ID_2}
 
 TC_MEC_MEC048_MEO_CSE_016_BR
@@ -684,10 +666,10 @@ TC_MEC_MEC048_MEO_CSE_016_BR
     # Save the subscription ID for update and cleanup
     ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
     ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
-    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_id}
     
     # Create another tenant to get a new customer ID for the update
-    Register tenant Info    TenantInfo2
+    Register tenant Info    TenantInfo2    ${True}    TENANT_ID_2
     Set Suite Variable    ${NEW_CUSTOMER_ID}    ${response['body']['customerId']}
     Set Suite Variable    ${TENANT_ID_2}    ${response['body']['tenantId']}
     
@@ -699,9 +681,10 @@ TC_MEC_MEC048_MEO_CSE_016_BR
     
     # Teardown - clean up the created resources
     [Teardown]    Run Keywords
-    ...    Delete Created Subscription    AND
-    ...    Remove tenant and site resources    AND
-    ...    Remove specific tenant info resource    ${TENANT_ID_2}
+    ...    Run Keyword If    '${SUBSCRIPTION_ID}' != '' and '${SUBSCRIPTION_ID}' != 'None'    Delete Created Subscription    AND
+    ...    Run Keyword If    '${SITE_ID_1}' != '' and '${SITE_ID_1}' != 'None'    Remove specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_1}    AND
+    ...    Run Keyword If    '${TENANT_ID_1}' != '' and '${TENANT_ID_1}' != 'None'    Remove specific tenant info resource    ${TENANT_ID_1}    AND
+    ...    Run Keyword If    '${TENANT_ID_2}' != '' and '${TENANT_ID_2}' != 'None'    Remove specific tenant info resource    ${TENANT_ID_2}
 
 TC_MEC_MEC048_MEO_CSE_017_OK
     [Documentation]    TP_MEC_MEC048_MEO_CSE_017_OK
@@ -730,7 +713,9 @@ TC_MEC_MEC048_MEO_CSE_017_OK
     Check HTTP Response Status Code Is    404
     
     # Teardown - clean up the created resources (only tenant and site as subscription is deleted)
-    [Teardown]    Remove tenant and site resources
+    [Teardown]    Run Keywords
+    ...    Run Keyword If    '${SITE_ID_1}' != '' and '${SITE_ID_1}' != 'None'    Remove specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_1}    AND
+    ...    Run Keyword If    '${TENANT_ID_1}' != '' and '${TENANT_ID_1}' != 'None'    Remove specific tenant info resource    ${TENANT_ID_1}
 
 TC_MEC_MEC048_MEO_CSE_017_NF
     [Documentation]    TP_MEC_MEC048_MEO_CSE_017_NF
@@ -768,11 +753,11 @@ TC_MEC_MEC048_MEO_CSE_018_OK
     # Save the subscription ID for cleanup
     ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
     ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
-    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_id}
     
     # Generate load to trigger the notification
     Log    Generating CPU load to trigger notification
-    ${result}=    Generate CPU Load    60    4
+    ${result}=    Generate CPU Load    60    5
     Log    ${result}
     
     # Start the notification server to wait for and capture the notification
@@ -792,8 +777,9 @@ TC_MEC_MEC048_MEO_CSE_018_OK
     
     # Teardown - clean up resources
     [Teardown]    Run Keywords
-    ...    Delete Created Subscription    AND
-    ...    Remove tenant and site resources
+    ...    Run Keyword If    '${SUBSCRIPTION_ID}' != '' and '${SUBSCRIPTION_ID}' != 'None'    Delete Created Subscription    AND
+    ...    Run Keyword If    '${SITE_ID_1}' != '' and '${SITE_ID_1}' != 'None'    Remove specific site resource quota info resource    ${TENANT_ID_1}    ${SITE_ID_1}    AND
+    ...    Run Keyword If    '${TENANT_ID_1}' != '' and '${TENANT_ID_1}' != 'None'    Remove specific tenant info resource    ${TENANT_ID_1}
 
 TC_MEC_MEC048_MEO_CSE_019_OK
     [Documentation]    TP_MEC_MEC048_MEO_CSE_019_OK
@@ -804,29 +790,29 @@ TC_MEC_MEC048_MEO_CSE_019_OK
     # Setup - Create a tenant for the subscription
     [Setup]    Register tenant Info    TenantInfo
     
-    # Create a ResourceUsageSubscription with callback to our notification server
+    # Create a ResourceUsageSubscription with callback to notification server
     ${subscription_json}=    Get File    jsons/ResourceUsageSubscription.json
     ${callback_url}=    Set Variable    http://${NOTIFICATION_SERVER_IP}:${NOTIFICATION_SERVER_PORT}${NOTIFICATION_SERVER_URI}
     ${subscription_json}=    Replace String    ${subscription_json}    "some/uri"    "${callback_url}"
-    ${subscription_json}=    Replace String    ${subscription_json}    "tenant-123"    "${TENANT_ID_1}" 
+    ${subscription_json}=    Replace String    ${subscription_json}    "tenant-123"    "${TENANT_ID_1}"
     ${subscription_json}=    Replace String    ${subscription_json}    "customer-123"    "${CUSTOMER_ID_1}"
     
-    # Register the subscription with our callback URL
+    # Register the subscription
     Post Raw Subscription    ${subscription_json}
     Check HTTP Response Status Code Is    201
     
     # Save the subscription ID for cleanup
     ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
     ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
-    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_uri}
+    Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_id}
     
-    # Generate load to trigger the notification
-    Log    Generating CPU load to trigger notification
-    ${result}=    Generate CPU Load    60    4
+    # Generate CPU load to trigger the notification
+    Log    Generating CPU load to trigger notification (cpuUsed: 5)
+    ${result}=    Generate CPU Load    60    5
     Log    ${result}
     
-    # Start the notification server to wait for and capture the notification
-    ${notification}=    Spawn Resource Notification Server
+    # Start the notification server to capture the notification
+    ${notification}=    Spawn Notification Server
     
     # Verify notification exists
     Should Not Be Empty    ${notification}
@@ -841,8 +827,8 @@ TC_MEC_MEC048_MEO_CSE_019_OK
     
     # Teardown - clean up resources
     [Teardown]    Run Keywords
-    ...    Delete Created Subscription    AND
-    ...    Remove specific tenant info resource    ${TENANT_ID_1}
+    ...    Run Keyword If    '${SUBSCRIPTION_ID}' != '' and '${SUBSCRIPTION_ID}' != 'None'    Delete Created Subscription    AND
+    ...    Run Keyword If    '${TENANT_ID_1}' != '' and '${TENANT_ID_1}' != 'None'    Remove specific tenant info resource    ${TENANT_ID_1}
 
 TC_MEC_MEC048_MEO_CSE_020_OK
     [Documentation]    TP_MEC_MEC048_MEO_CSE_020_OK
@@ -853,52 +839,51 @@ TC_MEC_MEC048_MEO_CSE_020_OK
     # Setup - Create a tenant for the subscription
     [Setup]    Register tenant Info    TenantInfo
     
-    # Get the current time and add a short time for expiry deadline (10 seconds in the future)
+    # Get the current time and add a short expiry deadline (10 seconds in the future)
     ${current_time}=    Get Current Date
     ${expiry_time}=    Add Time To Date    ${current_time}    10 seconds
     ${expiry_time_iso}=    Convert Date    ${expiry_time}    result_format=%Y-%m-%dT%H:%M:%SZ
     Set Suite Variable    ${EXPIRY_DEADLINE}    ${expiry_time_iso}
     
-    # Create a ResourceUsageSubscription with a short expiry time and callback to our notification server
+    # Create a ResourceUsageSubscription with expiry
     ${subscription_json}=    Get File    jsons/ResourceUsageSubscriptionWithExpiry.json
     ${callback_url}=    Set Variable    http://${NOTIFICATION_SERVER_IP}:${NOTIFICATION_SERVER_PORT}${NOTIFICATION_SERVER_URI}
     ${subscription_json}=    Replace String    ${subscription_json}    "some/uri"    "${callback_url}"
-    ${subscription_json}=    Replace String    ${subscription_json}    "tenant-123"    "${TENANT_ID_1}" 
+    ${subscription_json}=    Replace String    ${subscription_json}    "tenant-123"    "${TENANT_ID_1}"
     ${subscription_json}=    Replace String    ${subscription_json}    "customer-123"    "${CUSTOMER_ID_1}"
     ${subscription_json}=    Replace String    ${subscription_json}    "2099-12-31T23:59:59Z"    "${EXPIRY_DEADLINE}"
     
-    # Register the subscription with our callback URL
+    # Register the subscription
     Post Raw Subscription    ${subscription_json}
     Check HTTP Response Status Code Is    201
     
-    # Save the subscription ID and HREF for verification
+    # Save the subscription ID and HREF
     ${subscription_uri}=    Set Variable    ${response['body']['_links']['self']['href']}
     ${subscription_id}=    Fetch From Right    ${subscription_uri}    /subscriptions/
     Set Suite Variable    ${SUBSCRIPTION_ID}    ${subscription_id}
     Set Suite Variable    ${SUBSCRIPTION_HREF}    ${subscription_uri}
     
-    # Start the notification server to wait for and capture the expiry notification
-    # Need to wait for the subscription to expire (a bit longer than our expiry time)
-    ${notification}=    Spawn Expiry Notification Server
+    # Trigger subscription expiry
+    Log    Waiting for subscription to expire
+    Sleep    12s    # Wait past the 10-second expiry deadline
+    
+    # Start the notification server to capture the expiry notification
+    ${notification}=    Spawn Notification Server
     
     # Verify notification exists
     Should Not Be Empty    ${notification}
     
     # Verify notification content
     Should Be Equal As Strings    ${notification['notificationType']}    ExpiryNotification
-    
-    # Verify subscription link in the notification
     Should Be Equal As Strings    ${notification['_links']['subscription']['href']}    ${SUBSCRIPTION_HREF}
-    
-    # Verify expiry deadline matches what we set
     Should Be Equal As Strings    ${notification['expiryDeadline']}    ${EXPIRY_DEADLINE}
     
-    # Verify the subscription no longer exists/is expired
+    # Verify the subscription no longer exists
     Retrieve specific subscription    ${SUBSCRIPTION_ID}
     Check HTTP Response Status Code Is    404
     
-    # Teardown - clean up tenant (subscription should be auto-removed after expiry)
-    [Teardown]    Remove specific tenant info resource    ${TENANT_ID_1}
+    # Teardown - clean up tenant (subscription auto-removed after expiry)
+    [Teardown]    Run Keyword If    '${TENANT_ID_1}' != '' and '${TENANT_ID_1}' != 'None'    Remove specific tenant info resource    ${TENANT_ID_1}
 
 *** Keywords ***
 
@@ -937,10 +922,11 @@ Update subscription
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    # Replace placeholder values in the JSON with actual test values
-    ${body}=    Replace String    ${body}    "tenant-123"    "${TENANT_ID_1}"
+    Log    Variables - TENANT_ID_1: ${TENANT_ID_1}, TENANT_ID_2: ${TENANT_ID_2}, NEW_CUSTOMER_ID: ${NEW_CUSTOMER_ID}, SITE_ID_1: ${SITE_ID_1}
+    ${body}=    Replace String    ${body}    "placeholder-tenant"    "${TENANT_ID_1}"
     ${body}=    Replace String    ${body}    "customer-new"    "${NEW_CUSTOMER_ID}"
     ${body}=    Replace String    ${body}    "site-placeholder"    "${SITE_ID_1}"
+    Log    Request body after replacements: ${body}
     PUT    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/${subscription_id}    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
@@ -953,6 +939,7 @@ Retrieve specific subscription
     Set Headers    {"Authorization":"${TOKEN}"}
     GET    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/${subscription_id}
     ${output}=    Output    response
+    Log    GET Response: ${output}
     Set Suite Variable    ${response}    ${output}
 
 Create ResourceUsageSubscription
@@ -984,6 +971,36 @@ Retrieve subscriptions with filter
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
 
+Register site Resource subscription
+    [Arguments]    ${content}
+    Should Be True    ${PIC_MEC_PLAT} == 1    msg=PIC_MEC_PLAT must be 1
+    Should Be True    ${PIC_SERVICES} == 1    msg=PIC_SERVICES must be 1
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"application/json"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+    Log    Loading JSON file: ${file}
+    ${file_exists}=    Run Keyword And Return Status    File Should Exist    ${file}
+    Run Keyword If    not ${file_exists}    Fail    JSON file not found: ${file}
+    ${body}=    Get File    ${file}
+    Log    Request Body Before Replacement: ${body}
+    # Validate variables
+    Should Not Be Empty    ${TENANT_ID_1}    msg=TENANT_ID_1 is not defined
+    Should Not Be Empty    ${CUSTOMER_ID_1}    msg=CUSTOMER_ID_1 is not defined
+    Should Not Be Empty    ${SITE_ID_1}    msg=SITE_ID_1 is not defined
+    # Replace placeholders
+    ${body}=    Replace String    ${body}    "placeholder-tenant"    "${TENANT_ID_1}"
+    ${body}=    Replace String    ${body}    "placeholder-customer"    "${CUSTOMER_ID_1}"
+    ${body}=    Replace String    ${body}    "placeholder-site"    "${SITE_ID_1}"
+    Log    Request Body After Replacement: ${body}
+    # Validate JSON using Collections
+    # ${json_dict}=    Evaluate    json.loads($body)    modules=json
+    # Should Be True    isinstance($json_dict, dict)    msg=JSON is not a valid dictionary: ${body}
+    POST    ${apiRoot}/${apiName}/${apiVersion}/subscriptions    ${body}
+    ${output}=    Output    response
+    Log    POST Response: ${output}
+    Set Suite Variable    ${response}    ${output}
+    Run Keyword If    ${response['status']} != 201    Fail    Subscription creation failed: ${response['body']['error']}    status=${response['status']}
 Register subscription
     [Arguments]    ${content}
     Should Be True    ${PIC_MEC_PLAT} == 1
@@ -993,9 +1010,11 @@ Register subscription
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    # Replace placeholder values in the JSON with actual test values
-    ${body}=    Replace String    ${body}    "tenant-123"    "${TENANT_ID_1}"
-    ${body}=    Replace String    ${body}    "customer-123"    "${CUSTOMER_ID_1}"
+    Log    Variables - TENANT_ID_1: ${TENANT_ID_1}, CUSTOMER_ID_1: ${CUSTOMER_ID_1}, SITE_ID_1: ${SITE_ID_1}
+    ${body}=    Replace String    ${body}    "placeholder-tenant"    "${TENANT_ID_1}"
+    ${body}=    Replace String    ${body}    "placeholder-customer"    "${CUSTOMER_ID_1}"
+    ${body}=    Replace String    ${body}    "placeholder-site"    "${SITE_ID_1}"
+    Log    Request body after replacements: ${body}
     POST    ${apiRoot}/${apiName}/${apiVersion}/subscriptions    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
@@ -1064,6 +1083,7 @@ Register site resource quota for tenant
     # Create tenant
     Register tenant Info    TenantInfo
     Set Suite Variable    ${TENANT_ID_1}    ${response['body']['tenantId']}
+    Set Suite Variable    ${CUSTOMER_ID_1}    ${response['body']['customerId']}
     # Create site resource quota
     Register site resource quota Info    ${TENANT_ID_1}    SiteResourceQuotaInfo
     Set Suite Variable    ${SITE_ID_1}    ${response['body']['siteId']}
@@ -1147,7 +1167,7 @@ Retrieve all tenant info resources with query parameters
     Set Suite Variable    ${response}    ${output}
 
 Register tenant Info
-    [Arguments]     ${content}
+    [Arguments]     ${content}    ${is_individual_call}=${True}    ${tenant_var}=TENANT_ID_1
     Should Be True    ${PIC_MEC_PLAT} == 1
     Should Be True    ${PIC_SERVICES} == 1
     Set Headers    {"Accept":"application/json"}
@@ -1158,7 +1178,7 @@ Register tenant Info
     POST   ${apiRoot}/${apiName}/${apiVersion}/tenants   ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
-    Set Suite Variable      ${TENANT_ID_1}    ${response}[body][tenantId]
+    Run Keyword If    ${is_individual_call} and ${response}[status] != 400    Set Suite Variable    \${${tenant_var}}    ${response}[body][tenantId]
 
 Update tenant Info
     [Arguments]     ${tenantId}    ${content}
@@ -1169,10 +1189,10 @@ Update tenant Info
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    PUT   ${apiRoot}/${apiName}/${apiVersion}/tenants/${tenantId}
+    PUT   ${apiRoot}/${apiName}/${apiVersion}/tenants/${tenantId}   ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
-    Set Suite Variable      ${TENANT_ID}    ${response}[body][tenantId]
+    Run Keyword If    ${response['status']} != 400 and ${response['status']} != 404    Set Suite Variable    ${TENANT_ID_1}    ${response['body']['tenantId']}
 
 Update resource quota Info
     [Arguments]     ${tenantId}    ${content}
@@ -1183,22 +1203,21 @@ Update resource quota Info
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
     ${body}=    Get File    ${file}
-    PUT   ${apiRoot}/${apiName}/${apiVersion}/tenants/${tenantId}/resources/quota_in_system
+    PUT   ${apiRoot}/${apiName}/${apiVersion}/tenants/${tenantId}/resources/quota_in_system   ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}
-    Set Suite Variable      ${TENANT_ID}    ${response}[body][tenantId]
 
 Register mutiple tenant Info and get tenant Ids
     [Arguments]     ${content_01}     ${content_02}    ${content_03}
-    Register tenant Info    ${content_01}
+    Register tenant Info    ${content_01}    ${False}
     Set Suite Variable      ${TENANT_ID_1}    ${response}[body][tenantId]
     Set Suite Variable      ${CUSTOMER_ID_1}    ${response}[body][customerId]
     Set Suite Variable      ${CUSTOMER_NAME_1}    ${response}[body][customerName]
-    Register tenant Info    ${content_02}
+    Register tenant Info    ${content_02}    ${False}
     Set Suite Variable      ${TENANT_ID_2}    ${response}[body][tenantId]
     Set Suite Variable      ${CUSTOMER_ID_2}    ${response}[body][customerId]
     Set Suite Variable      ${CUSTOMER_NAME_2}    ${response}[body][customerName]
-    Register tenant Info    ${content_03}
+    Register tenant Info    ${content_03}    ${False}
     Set Suite Variable      ${TENANT_ID_3}    ${response}[body][tenantId]
     Set Suite Variable      ${CUSTOMER_ID_3}    ${response}[body][customerId]
     Set Suite Variable      ${CUSTOMER_NAME_3}    ${response}[body][customerName]

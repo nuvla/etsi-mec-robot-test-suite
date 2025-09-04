@@ -8,6 +8,7 @@ Resource    ../../../GenericKeywords.robot
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem    
 Library     String
+Library    Collections
 
 *** Test Cases ***
 TC_MEC_MEC015_SRV_MTS_001_OK
@@ -33,7 +34,7 @@ TC_MEC_MEC015_SRV_MTS_002_OK_01
     ...  ETSI GS MEC 015 v3.1.1, clause 9.3.3.1
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${SESSION_ID}    ${elements}[3]
+    Set Suite Variable    ${SESSION_ID}    ${elements}[-1]
     Retrieve MTS session list information   
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   MtsSessionInfo
@@ -50,8 +51,8 @@ TC_MEC_MEC015_SRV_MTS_002_OK_02
     ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.1
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${SESSION_ID}    ${elements}[3]
-    Retrieve MTS session list information using filter  ${APP_NAME_FILTER}   ${APP_INSTANCE_ID}   
+    Set Suite Variable    ${SESSION_ID}    ${elements}[-1]
+    Retrieve MTS session list information using filter  ${CORRECT_FILTER}   ${APP_INSTANCE_ID}   
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   MtsSessionInfo
     FOR    ${mstSessionInfo}    IN    @{response['body']}
@@ -70,7 +71,8 @@ TC_MEC_MEC015_SRV_MTS_002_OK_03
      ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5,
      ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.1
      [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
-
+     ${elements} =  Split String    ${response['headers']['Location']}       /
+     Set Suite Variable    ${SESSION_ID}    ${elements}[-1]
      Retrieve MTS session list information using filter  ${APP_NAME_FILTER}   ${APP_NAME}   
      Check HTTP Response Status Code Is    200
      Check HTTP Response Body Json Schema Is   MtsSessionInfo
@@ -85,6 +87,8 @@ TC_MEC_MEC015_SRV_MTS_002_OK_03
      ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5,
      ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.1
      [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
+     ${elements} =  Split String    ${response['headers']['Location']}       /
+     Set Suite Variable    ${SESSION_ID}    ${elements}[-1]
      Retrieve MTS session list information using filter  ${SESSION_ID_FILTER}   ${SESSION_ID}
      Check HTTP Response Status Code Is    200
      Check HTTP Response Body Json Schema Is   MtsSessionInfo
@@ -102,7 +106,7 @@ TC_MEC_MEC015_SRV_MTS_002_BR
     ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.1 
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${SESSION_ID}    ${elements}[3]
+    Set Suite Variable    ${SESSION_ID}    ${elements}[-1]
     
     Retrieve MTS session list information using filter  ${BAD_FILTER}   ${APP_INSTANCE_ID}   
     Check HTTP Response Status Code Is    400
@@ -153,8 +157,10 @@ TC_MEC_MEC015_SRV_MTS_003_OK_02
     ...  ETSI GS MEC 015 v3.1.1, clause 6.2.7
     ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
     ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.2
-    #[Setup]  Create new App Instance   CreateAppInstanceRequest
+    [Setup]  Create new App Instance   CreateAppInstanceRequest
     Register MTS session     MtsSessionInfoSessionSpecific
+    ${elements} =  Split String    ${response['headers']['Location']}       /
+    Set Suite Variable    ${SESSION_ID}    ${elements}[-1]
     Check HTTP Response Status Code Is    201
     Check HTTP Response Body Json Schema Is   MtsSessionInfo
     ${appInsId}    Get value entry from JSON file    MtsSessionInfoSessionSpecific   appInsId
@@ -166,11 +172,13 @@ TC_MEC_MEC015_SRV_MTS_003_OK_02
 
     Should Be Equal As Strings  ${response['body']['appInsId']}    ${appInsId}
     Should Be Equal As Strings  ${response['body']['requestType']}    ${requestType}
-    Should Be Equal As Strings  ${response['body']['flowFilter']}    ${flowFilter}
+    Dictionaries Should Be Equal  ${response['body']['flowFilter'][0]}    ${flowFilter}[0]
     Should Be Equal As Strings  ${response['body']['qosD']}    ${qosD}
     Should Be Equal As Strings  ${response['body']['mtsMode']}    ${mtsMode}
     Should Be Equal As Strings  ${response['body']['trafficDirection']}    ${trafficDirection}
-    [TearDown]   Delete APP Instance   ${APP_INSTANCE_ID} 
+    [TearDown]   Unregister from the MTS Service    ${SESSION_ID} 
+    Delete APP Instance   ${APP_INSTANCE_ID}
+    
 
 TC_MEC_MEC015_SRV_MTS_003_BR
     [Documentation]
@@ -180,7 +188,7 @@ TC_MEC_MEC015_SRV_MTS_003_BR
     ...  ETSI GS MEC 015 v3.1.1, clause 6.2.7
     ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
     ...  ETSI GS MEC 015 v3.1.1, clause 9.5.3.2
-    [Setup]  Create new App Instance   CreateAppInstanceRequest
+    [Setup]   Create new App Instance   CreateAppInstanceRequest
     Register MTS session     MtsSessionInfoApplicationSpecific_BR
     Check HTTP Response Status Code Is    400
     [TearDown]   Delete APP Instance   ${APP_INSTANCE_ID} 
@@ -195,7 +203,7 @@ TC_MEC_MEC015_SRV_MTS_004_OK
     ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.1
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${SESSION_ID}    ${elements}[3]
+    Set Suite Variable    ${SESSION_ID}    ${elements}[-1]
     Retrieve single MTS session   ${SESSION_ID}
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   MtsSessionInfo    
@@ -242,7 +250,7 @@ TC_MEC_MEC015_SRV_MTS_005_OK
     ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.2
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${SESSION_ID}    ${elements}[3]
+    Set Suite Variable    ${SESSION_ID}    ${elements}[-1]
     Update requested requirements on the MTS Service    ${SESSION_ID}     MtsSessionInfoApplicationSpecificUpdate
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is   MtsSessionInfo
@@ -266,7 +274,7 @@ TC_MEC_MEC015_SRV_MTS_005_BR
     ...  https://forge.etsi.org/rep/mec/gs015-bandwith-mgmt-api/blob/master/BwManagementApi.yaml
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${SESSION_ID}    ${elements}[3]
+    Set Suite Variable    ${SESSION_ID}    ${elements}[-1]
     Update requested requirements on the MTS Service    ${SESSION_ID}       MtsSessionInfoApplicationSpecificUpdate_BR
     Check HTTP Response Status Code Is    400
     [TearDown]   Unregister from the MTS Service And Delete APP Instance   ${SESSION_ID}    ${APP_INSTANCE_ID}  
@@ -279,7 +287,7 @@ TC_MEC_MEC015_SRV_MTS_005_NF
     ...  ETSI GS MEC 015 v3.1.1, clause 7.2.5
     ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.2
     ...  https://forge.etsi.org/rep/mec/gs015-bandwith-mgmt-api/blob/master/BwManagementApi.yaml
-    #[Setup]  Unregister from the MTS Service  ${NOT_EXISTING_SESSION_ID}
+    [Setup]  Unregister from the MTS Service  ${NOT_EXISTING_SESSION_ID}
     Update requested requirements on the MTS Service    ${NOT_EXISTING_SESSION_ID}     MtsSessionInfoApplicationSpecificUpdate
     Check HTTP Response Status Code Is    404
              
@@ -294,7 +302,7 @@ TC_MEC_MEC015_SRV_MTS_006_OK
     ...  ETSI GS MEC 015 v3.1.1, clause 9.4.3.3
     [Setup]  Create new App Instance and Register MTS session  CreateAppInstanceRequest   MtsSessionInfoApplicationSpecific
     ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${SESSION_ID}    ${elements}[3]
+    Set Suite Variable    ${SESSION_ID}    ${elements}[-1]
     Unregister from the MTS Service   ${SESSION_ID}
     Check HTTP Response Status Code Is    204
 

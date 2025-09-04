@@ -1,13 +1,55 @@
 {
-	"associateDevAppId":"MyNewWornderfulDevAppId",
-	"appInfo":{
-		"app":"MyNewWornderfulApp",
-		"appProvider":"TTF012",
-		"appDVersion":"v0.0.1",
-		"userAppInstanceInfo":[
-			{
-			}
-		]
-	}
+  "associateDevAppId": "MyNewId",
+  "callbackReference": "http://www.umair.com",
+  "appInfo": {
+    "appDId": "onboarded-demo4",
+    "app": "MyNewWornderfulApp",
+    "appProvider": "demo",
+    "appSoftVersion": "v0.1.0",
+    "appDVersion": "v0.1.0",
+    "appDescription": "Basic HTTP Ping Pong",
+    "userAppInstanceInfo": [
+      {
+        "appInstanceId": "c5f834ae-db0c-4eec-bdfe-3dfc55f91b4a",
+        "appLocation": {
+          "area": {
+            "coordinates": [
+              [
+                [
+                  2.302136,
+                  2.302136
+                ],
+                [
+                  2.302136,
+                  2.302136
+                ]
+              ],
+              [
+                [
+                  2.302136,
+                  2.302136
+                ],
+                [
+                  2.302136,
+                  2.302136
+                ]
+              ]
+            ]
+          },
+          "countryCode": "US",
+          "civicAddressElement": [
+            {
+              "caType": 7,
+              "caValue": "caValue"
+            },
+            {
+              "caType": 7,
+              "caValue": "caValue"
+            }
+          ]
+        },
+        "referenceURI": "http://example.com/aeiou"
+      }
+    ]
+  }
 }
-

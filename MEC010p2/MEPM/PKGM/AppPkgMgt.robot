@@ -93,7 +93,7 @@ TC_MEC_MEC010p2_MEPM_PKGM_002_02_OK
     [Setup]   Create new App Package        CreateAppPackage.json
     Set Suite Variable    ${APP_PKG_ID}    ${response['body']['id']}
     Set Suite Variable    ${APPD_ID}    ${response['body']['appDId']}
-    Get an individual APP Package identified by ID    ${APPD_ID}
+    Get an individual onboarded APP Package identified by ID    ${APPD_ID}
     Check HTTP Response Status Code Is    200    
     Validate Json    OnboardedAppPkgInfo.schema.json    ${response['body']}
     Should Contain  ${response['body']['_links']['self']['href']}    ${APP_PKG_ID}       
@@ -417,6 +417,14 @@ Get an individual APP Package identified by ID
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
 
+Get an individual onboarded APP Package identified by ID
+    [Arguments]    ${identifier}    
+    Set Headers    {"Accept":"application/json"}
+    Set Headers    {"Content-Type":"*/*"}
+    Set Headers    {"Authorization":"${TOKEN}"}
+    Get   ${apiRoot}/${apiName}/${apiVersion}/onboarded_app_packages/${identifier}
+    ${output}=    Output    response
+    Set Suite Variable    ${response}    ${output} 
 
 
 GET all app Packages content by appPkgId

@@ -1,11 +1,10 @@
 *** Variables ***
-${apiRoot}        
+${apiRoot}        sbxme1qzq4/mep1
 ${apiName}        dev_app
 ${apiVersion}     v1
-
-${MEC-APP_SCHEMA}                   http
-${MEC-APP_HOST}                     mockoon
-${MEC-APP_PORT}                     3003
+${MEC-APP_SCHEMA}                   https
+${MEC-APP_HOST}                     192.168.40.50
+${MEC-APP_PORT}                     443
 
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 
