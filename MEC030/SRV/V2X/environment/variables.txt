@@ -1,8 +1,8 @@
 *** Variables ***
 # Generic variables
 ${SCHEMA}                   http
-${HOST}                     mockoon
-${PORT}                     3005
+${HOST}                     %{MEC_APP_HOST=127.0.0.1}
+${PORT}                     %{MEC_APP_PORT=3005}
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        
