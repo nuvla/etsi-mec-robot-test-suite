@@ -1,5 +1,10 @@
 {
     "callbackReference": "http://example.com/callback",
+    "_links": {
+    "self": {
+      "href": "https://try-mec.etsi.org/sbxnr8fp0o/mep1/amsi/v1/subscriptions/sub-DjA60j9KKidfITKs"
+    }
+  },
     "requestTestNotification": false,
     "websockNotifConfig": {
         "websocketUri": "ws://example.com/websocket",

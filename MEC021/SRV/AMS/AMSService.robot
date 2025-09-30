@@ -2,14 +2,15 @@
 ...    Test Suite to validate UE Identity Tag (UETAG) operations.
 
 *** Settings ***
-Resource    environment/variables.txt
+#Resource    environment/variables.txt
+Resource    environment/variables_sandbox.txt
 Resource    ../../../pics.txt
 Resource    ../../../GenericKeywords.robot
 Library     REST    ${AMS_SCHEMA}://${AMS_HOST}:${AMS_PORT}    ssl_verify=false
 Library     BuiltIn
 Library     libraries/Server.py
 Library     OperatingSystem
-Library     MockServerLibrary
+#Library     MockServerLibrary
 Library     Collections
 
 
@@ -106,7 +107,7 @@ TC_MEC_MEC021_SRV_AMS_001_OK_04
 
     Get Registered AMS information using attribute-selector    filter    ${APP_MOBILITY_SERVICE_FILTER_EXCLUDE_FIELDS}
     Check HTTP Response Status Code Is    200
-    #Check HTTP Response Body Json Schema Is    AppMobilityServiceInfos
+    Check HTTP Response Body Json Schema Is    AppMobilityServiceInfos
 
     FOR    ${app}    IN    @{response['body']}
         Should Be Equal As Strings  ${app['appMobilityServiceId']}    ${APP_MOBILITY_SERVICE_ID} 
@@ -274,7 +275,7 @@ TC_MEC_MEC021_SRV_AMS_007_OK
     ...  ETSI GS MEC 021 3.1.1, clause 7.3.3
     ...  ETSI GS MEC 021 3.1.1, clause 8.7.3.2
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
-    Update individual subscription for AMS services    ${SUBSCRIPTION_ID}    NotificationSubscription
+    Update individual subscription for AMS services    ${SUBSCRIPTION_ID}    NotificationSubscriptionUpdate
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    NotificationSubscription
 
@@ -291,7 +292,7 @@ TC_MEC_MEC021_SRV_AMS_007_BR
     Check HTTP Response Status Code Is    400
 
 
-TP_MEC_MEC021_SRV_AMS_007_NF
+TC_MEC_MEC021_SRV_AMS_007_NF
     [Documentation]   Modify a specific subscription using wrong identifier
     ...  Check that the AMS service sends an error when it receives a modify request for a not existing subscription.
     ...  ETSI GS MEC 021 3.1.1, clause 7.3.2
@@ -374,7 +375,7 @@ TC_MEC_MEC021_SRV_AMS_012_OK
     ...  ETSI GS MEC 021 3.1.1, clause 7.2.2
     ...  ETSI GS MEC 021 3.1.1, clause 8.4.3.2
     [Tags]    PIC_AMS    INCLUDE_UNDEFINED_SCHEMAS
-    Modify a specific AMS service    ${APP_MOBILITY_SERVICE_ID}     RegistrationInfo 
+    Modify a specific AMS service    ${APP_MOBILITY_SERVICE_ID}     RegistrationInfo
     Check HTTP Response Status Code Is    200
     Check HTTP Response Body Json Schema Is    AppMobilityServiceInfo
     Should Be Equal As Strings  ${response['body']['appMobilityServiceId']}    ${APP_MOBILITY_SERVICE_ID}
@@ -519,6 +520,8 @@ TC_MEC_MEC021_SRV_UETESTNOT_001_OK
     Spawn Notification Server    TestNotification
     Validate Json   TestNotification.schema.json    ${payload_notification}
     [TearDown]  Delete individual subscription for AMS services    ${SUBSCRIPTION_ID}
+    
+
 *** Keywords ***
 Get Registered AMS information
     Set Headers    {"Accept":"application/json"}

@@ -1,7 +1,6 @@
 {
     "serviceConsumerId": {
-        "appInstanceId": "exampleAppInstanceId",
-        "mepId": "exampleMepId"
+        "appInstanceId": "ca29c5a5-f471-4098-abcb-d55d83410087"
     },
     "appMobilityServiceId": "exampleAppMobilityServiceId",
     "deviceInformation": [

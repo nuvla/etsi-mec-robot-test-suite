@@ -1,0 +1,24 @@
+{
+  "deviceInformation": [
+    {
+      "associateId": {
+        "type": "UE_IPv4_ADDRESS",
+        "value": "192.168.1.100"
+      },
+      "appMobilityServiceLevel": "APP_MOBILITY_NOT_ALLOWED",
+      "contextTransferState": "NOT_TRANSFERRED"
+    },
+    {
+      "associateId": {
+        "type": "UE_IPV6_ADDRESS",
+        "value": "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+      },
+      "appMobilityServiceLevel": "APP_MOBILITY_WITH_CONFIRMATION",
+      "contextTransferState": "USER_CONTEXT_TRANSFER_COMPLETED"
+    }
+  ],
+  "expiryTime": 3600,
+  "serviceConsumerId": {
+    "appInstanceId": "ca29c5a5-f471-4098-abcb-d55d83410087"
+  }
+}

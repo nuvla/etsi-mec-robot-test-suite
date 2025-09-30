@@ -1,0 +1,44 @@
+*** Variables ***
+# Generic variables
+#${AMS_SCHEMA}                   http
+#${AMS_HOST}                     mockoon
+#${AMS_PORT}                     3006
+#${response}                         {}
+#${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+#${apiRoot}        
+#${apiName}        amsi
+#${apiVersion}     v1
+
+
+####Env variable for the ETSI MEC Sandbox
+${AMS_SCHEMA}                   https
+${AMS_HOST}                     try-mec.etsi.org
+${AMS_PORT}                     443
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${response}                         {}
+${apiRoot}		  /<your_token_here>/mep1 
+${apiName}        amsi
+${apiVersion}     v1
+
+# Specific variables
+${APP_MOBILITY_SERVICE_ID}          -4P-3piNHphgT_GF
+${APP_MOBILITY_SERVICE_ID2}          APP_MOBILITY_SERVICE_ID2
+${MALFORMED_APP_MOBILITY_SERVICE_ID}          MALFORMED_APP_MOBILITY_SERVICE_ID
+${APP_MOBILITY_SERVICE_FILTER_APP_MOBILITY_SERVICE_ID}        (eq,appMobilityServiceId,ca29c5a5-f471-4098-abcb-d55d83410087)
+${APP_MOBILITY_SERVICE_FILTER_SERVICE_CONSUMER_ID}        (eq,serviceConsumerId[appInstanceId],5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f)
+${APP_MOBILITY_SERVICE_FILTER_EXCLUDE_FIELDS}        (eq,appMobilityServiceId,APP_MOBILITY_SERVICE_ID)&exclude_fields=[serviceConsumerId]
+${APP_INS_ID}                       ca29c5a5-f471-4098-abcb-d55d83410087
+${SUBSCRIPTION_TYPE}                MobilityProcedureSubscription
+${SUBSCRIPTION_ID}                  sub-DjA60j9KKidfITKs
+${NON_EXISTENT_SUBSCRIPTION_ID}     NON_EXISTENT_SUBSCRIPTION_ID
+${NON_EXISTENT_APP_MOBILITY_SERVICE_ID}     NON_EXISTENT_APP_MOBILITY_SERVICE_ID
+
+# Notifications variables
+${MOCK_SERVER_JAR}    ../../../bin/mockserver-netty-5.5.0-jar-with-dependencies.jar
+
+${callback_port}    9091
+${callback_uri}    http://172.22.1.7:${callback_port}
+${callback_endpoint}    /amsi/subscriptions
+${callback_endpoint_error}    /subs_404
+${total_polling_time}   2 min
+${polling_interval}     10 sec
