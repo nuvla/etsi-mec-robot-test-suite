@@ -1,7 +1,7 @@
 *** Variables ***
 ${MEC-APP_SCHEMA}                   http
-${MEC-APP_HOST}                     127.0.0.1
-${MEC-APP_PORT}                     8085
+${MEC-APP_HOST}                     %{MEC_APP_HOST=127.0.0.1}
+${MEC-APP_PORT}                     %{MEC_APP_PORT=8085}
 ${apiRoot}      
 ${apiName}      rni
 ${apiVersion}    v2

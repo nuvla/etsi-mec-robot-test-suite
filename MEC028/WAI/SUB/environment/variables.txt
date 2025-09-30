@@ -4,8 +4,9 @@ ${apiName}        wai
 ${apiVersion}     v2
 
 ${MEC-APP_SCHEMA}                   http
-${MEC-APP_HOST}                     mockoon
-${MEC-APP_PORT}                     3001
+${MEC-APP_HOST}                     %{MEC_APP_HOST=127.0.0.1}
+${MEC-APP_PORT}                     %{MEC_APP_PORT=3001}
+
 
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
  
