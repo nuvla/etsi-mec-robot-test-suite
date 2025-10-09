@@ -3,12 +3,7 @@
         "type": "object",
         "required": [
           "id",
-          "appDId",
-          "appName",
-          "appSoftwareVersion",
-          "appDVersion",
           "checksum",
-          "softwareImages",
           "onboardingState",
           "operationalState",
           "usageState",
@@ -17,26 +12,6 @@
         "properties": {
           "id": {
             "description": "Identifier of the onboarded application package.",
-            "type": "string"
-          },
-          "appDId": {
-            "description": "Identifier of this MEC application descriptor. This attribute shall be globally unique.",
-            "type": "string"
-          },
-          "appProvider": {
-            "description": "Provider of the application and of the AppD.",
-            "type": "string"
-          },
-          "appName": {
-            "description": "Name to identify the MEC application.",
-            "type": "string"
-          },
-          "appSoftwareVersion": {
-            "description": "Software version of the application. This is updated when there is any change to the software in the onboarded application package.",
-            "type": "string"
-          },
-          "appDVersion": {
-            "description": "Identifies the version of the application descriptor.",
             "type": "string"
           },
           "checksum": {
@@ -56,12 +31,6 @@
               "hash"
             ],
             "type": "object"
-          },
-          "softwareImages": {
-            "description": "Information of application software image in application package. Type is TBD"
-          },
-          "additionalArtifacts": {
-            "description": "Additional information of application package artifacts that are not application software images. Type is TBD"
           },
           "onboardingState": {
             "description": "Onboarding state of application package",

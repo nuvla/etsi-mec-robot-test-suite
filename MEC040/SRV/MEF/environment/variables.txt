@@ -1,8 +1,8 @@
 *** Variables ***
 # Generic variables
 ${SCHEMA}                               http
-${HOST}                                 127.0.0.1
-${PORT}                                 8084
+${HOST}                     %{MEC_APP_HOST=127.0.0.1}
+${PORT}                     %{MEC_APP_PORT=8084}
 ${response}                             {}
 ${TOKEN}                                YWxhZGRpbjpvcGVuc2VzYW1l
 ${apiRoot}        

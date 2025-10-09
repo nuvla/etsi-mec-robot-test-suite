@@ -1,0 +1,90 @@
+{
+  "properties": {
+    "subscriptionType": {
+      "description": "Shall be set to 'BwChgEventSubscription'.",
+      "type": "string",
+      "x-etsi-mec-cardinality": "1",
+      "x-etsi-mec-origin-type": "String"
+    },
+    "callbackReference": {
+      "description": "URI exposed by the client on which to receive notifications via HTTP.",
+      "type": "string",
+      "format": "uri",
+      "x-etsi-mec-cardinality": "0..1",
+      "x-etsi-mec-origin-type": "URI"
+    },
+    "websockNotifConfig": {
+      "properties": {
+        "requestWebsocketUri": {
+          "description": "Set to true by the service consumer to indicate that Websocket delivery is requested.",
+          "type": "boolean",
+          "x-etsi-mec-cardinality": "0..1",
+          "x-etsi-mec-origin-type": "Boolean"
+        },
+        "websocketUri": {
+          "description": "Set by location server to indicate to the service consumer the Websocket URI to be used for delivering notifications.",
+          "format": "uri",
+          "type": "string",
+          "x-etsi-mec-cardinality": "0..1",
+          "x-etsi-mec-origin-type": "Uri"
+        }
+      },
+      "type": "object",
+      "x-etsi-ref": "7.5.3"
+    },
+    "_links": {
+      "description": "Hyperlink related to the resource. This shall be only included in the HTTP responses and in HTTP PUT requests.",
+      "type": "object",
+      "properties": {
+        "self": {
+          "description": "Self-referring URI. The URI shall be unique within the BWM API as it acts as an ID for the subscription.",
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri",
+              "x-etsi-mec-cardinality": "1",
+              "x-etsi-mec-origin-type": "String"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "x-etsi-ref": "7.5.2"
+        }
+      },
+      "x-etsi-mec-cardinality": "0..1",
+      "x-etsi-mec-origin-type": "Structure (inlined)"
+    },
+    "filterCriteria": {
+      "description": "List of filtering criteria for the BW change event subscription.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "appInsId": {
+            "description": "Application instance identifier.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "1",
+            "x-etsi-mec-origin-type": "String"
+          },
+          "ueIp": {
+            "description": "Source address identity of session.",
+            "type": "string",
+            "x-etsi-mec-cardinality": "0..1",
+            "x-etsi-mec-origin-type": "String"
+          }
+        },
+        "required": [
+          "appInsId"
+        ]
+      },
+      "x-etsi-mec-cardinality": "1..N",
+      "x-etsi-mec-origin-type": "Structure (inlined)"
+    }
+  },
+  "required": [
+    "subscriptionType",
+    "filterCriteria"
+  ]
+}

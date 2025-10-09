@@ -1,0 +1,14 @@
+{
+    "notificationType": "ResourceUsageNotification",
+    "timeStamp": "2023-01-01T12:00:00Z",
+    "customerId": "customer-123",
+    "tenantId": "tenant-123",
+    "resourceUseInfo": {
+      "cpuUsed": 5,
+      "cpuRemain": 3,
+      "memoryUsed": 4096,
+      "memoryRemain": 2048,
+      "diskUsed": 50,
+      "diskRemain": 50
+    }
+  }

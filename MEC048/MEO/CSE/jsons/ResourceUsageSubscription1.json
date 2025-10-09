@@ -1,0 +1,11 @@
+{
+    "subscriptionType": "ResourceUsageSubscription",
+    "callbackReference": "http://example.org/callback1",
+    "customerId": "customer-123",
+    "tenantId": "tenant-123",
+    "notificationTrigger": {
+      "triggerType": 10,
+      "threshold": 80,
+      "greaterOrLess": true
+    }
+  }

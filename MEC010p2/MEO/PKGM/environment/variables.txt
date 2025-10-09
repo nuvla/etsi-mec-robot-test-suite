@@ -23,6 +23,7 @@ ${APP_NAME}                         appName
 ${CHECKSUM}                         SHA-256
 ${OPERATIONAL_STATE}                ENABLED
 ${ONBOARDING_STATE}                 CREATED
+${ONBOARDING_STATE_ONBOARDED}       ONBOARDED
 ${USAGE_STATE}                      NOT_IN_USE
 ${APP_PKG_ID}                       01234782-2c70-4e47-9a4e-0ee3a1a00123
 ${ON_BOARDED_APP_PKG_ID}            5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f

@@ -17,7 +17,7 @@ TC_MEC_MEC033_MEX_IOTS_IOTPLAT_001_OK
     [Documentation]
     ...  Check that the IUT responds with the list of registered IoT platforms
     ...  when queried by a Service Consumer
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.5.3.1
+    ...  ETSI GS MEC 033 clause 7.5.3.1
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]      Test Setup   ${None}   IoTPlatformInfo      ${REGISTER_ACTION}
     ${IOT_PLATFORM_ID_VALUE}   Get value entry from JSON file    IoTPlatformInfo  iotPlatformId
@@ -33,7 +33,7 @@ TC_MEC_MEC033_MEX_IOTS_IOTPLAT_002_OK
     [Documentation]
     ...  Check that the IUT registers the information of a new IoT platform
 	...  when requested by a Service Consumer
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.5.3.4
+    ...  ETSI GS MEC 033 clause 7.5.3.4
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     
     [Setup]      Test Setup   ${IOT_PLATFORM_ID}   ${None}      ${REMOVE_ACTION}    
@@ -55,7 +55,7 @@ TC_MEC_MEC033_MEX_IOTS_IOTPLAT_002_BR
     [Documentation]
     ...  Check that the IUT returns an error
 	...  when Service Consumer request to register an IoT device with incorrect parameters
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.5.3.4
+    ...  ETSI GS MEC 033 clause 7.5.3.4
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     Register IOT Platform information    IotPlatformInfoBR
     Check HTTP Response Status Code Is    400
@@ -65,7 +65,7 @@ TC_MEC_MEC033_MEX_IOTS_IOTPLAT_003_OK
     [Documentation]
     ...  Check that the IUT returns the IoT platform information
     ...  when requested by Service Consumer specifying the IoT platform identifier
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.5.3.1
+    ...  ETSI GS MEC 033 clause 7.5.3.1
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]      Test Setup   ${None}   IoTPlatformInfo      ${REGISTER_ACTION}
     ${IOT_PLATFORM_ID_VALUE}   Get value entry from JSON file    IoTPlatformInfo  iotPlatformId
@@ -84,7 +84,7 @@ TC_MEC_MEC033_MEX_IOTS_IOTPLAT_003_NF
     [Documentation]
     ...  Check that the IUT returns the IoT platform information
     ...  when requested by Service Consumer specifying the IoT platform identifier
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.5.3.1
+    ...  ETSI GS MEC 033 clause 7.5.3.1
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]      Test Setup   ${NOT_EXISTING_IOT_PLATFORM_ID}   ${None}      ${NOT_EXISTING_IOT_PLATFORM_ID}
     Retrieve specific registered IOT Platform information    ${NOT_EXISTING_IOT_PLATFORM_ID}
@@ -95,7 +95,7 @@ TC_MEC_MEC033_MEX_IOTS_IOTPLAT_004_OK
     [Documentation]
     ...  Check that the IUT updates the information about a registered IoT platform
 	...  when requested by a Service Consumer
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.5.3.2
+    ...  ETSI GS MEC 033 clause 7.5.3.2
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]      Test Setup   ${None}   IoTPlatformInfo      ${REGISTER_ACTION}
     ${IOT_PLATFORM_ID_VALUE}   Get value entry from JSON file    IotPlatformInfoUpdate  iotPlatformId
@@ -114,7 +114,7 @@ TC_MEC_MEC033_MEX_IOTS_IOTPLAT_004_NF
     [Documentation]
     ...  Check that the IUT returns an error
 	...  when a Service Consumer requests to update a not registered IoT platform
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.5.3.2
+    ...  ETSI GS MEC 033 clause 7.5.3.2
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]      Test Setup   ${NOT_EXISTING_IOT_PLATFORM_ID}   ${None}      ${NOT_EXISTING_IOT_PLATFORM_ID}
     Update registered IOT Platform information   ${NOT_EXISTING_IOT_PLATFORM_ID}  IotPlatformInfoUpdate
@@ -123,13 +123,13 @@ TC_MEC_MEC033_MEX_IOTS_IOTPLAT_004_NF
 
 TP_MEC_MEC033_MEX_IOTS_IOTPLAT_005_OK
     [Documentation]
-    ...  Check that the IUT deregisters an IoT platform information
+    ...  Check that the IUT unregisters an IoT platform information
 	...  when requested by a Service Consumer specifying the registered IoT platform identifier
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.5.3.5
+    ...  ETSI GS MEC 033 clause 7.5.3.5
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]      Test Setup   ${None}   IoTPlatformInfo      ${REGISTER_ACTION}
     ${IOT_PLATFORM_ID_VALUE}   Get value entry from JSON file    IoTPlatformInfo  iotPlatformId    
-    Deregister IOT Platform information   ${IOT_PLATFORM_ID}
+    Unregister IOT Platform information   ${IOT_PLATFORM_ID}
     Check HTTP Response Status Code Is    204
     [Teardown]    Test TearDown    ${IOT_PLATFORM_ID_VALUE}   ${None}      ${REMOVE_ACTION}
 
@@ -137,11 +137,11 @@ TP_MEC_MEC033_MEX_IOTS_IOTPLAT_005_OK
 TC_MEC_MEC033_MEX_IOTS_IOTPLAT_005_NF
     [Documentation]
     ...  Check that the IUT returns an error
-	...  when a Service Consumer request to deregister an IoT platform using incorrect parameters
-    ...  ETSI GS MEC 033 V3.1.1, clause 7.5.3.5
+	...  when a Service Consumer request to unregister an IoT platform using incorrect parameters
+    ...  ETSI GS MEC 033 clause 7.5.3.5
     ...  https://www.etsi.org/deliver/etsi_gs/MEC/001_099/033/03.01.01_60/gs_MEC033v030101p.pdf
     [Setup]      Test Setup   ${NOT_EXISTING_IOT_PLATFORM_ID}   ${None}      ${NOT_EXISTING_IOT_PLATFORM_ID}
-    Deregister IOT Platform information   ${NOT_EXISTING_IOT_PLATFORM_ID}
+    Unregister IOT Platform information   ${NOT_EXISTING_IOT_PLATFORM_ID}
     Check HTTP Response Status Code Is    404
     
                     
@@ -229,7 +229,7 @@ Register IOT Platform information
     Set Suite Variable    ${response}    ${output}   
 
 
- Deregister IOT Platform information
+Unregister IOT Platform information
     [Arguments]     ${registeredPlatformId}
     Should Be True    ${PIC_MEC_PLAT} == 1
     Should Be True    ${PIC_SERVICES} == 1

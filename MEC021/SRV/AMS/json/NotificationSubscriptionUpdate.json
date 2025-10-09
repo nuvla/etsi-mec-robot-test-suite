@@ -1,0 +1,21 @@
+{
+    "callbackReference": "http://example.com/callback",
+    "_links": {
+    "self": {
+      "href": "https://try-mec.etsi.org/sbxnr8fp0o/mep1/amsi/v1/subscriptions/sub-DjA60j9KKidfITKs"
+    }
+  },
+    "requestTestNotification": false,
+    "websockNotifConfig": {
+        "websocketUri": "ws://example.com/websocket",
+        "requestWebsocketUri": true
+    },
+    "expiryDeadline": {
+        "seconds": 2077353600,
+        "nanoSeconds": 0
+    },
+    "filterCriteria": {
+        "appInstanceId": "ca29c5a5-f471-4098-abcb-d55d83410087"
+    },
+    "subscriptionType": "MobilityProcedureSubscription"
+}

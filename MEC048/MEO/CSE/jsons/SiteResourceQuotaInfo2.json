@@ -1,0 +1,6 @@
+{
+    "siteId": "site-1234",
+    "cpuQuota": 3,
+    "memoryQuota": 7192,
+    "diskQuota": 90
+  }

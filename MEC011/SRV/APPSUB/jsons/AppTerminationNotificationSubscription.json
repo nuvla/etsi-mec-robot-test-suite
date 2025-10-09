@@ -1,10 +1,10 @@
 {
-  "subscriptionType": "AppTerminationNotificationSubscription",
+  "subscriptionType": "SerAvailabilityNotificationSubscription",
   "callbackReference": "https://somewhere.com/mecAppSuptApi/example",
   "_links": {
     "self": {
       "href": "https://somewhere.com/mecAppSuptApi/example"
     }
   },
-  "appInstanceId": "f1e4d448-e277-496b-bf63-98391cfd20fb"
+  "appInstanceId": "298b2c0c-7efa-45d3-8b47-8ab3c009b845"
 }

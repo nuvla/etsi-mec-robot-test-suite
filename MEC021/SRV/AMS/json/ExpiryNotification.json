@@ -1,0 +1,12 @@
+{
+  "_links": null,
+  "expiryDeadline": {
+    "nanoSeconds": 11,
+    "seconds": 11
+  },
+  "timeStamp": {
+    "nanoSeconds": 11,
+    "seconds": 11
+  },
+  "notificationType": "ExpiryNotification"
+}

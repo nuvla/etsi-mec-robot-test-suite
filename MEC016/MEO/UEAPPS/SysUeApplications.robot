@@ -14,7 +14,7 @@ Library     REST    ${MEC-APP_SCHEMA}://${MEC-APP_HOST}:${MEC-APP_PORT}    ssl_v
 TP_MEC_MEC016_MEO_UEAPPS_001_OK
     [Documentation] 
     ...  Check that the IUT responds with the list of user applications available when requested by an UE Application
-    ...  Reference ETSI GS MEC 016 v2.2.1, clause 7.3.3.1
+    ...  Reference ETSI GS MEC 016 v3.1.1, clause 7.3.3.1
     ...  Reference https://forge.etsi.org/gitlab/mec/gs016-ue-app-api/blob/master/UEAppInterfaceApi.yaml#/definitions/ApplicationList
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
@@ -31,7 +31,7 @@ TP_MEC_MEC016_MEO_UEAPPS_001_OK
 TP_MEC_MEC016_MEO_UEAPPS_001_NF
     [Documentation] 
     ...  Check that the IUT responds with an error when a request for an unknown URI is sent by a MEC Application
-    ...  Reference ETSI GS MEC 016 v2.2.1, clause 7.3.3.1
+    ...  Reference ETSI GS MEC 016 v3.1.1, clause 7.3.3.1
     ...  Reference https://forge.etsi.org/gitlab/mec/gs016-ue-app-api/blob/master/UEAppInterfaceApi.yaml#/definitions/ApplicationList
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
@@ -42,7 +42,7 @@ TP_MEC_MEC016_MEO_UEAPPS_001_NF
 TP_MEC_MEC016_MEO_UEAPPS_002_OK
     [Documentation] 
     ...  Check that the IUT responds with the list of user applications available when requested by an UE Application
-    ...  Reference ETSI GS MEC 016 2.2.1, clause 7.3.3.1
+    ...  Reference ETSI GS MEC 016 3.1.1, clause 7.3.3.1
     ...  Reference https://forge.etsi.org/gitlab/mec/gs016-ue-app-api/blob/master/UEAppInterfaceApi.yaml#/definitions/ApplicationList
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1
@@ -58,7 +58,7 @@ TP_MEC_MEC016_MEO_UEAPPS_002_OK
 TP_MEC_MEC016_MEO_UEAPPS_002_BR
     [Documentation] 
     ...  Check that the IUT responds with the list of user applications available when requested by an UE Application
-    ...  Reference ETSI GS MEC 016 2.2.1, clause 7.3.3.1
+    ...  Reference ETSI GS MEC 016 3.1.1, clause 7.3.3.1
     ...  Reference https://forge.etsi.org/gitlab/mec/gs016-ue-app-api/blob/master/UEAppInterfaceApi.yaml#/definitions/ApplicationList
     Should Be True    ${PIC_MEC_SYSTEM} == 1
     Should Be True    ${PIC_SERVICES} == 1

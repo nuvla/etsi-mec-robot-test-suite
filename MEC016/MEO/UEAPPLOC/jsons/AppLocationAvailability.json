@@ -1,8 +1,34 @@
 {
-	"associateDevAppId":"MyNewWornderfulDevAppId",
+	"associateDevAppId":"onboarded-demo4",
 	"appInfo":{
-		"appName":"MyNewWornderfulApp",
-		"appProvider":"TF012",
-		"appDVersion":"v0.0.1"
-	}
+  "appName": "onboarded-demo4",
+  "appProvider": "ETSI",
+  "appSoftVersion": "v0.1.0",
+  "appDVersion": "v0.1.0",
+  "appDescription": "Basic HTTP Ping Pong",
+  "availableLocations": [
+    {
+      "appLocation": {
+        "countryCode": "492",
+        "civicAddressElement": [
+          { "caType": 1, "caValue": "A1" },
+          { "caType": 2, "caValue": "A2" }
+        ],
+        "area": {
+          "coordinates": [
+            [
+              [2.302136, 2.302136],
+              [2.302136, 2.302136]
+            ],
+            [
+              [2.302136, 2.302136],
+              [2.302136, 2.302136]
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "appPackageSource": "http://example.com/aeiou"
+}
 }

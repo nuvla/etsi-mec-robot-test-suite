@@ -1,0 +1,10 @@
+{
+    "subscriptionType": "ResourceUsageSubscription",
+    "customerId": "placeholder-customer",
+    "tenantId": "placeholder-tenant",
+    "notificationTrigger": {
+      "triggerType": 10,
+      "threshold": 4,
+      "greaterOrLess": false
+    }
+  }

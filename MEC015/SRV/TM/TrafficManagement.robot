@@ -8,6 +8,7 @@ Resource    ../../../GenericKeywords.robot
 Library     REST    ${SCHEMA}://${HOST}:${PORT}    ssl_verify=false
 Library     OperatingSystem    
 Library     String
+Library     Collections
 
 *** Test Cases ***
 
@@ -15,9 +16,9 @@ TC_MEC_MEC015_SRV_TM_001_OK_01
     [Documentation]
     ...  Check that the IUT responds with the list of configured bandwidth allocations 
     ...  when queried by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.5,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2,
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.4.3.1  
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.5,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2,
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.1  
     [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Retrieve the list of configured bandwidth allocations
     Check HTTP Response Status Code Is    200
@@ -29,9 +30,9 @@ TC_MEC_MEC015_SRV_TM_001_OK_02
     [Documentation]
     ...  Check that the IUT responds with the list of configured bandwidth allocations
     ...  when queried by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.5,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2,
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.4.3.1  
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.5,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2,
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.1  
     [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Retrieve the list of configured bandwidth using filter  ${CORRECT_FILTER}   ${APP_INSTANCE_ID}  
     Check HTTP Response Status Code Is    200
@@ -48,9 +49,9 @@ TC_MEC_MEC015_SRV_TM_001_OK_03
     [Documentation]
     ...  Check that the IUT responds with a configured bandwidth allocation
     ...  when queried by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.5,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2,
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.4.3.1
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.5,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2,
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.1
     [Setup]    Create new App Instance and Register for bw service    CreateAppInstanceRequest     BwInfoApplicationSpecific                            
     Retrieve the list of configured bandwidth using filter  ${APP_NAME_FILTER}   ${APP_NAME}  
     Check HTTP Response Status Code Is    200
@@ -61,9 +62,9 @@ TC_MEC_MEC015_SRV_TM_001_OK_04
     [Documentation]
      ...  Check that the IUT responds with a configured bandwidth allocation
      ...  when queried by a MEC Application - session_id
-     ...  ETSI GS MEC 015 V2.2.1, clause 6.2.5,
-     ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2,
-     ...  ETSI GS MEC 015 V2.2.1, clause 8.4.3.1
+     ...  ETSI GS MEC 015 v3.1.1, clause 6.2.5,
+     ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2,
+     ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.1
      [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific                            
      Retrieve the list of configured bandwidth using filter  ${SESSION_ID_FILTER}   ${SESSION_ID}  
      Check HTTP Response Status Code Is    200
@@ -76,7 +77,7 @@ TC_MEC_MEC015_SRV_TM_001_BR
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when a request with incorrect parameters is sent by a MEC Application
-    ...  Reference ETSI GS MEC 015 V2.2.1, clause 8.4.3.1
+    ...  Reference ETSI GS MEC 015 v3.1.1, clause 8.4.3.1
     ...  Reference https://forge.etsi.org/rep/mec/gs015-bandwith-mgmt-api/blob/master/BwManagementApi.json
     [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Retrieve the list of configured bandwidth using filter  ${BAD_FILTER}   ${APP_INSTANCE_ID}  
@@ -88,9 +89,9 @@ TC_MEC_MEC015_SRV_TM_001_NF_01
     [Documentation]
     ...  Check that the IUT responds with an error when
     ...  a request with an unknown resource URI is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.5,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2,
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.4.3.1   
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.5,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2,
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.1   
     Retrieve the list of configured bandwidth using filter  ${CORRECT_FILTER}   ${NON_EXISTENT_APP_INSTANCE_ID}  
     Check HTTP Response Status Code Is    404
  
@@ -98,9 +99,9 @@ TC_MEC_MEC015_SRV_TM_001_NF_02
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when a request with an unknown resource URI is sent by a MEC Application - app_name
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.5,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2,
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.4.3.1   
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.5,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2,
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.1   
     Retrieve the list of configured bandwidth using filter  ${APP_NAME_FILTER}   ${NON_EXISTENT_APP_NAME}  
     Check HTTP Response Status Code Is    404
  
@@ -108,9 +109,9 @@ TC_MEC_MEC015_SRV_TM_001_NF_03
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when a request with an unknown resource URI is sent by a MEC Application - session_id
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.5,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2,
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.4.3.1    
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.5,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2,
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.1    
     Retrieve the list of configured bandwidth using filter  ${SESSION_ID_FILTER}   ${NON_EXISTENT_SESSION_ID}  
     Check HTTP Response Status Code Is    404   
 
@@ -118,11 +119,13 @@ TC_MEC_MEC015_SRV_TM_001_NF_03
 TC_MEC_MEC015_SRV_TM_002_OK
     [Documentation]
     ...  Check that the IUT acknowledges a creation of a bandwidthAllocation resource
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.2,
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2,
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.4.3.4 
-     [Setup]    Create new App Instance   CreateAppInstanceRequest 
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.2,
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2,
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.4 
+     [Setup]   Create new App Instance   CreateAppInstanceRequest 
      Registration for bandwidth services  ${APP_INSTANCE_ID}   BwInfoApplicationSpecific
+     ${elements} =  Split String    ${response['headers']['Location']}       /
+     Set Suite Variable    ${ALLOCATION_ID}    ${elements}[-1]
      Check HTTP Response Status Code Is    201 
      Check HTTP Response Body Json Schema Is   BwInfo
      ${appInsId}    Get value entry from JSON file    BwInfoApplicationSpecific   appInsId
@@ -133,25 +136,25 @@ TC_MEC_MEC015_SRV_TM_002_OK
      Should Be Equal As Strings  ${response['body']['requestType']}    ${requestType}  
      Should Be Equal As Strings  ${response['body']['fixedAllocation']}    ${fixedAllocation}  
      Should Be Equal As Strings  ${response['body']['allocationDirection']}    ${allocationDirection}  
-     [TearDown]    Delete App Instance   ${APP_INSTANCE_ID}    
+     [TearDown]    Unregister bw Service And Delete APP Instance    ${ALLOCATION_ID}    ${APP_INSTANCE_ID}    
     
 
 TC_MEC_MEC015_SRV_TM_002_BR_01
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when a request with incorrect parameters is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.4.3.4
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.4
     ...  Reference https://forge.etsi.org/rep/mec/gs015-bandwith-mgmt-api/blob/master/BwManagementApi.json
     [Setup]    Create new App Instance   CreateAppInstanceRequest
     Registration for bandwidth services  ${APP_INSTANCE_ID}   BwInfo_BR
     Check HTTP Response Status Code Is    400
-    [TearDown]    Delete App Instance   ${APP_INSTANCE_ID}    
+    [TearDown]   Delete App Instance   ${APP_INSTANCE_ID}    
     
 TC_MEC_MEC015_SRV_TM_002_BR_02
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when a request with incorrect parameters is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.4.3.4
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.4.3.4
     ...  Reference https://forge.etsi.org/rep/mec/gs015-bandwith-mgmt-api/blob/master/BwManagementApi.json
     [Setup]    Create new App Instance   CreateAppInstanceRequest
     Registration for bandwidth services  ${APP_INSTANCE_ID}   BwInfo_BR2
@@ -164,9 +167,9 @@ TC_MEC_MEC015_SRV_TM_003_OK
     [Documentation]
     ...  Check that the IUT responds with the configured bandwidth allocation
     ...  when queried by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.5
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.1
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.1
     [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Get a bandwidth allocation   ${ALLOCATION_ID}
     Check HTTP Response Status Code Is    200
@@ -179,9 +182,9 @@ TC_MEC_MEC015_SRV_TM_003_NF
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when a request for an unknown URI is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.5
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.1
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.1
     [Setup]    Unregister Bandwidth Management Service   ${NON_EXISTENT_ALLOCATION_ID}
     Get a bandwidth allocation   ${NON_EXISTENT_ALLOCATION_ID}
     Check HTTP Response Status Code Is    404
@@ -192,10 +195,10 @@ TC_MEC_MEC015_SRV_TM_004_OK
     [Documentation]
     ...  Check that the IUT updates the requested bandwidth requirements
     ...  when commanded by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.4
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.2
-    #[Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.4
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.2
+    [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Update a bandwidth allocation   ${ALLOCATION_ID}   BwInfoUpdate
     ${appInsId}    Get value entry from JSON file    BwInfoUpdate   appInsId
     ${fixedAllocation}    Get value entry from JSON file    BwInfoUpdate   fixedAllocation
@@ -205,15 +208,15 @@ TC_MEC_MEC015_SRV_TM_004_OK
     Should Be Equal As Strings  ${response['body']['appInsId']}    ${appInsId} 
     Should Be Equal As Strings  ${response['body']['fixedAllocation']}    ${fixedAllocation}
     Should Be Equal As Strings  ${response['body']['allocationDirection']}   ${allocationDirection}
-    #[TearDown]   Unregister bw Service And Delete APP Instance    ${ALLOCATION_ID}    ${APP_INSTANCE_ID}
+    [TearDown]   Unregister bw Service And Delete APP Instance    ${ALLOCATION_ID}    ${APP_INSTANCE_ID}
 
 
 TC_MEC_MEC015_SRV_TM_004_BR_01
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.4
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.4
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.2
     [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Update a bandwidth allocation   ${ALLOCATION_ID}   BwInfoUpdate_BR
     Check HTTP Response Status Code Is    400
@@ -223,9 +226,9 @@ TC_MEC_MEC015_SRV_TM_004_BR_01
 TC_MEC_MEC015_SRV_TM_004_BR_02
     [Documentation]
     ...  Check that the IUT responds with an error when a request with incorrect parameters is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.4
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.4
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.2
     [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Update a bandwidth allocation   ${ALLOCATION_ID}   BwInfoUpdate_BR2
     Check HTTP Response Status Code Is    400
@@ -235,9 +238,9 @@ TC_MEC_MEC015_SRV_TM_004_BR_02
 TC_MEC_MEC015_SRV_TM_004_NF
     [Documentation]
     ...  Check that the IUT responds with an error when a request sent by a MEC Application doesn't comply with a required condition
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.4
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.4
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.2
    
     #[Setup]  Delete APP Instance    ${NON_EXISTENT_ALLOCATION_ID}
     Update a bandwidth allocation   ${NON_EXISTENT_ALLOCATION_ID}    BwInfoUpdate
@@ -248,9 +251,9 @@ TC_MEC_MEC015_SRV_TM_005_OK
     [Documentation]
     ...  Check that the IUT when provided with just the changes (deltas) 
     ...  updates the requested bandwidth requirements when commanded by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.4
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.3
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.4
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.3
     [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Request a deltas changes    ${ALLOCATION_ID}    BwInfoDeltas
     
@@ -268,9 +271,9 @@ TC_MEC_MEC015_SRV_TM_005_BR_01
     [Documentation]
     ...  Check that the IUT responds with an error 
     ...  when a request with incorrect parameters is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.4
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.3
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.4
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.3
     [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Request a deltas changes    ${ALLOCATION_ID}    BwInfoDeltas_BR
     Check HTTP Response Status Code Is    400
@@ -279,9 +282,9 @@ TC_MEC_MEC015_SRV_TM_005_BR_02
     [Documentation]
     ...  Check that the IUT responds with an error 
     ...  when a request with incorrect parameters is sent by a MEC Application - sessionFilter shall be present
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.4
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.3
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.4
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.3
     [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Request a deltas changes    ${ALLOCATION_ID}    BwInfoDeltas_BR2
     Check HTTP Response Status Code Is    400
@@ -290,9 +293,9 @@ TC_MEC_MEC015_SRV_TM_005_BR_02
 TC_MEC_MEC015_SRV_TM_005_NF
     [Documentation]
     ...  Check that the IUT responds with an error when a request for an unknown URI is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.4
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.3
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.4
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.3
     [Setup]   Delete APP Instance    ${NON_EXISTENT_ALLOCATION_ID}
     Request a deltas changes    ${NON_EXISTENT_ALLOCATION_ID}    BwInfoDeltas
     Check HTTP Response Status Code Is    404
@@ -301,9 +304,9 @@ TC_MEC_MEC015_SRV_TM_005_NF
 TC_MEC_MEC015_SRV_TM_006_OK
     [Documentation]
     ...  Check that the IUT unregisters from the Bandwidth Management Service when commanded by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.3
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.3
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.5
     [Setup]    Create new App Instance and Register for bw service   CreateAppInstanceRequest     BwInfoApplicationSpecific
     Unregister Bandwidth Management Service    ${ALLOCATION_ID}
     Check HTTP Response Status Code Is    204
@@ -312,9 +315,9 @@ TC_MEC_MEC015_SRV_TM_006_OK
 TC_MEC_MEC015_SRV_TM_006_NF
     [Documentation]
     ...  Check that the IUT responds with an error when a request for an unknown URI is sent by a MEC Application
-    ...  ETSI GS MEC 015 V2.2.1, clause 6.2.3
-    ...  ETSI GS MEC 015 V2.2.1, clause 7.2.2
-    ...  ETSI GS MEC 015 V2.2.1, clause 8.3.3.5
+    ...  ETSI GS MEC 015 v3.1.1, clause 6.2.3
+    ...  ETSI GS MEC 015 v3.1.1, clause 7.2.2
+    ...  ETSI GS MEC 015 v3.1.1, clause 8.3.3.5
     [Setup]   Unregister Bandwidth Management Service    ${NON_EXISTENT_ALLOCATION_ID}        
     Unregister Bandwidth Management Service    ${NON_EXISTENT_ALLOCATION_ID}
     Check HTTP Response Status Code Is    404
@@ -326,7 +329,7 @@ Create new App Instance and Register for bw service
      Create new App Instance     ${appInstancePayload}
      Registration for bandwidth services   ${APP_INSTANCE_ID}    ${bwServicePayload}
      ${elements} =  Split String    ${response['headers']['Location']}       /
-     Set Suite Variable    ${ALLOCATION_ID}    ${elements}[3]
+     Set Suite Variable    ${ALLOCATION_ID}    ${elements}[-1]
      
        
      
@@ -446,7 +449,10 @@ Request a deltas changes
     Set Headers    {"Authorization":"${TOKEN}"}
     ${path}    Catenate    SEPARATOR=      jsons/     ${content}.json
     ${body}    Get File    ${path}
-    ${json_object}=	Evaluate  json.loads('''${body}''')  json
+    ${json_object}=    Evaluate    json.loads('''${body}''')    json
+    # Inject allocation_id into the JSON object
+    Set To Dictionary    ${json_object}    allocationId=${allocation_id}
+    ${body}=    Evaluate    json.dumps(${json_object})    json
     Patch    ${apiRoot}/${apiName}/${apiVersion}/bw_allocations/${allocation_id}    ${body}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}

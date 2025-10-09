@@ -1,0 +1,14 @@
+{
+    "subscriptionType": "QoSSubscription",
+    "callbackReference": "http://someuri/someendpoint",
+    "flowFilter": [
+        {
+            "sourceIP": "ACR_SOME_IP"
+        }
+    ],
+    "reportingCtrl": {},
+    "measuringPeriod": 1000,
+    "reportTrigger": {
+        "metricType": "THROUGHPUT"
+    }
+}

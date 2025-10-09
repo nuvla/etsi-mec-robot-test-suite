@@ -554,9 +554,6 @@
 											"x-etsi-mec-cardinality": "1",
 											"x-etsi-mec-origin-type": "String"
 										},
-										"tunnelSpecificData": {
-											"type": "string"
-										},
 										"tunnelSrcAddress": {
 											"description": "Source address of the tunnel.",
 											"type": "string",
@@ -611,6 +608,14 @@
 									"type": "integer",
 									"x-etsi-mec-cardinality": "0..1",
 									"x-etsi-mec-origin-type": "Int"
+								},
+								"direction": {
+									"description": "Identifies the direction of the data flow when the value of 'filterType' is 'per FLOW'. See note. Permitted values: 00= Downlink (towards the UE), 01 = Uplink (away from the UE)",
+									"type": "string",
+									"enum": [
+										"00",
+										"01"
+									]
 								},
 								"dstAddress": {
 									"description": "A IP address or a range of IP addresses.For IPv4, the IP address could be an IP address plus mask, or an individual IP address, or a range of IP addresses.For IPv6, the IP address could be an IP prefix, or a range of IP prefixes.",
@@ -748,7 +753,8 @@
 					"action"
 				],
 				"type": "object",
-				"x-etsi-ref": "6.2.1.9"
+				"x-etsi-ref": "6.2.1.9",
+				"x-etsi-notes": "NOTE:\tWhen direction, srcAddress, dstAddress, srcPort, dstPort and protocol are combined to describe a IP flow traffic filter which is transferred to 5G core network by MEC system, this group of attributes follows the rules specified in the clause 5.3.8 of ETSI TS 129 214 [22]."
 			},
 			"minItems": 0,
 			"type": "array",
