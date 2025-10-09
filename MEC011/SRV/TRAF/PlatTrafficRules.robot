@@ -19,9 +19,9 @@ TC_MEC_MEC011_SRV_TRAF_001_OK
     ...    when queried by a MEC Application
     ...
     ...    Reference
-    ...    ETSI GS MEC 011 3.2.1, clause 5.2.7,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.1.2.2,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.2.7.3.1
+    ...    ETSI GS MEC 011 clause 5.2.7,
+    ...    ETSI GS MEC 011 clause 7.1.2.2,
+    ...    ETSI GS MEC 011 clause 7.2.7.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application   AppInfo
@@ -36,9 +36,9 @@ TC_MEC_MEC011_SRV_TRAF_001_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 5.2.7,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.1.2.2,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.2.7.3.1
+    ...    Reference  ETSI GS MEC 011 clause 5.2.7,
+    ...    ETSI GS MEC 011 clause 7.1.2.2,
+    ...    ETSI GS MEC 011 clause 7.2.7.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Remove MEC application  ${NON_EXISTENT_APP_INSTANCE_ID}
@@ -51,9 +51,9 @@ TC_MEC_MEC011_SRV_TRAF_002_OK
     ...    Check that the IUT responds with the information on a specific traffic rule
     ...    when queried by a MEC Application
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 5.2.7,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.1.2.2,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.2.8.3.1
+    ...    Reference  ETSI GS MEC 011 clause 5.2.7,
+    ...    ETSI GS MEC 011 clause 7.1.2.2,
+    ...    ETSI GS MEC 011 clause 7.2.8.3.1
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application   AppInfo
     Get individual traffic rule    ${APP_INSTANCE_ID}    ${TRAFFIC_RULE_ID}
@@ -68,9 +68,9 @@ TC_MEC_MEC011_SRV_TRAF_002_NF
     ...    Check that the IUT responds with an error when a request for an unknown traffic rule
     ...     when queried by a MEC Application
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 5.2.7,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.1.2.2,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.2.8.3.1
+    ...    Reference  ETSI GS MEC 011 clause 5.2.7,
+    ...    ETSI GS MEC 011 clause 7.1.2.2,
+    ...    ETSI GS MEC 011 clause 7.2.8.3.1
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Get individual traffic rule    ${APP_INSTANCE_ID}    ${NON_EXISTENT_TRAFFIC_RULE_ID}
@@ -83,9 +83,9 @@ TC_MEC_MEC011_SRV_TRAF_003_OK
     ...    Check that the IUT updates a specific traffic rule
     ...    when commanded by a MEC Application
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 5.2.7,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.1.2.2,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.2.8.3.2
+    ...    Reference  ETSI GS MEC 011 clause 5.2.7,
+    ...    ETSI GS MEC 011 clause 7.1.2.2,
+    ...    ETSI GS MEC 011 clause 7.2.8.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application   AppInfo
     ${TRAFFIC_RULE_ID}    Get value entry from JSON file      TrafficRuleUpdate      trafficRuleId
@@ -101,9 +101,9 @@ TC_MEC_MEC011_SRV_TRAF_003_BR
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 5.2.7,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.1.2.2,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.2.8.3.2
+    ...    Reference  ETSI GS MEC 011 clause 5.2.7,
+    ...    ETSI GS MEC 011 clause 7.1.2.2,
+    ...    ETSI GS MEC 011 clause 7.2.8.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application   AppInfo
     Update a traffic rule    ${APP_INSTANCE_ID}    ${TRAFFIC_RULE_ID}    TrafficRuleUpdateError
@@ -116,9 +116,9 @@ TC_MEC_MEC011_SRV_TRAF_003_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 5.2.7",
-    ...    ETSI GS MEC 011 3.2.1, clause 7.1.2.2",
-    ...    ETSI GS MEC 011 3.2.1, clause 7.2.8.3.2
+    ...    Reference  ETSI GS MEC 011 clause 5.2.7",
+    ...    ETSI GS MEC 011 clause 7.1.2.2",
+    ...    ETSI GS MEC 011 clause 7.2.8.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application   AppInfo
     Update a traffic rule    ${APP_INSTANCE_ID}    ${NON_EXISTENT_TRAFFIC_RULE_ID}    TrafficRuleUpdate
@@ -131,9 +131,9 @@ TC_MEC_MEC011_SRV_TRAF_003_PF
     ...    Check that the IUT responds with an error when
     ...    a request sent by a MEC Application doesn't comply with a required condition
     ...
-    ...    Reference  ETSI GS MEC 011 3.2.1, clause 5.2.7,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.1.2.2,
-    ...    ETSI GS MEC 011 3.2.1, clause 7.2.8.3.2
+    ...    Reference  ETSI GS MEC 011 clause 5.2.7,
+    ...    ETSI GS MEC 011 clause 7.1.2.2,
+    ...    ETSI GS MEC 011 clause 7.2.8.3.2
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application   AppInfo
     Update a traffic rule with invalid etag   ${APP_INSTANCE_ID}    ${TRAFFIC_RULE_ID}    TrafficRuleUpdate

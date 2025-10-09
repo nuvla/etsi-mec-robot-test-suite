@@ -19,8 +19,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK
     [Documentation]
     ...  Check that the IUT responds with a list of all available systemInfo 
     ...  when requested by a MEC Orchestrator - No query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     Retrieve all system info resources
     Check HTTP Response Status Code Is    200
@@ -33,8 +33,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK_02
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo
     ...  when requested by a MEC Orchestrator - SystemId query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     Retrieve all system info resources with query params   ${SYSTEM_ID_QUERY_PARAM}
     Check HTTP Response Status Code Is    200
@@ -48,8 +48,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK_03
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo 
     ...  when requested by a MEC Orchestrator - Multiple SystemId query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     
@@ -74,8 +74,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK_04
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo
     ...  when requested by a MEC Orchestrator - Empty SystemId query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     
     Retrieve all system info resources
@@ -88,8 +88,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK_05
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo
     ...  when requested by a MEC Orchestrator - SystemName query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     ${SYSTEM_NAME_VALUE}   Get value entry from JSON file    SystemInfo  systemName
 
@@ -105,8 +105,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK_06
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo
     ...  when requested by a MEC Orchestrator - Multiple SystemName query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     ${SYSTEM_NAME_VALUE}   Get value entry from JSON file    SystemInfo  systemName
     ${SYSTEM_NAME_VALUE_2}   Get value entry from JSON file    SystemInfo2  systemName
@@ -131,8 +131,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK_07
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo
     ...  when requested by a MEC Orchestrator - Empty SystemName query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     
     Retrieve all system info resources with query params     ${EMPTY_SYSTEM_NAME_QUERY_PARAM}
@@ -145,8 +145,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK_08
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo
     ...  when requested by a MEC Orchestrator - systemProvider query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     ${SYS_PROVIDER_VALUE}   Get value entry from JSON file    SystemInfo  systemProvider
 
@@ -163,8 +163,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK_09
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo
     ...  when requested by a MEC Orchestrator - Multiple systemProvider query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     Retrieve all system info resources with query params   ${MUTIPLE_SYS_PROVIDER_QUERY_PAR}
     Check HTTP Response Status Code Is    200
@@ -190,8 +190,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK_10
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo
     ...  when requested by a MEC Orchestrator - Empty systemProvider query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     Retrieve all system info resources with query params   ${EMPTY_SYSTEM_PROVIDER_QUERY_PARAM}
     Check HTTP Response Status Code Is    200
@@ -206,8 +206,8 @@ TC_MEC_MEC040_SRV_MEF_001_OK_11
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo
     ...  when requested by a MEC Orchestrator - Multiple query parameters
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     ${SYS_NAME_VALUE}   Get value entry from JSON file    SystemInfo  systemName
     ${SYS_ID}   Get value entry from JSON file    SystemInfo  systemName
@@ -235,8 +235,8 @@ TC_MEC_MEC040_SRV_MEF_001_NF_01
     [Documentation]
     ...  Check that the IUT responds with an error 
     ...  when selection is not applicable - SystemId
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Remove specific system info resource    ${NOT_EXT_SYSTEM_ID_QUERY_PARAM}   
     Retrieve all system info resources with query params   ${NOT_EXT_SYSTEM_ID_QUERY_PARAM}
     Check HTTP Response Status Code Is    404
@@ -245,8 +245,8 @@ TC_MEC_MEC040_SRV_MEF_001_NF_02
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when selection is not applicable - SystemName
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     ##Test setup not applicable because systemInfo cannot be deleted by systemName
     Retrieve all system info resources with query params   ${NOT_EXT_SYSTEM_NAME_QUERY_PARAM}
     Check HTTP Response Status Code Is    404
@@ -256,8 +256,8 @@ TC_MEC_MEC040_SRV_MEF_001_NF_03
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when selection is not applicable - SystemProvider
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     ##Test setup not applicable because systemInfo cannot be deleted by systemProvider
     Retrieve all system info resources with query params   ${NOT_EXT_SYS_PROVIDER_QUERY_PARAM}
     Check HTTP Response Status Code Is    404
@@ -266,16 +266,16 @@ TC_MEC_MEC040_SRV_MEF_001_NF_03
 TC_MEC_MEC040_SRV_MEF_001_BR
     [Documentation]
     ...  Check that the IUT responds with an error when request is malformed
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.1, clause 5.2.2.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.1, clause 5.2.2.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
    Retrieve all system info resources wrong URL
    #Check HTTP Response Status Code Is    400
     
 TC_MEC_MEC040_SRV_MEF_002_OK
     [Documentation]
     ...  Check that the IUT creates a new systemInfo when requested by a MEC Orchestrator
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.4, clause 5.2.2.1.1
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.4, clause 5.2.2.1.1
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     ##No test setup needed because the systemId is generated by IUT
     Register System Info    SystemInfo
     Check HTTP Response Status Code Is    201
@@ -293,8 +293,8 @@ TC_MEC_MEC040_SRV_MEF_002_OK
 TC_MEC_MEC040_SRV_MEF_002_BR_01
     [Documentation]
     ...  Check that the IUT responds with an error on creating an existing systemInfo
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.4, clause 5.2.2.1.1
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.4, clause 5.2.2.1.1
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     Register System Info    SystemInfoBR
     Check HTTP Response Status Code Is    400
 
@@ -303,8 +303,8 @@ TC_MEC_MEC040_SRV_MEF_002_BR_01
 TC_MEC_MEC040_SRV_MEF_002_BR_02
     [Documentation]
     ...  Check that the IUT responds with an error on providing inconsistent data
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.3.3.4, clause 5.2.2.1.1
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.3.3.4, clause 5.2.2.1.1
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     Register System Info    SystemInfoBR
     Check HTTP Response Status Code Is    400    
     
@@ -312,8 +312,8 @@ TC_MEC_MEC040_SRV_MEF_003_OK
     [Documentation]
     ...  Check that the IUT responds with a selection of all available systemInfo 
     ...  when requested by a MEC Orchestrator
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.4.3.1, clause 5.2.2.1.1
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.4.3.1, clause 5.2.2.1.1
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     Retrieve specific system info resource   ${SYSTEM_ID_1} 
     Check HTTP Response Status Code Is    200
@@ -325,8 +325,8 @@ TC_MEC_MEC040_SRV_MEF_003_NF
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when it receives a request for returning a systemInfo  referred with a wrong systemId
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.4.3.1, clause 5.2.2.1.1
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.4.3.1, clause 5.2.2.1.1
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]  Remove specific system info resource   ${NOT_EXISTING_SYSTEM_ID} 
     Retrieve specific system info resource    ${NOT_EXISTING_SYSTEM_ID} 
     Check HTTP Response Status Code Is    404
@@ -336,16 +336,16 @@ TC_MEC_MEC040_SRV_MEF_003_BR
     [Documentation]
     ...  Check that the IUT responds with an error
     ...  when it receives a request for returning a systemInfo  referred with a wrong systemId
-    ...  ETSI GS MEC 040 V3.1.1, clause 7.4.3.1, clause 5.2.2.1.1
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause 7.4.3.1, clause 5.2.2.1.1
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     Retrieve specific system info resource    ${NOT_EXISTING_SYSTEM_ID} 
     #Check HTTP Response Status Code Is    400
     
 TC_MEC_MEC040_SRV_MEF_004_OK_01
     [Documentation]
     ...  Check that the IUT updates the systemInfo when requested by a MEC Orchestrator
-    ...  ETSI GS MEC 040 V3.1.1, clause clause 7.4.3.3, clause 5.2.2.1.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause clause 7.4.3.3, clause 5.2.2.1.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     ${SYS_PROVIDER}   Get value entry from JSON file    SystemInfoUpdate  endpoint
     Update specific system info resource  ${SYSTEM_ID_1}    SystemInfoUpdate 
@@ -357,8 +357,8 @@ TC_MEC_MEC040_SRV_MEF_004_OK_01
 TC_MEC_MEC040_SRV_MEF_004_OK_02
     [Documentation]
     ...  Check that the IUT updates the systemInfo when requested by a MEC Orchestrator
-    ...  ETSI GS MEC 040 V3.1.1, clause clause 7.4.3.3, clause 5.2.2.1.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause clause 7.4.3.3, clause 5.2.2.1.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     Update specific system info resource  ${SYSTEM_ID_1}    SystemInfoUpdate2
     ${SYS_NAME}   Get value entry from JSON file    SystemInfoUpdate2  systemName
@@ -371,8 +371,8 @@ TC_MEC_MEC040_SRV_MEF_004_OK_02
 TC_MEC_MEC040_SRV_MEF_004_OK_03
     [Documentation]
     ...  Check that the IUT updates the systemInfo when requested by a MEC Orchestrator
-    ...  ETSI GS MEC 040 V3.1.1, clause clause 7.4.3.3, clause 5.2.2.1.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause clause 7.4.3.3, clause 5.2.2.1.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     Update specific system info resource  ${SYSTEM_ID_1}   SystemInfoUpdate3
     Check HTTP Response Status Code Is    200
@@ -387,8 +387,8 @@ TC_MEC_MEC040_SRV_MEF_004_OK_03
 TC_MEC_MEC040_SRV_MEF_004_NF
     [Documentation]
     ...  Check that the IUT responds with an error when requested to update an unknown systemInfo
-    ...  ETSI GS MEC 040 V3.1.1, clause clause 7.4.3.3, clause 5.2.2.1.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause clause 7.4.3.3, clause 5.2.2.1.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]  Remove specific system info resource   ${NOT_EXISTING_SYSTEM_ID} 
     Update specific system info resource  ${NOT_EXISTING_SYSTEM_ID}    SystemInfoUpdate3
     Check HTTP Response Status Code Is    404
@@ -397,16 +397,16 @@ TC_MEC_MEC040_SRV_MEF_004_NF
 TC_MEC_MEC040_SRV_MEF_004_BR_01
     [Documentation]
     ...  Check that the IUT responds with an error when requested to update with an inconsistant URI
-    ...  ETSI GS MEC 040 V3.1.1, clause clause 7.4.3.3, clause 5.2.2.1.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause clause 7.4.3.3, clause 5.2.2.1.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     Update specific system info resource  ${NOT_EXISTING_SYSTEM_ID}    SystemInfoUpdate3
     Check HTTP Response Status Code Is    400
 
 TC_MEC_MEC040_SRV_MEF_004_BR_02
     [Documentation]
     ...  Check that the IUT responds with an error when requested to update with no data provided
-    ...  ETSI GS MEC 040 V3.1.1, clause clause 7.4.3.3, clause 5.2.2.1.2
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause clause 7.4.3.3, clause 5.2.2.1.2
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     Update specific system info resource  ${EXPECTED_SYSTEM_ID}    SystemInfoUpdateBR
     Check HTTP Response Status Code Is    400            
@@ -416,8 +416,8 @@ TC_MEC_MEC040_SRV_MEF_004_BR_02
 TC_MEC_MEC040_SRV_MEF_005_OK
     [Documentation]
     ...  Check that the IUT responds with an error when requested to delete an unknown systemInfo
-    ...  ETSI GS MEC 040 V3.1.1, clause clause 7.4.3.5, clause 5.2.2.1.3
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause clause 7.4.3.5, clause 5.2.2.1.3
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]   Register mutiple system Info and get system Ids   SystemInfo    SystemInfo2    SystemInfo3
     Remove specific system info resource  ${SYSTEM_ID_1}  
     Check HTTP Response Status Code Is    204  
@@ -426,8 +426,8 @@ TC_MEC_MEC040_SRV_MEF_005_OK
 TC_MEC_MEC040_SRV_MEF_005_NF
     [Documentation]
     ...  Check that the IUT responds with an error when requested to delete an unknown systemInfo
-    ...  ETSI GS MEC 040 V3.1.1, clause clause 7.4.3.5, clause 5.2.2.1.3
-    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.01.01_60/gs_mec040v030101p.pdf
+    ...  ETSI GS MEC 040 V3.2.1, clause clause 7.4.3.5, clause 5.2.2.1.3
+    ...  https://www.etsi.org/deliver/etsi_gs/mec/001_099/040/03.02.01_60/gs_mec040v030201p.pdf
     [Setup]      Remove specific system info resource  ${NOT_EXISTING_SYSTEM_ID}
     Remove specific system info resource  ${NOT_EXISTING_SYSTEM_ID}  
     Check HTTP Response Status Code Is    404

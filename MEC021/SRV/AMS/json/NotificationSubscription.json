@@ -1,16 +1,16 @@
 {
     "callbackReference": "http://example.com/callback",
-    "requestTestNotification": true,
+    "requestTestNotification": false,
     "websockNotifConfig": {
         "websocketUri": "ws://example.com/websocket",
         "requestWebsocketUri": true
     },
     "expiryDeadline": {
-        "seconds": 1644691200,
+        "seconds": 2077353600,
         "nanoSeconds": 0
     },
     "filterCriteria": {
-        "appInstanceId": "app-123"
+        "appInstanceId": "ca29c5a5-f471-4098-abcb-d55d83410087"
     },
-    "subscriptionType": "AdjacentAppInfoSubscription"
+    "subscriptionType": "MobilityProcedureSubscription"
 }

@@ -18,9 +18,9 @@ TC_MEC_MEC011_SRV_CONFTASK_001_OK
     ...    Check that the IUT responds that it has completed 
     ...    the application level termination
     ...
-    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.3",
-    ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
-    ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
+    ...    Reference   "ETSI GS MEC 011 clause 5.2.3",
+    ...    "ETSI GS MEC 011 clause 7.1.4.3",
+    ...    "ETSI GS MEC 011 clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
     Request termination of MEC Application   ${APP_INSTANCE_ID}    AppTerminationConfirmation
@@ -33,9 +33,9 @@ TC_MEC_MEC011_SRV_CONFTASK_001_NF
     ...    Check that the IUT responds with an error
     ...    when requested graceful termination/stop of an unknown MEC Application instance
     ...
-    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.3",
-    ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
-    ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
+    ...    Reference   "ETSI GS MEC 011 clause 5.2.3",
+    ...    "ETSI GS MEC 011 clause 7.1.4.3",
+    ...    "ETSI GS MEC 011 clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Teardown]   Delete MEC application instance profile   ${NON_EXISTING_APP_INSTANCE_ID}
     Request termination of MEC Application    ${NON_EXISTING_APP_INSTANCE_ID}    AppTerminationConfirmation
@@ -49,9 +49,9 @@ TC_MEC_MEC011_SRV_CONFTASK_002_OK
     ...    Check that the IUT responds with an acknowledge
     ...    when requested readiness status for a MEC Application instance
     ...
-    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.3",
-    ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
-    ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
+    ...    Reference   "ETSI GS MEC 011 clause 5.2.3",
+    ...    "ETSI GS MEC 011 clause 7.1.4.3",
+    ...    "ETSI GS MEC 011 clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create a new MEC application instance profile  AppInfo       
     Request readiness status of MEC Application    ${APP_INSTANCE_ID}    AppReadyConfirmation
@@ -64,9 +64,9 @@ TC_MEC_MEC011_SRV_CONFTASK_002_NF
     ...    Check that the IUT responds with an error
     ...    when requested readiness status for an unknown MEC Application instance
     ...
-    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.3",
-    ...    "ETSI GS MEC 011 3.2.1, clause 7.1.4.3",
-    ...    "ETSI GS MEC 011 3.2.1, clause 7.2.11.3.4"
+    ...    Reference   "ETSI GS MEC 011 clause 5.2.3",
+    ...    "ETSI GS MEC 011 clause 7.1.4.3",
+    ...    "ETSI GS MEC 011 clause 7.2.11.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Delete MEC application instance profile   ${NON_EXISTING_APP_INSTANCE_ID}
     Request readiness status of MEC Application    ${NON_EXISTING_APP_INSTANCE_ID}   AppReadyConfirmation

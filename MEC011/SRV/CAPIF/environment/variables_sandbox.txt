@@ -1,0 +1,30 @@
+*** Variables ***
+
+
+####Env variable for the ETSI MEC Sandbox
+${SCHEMA}                   https
+${HOST}                     try-mec.etsi.org
+${PORT}                     443
+${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
+${apiRoot}		  /sbxnr8fp0o/mep1 
+${apiName}        service-apis
+${apiVersion}     v1
+
+
+
+# Generic variables
+${response}                         {}
+${capifSubApiName}  capif-events
+${apiVersion}       v1
+
+# Specific variables
+${API_NAME_QUERY_PARAM}                mec015-1
+${API_ID_QUERY_PARAM}                  mec015-1
+${UNKNOWN_MEC_SRV_SER_NAME}            UNKNOWN_MEC_SRV_SER_NAME
+${MEC_SRV_INSTANCE_ID}                 MEC_SRV_SER_INSTANCE_ID
+${NOT_EXISTING_MEC_SRV_INSTANCE_ID}    NOT_EXISTING_MEC_SRV_INSTANCE_ID
+${SERVICE_API_ID}                      SERVICE_API_ID
+${UNKNOWN_SERVICE_API_ID}              UNKNOWN_SERVICE_API_ID
+${UNKNOWN_MEC_SRV_INSTANCE_ID}         UNKNOWN_MEC_SRV_INSTANCE_ID
+${SUBSCRIPTION_ID}         			   SUBSCRIPTION_ID
+${UNKNOWN_SUBSCRIPTION_ID}             UNKNOWN_SUBSCRIPTION_ID

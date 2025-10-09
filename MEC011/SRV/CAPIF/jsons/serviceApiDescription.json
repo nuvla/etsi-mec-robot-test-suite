@@ -1,0 +1,11 @@
+{
+    "apiName": "apiName",
+    "serviceAPICategory": "serviceAPICategory",
+    "apiId": "apiId",
+    "shareableInfo": {},
+    "ccfId": "ccfId",
+    "apiSuppFeats": "apiSuppFeats",
+    "pubApiPath": "pubApiPath",
+    "apiStatus": "apiStatus",
+    "vendorSpecific-urn:etsi:mec:capifext:service-info": {}
+}

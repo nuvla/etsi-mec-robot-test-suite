@@ -14,9 +14,9 @@ TC_MEC_MEC011_SRV_MSL_001_OK
     [Documentation]
     ...    Check that the IUT responds with the liveness of a MEC service instance 
     ...     when queried by a MEC Application
-    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.12",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.2.4",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.10.3.1"
+    ...    Reference    "ETSI GS MEC 011 clause 5.2.12",
+    ...                 "ETSI GS MEC 011 clause 8.1.2.4",
+    ...                 "ETSI GS MEC 011 clause 8.2.10.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]   Create new service   ServiceInfo    ${APP_INSTANCE_ID}
     Individual MEC service liveness  ${LIVENESS_URI} 
@@ -30,9 +30,9 @@ TC_MEC_MEC011_SRV_MSL_001_NF
     ...   Check that the IUT responds with an error when
     ...   a request for an URI that cannot be mapped to a valid resource URI 
     ...   is sent by a MEC Application
-    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.12",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.2.4",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.10.3.1"
+    ...    Reference    "ETSI GS MEC 011 clause 5.2.12",
+    ...                 "ETSI GS MEC 011 clause 8.1.2.4",
+    ...                 "ETSI GS MEC 011 clause 8.2.10.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Individual MEC service liveness  ${NOT_EXISTING_URL_SERVICE_MEC_LIVENESS}
     Check HTTP Response Status Code Is    404
@@ -42,9 +42,9 @@ TC_MEC_MEC011_SRV_MSL_002_OK_01
     [Documentation]
     ...    Check that the IUT updates the liveness of a MEC service instance 
     ...    when requested by a MEC Application
-    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.12",
-    ...               "ETSI GS MEC 011 3.2.1, clause 8.1.2.5",
-    ...               "ETSI GS MEC 011 3.2.1, clause 8.2.10.3.3"
+    ...    Reference  "ETSI GS MEC 011 clause 5.2.12",
+    ...               "ETSI GS MEC 011 clause 8.1.2.5",
+    ...               "ETSI GS MEC 011 clause 8.2.10.3.3"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ServiceLivenessUpdate    .json
@@ -61,9 +61,9 @@ TC_MEC_MEC011_SRV_MSL_002_OK_02
     [Documentation]
     ...    Check that the IUT updates the liveness of a MEC service instance 
     ...    when requested by a MEC Application
-    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.12",
-    ...               "ETSI GS MEC 011 3.2.1, clause 8.1.2.5",
-    ...               "ETSI GS MEC 011 3.2.1, clause 8.2.10.3.3"
+    ...    Reference  "ETSI GS MEC 011 clause 5.2.12",
+    ...               "ETSI GS MEC 011 clause 8.1.2.5",
+    ...               "ETSI GS MEC 011 clause 8.2.10.3.3"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ServiceLivenessUpdate    .json
@@ -76,9 +76,9 @@ TC_MEC_MEC011_SRV_MSL_002_BR
     [Documentation]
     ...    Check that the IUT responds with an error when
     ...    incorrect parameters were sent by a MEC Application
-    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.12",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.2.5",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.10.3.3"
+    ...    Reference    "ETSI GS MEC 011 clause 5.2.12",
+    ...                 "ETSI GS MEC 011 clause 8.1.2.5",
+    ...                 "ETSI GS MEC 011 clause 8.2.10.3.3"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Set Headers    {"Authorization":"${TOKEN}"}
     
@@ -93,9 +93,9 @@ TC_MEC_MEC011_SRV_MSL_002_NF
     ...    Check that the IUT responds with an error when 
     ...    a request for an URI that cannot be mapped to a valid 
     ...    resource URI is sent by a MEC Application
-    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.12",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.2.5",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.10.3.3"
+    ...    Reference    "ETSI GS MEC 011 clause 5.2.12",
+    ...                 "ETSI GS MEC 011 clause 8.1.2.5",
+    ...                 "ETSI GS MEC 011 clause 8.2.10.3.3"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     Set Headers    {"Authorization":"${TOKEN}"}
     ${file}=    Catenate    SEPARATOR=    jsons/    ServiceLivenessUpdateError    .json

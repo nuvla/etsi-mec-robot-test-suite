@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QoSEventSubscription",
+  "type": "object",
+  "properties": {
+    "subscriptionType": {
+      "type": "string",
+      "const": "QoSEventSubscription"
+    },
+    "callbackReference": {
+      "type": "string",
+      "format": "uri"
+    },
+    "requestTestNotification": {
+      "type": "boolean"
+    },
+    "websocketNotifConfig": {
+      "$ref": "#/definitions/WebsocketNotifConfig"
+    },
+    "_links": {
+      "type": "object",
+      "description": "HATEOAS-style resource links."
+    },
+    "self": {
+      "type": "string",
+      "format": "uri"
+    },
+    "users": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "flowFilter": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/FlowFilter"
+      }
+    },
+    "sourceIp": {
+      "type": "string"
+    },
+    "sourcePort": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 65535
+      }
+    },
+    "dstIp": {
+      "type": "string"
+    },
+    "dstPort": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 65535
+      }
+    },
+    "protocol": {
+      "type": "integer"
+    },
+    "dsField": {
+      "type": "integer"
+    },
+    "trafficFilter": {
+      "type": "string"
+    },
+    "eventTrigger": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/EventTrigger"
+      }
+    },
+    "upperThreshold": {
+      "type": "integer"
+    },
+    "lowerThreshold": {
+      "type": "integer"
+    },
+    "reportingCtrl": {
+      "$ref": "#/definitions/ReportingCtrl"
+    },
+    "measuringPeriod": {
+      "type": "integer"
+    },
+    "monitoringArea": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AreaInfo"
+      }
+    },
+    "accessPointId": {
+      "type": "string"
+    },
+    "zoneId": {
+      "type": "string"
+    },
+    "timeSlot": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TimeSlot"
+      }
+    },
+    "startTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiryDeadline": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "subscriptionType",
+    "eventTrigger",
+    "startTime",
+    "endTime"
+  ],
+  "anyOf": [
+    { "required": ["callbackReference"] },
+    { "required": ["websocketNotifConfig"] }
+  ],
+  "definitions": {
+    "WebsocketNotifConfig": {
+      "type": "object",
+      "properties": {
+        "websocketUri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "subprotocols": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["websocketUri"]
+    },
+    "FlowFilter": {
+      "type": "object",
+      "properties": {
+        "sourceIp": { "type": "string" },
+        "destinationIp": { "type": "string" },
+        "sourcePort": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 0, "maximum": 65535 }
+        },
+        "destinationPort": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 0, "maximum": 65535 }
+        },
+        "protocol": { "type": "integer" },
+        "dsField": { "type": "integer" }
+      }
+    },
+    "EventTrigger": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of event trigger, e.g., THRESHOLD_CROSSED"
+        },
+        "params": {
+          "type": "object",
+          "description": "Additional trigger-specific parameters"
+        }
+      },
+      "required": ["type"]
+    },
+    "ReportingCtrl": {
+      "type": "object",
+      "properties": {
+        "reportingMode": {
+          "type": "string",
+          "enum": ["ONCE", "PERIODIC", "ON_EVENT"]
+        },
+        "maxReports": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": ["reportingMode"]
+    },
+    "AreaInfo": {
+      "type": "object",
+      "properties": {
+        "zoneId": { "type": "string" },
+        "locationList": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "TimeSlot": {
+      "type": "object",
+      "properties": {
+        "start": { "type": "string", "format": "date-time" },
+        "end": { "type": "string", "format": "date-time" }
+      },
+      "required": ["start", "end"]
+    }
+  }
+}

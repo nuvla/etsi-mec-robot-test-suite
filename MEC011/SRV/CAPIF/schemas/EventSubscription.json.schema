@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EventSubscription",
+  "type": "object",
+  "properties": {
+    "events": {
+      "type": "array",
+      "description": "The applicable subset of values from 'CAPIFEvent' mapped to MEC event types as defined in clause 9.1.6.1.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "eventReq": {
+      "type": "object",
+      "description": "See note. Optional attribute."
+    },
+    "notificationDestination": {
+      "type": "string",
+      "description": "Shall be set to the value of the 'callbackReference' attribute in the 'SerAvailabilityNotificationSubscription' structure as defined in clause 8.1.3.2.",
+      "format": "uri"
+    },
+    "requestTestNotification": {
+      "type": "boolean",
+      "description": "Aligned with ETSI GS MEC 009 [5], refers to a 3GPP-related mechanism."
+    },
+    "websocketNotifConfig": {
+      "type": "object",
+      "description": "Aligned with ETSI GS MEC 009 [5], refers to a 3GPP-related mechanism."
+    }
+  },
+  "required": ["events", "notificationDestination"]
+}

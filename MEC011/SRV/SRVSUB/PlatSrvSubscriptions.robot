@@ -17,9 +17,9 @@ TC_MEC_MEC011_SRV_SRVSUB_001_OK
     ...    Check that the IUT responds with a list of subscriptions for notifications
     ...    on services availability when queried by a MEC Application
     ...
-    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.6",
-    ...               "ETSI GS MEC 011 3.2.1, clause 8.1.3",
-    ...               "ETSI GS MEC 011 3.2.1, clause 8.2.8.3.1"
+    ...    Reference  "ETSI GS MEC 011 clause 5.2.6",
+    ...               "ETSI GS MEC 011 clause 8.1.3",
+    ...               "ETSI GS MEC 011 clause 8.2.8.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES    
     [Setup]  Create a new MEC application instance profile and create subscription  AppInfo   SerAvailabilityNotificationSubscription
     Get list of subscriptions    ${APP_INSTANCE_ID}
@@ -33,9 +33,9 @@ TC_MEC_MEC011_SRV_SRVSUB_001_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference  "ETSI GS MEC 011 3.2.1, clause 5.2.6",
-    ...               "ETSI GS MEC 011 3.2.1, clause 8.1.3",
-    ...               "ETSI GS MEC 011 3.2.1, clause 8.2.8.3.1"
+    ...    Reference  "ETSI GS MEC 011 clause 5.2.6",
+    ...               "ETSI GS MEC 011 clause 8.1.3",
+    ...               "ETSI GS MEC 011 clause 8.2.8.3.1"
 
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Remove MEC application   ${NON_EXISTENT_INSTANCE_ID}
@@ -47,9 +47,9 @@ TC_MEC_MEC011_SRV_SRVSUB_002_OK
     ...    Check that the IUT acknowledges the subscription by a MEC Application
     ...    to notifications on service availability events
     ...
-    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.6",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.3",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.8.3.4"
+    ...    Reference    "ETSI GS MEC 011 clause 5.2.6",
+    ...                 "ETSI GS MEC 011 clause 8.1.3",
+    ...                 "ETSI GS MEC 011 clause 8.2.8.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     
     [Setup]  Create a new MEC application  AppInfo
@@ -69,9 +69,9 @@ TC_MEC_MEC011_SRV_SRVSUB_002_BR
     ...    Check that the IUT responds with an error when
     ...    a request with incorrect parameters is sent by a MEC Application
     ...
-    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.6",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.3",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.8.3.4"
+    ...    Reference    "ETSI GS MEC 011 clause 5.2.6",
+    ...                 "ETSI GS MEC 011 clause 8.1.3",
+    ...                 "ETSI GS MEC 011 clause 8.2.8.3.4"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application  AppInfo
     Create a new subscription    ${APP_INSTANCE_ID}    SerAvailabilityNotificationSubscriptionError
@@ -84,9 +84,9 @@ TC_MEC_MEC011_SRV_SRVSUB_003_OK
     ...    Check that the IUT responds with the information on a specific subscription
     ...    when queried by a MEC Application
     ...
-    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.6",
-    ...                "ETSI GS MEC 011 3.2.1, clause 8.1.3",
-    ...                "ETSI GS MEC 011 3.2.1, clause 8.2.9.3.1"
+    ...    Reference   "ETSI GS MEC 011 clause 5.2.6",
+    ...                "ETSI GS MEC 011 clause 8.1.3",
+    ...                "ETSI GS MEC 011 clause 8.2.9.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application instance profile and create subscription  AppInfo   SerAvailabilityNotificationSubscription
     Get individual subscription    ${APP_INSTANCE_ID}    ${SUB_ID}
@@ -103,9 +103,9 @@ TC_MEC_MEC011_SRV_SRVSUB_003_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference   "ETSI GS MEC 011 3.2.1, clause 5.2.6",
-    ...                "ETSI GS MEC 011 3.2.1, clause 8.1.3",
-    ...                "ETSI GS MEC 011 3.2.1, clause 8.2.9.3.1"
+    ...    Reference   "ETSI GS MEC 011 clause 5.2.6",
+    ...                "ETSI GS MEC 011 clause 8.1.3",
+    ...                "ETSI GS MEC 011 clause 8.2.9.3.1"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application  AppInfo
     Get individual subscription    ${APP_INSTANCE_ID}    ${NON_EXISTENT_SUBSCRIPTION_ID}
@@ -117,9 +117,9 @@ TC_MEC_MEC011_SRV_SRVSUB_004_OK
     ...    Check that the IUT acknowledges the unsubscribe from service availability event notifications
     ...    when commanded by a MEC Application
     ...
-    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.6",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.3",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.9.3.5"
+    ...    Reference    "ETSI GS MEC 011 clause 5.2.6",
+    ...                 "ETSI GS MEC 011 clause 8.1.3",
+    ...                 "ETSI GS MEC 011 clause 8.2.9.3.5"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [Setup]  Create a new MEC application instance profile and create subscription  AppInfo   SerAvailabilityNotificationSubscription   
     Remove subscription    ${APP_INSTANCE_ID}    ${SUB_ID}
@@ -131,9 +131,9 @@ TC_MEC_MEC011_SRV_SRVSUB_004_NF
     ...    Check that the IUT responds with an error when
     ...    a request for an unknown URI is sent by a MEC Application
     ...
-    ...    Reference    "ETSI GS MEC 011 3.2.1, clause 5.2.6",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.1.3",
-    ...                 "ETSI GS MEC 011 3.2.1, clause 8.2.9.3.5"
+    ...    Reference    "ETSI GS MEC 011 clause 5.2.6",
+    ...                 "ETSI GS MEC 011 clause 8.1.3",
+    ...                 "ETSI GS MEC 011 clause 8.2.9.3.5"
     [Tags]    PIC_MEC_PLAT    PIC_SERVICES
     [TearDown]  Remove MEC application    ${NON_EXISTENT_INSTANCE_ID} 
     Remove subscription    ${NON_EXISTENT_INSTANCE_ID}    ${SUBSCRIPTION_ID}

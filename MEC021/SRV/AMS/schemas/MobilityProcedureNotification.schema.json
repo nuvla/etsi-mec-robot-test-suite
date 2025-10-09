@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema#",
+  "title": "MobilityProcedureNotification",
+  "type": "object",
+  "properties": {
+    "notificationType": {
+      "type": "string",
+      "const": "MobilityProcedureNotification",
+      "description": "Shall be set to 'MobilityProcedureNotification'."
+    },
+    "timeStamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time of the generation of the notification."
+    },
+    "associateId": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "minItems": 1,
+      "description": "1 to N identifiers to associate the information for specific UE(s) and flow(s)."
+    },
+    "mobilityStatus": {
+      "type": "integer",
+      "enum": [1, 2, 3],
+      "description": "Status of the UE mobility. 1 = INTERHOST_MOVEOUT_TRIGGERED, 2 = INTERHOST_MOVEOUT_COMPLETED, 3 = INTERHOST_MOVEOUT_FAILED. Other values are reserved."
+    },
+    "targetAppInfo": {
+      "type": "object",
+      "properties": {
+        "appInstanceId": {
+          "type": "string",
+          "description": "Identifier of the target application instance."
+        },
+        "commInterface": {
+          "$ref": "#/$defs/CommunicationInterface"
+        }
+      },
+      "required": ["appInstanceId"],
+      "additionalProperties": false,
+      "description": "Identifiers to associate the information of target application instance."
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "subscription": {
+          "$ref": "#/$defs/LinkType"
+        }
+      },
+      "required": ["subscription"],
+      "additionalProperties": false,
+      "description": "Object containing hyperlinks related to the resource."
+    }
+  },
+  "required": ["notificationType", "associateId", "mobilityStatus", "_links"],
+  "additionalProperties": false,
+  "$defs": {
+    "AssociateId": {
+      "type": "object",
+      "description": "Identifier for UE(s) and flow(s).",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["id"],
+      "additionalProperties": true
+    },
+    "CommunicationInterface": {
+      "type": "object",
+      "description": "Communication interface of the application instance.",
+      "properties": {
+        "interfaceType": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["interfaceType", "endpoint"],
+      "additionalProperties": true
+    },
+    "LinkType": {
+      "type": "object",
+      "description": "Represents a type of link.",
+      "properties": {
+        "href": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI referring to a resource."
+        }
+      },
+      "required": ["href"],
+      "additionalProperties": false
+    }
+  }
+}

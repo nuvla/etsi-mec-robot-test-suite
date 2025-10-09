@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema#",
+    "title": "ExpiryNotification",
+    "type": "object",
+    "properties": {
+        "_links": {
+            "title": "Links2",
+            "required": [
+                "subscription"
+            ],
+            "properties": {
+                "subscription": {
+                    "description": "URI identifying the subscription which has expired.",
+                    "title": "LinkType",
+                    "required": [
+                        "href"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "href": {
+                            "type": "string",
+                            "description": "URI referring to a resource"
+                        }
+                    }
+                }
+            },
+            "description": "List of hyperlinks related to the resource."
+        },
+        "expiryDeadline": {
+            "title": "TimeStamp",
+            "required": [
+                "nanoSeconds",
+                "seconds"
+            ],
+            "type": "object",
+            "properties": {
+                "nanoSeconds": {
+                    "type": "integer",
+                    "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                },
+                "seconds": {
+                    "type": "integer",
+                    "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                }
+            }
+        },
+        "timeStamp": {
+            "description": "Time stamp of the notification.",
+            "title": "TimeStamp",
+            "required": [
+                "nanoSeconds",
+                "seconds"
+            ],
+            "type": "object",
+            "properties": {
+                "nanoSeconds": {
+                    "type": "integer",
+                    "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                },
+                "seconds": {
+                    "type": "integer",
+                    "description": "The seconds part of the time. Time is defined as Unixtime since January 1, 1970, 00:00:00 UTC.",
+                    "contentEncoding": "int32"
+                }
+            }
+        },
+        "notificationType": {
+            "description": "Shall be set to \"ExpiryNotification\"",
+            "type": "string"
+        }
+    },
+    "required": [
+        "_links",
+        "expiryDeadline",
+        "notificationType"
+    ]
+}

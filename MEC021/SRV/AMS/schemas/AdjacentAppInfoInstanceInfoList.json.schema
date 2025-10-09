@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema#",
+  "title": "AdjacentAppInstanceInfoList",
+  "type": "array",
+  "description": "A list of AdjacentAppInstanceInfo objects.",
+  "items": {
+    "$ref": "#/$defs/AdjacentAppInstanceInfo"
+  },
+  "minItems": 1,
+  "$defs": {
+    "AdjacentAppInstanceInfo": {
+      "title": "AdjacentAppInstanceInfo",
+      "type": "object",
+      "properties": {
+        "appInstanceId": {
+          "type": "string",
+          "description": "Identifier of the application instance."
+        },
+        "appDId": {
+          "type": "string",
+          "description": "Identifier of the application descriptor."
+        },
+        "appInstanceCommLink": {
+          "type": "array",
+          "minItems": 1,
+          "description": "It specifies the communication interface of application instance.",
+          "items": {
+            "$ref": "#/$defs/CommunicationInterface"
+          }
+        },
+        "mecHostInformation": {
+          "description": "It specifies the communication interface of application instance.",
+          "$ref": "#/$defs/MECHostInformation"
+        }
+      },
+      "required": [
+        "appInstanceId",
+        "appDId"
+      ]
+    },
+    "CommunicationInterface": {
+      "type": "object",
+      "description": "Communication interface of the application instance.",
+      "properties": {
+        "interfaceType": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "interfaceType",
+        "endpoint"
+      ],
+      "additionalProperties": true
+    },
+    "MECHostInformation": {
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "type": "string"
+        },
+        "hostId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostId"
+      ]
+    }
+  }
+}

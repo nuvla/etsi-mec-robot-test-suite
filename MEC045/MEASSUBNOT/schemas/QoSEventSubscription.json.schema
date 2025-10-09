@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QoSEventSubscription",
+  "type": "object",
+  "properties": {
+    "subscriptionType": {
+      "type": "string",
+      "const": "QoSEventSubscription",
+      "description": "Shall be set to 'QoSEventSubscription'."
+    },
+    "callbackReference": {
+      "type": "string",
+      "format": "uri",
+      "description": "URI exposed by the client to receive notifications via HTTP."
+    },
+    "requestTestNotification": {
+      "type": "boolean",
+      "description": "If true, test notification shall be sent via HTTP as per ETSI GS MEC 009."
+    },
+    "websocketNotifConfig": {
+      "$ref": "#/definitions/WebsocketNotifConfig"
+    },
+    "_links": {
+      "type": "object",
+      "description": "Links to resources. Inline structure."
+    },
+    "self": {
+      "type": "string",
+      "format": "uri",
+      "description": "URI of the subscription resource."
+    },
+    "users": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "List of user identifiers."
+    },
+    "flowFilter": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Inline structure for traffic flow filtering criteria."
+      }
+    },
+    "sourceIp": {
+      "type": "string",
+      "description": "IPv4/IPv6 address of the flow source."
+    },
+    "sourcePort": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 65535
+      }
+    },
+    "dstIp": {
+      "type": "string",
+      "description": "IPv4/IPv6 address of the flow destination."
+    },
+    "dstPort": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 65535
+      }
+    },
+    "protocol": {
+      "type": "integer"
+    },
+    "dsField": {
+      "type": "integer"
+    },
+    "trafficFilter": {
+      "type": "string"
+    },
+    "eventTrigger": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "description": "Inline structure describing event trigger."
+      }
+    },
+    "upperThreshold": {
+      "type": "integer"
+    },
+    "lowerThreshold": {
+      "type": "integer"
+    },
+    "reportingCtrl": {
+      "$ref": "#/definitions/ReportingCtrl"
+    },
+    "measuringPeriod": {
+      "type": "integer"
+    },
+    "monitoringArea": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AreaInfo"
+      }
+    },
+    "accessPointId": {
+      "type": "string"
+    },
+    "zoneId": {
+      "type": "string"
+    },
+    "timeSlot": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "StartTime and EndTime range."
+      }
+    },
+    "startTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiryDeadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Expiration time of the subscription."
+    }
+  },
+  "required": [
+    "subscriptionType",
+    "eventTrigger",
+    "startTime",
+    "endTime"
+  ],
+  "anyOf": [
+    { "required": ["callbackReference"] },
+    { "required": ["websocketNotifConfig"] }
+  ],
+  "definitions": {
+    "WebsocketNotifConfig": {
+      "type": "object",
+      "description": "WebSocket config structure, aligns with ETSI GS MEC 009."
+    },
+    "ReportingCtrl": {
+      "type": "object",
+      "description": "Reporting control structure as per ETSI."
+    },
+    "AreaInfo": {
+      "type": "object",
+      "description": "Structure defining geographic or logical area for monitoring."
+    }
+  }
+}
