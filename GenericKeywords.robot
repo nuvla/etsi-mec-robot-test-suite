@@ -1,10 +1,12 @@
 *** Settings ***
-Library    JSONSchemaLibrary    schemas/
+Library    JSONLibrary
 Library    BuiltIn
 Library    OperatingSystem
 
 *** Variables ***
 ${response}
+${SCHEMA_BASE_DIR}    ${CURDIR}/schemas
+${JSON_BASE_DIR}      ${CURDIR}/jsons
 
 
 *** Keywords ***
@@ -17,8 +19,8 @@ Check HTTP Response Status Code Is
 Check HTTP Response Body Json Schema Is
     [Arguments]    ${input}
     Should Contain    ${response['headers']['Content-Type']}    application/json
-    ${schema} =    Catenate    SEPARATOR=    ${input}    .schema.json
-    Validate Json    ${schema}    ${response['body']}
+    ${schema} =    Catenate    SEPARATOR=    ${SCHEMA_BASE_DIR}${/}    ${input}    .schema.json
+    Validate Json By Schema File    ${response['body']}    ${schema}
     Log    Json Schema Validation OK
 
 Should Be Present In Json List
@@ -29,7 +31,7 @@ Should Be Present In Json List
       Exit For Loop If    ${are_equal}
     END
     Log    Item found ${item}
-    [return]    ${item}
+    RETURN    ${item}
     
 Should Be Present In Json
     [Arguments]     ${expr}   ${json_field}   ${json_value}
@@ -66,10 +68,10 @@ Check HTTP Response Contain Header with value
 
 Get value entry from JSON file 
     [Arguments]       ${filename}   ${key}
-    ${file}=    Catenate    SEPARATOR=    jsons/    ${filename}    .json
+    ${file}=    Catenate    SEPARATOR=    ${JSON_BASE_DIR}${/}    ${filename}    .json
     ${body}=    Get File    ${file}
     ${data}=   Evaluate    ${body}
     ${value_key}    Set Variable   ${data}[${key}]
-    [return]   ${value_key}
+    RETURN   ${value_key}
 
         

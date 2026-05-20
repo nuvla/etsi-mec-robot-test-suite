@@ -9,7 +9,8 @@ __version__ = '0.0.1'
 
 def import_notification_json(subscription_type):
     notification_type = subscription_type.split("Subscription")[0]    
-    file_path = "./jsons/"+notification_type+".json"
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    file_path = os.path.join(base_dir, "jsons", notification_type + ".json")
     logging.info(file_path)
     logging.info(os.listdir())
     try:

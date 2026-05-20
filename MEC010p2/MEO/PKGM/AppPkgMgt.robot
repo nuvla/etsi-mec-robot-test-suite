@@ -9,8 +9,13 @@ Library     BuiltIn
 Library     OperatingSystem
 Library      libraries/Server.py
 
+Suite Setup      Local Auth Setup
 Test Setup       Test Setup   ${APP_PKG_ID_PLACEHOLDER}   AppPkgInfo      ${NO_ACTION}
 Test Teardown    Test TearDown    ${APP_PKG_ID_PLACEHOLDER}   AppPkgInfo      ${NO_ACTION}
+
+*** Variables ***
+${SCHEMA_BASE_DIR}    ${CURDIR}/schemas
+${JSON_BASE_DIR}      ${CURDIR}/jsons
 
 
 *** Test Cases ***
@@ -50,7 +55,7 @@ TC_MEC_MEC010p2_MEO_PKGM_002_01_OK
     GET all app Packages 
     Check HTTP Response Status Code Is    200
     FOR    ${onBoardedAppPkgInfo}    IN    @{response['body']}
-        Validate Json    AppPkgInfo.schema.json    ${onBoardedAppPkgInfo}
+        Validate Json By Schema File    ${onBoardedAppPkgInfo}    ${CURDIR}/schemas/AppPkgInfo.schema.json
         Should Be Equal As Strings  ${onBoardedAppPkgInfo['onboardingState']}    ${ONBOARDING_STATE}
     END
     [Teardown]    Test TearDown     ${setup_response['body']['id']}   ${None}      ${REMOVE_ACTION}
@@ -66,7 +71,7 @@ TC_MEC_MEC010p2_MEO_PKGM_002_02_OK
     GET all onboarded app Packages
     Check HTTP Response Status Code Is    200
     FOR    ${onBoardedAppPkgInfo}    IN    @{response['body']}
-        Validate Json    OnboardedAppPkgInfo.schema.json    ${onBoardedAppPkgInfo}
+        Validate Json By Schema File    ${onBoardedAppPkgInfo}    ${CURDIR}/schemas/OnboardedAppPkgInfo.schema.json
         Should Be Equal As Strings  ${onBoardedAppPkgInfo['onboardingState']}   ${ONBOARDING_STATE_ONBOARDED}
     END
     [Teardown]    Test TearDown     ${setup_response['body']['id']}   ${None}      ${REMOVE_ACTION}
@@ -294,7 +299,7 @@ TC_MEC_MEC010p2_MEO_PKGM_010_OK
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
     [Setup]   Send a request for a subscription    AppPkgSubscription.json
     Spawn Notification Server        AppPkgNotification
-    Validate Json   AppPkgNotification.schema.json    ${payload_notification}
+    Validate Json By Schema File    ${payload_notification}    ${CURDIR}/schemas/AppPkgNotification.schema.json
     [TearDown]   Delete an App Package Subscription identified by    ${SUBSCRIPTION_ID}
         
 TC_MEC_MEC010p2_MEO_PKGM_011_OK
@@ -347,8 +352,10 @@ TC_MEC_MEC010p2_MEO_PKGM_012_BR
     ...    Check that MEO service sends an error when it receives a malformed request
     ...    ETSI GS MEC 010-2 3.2.1, clause 7.3.7.3.2
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
+    [Setup]   Post Request to create new App Package Resource      CreateAppPackage.json
     Get app Package identified by    ${ON_BOARDED_APP_PKG_ID}      ${WRONG_CONTENT_TYPE}
     Check HTTP Response Status Code Is    400
+    [TearDown]   Delete an individual APP Package identified by    ${ON_BOARDED_APP_PKG_ID}
 
 
 TC_MEC_MEC010p2_MEO_PKGM_012_01_NF
@@ -377,10 +384,10 @@ TC_MEC_MEC010p2_MEO_PKGM_013_OK
     ...    ETSI GS MEC 010-2 3.2.1, clause 7.3.7.3.3
     ...    ETSI GS MEC 010-2 3.2.1, clause 6.2.1.2
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    [Setup]   Delete an individual APP Package identified by    ${APP_PKG_ID}
-    Submit application package    ${APP_PKG_ID}
+    [Setup]   Post Request to create new App Package Resource      CreateAppPackage.json
+    Submit application package    ${ON_BOARDED_APP_PKG_ID}
     Check HTTP Response Status Code Is    202   
-    [TearDown]   Delete an individual APP Package identified by    ${APP_PKG_ID}
+    [TearDown]   Delete an individual APP Package identified by    ${ON_BOARDED_APP_PKG_ID}
 
 
 TC_MEC_MEC010p2_MEO_PKGM_013_NF
@@ -396,18 +403,52 @@ TC_MEC_MEC010p2_MEO_PKGM_013_NF
 
 
 *** Keywords ***
+Local Auth Setup
+    IF    '''${NUVLA_API_KEY}''' != '''''' and '''${NUVLA_API_SECRET}''' != ''''''
+        Log    Creating local Nuvla session from API key
+        Set Headers    {"Accept":"application/json"}
+        Set Headers    {"Content-Type":"application/json"}
+        ${body}=    Catenate    SEPARATOR=
+        ...    {"template":{"href":"session-template/api-key","key":"${NUVLA_API_KEY}","secret":"${NUVLA_API_SECRET}"}}
+        POST    /api/session    ${body}
+        ${output}=    Output    response
+        Set Suite Variable    ${auth_response}    ${output}
+        Should Be Equal As Integers    ${auth_response['status']}    201
+    END
+
+Set Auth Header
+    IF    '''${AUTH_HEADER_NAME}''' != '''''' and '''${AUTH_HEADER_VALUE}''' != ''''''
+        Set Headers    {"${AUTH_HEADER_NAME}":"${AUTH_HEADER_VALUE}"}
+    ELSE
+        Set Headers    {"Authorization":"${TOKEN}"}
+    END
+
+Update Current App Package Variables
+    [Arguments]    ${output}
+    IF    ${output['status']} == 201
+        Set Suite Variable    ${ON_BOARDED_APP_PKG_ID}    ${output['body']['id']}
+        Set Suite Variable    ${APPD_ID}    ${output['body']['appDId']}
+    END
+
+Update Current Subscription Variables
+    [Arguments]    ${output}
+    IF    ${output['status']} == 201
+        Set Suite Variable    ${SUBSCRIPTION_ID}    ${output['body']['id']}
+    END
+
 Test Setup 
     [Arguments]     ${appPkgId}    ${content}   ${action}
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
      
     IF    '''${action}''' == '''${REGISTER_ACTION}'''
-       ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+       ${file}=    Catenate    SEPARATOR=    ${CURDIR}/jsons/    ${content}    .json
        ${body}=    Get File    ${file}
        POST   ${apiRoot}/${apiName}/${apiVersion}/app_packages   ${body}
        ${output}=    Output    response
        Set Suite Variable    ${setup_response}    ${output}
+       Update Current App Package Variables    ${output}
     END
     
     IF    '''${action}''' == '''${REMOVE_ACTION}'''
@@ -418,10 +459,10 @@ Test Teardown
     [Arguments]     ${appPkgId}    ${content}   ${action}
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
      
     IF    '''${action}''' == '''${REGISTER_ACTION}'''
-       ${file}=    Catenate    SEPARATOR=    jsons/    ${content}    .json
+       ${file}=    Catenate    SEPARATOR=    ${CURDIR}/jsons/    ${content}    .json
        ${body}=    Get File    ${file}
        POST   ${apiRoot}/${apiName}/${apiVersion}/app_packages   ${body}
     END
@@ -436,19 +477,20 @@ Post Request to create new App Package Resource
     Log    Creating a new App Package
     Set Headers    {"Accept":"*/*"}
     Set Headers    {"Content-Type":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
-    ${path}    Catenate    SEPARATOR=      jsons/     ${content}
+    Set Auth Header
+    ${path}    Catenate    SEPARATOR=      ${CURDIR}/jsons/     ${content}
     ${body}    Get File    ${path}
     Post    ${apiRoot}/${apiName}/${apiVersion}/app_packages    ${body}    allow_redirects=false
     ${output}=    Output    response
-    Set Suite Variable    ${response}    ${output}     
+    Set Suite Variable    ${response}    ${output}
+    Update Current App Package Variables    ${output}
    
     
 GET all app Packages
     Log    Getting all App Packages
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Get    ${apiRoot}/${apiName}/${apiVersion}/app_packages    
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -458,7 +500,7 @@ GET all onboarded app Packages
     Log    Getting all App Packages
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Get    ${apiRoot}/${apiName}/${apiVersion}/onboarded_app_packages    
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -469,7 +511,7 @@ GET all app Packages with filters
     Log    Getting all App Packages using filtering parameters
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Get    ${apiRoot}/${apiName}/${apiVersion}/app_packages?${key}=${value}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -480,7 +522,7 @@ GET an app Package identified by
     Log    Getting an App Package
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Get    ${apiRoot}/${apiName}/${apiVersion}/app_packages/${value}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -491,7 +533,7 @@ GET an onboarded app Package identified by
     Log    Getting an App Package
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Get    ${apiRoot}/${apiName}/${apiVersion}/onboarded_app_packages/${value}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -502,7 +544,7 @@ Delete an individual APP Package identified by
     Log    Removing an App Package
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Delete    ${apiRoot}/${apiName}/${apiVersion}/app_packages/${value}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -514,8 +556,8 @@ Update Operational State for an app Package
     Log    Updating an App Package
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
-    ${path}    Catenate    SEPARATOR=      jsons/     ${content}
+    Set Auth Header
+    ${path}    Catenate    SEPARATOR=      ${CURDIR}/jsons/     ${content}
     ${body}    Get File    ${path}
     PATCH    ${apiRoot}/${apiName}/${apiVersion}/app_packages/${appPkgId}     ${body} 
     ${output}=    Output    response
@@ -527,7 +569,7 @@ Get an AppD from App Package identified by
     [Arguments]    ${appPkgId}
     Log    Getting App descriptor for App Package
     Set Headers    {"Accept":"${ACCEPTED_CONTENT_TYPE}"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Get    ${apiRoot}/${apiName}/${apiVersion}/app_packages/${appPkgId}/appd
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -537,7 +579,7 @@ Get app Package identified by
     [Arguments]    ${appPkgId}      ${CONTENT_TYPE}
     Log    Getting App descriptor for App Package
     Set Headers    {"Accept":"${CONTENT_TYPE}"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Get    ${apiRoot}/${apiName}/${apiVersion}/app_packages/${appPkgId}/package_content
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -547,7 +589,7 @@ Get onboarded app Package identified by
     [Arguments]    ${appPkgId}      ${CONTENT_TYPE}
     Log    Getting App descriptor for App Package
     Set Headers    {"Accept":"${CONTENT_TYPE}"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Get    ${apiRoot}/${apiName}/${apiVersion}/onboarded_app_packages/${appPkgId}/package_content
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -557,22 +599,31 @@ Submit application package
     [Arguments]    ${appPkgId}
     Log    Getting App descriptor for App Package
     Set Headers    {"Accept":"${ACCEPTED_CONTENT_TYPE_ZIP}"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Put    ${apiRoot}/${apiName}/${apiVersion}/app_packages/${appPkgId}/package_content
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output}     
+
+Prepare subscription request body
+    [Arguments]    ${content}
+    ${path}    Catenate    SEPARATOR=      ${CURDIR}/jsons/     ${content}
+    ${body}    Get File    ${path}
+    IF    '''${CALLBACK_URI}''' != ''''''
+        ${body}    Evaluate    json.dumps(dict(json.loads('''${body}'''), callbackUri='${CALLBACK_URI}'))    json
+    END
+    RETURN    ${body}
 
 Send a request for a subscription    
     [Arguments]    ${content}
     Log    Creating a new subscription
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"application/json"}
-    Set Headers    {"Authorization":"${TOKEN}"}
-    ${path}    Catenate    SEPARATOR=      jsons/     ${content}
-    ${body}    Get File    ${path}
+    Set Auth Header
+    ${body}    Prepare subscription request body    ${content}
     Post    ${apiRoot}/${apiName}/${apiVersion}/subscriptions    ${body}
     ${output}=    Output    response
-    Set Suite Variable    ${response}    ${output}       
+    Set Suite Variable    ${response}    ${output}
+    Update Current Subscription Variables    ${output}
 
 
 
@@ -580,7 +631,7 @@ Get all app Package subscriptions
     Log    Getting list of subscriptions
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Get    ${apiRoot}/${apiName}/${apiVersion}/subscriptions
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -591,7 +642,7 @@ Get an individual APP Package subscriptions
     Log    Getting an individual subscription
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Get    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/${subId}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
@@ -602,7 +653,7 @@ Delete an App Package Subscription identified by
     Log    Deleting a subscription
     Set Headers    {"Accept":"application/json"}
     Set Headers    {"Content-Type":"*/*"}
-    Set Headers    {"Authorization":"${TOKEN}"}
+    Set Auth Header
     Delete    ${apiRoot}/${apiName}/${apiVersion}/subscriptions/${subId}
     ${output}=    Output    response
     Set Suite Variable    ${response}    ${output} 
