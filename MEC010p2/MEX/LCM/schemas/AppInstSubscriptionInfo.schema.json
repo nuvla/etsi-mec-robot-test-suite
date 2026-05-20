@@ -1,0 +1,40 @@
+{
+  "description": "'The data type represents a subscription to notifications related to application instances.'",
+  "type": "object",
+  "required": [
+    "id",
+    "subscriptionType",
+    "callbackUri"
+  ],
+  "properties": {
+    "id": {
+      "description": "Identifier of the subscription.",
+      "type": "string"
+    },
+    "subscriptionType": {
+      "description": "Subscribed notification type.",
+      "type": "string",
+      "enum": [
+        "AppInstanceStateChangeSubscription",
+        "AppLcmOpOccStateChangeSubscription"
+      ]
+    },
+    "callbackUri": {
+      "description": "The URI of the endpoint for the notification to be sent to.",
+      "type": "string",
+      "format": "uri"
+    },
+    "created": {
+      "type": "string"
+    },
+    "updated": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    }
+  }
+}

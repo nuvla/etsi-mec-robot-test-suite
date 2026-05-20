@@ -2,25 +2,37 @@
 # Generic variables
 ${MEPM_SCHEMA}                   http
 ${MEPM_HOST}                     127.0.0.1
-${MEPM_PORT}                     8081
+${MEPM_PORT}                     8200
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
-${apiRoot}        
+${apiRoot}                         /api/mec/mm1
 ${apiName}        app_lcm
 ${apiVersion}     v1
+${SCHEMA_BASE_DIR}                  ${CURDIR}/schemas
+${JSON_BASE_DIR}                    ${CURDIR}/jsons
+${PKGM_API_ROOT}                    /api/mec/mm1
+${PKGM_API_NAME}                    app_pkgm
+${PKGM_API_VERSION}                 v1
+${NUVLA_API_KEY}
+${NUVLA_API_SECRET}
+${AUTH_HEADER_NAME}
+${AUTH_HEADER_VALUE}
 
 # Specific variables
-${NOT_EXISTING_APP_INSTANCE_ID}     NOT_EXISTING_APP_INSTANCE_ID
-${APP_INSTANCE_ID}                  5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
-${APPD_ID}                          e0deee2b-6e50-4f33-ab09-8bf0585025d3
-${APP_LCM_OP_OCC_ID} 				abceee2b-6e50-4f33-ab09-8bf05850abcd
-${NOT_EXISTING_APP_LCM_OP_OCC_ID} 	NOT_EXISTING_APP_LCM_OP_OCC_ID
+${TEST_APP_PKG_ID}
+${NOT_EXISTING_APP_INSTANCE_ID}     deployment/NOT_EXISTING_APP_INSTANCE_ID
+${APP_INSTANCE_ID}
+${APP_ID}
+${APPD_ID}
+${APP_LCM_OP_OCC_ID}
+${APP_LCM_OP_OCCS_ID}
+${NOT_EXISTING_APP_LCM_OP_OCC_ID}   job/NOT_EXISTING_APP_LCM_OP_OCC_ID
 ${NON_EXISTENT_APP_PKG_ID}          NON_EXISTENT_APP_PKG_ID
 ${OPERATION_VALUE}                  DISABLE
 ${CALLBACK_URI}                     https://callback.uri/path
 ${SUB_TYPE}                     AppInstanceStateChangeSubscription
-${SUBSCRIPTION_ID}                  01234e2b-6e50-4f33-ab09-8bf05850890
-${NOT_EXISTING_SUBSCRIPTION_ID}     NOT_EXISTING_SUBSCRIPTION_ID
+${SUBSCRIPTION_ID}
+${NOT_EXISTING_SUBSCRIPTION_ID}     subscription/NOT_EXISTING_SUBSCRIPTION_ID
 
 ${REQ_SUBSCRIPTION_TYPE}
 ${REQ_CALLBACK_URI}

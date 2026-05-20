@@ -78,7 +78,7 @@
 						"type": "string",
 						"format": "enum",
 						"enum": [
-							"INSTATIATE",
+							"INSTANTIATE",
 							"OPERATE",
 							"TERMINATE"
 						]

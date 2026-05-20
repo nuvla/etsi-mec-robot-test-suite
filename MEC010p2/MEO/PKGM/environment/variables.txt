@@ -3,10 +3,10 @@
 ${MEO_SCHEMA}                   http
 ${MEO_HOST}                     127.0.0.1
 #${MEO_HOST}                     10.192.2.172
-${MEO_PORT}                     8081
+${MEO_PORT}                     8200
 ${response}                         {}
 ${TOKEN}                            Basic YWxhZGRpbjpvcGVuc2VzYW1l
-${apiRoot}        
+${apiRoot}                         /api/mec/mm1
 ${apiName}        app_pkgm
 ${apiVersion}     v1
 ${NUVLA_API_KEY}                    
