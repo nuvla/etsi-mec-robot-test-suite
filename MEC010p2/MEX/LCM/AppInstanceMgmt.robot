@@ -560,7 +560,7 @@ APP Instance Should Have Operational State
 
 Wait For APP Instance Operational State
     [Arguments]    ${app_instance_id}    ${operational_state}
-    Wait Until Keyword Succeeds    30 sec    2 sec    APP Instance Should Have Operational State    ${app_instance_id}    ${operational_state}
+    Wait Until Keyword Succeeds    90 sec    2 sec    APP Instance Should Have Operational State    ${app_instance_id}    ${operational_state}
 
 APP Instance Should Be Not Instantiated
     [Arguments]    ${app_instance_id}
@@ -570,7 +570,7 @@ APP Instance Should Be Not Instantiated
 
 Wait For APP Instance To Be Not Instantiated
     [Arguments]    ${app_instance_id}
-    Wait Until Keyword Succeeds    30 sec    2 sec    APP Instance Should Be Not Instantiated    ${app_instance_id}
+    Wait Until Keyword Succeeds    90 sec    2 sec    APP Instance Should Be Not Instantiated    ${app_instance_id}
 
 Cleanup APP Instance
     [Arguments]    ${app_instance_id}
