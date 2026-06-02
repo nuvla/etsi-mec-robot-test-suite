@@ -6,6 +6,7 @@ Resource    environment/variables.txt
 Resource    ../../../GenericKeywords.robot
 Library     REST    ${MEPM_SCHEMA}://${MEPM_HOST}:${MEPM_PORT}    ssl_verify=false
 Library     BuiltIn
+Library     Collections
 Library     OperatingSystem
 Library    String
 
@@ -53,7 +54,7 @@ TC_MEC_MEC010p2_MEX_LCM_002_OK
     GET all APP Instances  
     Check HTTP Response Status Code Is  200
     
-    FOR    ${appInstance}    IN    @{response['body']['items']}
+    FOR    ${appInstance}    IN    @{response['body']}
         Validate Json By Schema File    ${appInstance}    ${SCHEMA_BASE_DIR}${/}AppInstanceInfo.schema.json
         ${passed}    Run Keyword And Return Status  Should Be Equal As Strings  ${appInstance}[id]    ${NEW_APP_INSTANCE_ID}    
         Exit For Loop If    ${passed}
@@ -220,7 +221,7 @@ TC_MEC_MEC010p2_MEX_LCM_008_OK
     GET all App LCM op Occs   
     Check HTTP Response Status Code Is  200
     
-    FOR    ${appLcmOpOcc}    IN    @{response['body']['items']}
+    FOR    ${appLcmOpOcc}    IN    @{response['body']}
         Validate Json By Schema File    ${appLcmOpOcc}    ${SCHEMA_BASE_DIR}${/}AppLcmOpOcc.schema.json
     END
 
@@ -309,6 +310,11 @@ TC_MEC_MEC010p2_MEX_LCM_011_OK
     Send a request for retrieving all subscriptions
     Check HTTP Response Status Code Is  200
     Validate Json By Schema File    ${response}[body]    ${SCHEMA_BASE_DIR}${/}AppInstanceSubscriptionLinkList.schema.json
+    Dictionary Should Contain Key    ${response['body']['_links']}    subscriptions
+    FOR    ${subscriptionLink}    IN    @{response['body']['_links']['subscriptions']}
+        Dictionary Should Contain Key    ${subscriptionLink}    href
+        Dictionary Should Contain Key    ${subscriptionLink}    subscriptionType
+    END
     [TearDown]   Send a request for deleting a subscription  ${SUB_ID}
     
 
@@ -440,6 +446,7 @@ Suite Local Setup
     Ensure Test App Package
 
 Suite Local Teardown
+    Sleep    15 sec
     Cleanup Test App Package
 
 Local Auth Setup
