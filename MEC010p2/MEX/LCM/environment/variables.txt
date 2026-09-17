@@ -11,15 +11,17 @@ ${apiVersion}     v1
 
 # Specific variables
 ${NOT_EXISTING_APP_INSTANCE_ID}     NOT_EXISTING_APP_INSTANCE_ID
-${APP_INSTANCE_ID}                  5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
-${APPD_ID}                          e0deee2b-6e50-4f33-ab09-8bf0585025d3
-${APP_LCM_OP_OCC_ID} 				abceee2b-6e50-4f33-ab09-8bf05850abcd
+${APP_INSTANCE_ID}
+${APP_ID}
+${APPD_ID}
+${APP_LCM_OP_OCC_ID}
+${APP_LCM_OP_OCCS_ID}
 ${NOT_EXISTING_APP_LCM_OP_OCC_ID} 	NOT_EXISTING_APP_LCM_OP_OCC_ID
 ${NON_EXISTENT_APP_PKG_ID}          NON_EXISTENT_APP_PKG_ID
 ${OPERATION_VALUE}                  DISABLE
 ${CALLBACK_URI}                     https://callback.uri/path
 ${SUB_TYPE}                     AppInstanceStateChangeSubscription
-${SUBSCRIPTION_ID}                  01234e2b-6e50-4f33-ab09-8bf05850890
+${SUBSCRIPTION_ID}
 ${NOT_EXISTING_SUBSCRIPTION_ID}     NOT_EXISTING_SUBSCRIPTION_ID
 
 ${REQ_SUBSCRIPTION_TYPE}

@@ -7,7 +7,6 @@ Resource    ../../../GenericKeywords.robot
 Library     REST    ${MEPM_SCHEMA}://${MEPM_HOST}:${MEPM_PORT}    ssl_verify=false
 Library     BuiltIn
 Library     OperatingSystem
-Library    String
 
 
 *** Test Cases ***
@@ -116,8 +115,11 @@ TC_MEC_MEC010p2_MEX_LCM_005_BR
     ...    Check that MEC API provider service fails to instantiate an App Instance when it receives a malformed request
     ...    ETSI GS MEC 010-2 3.2.1, clause 7.4.6.3.1
     ...    ETSI GS MEC 010-2 3.2.1, table 6.2.2.7.2-1  #InstantiateAppRequest
-    Instantiate App Request   ${APP_INSTANCE_ID}   InstantiateAppRequestBadRequest
+    [Setup]  Create new App Instance  CreateAppInstanceRequest
+    Set Test Variable  ${NEW_APP_INSTANCE_ID}    ${response['body']['id']}
+    Instantiate App Request   ${NEW_APP_INSTANCE_ID}   InstantiateAppRequestBadRequest
     Check HTTP Response Status Code Is    400
+    [TearDown]  Delete APP Instance   ${NEW_APP_INSTANCE_ID}
     
 
 
@@ -150,8 +152,10 @@ TC_MEC_MEC010p2_MEX_LCM_006_BR
     ...    Check that MEC API provider service fails to terminate an App Instance when it receives a malformed request
     ...    ETSI GS MEC 010-2 3.2.1, clause 7.4.7.3.1
     ...    ETSI GS MEC 010-2 3.2.1, table 6.2.2.9.2-1  #TerminateAppRequest
-    Terminate App Request  ${APP_INSTANCE_ID}  TerminateAppRequestBadRequest
+    [Setup]  Create and Instantiate App Instance    CreateAppInstanceRequest     InstantiateAppRequest
+    Terminate App Request  ${APP_ID}  TerminateAppRequestBadRequest
     Check HTTP Response Status Code Is    400
+    [TearDown]  Delete APP Instance   ${APP_ID}
  
 
 TC_MEC_MEC010p2_MEX_LCM_006_NF
@@ -174,7 +178,7 @@ TC_MEC_MEC010p2_MEX_LCM_007_OK
     ...    ETSI GS MEC 010-2 3.2.1, table 6.2.2.8.2-1 #OperateAppRequest    
     [Setup]  Create and Instantiate App Instance    CreateAppInstanceRequest     InstantiateAppRequest 
     ##TODO sleep for a while because the instantiation is not immediate
-    Operate App Request  ${APP_INSTANCE_ID}  OperateAppRequest
+    Operate App Request  ${APP_ID}  OperateAppRequest
     Check HTTP Response Status Code Is    202
     Check HTTP Response Header Contains    Location
     [TearDown]  Delete APP Instance   ${APP_ID}  
@@ -185,8 +189,10 @@ TC_MEC_MEC010p2_MEX_LCM_007_BR
     ...    Check that MEC API provider service fails to operate on an App Instance when it receives a malformed request
     ...    ETSI GS MEC 010-2 3.2.1, clause 7.4.8.3.1
     ...    ETSI GS MEC 010-2 3.2.1, table 6.2.2.8.2-1  #OperateAppRequest    
-    Operate App Request  ${APP_INSTANCE_ID}  OperateAppRequestBadRequest
+    [Setup]  Create and Instantiate App Instance    CreateAppInstanceRequest     InstantiateAppRequest
+    Operate App Request  ${APP_ID}  OperateAppRequestBadRequest
     Check HTTP Response Status Code Is    400
+    [TearDown]  Delete APP Instance   ${APP_ID}
     
 TC_MEC_MEC010p2_MEX_LCM_007_NF
     [Documentation]    TP_MEC_MEC010p2_MEX_LCM_007_NF
@@ -422,6 +428,11 @@ TC_MEC_MEC010p2_MEX_LCM_016_NF
 
 
 *** Keywords ***
+Resource Id From Location
+    [Arguments]    ${location}
+    ${resource_id}=    Evaluate    (lambda loc: (lambda p: '/'.join(p[p.index('app_lcm_op_occs')+1:]) if 'app_lcm_op_occs' in p else p[-1])([x for x in loc.split('/') if x]))('''${location}''')
+    [return]    ${resource_id}
+
 Create new App Instance
     [Arguments]    ${content}
     Log    Creating a new app package
@@ -432,7 +443,11 @@ Create new App Instance
     ${body}=    Get File    ${file}
     Post    ${apiRoot}/${apiName}/${apiVersion}/app_instances    ${body}
     ${output}=    Output    response
-    Set Suite Variable    ${response}    ${output}   
+    Set Suite Variable    ${response}    ${output}
+    IF    ${output['status']} == 201
+        Set Suite Variable    ${APP_INSTANCE_ID}    ${output['body']['id']}
+        Set Suite Variable    ${APP_ID}    ${output['body']['id']}
+    END
 
 
 GET all APP Instances 
@@ -472,8 +487,9 @@ Create and Instantiate App Instance
     Create new App Instance  ${appInstanceFile} 
     Set Suite Variable   ${APP_ID}   ${response['body']['id']}
     Instantiate App Request  ${response['body']['id']}   ${instantiatePayloadFile}
-    ${elements} =  Split String    ${response['headers']['Location']}       /
-    Set Suite Variable    ${APP_LCM_OP_OCCS_ID}     ${elements}[4]
+    ${app_lcm_op_occ_id}=    Resource Id From Location    ${response['headers']['Location']}
+    Set Suite Variable    ${APP_LCM_OP_OCCS_ID}     ${app_lcm_op_occ_id}
+    Set Suite Variable    ${APP_LCM_OP_OCC_ID}      ${app_lcm_op_occ_id}
     
     
 
@@ -486,7 +502,12 @@ Instantiate App Request
     ${body}=    Get File    ${file}
     Post    ${apiRoot}/${apiName}/${apiVersion}/app_instances/${appInstanceId}/instantiate   ${body}
     ${output}=    Output    response
-    Set Suite Variable    ${response}    ${output}  
+    Set Suite Variable    ${response}    ${output}
+    IF    '${output["status"]}' == '202'
+        ${app_lcm_op_occ_id}=    Resource Id From Location    ${output['headers']['Location']}
+        Set Suite Variable    ${APP_LCM_OP_OCCS_ID}     ${app_lcm_op_occ_id}
+        Set Suite Variable    ${APP_LCM_OP_OCC_ID}      ${app_lcm_op_occ_id}
+    END
     
 
 Terminate App Request
@@ -548,7 +569,10 @@ Send a request for a subscription
     ${body}=    Get File    ${file}
     Post    ${apiRoot}/${apiName}/${apiVersion}/subscriptions    ${body}
     ${output}=    Output    response
-    Set Suite Variable    ${response}    ${output}  
+    Set Suite Variable    ${response}    ${output}
+    IF    ${output['status']} == 201
+        Set Suite Variable    ${SUBSCRIPTION_ID}    ${output['body']['id']}
+    END
     
 
 

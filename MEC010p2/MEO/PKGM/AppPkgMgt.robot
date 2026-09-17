@@ -347,8 +347,10 @@ TC_MEC_MEC010p2_MEO_PKGM_012_BR
     ...    Check that MEO service sends an error when it receives a malformed request
     ...    ETSI GS MEC 010-2 3.2.1, clause 7.3.7.3.2
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
+    [Setup]   Post Request to create new App Package Resource      CreateAppPackage.json
     Get app Package identified by    ${ON_BOARDED_APP_PKG_ID}      ${WRONG_CONTENT_TYPE}
     Check HTTP Response Status Code Is    400
+    [TearDown]   Delete an individual APP Package identified by    ${ON_BOARDED_APP_PKG_ID}
 
 
 TC_MEC_MEC010p2_MEO_PKGM_012_01_NF
@@ -377,10 +379,10 @@ TC_MEC_MEC010p2_MEO_PKGM_013_OK
     ...    ETSI GS MEC 010-2 3.2.1, clause 7.3.7.3.3
     ...    ETSI GS MEC 010-2 3.2.1, clause 6.2.1.2
     [Tags]    PIC_APP_PACKAGE_MANAGEMENT    INCLUDE_UNDEFINED_SCHEMAS
-    [Setup]   Delete an individual APP Package identified by    ${APP_PKG_ID}
-    Submit application package    ${APP_PKG_ID}
+    [Setup]   Post Request to create new App Package Resource      CreateAppPackage.json
+    Submit application package    ${ON_BOARDED_APP_PKG_ID}
     Check HTTP Response Status Code Is    202   
-    [TearDown]   Delete an individual APP Package identified by    ${APP_PKG_ID}
+    [TearDown]   Delete an individual APP Package identified by    ${ON_BOARDED_APP_PKG_ID}
 
 
 TC_MEC_MEC010p2_MEO_PKGM_013_NF
@@ -396,6 +398,19 @@ TC_MEC_MEC010p2_MEO_PKGM_013_NF
 
 
 *** Keywords ***
+Update Current App Package Variables
+    [Arguments]    ${output}
+    IF    ${output['status']} == 201
+        Set Suite Variable    ${ON_BOARDED_APP_PKG_ID}    ${output['body']['id']}
+        Set Suite Variable    ${APPD_ID}    ${output['body']['appDId']}
+    END
+
+Update Current Subscription Variables
+    [Arguments]    ${output}
+    IF    ${output['status']} == 201
+        Set Suite Variable    ${SUBSCRIPTION_ID}    ${output['body']['id']}
+    END
+
 Test Setup 
     [Arguments]     ${appPkgId}    ${content}   ${action}
     Set Headers    {"Accept":"application/json"}
@@ -408,6 +423,7 @@ Test Setup
        POST   ${apiRoot}/${apiName}/${apiVersion}/app_packages   ${body}
        ${output}=    Output    response
        Set Suite Variable    ${setup_response}    ${output}
+       Update Current App Package Variables    ${output}
     END
     
     IF    '''${action}''' == '''${REMOVE_ACTION}'''
@@ -441,7 +457,8 @@ Post Request to create new App Package Resource
     ${body}    Get File    ${path}
     Post    ${apiRoot}/${apiName}/${apiVersion}/app_packages    ${body}    allow_redirects=false
     ${output}=    Output    response
-    Set Suite Variable    ${response}    ${output}     
+    Set Suite Variable    ${response}    ${output}
+    Update Current App Package Variables    ${output}
    
     
 GET all app Packages
@@ -572,7 +589,8 @@ Send a request for a subscription
     ${body}    Get File    ${path}
     Post    ${apiRoot}/${apiName}/${apiVersion}/subscriptions    ${body}
     ${output}=    Output    response
-    Set Suite Variable    ${response}    ${output}       
+    Set Suite Variable    ${response}    ${output}
+    Update Current Subscription Variables    ${output}
 
 
 

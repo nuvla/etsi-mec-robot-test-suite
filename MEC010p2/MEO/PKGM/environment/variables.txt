@@ -25,9 +25,9 @@ ${OPERATIONAL_STATE}                ENABLED
 ${ONBOARDING_STATE}                 CREATED
 ${ONBOARDING_STATE_ONBOARDED}       ONBOARDED
 ${USAGE_STATE}                      NOT_IN_USE
-${APP_PKG_ID}                       01234782-2c70-4e47-9a4e-0ee3a1a00123
-${ON_BOARDED_APP_PKG_ID}            5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
-${APPD_ID}                          e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${APP_PKG_ID}
+${ON_BOARDED_APP_PKG_ID}
+${APPD_ID}
 ${MALFORMED_FILTER_NAME}            operationalStatus
 ${FILTER_VALUE}                     NOT_IN_USE
 ${NON_EXISTENT_APP_PKG_ID}          NON_EXISTENT_APP_PKG_ID
@@ -38,7 +38,7 @@ ${WRONG_OPERATION_VALUE}            DISABL
 ${ACCEPTED_CONTENT_TYPE}            text/plain; charset=utf-8
 ${ACCEPTED_CONTENT_TYPE_ZIP}        application/zip
 ${WRONG_CONTENT_TYPE}               application/json
-${SUBSCRIPTION_ID}                  e0deee2b-6e50-4f33-ab09-8bf0585025d3
+${SUBSCRIPTION_ID}
 ${NOT_EXISTING_APP_PKG_ID}          NOT_EXISTING_APP_PKG_ID
 
 ${NOT_EXISTING_ON_BOARDED_APP_PKG_ID}   NOT_EXISTING_ON_BOARDED_APP_PKG_ID
