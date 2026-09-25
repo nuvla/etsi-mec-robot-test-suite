@@ -8,6 +8,22 @@ Latest publicly available drafts are available at https://docbox.etsi.org/isg/me
 
 For more information on ETSI ISG Multi-access Edge Computing (MEC), visit https://www.etsi.org/technologies/multi-access-edge-computing.
 
+## Nuvla adaptation (`nuvla` branch)
+
+This GitHub repository is a working copy of the [official ETSI MEC Robot Test Suite](https://forge.etsi.org/rep/mec/gs032p3-robot-test-suite) (ETSI GS MEC-DEC 032-3). The `master` branch tracks upstream. The **`nuvla` branch** adds a thin adaptation layer so the MEC 010-2 **MEO** suites (`MEC010p2/MEO/PKGM`, `MEC010p2/MEX/LCM`) can run against [Nuvla](https://github.com/nuvla/api-server/tree/etsi-mec) as MEC Orchestrator over `Mm1` (`/api/mec/mm1`), including API-key session auth and reuse of IDs returned by create operations instead of hard-coded UUIDs. ETSI test purposes and assertions are unchanged. Upstream-friendly fixes (schema typo, dynamic IDs) live on `fix-mec010-dynamic-ids-and-typos`. For a local Nuvla + MEPM setup, see the Nuvla `api-server` `etsi-mec` branch documentation.
+
+### Running against Nuvla
+
+With Robot Framework installed (see Installation below) and a local Nuvla instance exposing `/api/mec/mm1`:
+
+```bash
+NUVLA_API_KEY=credential/... \
+NUVLA_API_SECRET=... \
+./run-adapted-etsi-tests.sh
+```
+
+The harness authenticates via the Nuvla session API, injects host/credential/API-root variables, and runs the PKGM and LCM suites (64 test cases). Optional Robot arguments are forwarded (for example `-t TC_MEC_MEC010p2_MEO_PKGM_001_OK`).
+
 ## Contact information
 
 Email at `cti_support` at `etsi` dot `org`.
